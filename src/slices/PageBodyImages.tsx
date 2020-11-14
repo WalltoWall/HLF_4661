@@ -19,7 +19,7 @@ const PageBodyImages = ({ children, nextSharesBg }: PageBodyImagesProps) => {
 
   return (
     <BoundedBox
-      component="section"
+      as="section"
       nextSharesBg={nextSharesBg}
       styles={{ backgroundColor: 'black', color: 'white' }}
     >
@@ -48,7 +48,7 @@ const Image = ({
   imageFluid,
   imageAlt,
 }: PageBodyImagesImageProps) => (
-  <Box component="figure" styles={{ display: 'flex', flexDirection: 'column' }}>
+  <Box as="figure" styles={{ display: 'flex', flexDirection: 'column' }}>
     {imageFluid && <GatsbyImage fluid={imageFluid} alt={imageAlt} />}
     {captionHTML && (
       <HTMLContent

@@ -1,4 +1,4 @@
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
 import faker from 'faker'
 import { buildImgixFluid } from 'gatsby-plugin-imgix'
 
@@ -16,7 +16,7 @@ Blopck containing one or more images with optional captions.
 
 This slice can support multiple images.
 
-<Preview withSource="none">
+<Canvas withSource="none">
   <Story name="With One Image">
     <PageBodyImages nextSharesBg={false}>
       <PageBodyImages.Image
@@ -29,13 +29,13 @@ This slice can support multiple images.
       />
     </PageBodyImages>
   </Story>
-</Preview>
+</Canvas>
 
 ### With Two Images
 
 Images are spaced evenly as shown below.
 
-<Preview withSource="none">
+<Canvas withSource="none">
   <Story name="With Two Images">
     <PageBodyImages nextSharesBg={false}>
       <PageBodyImages.Image
@@ -54,4 +54,4 @@ Images are spaced evenly as shown below.
       />
     </PageBodyImages>
   </Story>
-</Preview>
+</Canvas>

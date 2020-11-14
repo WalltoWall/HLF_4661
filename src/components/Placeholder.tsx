@@ -1,18 +1,23 @@
 import * as React from 'react'
 import { Box, BoxProps } from '@walltowall/calico'
 
-export type PlaceholderProps = {
+const defaultElement = 'div'
+
+export type PlaceholderProps<E extends React.ElementType> = {
   height?: string | number
   width?: string | number
-} & BoxProps
+} & BoxProps<E>
 
-export const Placeholder = ({
+export const Placeholder = <
+  E extends React.ElementType = typeof defaultElement
+>({
   height = 150,
   width = 'auto',
   ...props
-}: PlaceholderProps) => {
+}: PlaceholderProps<E>) => {
   return (
     <Box
+      as={defaultElement}
       {...props}
       style={{
         width,

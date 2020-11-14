@@ -13,7 +13,7 @@ const PageBodyFooter = ({ nextSharesBg }: PageBodyFooter) => {
 
   return (
     <BoundedBox
-      component="footer"
+      as="footer"
       nextSharesBg={nextSharesBg}
       styles={{
         backgroundColor: 'black',

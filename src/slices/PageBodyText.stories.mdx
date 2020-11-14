@@ -1,4 +1,4 @@
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
 import faker from 'faker'
 
 import PageBodyText from './PageBodyText.tsx'
@@ -9,7 +9,7 @@ import PageBodyText from './PageBodyText.tsx'
 
 Adds text with rich formatting including headings, lists, and links.
 
-<Preview withSource="none">
+<Canvas withSource="none">
   <Story name="With long text">
     <PageBodyText
       nextSharesBg={false}
@@ -20,4 +20,4 @@ Adds text with rich formatting including headings, lists, and links.
         .join('')}
     />
   </Story>
-</Preview>
+</Canvas>

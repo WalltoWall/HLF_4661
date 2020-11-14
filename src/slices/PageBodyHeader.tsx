@@ -16,7 +16,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
   return (
     <>
       <BoundedBox
-        component="header"
+        as="header"
         nextSharesBg={nextSharesBg}
         styles={{ backgroundColor: 'black', color: 'white' }}
       >

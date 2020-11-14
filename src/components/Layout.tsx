@@ -26,7 +26,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <Text>Skip to content</Text>
       </SkipNavLink>
       <Box
-        component="main"
+        as="main"
         styles={{
           fontFamily: 'sans',
           color: 'black',

@@ -8,6 +8,8 @@ import {
 } from '@walltowall/calico'
 import * as RA from 'fp-ts/ReadonlyArray'
 
+const defaultElement = 'div'
+
 const variants = {
   base: {
     paddingLeft: [4, 7, 10],
@@ -17,20 +19,22 @@ const variants = {
   },
 } as const
 
-type BoundedBoxProps = BoxProps & {
+type BoundedBoxProps<E extends React.ElementType> = {
   children?: React.ReactNode
   variant?: keyof typeof variants
   innerMaxWidth?: BaseBoxStylesProps['maxWidth']
   nextSharesBg?: ResponsiveProp<boolean>
-}
+} & BoxProps<E>
 
-export const BoundedBox = ({
+export const BoundedBox = <
+  E extends React.ElementType = typeof defaultElement
+>({
   children,
   variant = 'base',
   innerMaxWidth,
   nextSharesBg = false,
   ...props
-}: BoundedBoxProps) => {
+}: BoundedBoxProps<E>) => {
   const variantStyles = variants[variant]
 
   const resolvedPaddingBottom = RA.zipWith(
@@ -41,6 +45,7 @@ export const BoundedBox = ({
 
   return (
     <Box
+      as={defaultElement}
       {...props}
       styles={{
         paddingLeft: variantStyles.paddingLeft,
