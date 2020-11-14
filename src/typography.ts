@@ -18,10 +18,10 @@ import { pipe } from 'fp-ts/function'
 
 export const fontMetrics = {
   sans: {
-    capHeight: 697,
-    ascent: 960,
-    descent: -225,
-    lineGap: 40,
+    capHeight: 667,
+    ascent: 917,
+    descent: -285,
+    lineGap: 0,
     unitsPerEm: 1000,
   },
 } as const
