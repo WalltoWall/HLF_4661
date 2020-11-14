@@ -3,10 +3,11 @@ const path = require('path')
 require('dotenv').config()
 
 const siteMetadata = {
-  title: 'SITE_TITLE',
-  titleShort: 'SITE_TITLE_SHORT',
-  description: 'SITE_DESCRIPTION',
-  siteUrl: 'https://example.com',
+  title: 'Omidyar Fellows',
+  titleShort: 'OF',
+  description:
+    'Omidyar Fellows is a societal change program. We seek to cultivate the conditions in which Hawaiʻi thrives.',
+  siteUrl: 'https://www.omidyarfellows.org',
 }
 
 module.exports = {
