@@ -1,34 +1,70 @@
 import React from 'react'
-import clsx from 'clsx'
 import { useStyles } from 'react-treat'
 import { Box, BoxProps } from '@walltowall/calico'
 import ConditionalWrap from 'conditional-wrap'
+import * as R from 'fp-ts/Record'
+import { pipe } from 'fp-ts/function'
+import clsx from 'clsx'
 
 import { useDebug } from '../hooks/useDebug'
 
 import * as styleRefs from './Text.treat'
 
-const variantExtraStyles: Record<styleRefs.variations, BoxProps['styles']> = {
-  sans16: {
+const defaultElement = 'div'
+
+const variants = {
+  'sans-16': {
+    fontFamily: 'sans',
+  },
+  'sans-20-48': {
     fontFamily: 'sans',
   },
 } as const
 
-type TextProps = {
-  as?: 'p' | 'span' | 'strong' | 'em' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  children?: React.ReactNode
-  variant?: styleRefs.variations
-  debug?: boolean
-} & Omit<BoxProps, 'as'>
+const styledVariants = {
+  'sans-caps-16': {
+    variant: 'sans-16',
+    styles: {
+      textTransform: 'uppercase',
+      letterSpacing: 'm',
+    },
+  },
+  'sans-bold-20-48': {
+    variant: 'sans-20-48',
+    styles: {
+      fontWeight: 'bold',
+    },
+  },
+} as const
 
-export const Text = ({
-  as = 'p',
-  variant = 'sans16',
-  children,
+const normalizedVariants = {
+  ...pipe(
+    variants,
+    R.mapWithIndex((variant, styles) => ({ variant, styles })),
+  ),
+  ...pipe(
+    styledVariants,
+    R.map((variant) => ({
+      ...variant,
+      styles: {
+        ...variants[variant.variant],
+        ...variant.styles,
+      },
+    })),
+  ),
+}
+
+type TextProps<E extends React.ElementType = typeof defaultElement> = {
+  variant?: keyof typeof normalizedVariants
+} & BoxProps<E>
+
+export const Text = <E extends React.ElementType>({
+  variant: variantName = 'sans-16',
   className,
   ...props
-}: TextProps) => {
+}: TextProps<E>) => {
   const styles = useStyles(styleRefs)
+  const variant = normalizedVariants[variantName]
   const debug = useDebug()
 
   return (
@@ -41,18 +77,16 @@ export const Text = ({
       )}
     >
       <Box
-        as={as}
-        className={clsx(styles.variants[variant], className)}
+        as={defaultElement}
+        className={clsx(styles.variants[variant.variant], className)}
         {...props}
         styles={{
-          ...variantExtraStyles[variant],
+          ...variant.styles,
           ...props.styles,
         }}
-      >
-        {children}
-      </Box>
+      />
     </ConditionalWrap>
   )
 }
 
-Text.variants = Object.keys(styleRefs.variants)
+Text.variants = Object.keys(normalizedVariants)

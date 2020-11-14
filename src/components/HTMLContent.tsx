@@ -3,7 +3,6 @@ import React from 'react'
 import { BoxProps, Box } from '@walltowall/calico'
 import HTMLRenderer, { HTMLRendererProps } from 'react-html-renderer'
 
-import { Heading, HeadingProps } from './Heading'
 import { Anchor } from './Anchor'
 import { Text } from './Text'
 import { useUtilStyles } from '../hooks/useUtilStyles'
@@ -19,42 +18,51 @@ const baseTextStyles = {
   marginBottom: [6, 7, 8],
 } as const
 
-const HTMLHeading = (props: HeadingProps) => {
-  const { firstLastNoMargin } = useUtilStyles()
-
-  return (
-    <Heading
-      className={firstLastNoMargin}
-      {...props}
-      styles={{
-        ...baseHeadingStyles,
-        ...props.styles,
-      }}
-    />
-  )
-}
-
 const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
-  h1: (props) => <HTMLHeading level={3} {...props} />,
-  h2: (props) => <HTMLHeading level={4} {...props} />,
-  h3: (props) => <HTMLHeading level={5} {...props} />,
+  h1: (props) => (
+    <Text
+      as="h3"
+      variant="sans-bold-20-48"
+      {...props}
+      styles={{ ...baseHeadingStyles, ...props.styles }}
+    />
+  ),
+  h2: (props) => (
+    <Text
+      as="h5"
+      variant="sans-bold-20-48"
+      {...props}
+      styles={{ ...baseHeadingStyles, ...props.styles }}
+    />
+  ),
+  h3: (props) => (
+    <Text
+      as="h6"
+      variant="sans-bold-20-48"
+      {...props}
+      styles={{ ...baseHeadingStyles, ...props.styles }}
+    />
+  ),
   h4: (props) => (
-    <HTMLHeading
-      level={6}
+    <Text
+      as="h6"
+      variant="sans-bold-20-48"
       {...props}
       styles={{ ...baseTextStyles, ...props.styles }}
     />
   ),
   h5: (props) => (
-    <HTMLHeading
-      level={6}
+    <Text
+      as="h6"
+      variant="sans-bold-20-48"
       {...props}
       styles={{ ...baseTextStyles, ...props.styles }}
     />
   ),
   h6: (props) => (
-    <HTMLHeading
-      level={6}
+    <Text
+      as="h6"
+      variant="sans-bold-20-48"
       {...props}
       styles={{ ...baseTextStyles, ...props.styles }}
     />
@@ -64,6 +72,7 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
 
     return (
       <Text
+        as="p"
         className={lastNoMargin}
         {...props}
         styles={{ ...baseTextStyles, ...props.styles }}

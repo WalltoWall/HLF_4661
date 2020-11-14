@@ -10,5 +10,4 @@ export default {
 
 const content = faker.lorem.sentence()
 
-export const Sans16 = () => <Text>{content}</Text>
-Sans16.storyName = 'Sans (16)'
+export const Default = () => <Text>{content}</Text>
