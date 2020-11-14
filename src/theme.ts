@@ -11,7 +11,10 @@
  *  - /types/calico.d.ts
  */
 
-import { createCalicoTheme } from '@walltowall/calico/src/createCalicoTheme'
+import {
+  createCalicoTheme,
+  baseCalicoTheme,
+} from '@walltowall/calico/src/createCalicoTheme'
 
 export type Theme = typeof theme
 
@@ -143,6 +146,14 @@ export const theme = createCalicoTheme({
     opacity: {
       0.25: 0.25,
       1: 1,
+    },
+
+    letterSpacing: {
+      ...baseCalicoTheme.rules.letterSpacing,
+      xs: '0.025em',
+      s: '0.05em',
+      m: '0.1em',
+      l: '0.2em',
     },
   },
 
