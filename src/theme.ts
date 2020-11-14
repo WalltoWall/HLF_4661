@@ -127,7 +127,7 @@ export const theme = createCalicoTheme({
     gap: space,
 
     fontFamily: {
-      sans: 'system-ui, sans-serif',
+      sans: '"Proxima Nova", system-ui, sans-serif',
     },
 
     maxWidth: {
