@@ -2,8 +2,10 @@ import * as React from 'react'
 
 import PageBodyHeader from './PageBodyHeader'
 
+// This slice is documented under Components, not Pages, since this isn't an
+// editor-facing slice.
 export default {
-  title: 'Slices/Page/Header',
+  title: 'Components/Header',
   component: PageBodyHeader,
 }
 

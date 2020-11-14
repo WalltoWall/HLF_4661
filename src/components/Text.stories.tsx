@@ -4,7 +4,7 @@ import faker from 'faker'
 import { Text } from './Text'
 
 export default {
-  title: 'Design System/Text',
+  title: 'Components/Text',
   component: Text,
 }
 

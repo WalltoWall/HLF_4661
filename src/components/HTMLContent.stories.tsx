@@ -4,7 +4,7 @@ import faker from 'faker'
 import { HTMLContent } from './HTMLContent'
 
 export default {
-  title: 'Design System/HTMLContent',
+  title: 'Components/HTMLContent',
   component: HTMLContent,
 }
 
