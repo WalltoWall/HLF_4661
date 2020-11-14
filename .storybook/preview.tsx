@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { addParameters, addDecorator } from '@storybook/react'
-// import { action } from '@storybook/addon-actions'
+import { addDecorator } from '@storybook/react'
 import { TreatProvider } from 'react-treat'
 
 import { theme } from '../src/theme.treat'
@@ -8,39 +7,28 @@ import { theme } from '../src/theme.treat'
 import '../src/global'
 import './preview.css'
 
-const rootSortOrder = [
-  'Documentation',
-  // ---
-  'Pages',
-  'Document Types',
-  // ---
-  'Style Guide',
-  'Components',
-]
-
 addDecorator((storyFn) => (
   <TreatProvider theme={theme}>{storyFn()}</TreatProvider>
 ))
 
-addParameters({
+export const parameters = {
   options: {
-    showRoots: true,
-    storySort: (a, b) => {
-      const byRoot =
-        rootSortOrder.findIndex((root) => root === a[1].kind.split('/')[0]) -
-        rootSortOrder.findIndex((root) => root === b[1].kind.split('/')[0])
-
-      if (byRoot !== 0) return byRoot
-
-      if (a[1].parameters.docsOnly && !b[1].parameters.docsOnly) return -1
-      if (!a[1].parameters.docsOnly && b[1].parameters.docsOnly) return 1
-
-      return a[1].kind === b[1].kind
-        ? 0
-        : a[1].id.localeCompare(b[1].id, undefined, { numeric: true })
+    storySort: {
+      // The "---" indicate where dividers are added using CSS in ./manager.css
+      order: [
+        'Documentation',
+        ['How to Use'],
+        // ---
+        'Pages',
+        ['All slices'],
+        'Document Types',
+        // ---
+        'Style Guide',
+        'Components',
+      ],
     },
   },
-})
+}
 
 declare global {
   var ___loader: {

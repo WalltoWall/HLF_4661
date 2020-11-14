@@ -7,7 +7,7 @@ import { Anchor } from './Anchor'
 import { Text } from './Text'
 
 export default {
-  title: 'Design System/Anchor',
+  title: 'Components/Anchor',
   component: Anchor,
 }
 
