@@ -1,0 +1,106 @@
+{
+  "Main": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title"
+      }
+    },
+    "site_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Site Name"
+      }
+    },
+    "site_description": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Site Description"
+      }
+    },
+    "site_copyright": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Site Copyright"
+      }
+    },
+    "facebook_handle": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Facebook Handle"
+      }
+    },
+    "twitter_handle": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Twitter Handle"
+      }
+    },
+    "instagram_handle": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Instagram Handle"
+      }
+    }
+  },
+  "Redirects": {
+    "redirects": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "from_path": {
+            "type": "Text",
+            "config": {
+              "label": "From Path"
+            }
+          },
+          "to_path": {
+            "type": "Text",
+            "config": {
+              "label": "To Path"
+            }
+          },
+          "is_permanent": {
+            "type": "Boolean",
+            "config": {
+              "placeholder_false": "No",
+              "placeholder_true": "Yes, redirect forever",
+              "default_value": false,
+              "label": "Is Permanent"
+            }
+          }
+        },
+        "label": "Redirects"
+      }
+    }
+  },
+  "Developer Only": {
+    "preview_map": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "api_id": {
+            "type": "Text",
+            "config": {
+              "label": "API ID"
+            }
+          },
+          "page": {
+            "type": "Link",
+            "config": {
+              "label": "Page"
+            }
+          }
+        },
+        "label": "Preview Map"
+      }
+    }
+  }
+}

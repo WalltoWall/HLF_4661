@@ -1,0 +1,36 @@
+.sb-show-main {
+  box-sizing: inherit !important;
+  background-color: #fff;
+}
+
+.sb-show-nopreview {
+  background-color: #fff;
+}
+
+.sbdocs-content {
+  max-width: 850px !important;
+}
+
+.sbdocs-h1,
+.sbdocs-h2,
+.sbdocs-h3,
+.sbdocs-h4,
+.sbdocs-h5,
+.sbdocs-h6 {
+  font-weight: bold;
+}
+
+.sbdocs-li {
+  list-style: disc;
+}
+
+.sbdocs-preview {
+  /* width: 100vw; */
+  margin-left: calc(0px - ((100vw - 100%) / 2) + 1rem) !important;
+  margin-right: calc(0px - ((100vw - 100%) / 2) + 1rem) !important;
+}
+
+.sbdocs-preview > div > div {
+  padding: 0;
+  margin: 0;
+}

@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Documentation/Prismic CMS/Getting Started with Prismic" />
+
+# Getting Started with Prismic
+
+Overview of the site's content management system.
+
+## Quick intro
+
+Prismic is your site's content management system (CMS) and is used to create and
+edit content. Content is managed primarily through two ways: **Documents** and
+**Slices**.
+
+### Documents
+
+Documents contain the content for pages on the site. Documents can also be used
+as settings for other Documents. For example, a Document could contain
+information for a blog post or product.
+
+Several Document types have already been configured for your site.
+
+[See all Document types here](/admin/types/)
+
+### Slices
+
+Slices are used within most Documents to build content. They are configurable
+blocks of content with a predefined look and feel. Think of these as the content
+building blocks by which you'll assemble a page.
+
+This is what a blog post might look like in Prismic. `Name` and `Summary` are
+text fields while `Content` is made with Slices.
+
+```
+Blog Post
+_________
+
+Name:    My first blog post!
+Summary: Learn how to use Prismic, a modern CMS.
+Content: [Text slice]
+         [Image slice]
+         [Text slice]
+```
+
+Each Document type has its own set of available Slices.
+
+[See all Slices here](/admin/slices/)
+
+## Logging in
+
+Prismic is managed separately from the website and has its own login
+credentials.
+
+Depending on your service level, you will either have a single set of
+credentials shared among all of the site's editors, or each editor will have
+their own login. Wall-to-Wall uses their own separate account to access your
+Prismic content.
+
+You can always access Prismic by opening this documentation site and clicking
+the "Open Prismic" button at the top of the page.
+
+Alternatively, you can go to this URL directly:
+<https://hawaiiairportsmodernization.com/admin/>
+
+## Editing pages and documents
+
+Most of your interaction with the site will involve editing pages and documents
+within Prismic.
+
+[Read about editing pages and documents here](/admin/guides/editing-pages-and-documents/)

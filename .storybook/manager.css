@@ -1,0 +1,12 @@
+.sidebar-container section[data-title='Pages'],
+.sidebar-container section[data-title='Style Guide'] {
+  border-top: 1px solid #00000012;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+/* Brand image */
+.sidebar-header img {
+  width: 100%;
+  max-width: 150px;
+}

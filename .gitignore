@@ -1,0 +1,11 @@
+node_modules/
+*.log
+.cache/
+public/
+jsconfig.json
+.DS_Store
+lambda/
+.netlify
+storybook-static/
+.vscode
+shell.nix

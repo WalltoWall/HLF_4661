@@ -1,0 +1,23 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+import faker from 'faker'
+
+import PageBodyText from './PageBodyText.tsx'
+
+<Meta title="Slices/Page/Text" component={PageBodyText} />
+
+# Text
+
+Adds text with rich formatting including headings, lists, and links.
+
+<Preview withSource="none">
+  <Story name="With long text">
+    <PageBodyText
+      nextSharesBg={false}
+      textHTML={faker.lorem
+        .paragraphs(4)
+        .split('\n')
+        .map((p) => `<p>${p}</p>`)
+        .join('')}
+    />
+  </Story>
+</Preview>
