@@ -2,6 +2,7 @@
 import React from 'react'
 import { BoxProps, Box } from '@walltowall/calico'
 import HTMLRenderer, { HTMLRendererProps } from 'react-html-renderer'
+import clsx from 'clsx'
 
 import { Anchor } from './Anchor'
 import { Text } from './Text'
@@ -19,74 +20,104 @@ const baseTextStyles = {
 } as const
 
 const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
-  h1: (props) => (
-    <Text
-      as="h3"
-      variant="sans-bold-20-48"
-      {...props}
-      styles={{ ...baseHeadingStyles, ...props.styles }}
-    />
-  ),
-  h2: (props) => (
-    <Text
-      as="h5"
-      variant="sans-bold-20-48"
-      {...props}
-      styles={{ ...baseHeadingStyles, ...props.styles }}
-    />
-  ),
-  h3: (props) => (
-    <Text
-      as="h6"
-      variant="sans-bold-20-48"
-      {...props}
-      styles={{ ...baseHeadingStyles, ...props.styles }}
-    />
-  ),
-  h4: (props) => (
-    <Text
-      as="h6"
-      variant="sans-bold-20-48"
-      {...props}
-      styles={{ ...baseTextStyles, ...props.styles }}
-    />
-  ),
-  h5: (props) => (
-    <Text
-      as="h6"
-      variant="sans-bold-20-48"
-      {...props}
-      styles={{ ...baseTextStyles, ...props.styles }}
-    />
-  ),
-  h6: (props) => (
-    <Text
-      as="h6"
-      variant="sans-bold-20-48"
-      {...props}
-      styles={{ ...baseTextStyles, ...props.styles }}
-    />
-  ),
+  h1: (props) => {
+    const { firstLastNoMargin } = useUtilStyles()
+
+    return (
+      <Text
+        as="h3"
+        variant="sans-bold-20-48"
+        {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
+        styles={{ ...baseHeadingStyles, ...props.styles }}
+      />
+    )
+  },
+  h2: (props) => {
+    const { firstLastNoMargin } = useUtilStyles()
+
+    return (
+      <Text
+        as="h5"
+        variant="sans-bold-20-48"
+        {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
+        styles={{ ...baseHeadingStyles, ...props.styles }}
+      />
+    )
+  },
+  h3: (props) => {
+    const { firstLastNoMargin } = useUtilStyles()
+
+    return (
+      <Text
+        as="h6"
+        variant="sans-bold-20-48"
+        {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
+        styles={{ ...baseHeadingStyles, ...props.styles }}
+      />
+    )
+  },
+  h4: (props) => {
+    const { firstLastNoMargin } = useUtilStyles()
+
+    return (
+      <Text
+        as="h6"
+        variant="sans-bold-20-48"
+        {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
+        styles={{ ...baseTextStyles, ...props.styles }}
+      />
+    )
+  },
+  h5: (props) => {
+    const { firstLastNoMargin } = useUtilStyles()
+
+    return (
+      <Text
+        as="h6"
+        variant="sans-bold-20-48"
+        {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
+        styles={{ ...baseTextStyles, ...props.styles }}
+      />
+    )
+  },
+  h6: (props) => {
+    const { firstLastNoMargin } = useUtilStyles()
+
+    return (
+      <Text
+        as="h6"
+        variant="sans-bold-20-48"
+        {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
+        styles={{ ...baseTextStyles, ...props.styles }}
+      />
+    )
+  },
   p: (props) => {
-    const { lastNoMargin } = useUtilStyles()
+    const { firstLastNoMargin } = useUtilStyles()
 
     return (
       <Text
         as="p"
-        className={lastNoMargin}
         {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseTextStyles, ...props.styles }}
       />
     )
   },
   ul: (props) => {
-    const { lastNoMargin } = useUtilStyles()
+    const { firstLastNoMargin } = useUtilStyles()
 
     return (
       <Box
         as="ul"
-        className={lastNoMargin}
         {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{
           ...baseTextStyles,
           paddingLeft: [7, 8],
@@ -97,13 +128,13 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     )
   },
   ol: (props) => {
-    const { lastNoMargin } = useUtilStyles()
+    const { firstLastNoMargin } = useUtilStyles()
 
     return (
       <Box
         as="ol"
-        className={lastNoMargin}
         {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{
           ...baseTextStyles,
           paddingLeft: [7, 8],
@@ -114,13 +145,13 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     )
   },
   li: (props) => {
-    const { lastNoMargin } = useUtilStyles()
+    const { firstLastNoMargin } = useUtilStyles()
 
     return (
       <Text
         as="li"
-        className={lastNoMargin}
         {...props}
+        className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{
           display: 'listItem',
           marginBottom: 4,
