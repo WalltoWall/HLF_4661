@@ -8,6 +8,8 @@ import { Anchor } from './Anchor'
 import { Text } from './Text'
 import { useUtilStyles } from '../hooks/useUtilStyles'
 
+const defaultElement = 'div'
+
 const baseHeadingStyles = {
   marginTop: [8, 9, 10],
   marginBottom: [7, 8],
@@ -73,7 +75,7 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
 
     return (
       <Box
-        component="ul"
+        as="ul"
         className={lastNoMargin}
         {...props}
         styles={{
@@ -90,7 +92,7 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
 
     return (
       <Box
-        component="ol"
+        as="ol"
         className={lastNoMargin}
         {...props}
         styles={{
@@ -107,7 +109,7 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
 
     return (
       <Text
-        component="li"
+        as="li"
         className={lastNoMargin}
         {...props}
         styles={{
@@ -120,26 +122,25 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
   },
   a: ({ href, ...props }) => <Anchor href={href!} {...props} />,
   strong: (props) => (
-    <Box
-      component="strong"
-      styles={{ fontWeight: 'semibold', ...props.styles }}
-    >
+    <Box as="strong" styles={{ fontWeight: 'semibold', ...props.styles }}>
       {props.children}
     </Box>
   ),
 }
 
-export type HTMLContentProps = {
+export type HTMLContentProps<E extends React.ElementType> = {
   html?: HTMLRendererProps['html']
   componentOverrides?: HTMLRendererProps['componentOverrides']
-} & BoxProps
+} & BoxProps<E>
 
-export const HTMLContent = ({
+export const HTMLContent = <
+  E extends React.ElementType = typeof defaultElement
+>({
   html,
   componentOverrides,
   ...props
-}: HTMLContentProps) => (
-  <Box {...props}>
+}: HTMLContentProps<E>) => (
+  <Box as={defaultElement} {...props}>
     <HTMLRenderer
       html={html}
       components={components}

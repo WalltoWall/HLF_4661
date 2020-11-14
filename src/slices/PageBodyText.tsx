@@ -13,7 +13,7 @@ export type PageBodyTextProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
 
 const PageBodyText = ({ textHTML, nextSharesBg }: PageBodyTextProps) => (
-  <BoundedBox component="section" nextSharesBg={nextSharesBg}>
+  <BoundedBox as="section" nextSharesBg={nextSharesBg}>
     {textHTML && <HTMLContent html={textHTML} />}
   </BoundedBox>
 )

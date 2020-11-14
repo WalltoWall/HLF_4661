@@ -4,6 +4,8 @@ import { useStyles } from 'react-treat'
 import { Box, BoxProps } from '@walltowall/calico'
 import ConditionalWrap from 'conditional-wrap'
 
+import { useDebug } from '../hooks/useDebug'
+
 import * as styleRefs from './Text.treat'
 
 const variantExtraStyles: Record<styleRefs.variations, BoxProps['styles']> = {
@@ -12,22 +14,22 @@ const variantExtraStyles: Record<styleRefs.variations, BoxProps['styles']> = {
   },
 } as const
 
-type TextProps = Omit<BoxProps, 'component'> & {
-  component?: 'p' | 'span' | 'strong' | 'em' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+type TextProps = {
+  as?: 'p' | 'span' | 'strong' | 'em' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   children?: React.ReactNode
   variant?: styleRefs.variations
   debug?: boolean
-}
+} & Omit<BoxProps, 'as'>
 
 export const Text = ({
-  component = 'p',
+  as = 'p',
   variant = 'sans16',
   children,
   className,
-  debug = false,
   ...props
 }: TextProps) => {
   const styles = useStyles(styleRefs)
+  const debug = useDebug()
 
   return (
     <ConditionalWrap
@@ -39,7 +41,7 @@ export const Text = ({
       )}
     >
       <Box
-        component={component}
+        as={as}
         className={clsx(styles.variants[variant], className)}
         {...props}
         styles={{
