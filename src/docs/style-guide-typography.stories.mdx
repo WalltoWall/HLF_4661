@@ -1,0 +1,50 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks'
+import faker from 'faker'
+
+import { titleize } from '../utils'
+
+import * as Storybook from '../components/Storybook'
+import { Heading } from '../components/Heading'
+import { Text } from '../components/Text'
+
+export const heading = titleize(faker.lorem.words(4))
+
+<Meta title="Style Guide/Typography" />
+
+#### Style Guide
+
+# Typography
+
+<br />
+<br />
+
+## Headings
+
+<br />
+<br />
+
+##### System UI
+
+<br />
+
+<Story name="Heading - System">
+  <Storybook.Typography component={Heading} variantPrefix="sans">
+    {heading}
+  </Storybook.Typography>
+</Story>
+
+<br />
+<br />
+<br />
+
+## Text
+
+<br />
+
+##### System UI
+
+<br />
+
+<Story name="Text - System">
+  <Storybook.Typography component={Text} variantPrefix="sans" />
+</Story>
