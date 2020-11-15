@@ -4,19 +4,25 @@ import { Helmet } from 'react-helmet-async'
 import { withPreview } from 'gatsby-source-prismic'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
+import { Box } from '@walltowall/calico'
 
 import { InteriorPageTemplateQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
+import { useSiteSettings } from '../hooks/useSiteSettings'
 import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
 import { slicesMap as interiorPageHeaderSlicesMap } from '../slices/InteriorPageHeader'
+import { slicesMap as interiorPageBodySlicesMap } from '../slices/InteriorPageBody'
 
 import { Layout } from '../components/Layout'
-import { useSiteSettings } from '../hooks/useSiteSettings'
+import { BoundedBox } from '../components/BoundedBox'
+import { Text } from '../components/Text'
+import { Inline } from '../components/Inline'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
   ...pageBodySlicesMap,
   ...interiorPageHeaderSlicesMap,
+  ...interiorPageBodySlicesMap,
 }
 
 /**
@@ -29,8 +35,12 @@ const slicesMap = {
 export const slicesMiddleware = <T,>(list: T[]) => [
   { __typename: 'PageBodyHeader', id: 'header' },
   ...list,
-  { __typename: 'PageBodyFooter', id: 'footer' },
 ]
+
+/**
+ * Used to render the footer. This practice is specific to this template.
+ */
+export const footerSliceList = [{ __typename: 'PageBodyFooter', id: 'footer' }]
 
 /**
  * `mapDataToPropsEnhancer` for `react-map-slices-to-components`. Props defined
@@ -70,6 +80,9 @@ export const InteriorPageTemplate = ({
   const siteSettings = useSiteSettings()
   const page = data?.prismicInteriorPage
 
+  const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
+  const pageDescription = page?.data?.meta_description
+
   /**
    * Metadata made available in a slice's `mapDataToProps` and
    * `mapDataToContext` functions.
@@ -88,11 +101,11 @@ export const InteriorPageTemplate = ({
     <Layout>
       <Helmet>
         <title>
-          {page?.data?.meta_title ?? page?.data?.title?.text ?? ''}
+          {pageTitle ?? ''}
           {page?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`}
         </title>
-        {page?.data?.meta_description && (
-          <meta name="description" content={page?.data?.meta_description} />
+        {pageDescription && (
+          <meta name="description" content={pageDescription} />
         )}
       </Helmet>
       <MapSlicesToComponents
@@ -100,6 +113,56 @@ export const InteriorPageTemplate = ({
         map={slicesMap}
         meta={meta}
         listMiddleware={slicesMiddleware}
+        mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+      />
+      <Box
+        styles={{
+          backgroundColor: 'white',
+          maxWidth: 'xlarge',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          display: 'grid',
+          gap: 8,
+          gridTemplateColumns: [null, '3'],
+          /* alignItems: 'baseline', */
+        }}
+      >
+        <BoundedBox styles={{ paddingRight: 0 }}>
+          <Inline space={8}>
+            {pageTitle && (
+              <Text variant="serif-48" as="h1" styles={{ color: 'gray10' }}>
+                {pageTitle}
+              </Text>
+            )}
+            {pageDescription && (
+              <Text
+                variant="sans-16-italic"
+                as="p"
+                styles={{ color: 'orange55', maxWidth: '30ch' }}
+              >
+                {pageDescription}
+              </Text>
+            )}
+          </Inline>
+        </BoundedBox>
+        <Box
+          styles={{
+            gridColumn: 'span-2',
+            paddingTop: [4, 5, 7],
+          }}
+        >
+          <MapSlicesToComponents
+            list={page?.data?.body}
+            map={slicesMap}
+            meta={meta}
+            mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+          />
+        </Box>
+      </Box>
+      <MapSlicesToComponents
+        list={footerSliceList}
+        map={slicesMap}
+        meta={meta}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
       />
     </Layout>
@@ -125,6 +188,13 @@ export const query = graphql`
             id
           }
           ...SlicesInteriorPageHeader
+        }
+        body {
+          __typename
+          ... on Node {
+            id
+          }
+          ...SlicesInteriorPageBody
         }
       }
     }

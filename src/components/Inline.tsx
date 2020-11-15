@@ -16,7 +16,7 @@ type InlineProps<E extends React.ElementType> = {
   align?: NonNullable<BoxProps['styles']>['justifyContent']
   alignY?: NonNullable<BoxProps['styles']>['alignItems']
   wrap?: boolean
-} & Omit<BoxProps<E>, 'wrap'> & { as: BoxProps<E>['as'] }
+} & Omit<BoxProps<E>, 'wrap'> & { as?: BoxProps<E>['as'] }
 
 export const Inline = <E extends React.ElementType = typeof defaultElement>({
   children,

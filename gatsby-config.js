@@ -43,6 +43,9 @@ module.exports = {
         typekit: {
           id: process.env.TYPEKIT_PROJECT_ID,
         },
+        google: {
+          families: ['PT Serif', 'PT Serif:ital'],
+        },
       },
     },
     {
