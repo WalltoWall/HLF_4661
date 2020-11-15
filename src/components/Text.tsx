@@ -13,6 +13,9 @@ import * as styleRefs from './Text.treat'
 const defaultElement = 'div'
 
 const variants = {
+  'sans-12': {
+    fontFamily: 'sans',
+  },
   'sans-14': {
     fontFamily: 'sans',
   },
@@ -22,10 +25,17 @@ const variants = {
 } as const
 
 const styledVariants = {
-  'sans-semibold-caps-14': {
+  'sans-caps-12': {
+    variant: 'sans-12',
+    styles: {
+      textTransform: 'uppercase',
+      letterSpacing: 's',
+    },
+  },
+  'sans-bold-caps-14': {
     variant: 'sans-14',
     styles: {
-      fontWeight: 'semibold',
+      fontWeight: 'bold',
       textTransform: 'uppercase',
       letterSpacing: 's',
     },

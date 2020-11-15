@@ -13,29 +13,30 @@ import { useId } from '@reach/auto-id'
 import querystring from 'querystring'
 import clsx from 'clsx'
 
-import { useSiteSettings } from '../hooks/useSiteSettings'
 import { PageTemplateEnhancerProps } from '../templates/page'
+import { useSiteSettings } from '../hooks/useSiteSettings'
 import { useNavigation } from '../hooks/useNavigation'
 
-import { BoundedBox } from '../components/BoundedBox'
-import { Link } from '../components/Link'
-import { HamburgerIcon } from '../components/HamburgerIcon'
-import { Text } from '../components/Text'
 import { Anchor, AnchorProps } from '../components/Anchor'
-import { Logo } from '../components/Logo'
+import { BoundedBox } from '../components/BoundedBox'
+import { HamburgerIcon } from '../components/HamburgerIcon'
 import { Icon } from '../components/Icon'
+import { Inline } from '../components/Inline'
+import { Link } from '../components/Link'
+import { Logo } from '../components/Logo'
+import { Text } from '../components/Text'
 
 import * as styleRefs from './PageBodyHeader.treat'
 
 const SEARCH_URL = withPrefix('/search/')
 
-type NavItemProps = {
+type MobileNavItemProps = {
   href: AnchorProps['href']
   name?: string
   children?: React.ReactNode
 }
 
-const NavItem = ({ href, name, children }: NavItemProps) => {
+const MobileNavItem = ({ href, name, children }: MobileNavItemProps) => {
   const [isOpen, toggleIsOpen] = React.useReducer((state) => !state, false)
 
   const styles = useStyles(styleRefs)
@@ -112,12 +113,12 @@ const NavItem = ({ href, name, children }: NavItemProps) => {
   )
 }
 
-type NavItemChildProps = {
+type MobileNavItemChildProps = {
   href: AnchorProps['href']
   name?: string
 }
 
-const NavItemChild = ({ href, name }: NavItemChildProps) => (
+const MobileNavItemChild = ({ href, name }: MobileNavItemChildProps) => (
   <Box
     as="li"
     styles={{
@@ -144,6 +145,122 @@ const NavItemChild = ({ href, name }: NavItemChildProps) => (
   </Box>
 )
 
+const secondaryNavItemVariants = {
+  gray: { color: 'gray40' },
+  orange: { color: 'orange55' },
+} as const
+
+type SecondaryNavItemProps = {
+  href: AnchorProps['href']
+  name?: string
+  variant?: keyof typeof secondaryNavItemVariants
+}
+
+const SecondaryNavItem = ({
+  href,
+  name,
+  variant: variantName = 'gray',
+}: SecondaryNavItemProps) => {
+  const variant = secondaryNavItemVariants[variantName]
+
+  return (
+    <Anchor href={href} styles={{ color: variant.color }}>
+      <Text variant="sans-caps-12">{name}</Text>
+    </Anchor>
+  )
+}
+
+type NavItemProps = {
+  href: AnchorProps['href']
+  name?: string
+  children?: React.ReactNode
+}
+
+const NavItem = ({ href, name, children }: NavItemProps) => {
+  const styles = useStyles(styleRefs)
+  const hasChildren = React.Children.count(children) > 0
+
+  return (
+    <Box
+      styles={{
+        position: 'relative',
+        marginTop: -4,
+        marginBottom: -4,
+        marginLeft: -3,
+        marginRight: -3,
+      }}
+    >
+      <Anchor
+        href={href}
+        className={styles.navFocusSensor}
+        styles={{
+          color: 'white',
+          display: 'block',
+          paddingTop: 4,
+          paddingBottom: 4,
+          paddingLeft: 3,
+          paddingRight: 3,
+        }}
+      >
+        <Text variant="sans-bold-caps-14">{name}</Text>
+        {hasChildren && (
+          <Box
+            as="ul"
+            className={clsx(
+              styles.navFocusTarget,
+              styles.transparentWhiteBackground,
+              styles.shadow,
+            )}
+            styles={{
+              opacity: 0,
+              pointerEvents: 'none',
+              position: 'absolute',
+              top: '100%',
+              right: 0,
+              marginRight: -2,
+              paddingTop: 2.5,
+              paddingBottom: 2.5,
+              minWidth: '14rem',
+              transitionDuration: 'slow',
+              transitionTimingFunction: 'easeInOut',
+            }}
+          >
+            {children}
+          </Box>
+        )}
+      </Anchor>
+    </Box>
+  )
+}
+
+type NavItemChildProps = {
+  href: AnchorProps['href']
+  name?: string
+}
+
+const NavItemChild = ({ href, name }: NavItemChildProps) => (
+  <Box as="li">
+    <Anchor
+      href={href}
+      styles={{
+        color: 'gray40',
+        display: 'block',
+        paddingLeft: 8,
+        paddingRight: 5,
+        paddingTop: 2.5,
+        paddingBottom: 2.5,
+      }}
+    >
+      <Text
+        variant="sans-bold-caps-14"
+        styles={{ textAlign: 'right', whiteSpace: 'nowrap' }}
+      >
+        {name}
+      </Text>
+    </Anchor>
+  </Box>
+)
+
 export type PageBodyHeaderProps = PageTemplateEnhancerProps
 
 const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
@@ -156,6 +273,8 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
   const styles = useStyles(styleRefs)
   const siteSettings = useSiteSettings()
   const navigation = useNavigation()
+
+  const mobileSearchQueryInputId = useId()
   const searchQueryInputId = useId()
 
   const onSearchQueryChange = (event: React.FormEvent<HTMLInputElement>) =>
@@ -173,7 +292,96 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
 
   return (
     <>
-      <Box as="header">
+      <Box
+        as="header"
+        styles={{
+          maxWidth: 'large',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <Box
+          styles={{
+            display: ['none', 'flex'],
+            alignItems: 'center',
+            backgroundColor: 'white',
+          }}
+        >
+          <BoundedBox
+            styles={{
+              paddingTop: 3,
+              paddingBottom: 3,
+              paddingRight: 5,
+              flexGrow: 1,
+            }}
+          >
+            <Inline as="nav" variant="ul" space={5} align="end">
+              {navigation.secondary.map(
+                (item) =>
+                  item?.primary?.link?.url && (
+                    <SecondaryNavItem
+                      key={item.primary.name}
+                      name={item.primary.name}
+                      href={item.primary.link.url}
+                    />
+                  ),
+              )}
+              {siteSettings.newsletterSignUpHref && (
+                <SecondaryNavItem
+                  name="Sign Up for Updates"
+                  href={siteSettings.newsletterSignUpHref}
+                  variant="orange"
+                />
+              )}
+            </Inline>
+          </BoundedBox>
+          <Box
+            as="form"
+            action={SEARCH_URL}
+            method="get"
+            role="search"
+            onSubmit={onSearchSubmit}
+            styles={{ flexShrink: 0 }}
+          >
+            <VisuallyHidden>
+              <label htmlFor={searchQueryInputId}>Search</label>
+            </VisuallyHidden>
+            <Box styles={{ position: 'relative' }}>
+              <Box
+                as="input"
+                name="query"
+                id={searchQueryInputId}
+                placeholder="Search&hellip;"
+                value={searchQuery}
+                onChange={onSearchQueryChange}
+                className={styles.placeholderColor}
+                styles={{
+                  backgroundColor: 'gray85',
+                  fontFamily: 'sans',
+                  paddingTop: 2.5,
+                  paddingBottom: 2.5,
+                  paddingLeft: 9,
+                  paddingRight: 4,
+                  lineHeight: 1,
+                  fontSize: '0.875rem',
+                  color: 'gray40',
+                  width: '10rem',
+                }}
+              />
+              <Icon
+                name="search"
+                className={styles.verticallyCenter}
+                styles={{
+                  width: '1rem',
+                  color: 'gray40',
+                  position: 'absolute',
+                  marginLeft: 3,
+                }}
+              />
+            </Box>
+          </Box>
+        </Box>
+        <Box styles={{ backgroundColor: 'orange50', height: '0.375rem' }} />
         <Disclosure open={mobileNavIsOpen} onChange={toggleMobileNavIsOpen}>
           <BoundedBox
             nextSharesBg={nextSharesBg}
@@ -192,22 +400,19 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                 gridTemplateColumns: '1fr auto',
               }}
             >
-              <Box styles={{ maxWidth: '15rem', paddingTop: 1 }}>
-                <Link href="/">
+              <Box
+                styles={{
+                  maxWidth: ['15rem', null, '20rem'],
+                  paddingTop: 1,
+                }}
+              >
+                <Link href={withPrefix('/')}>
                   <VisuallyHidden>{siteSettings.siteName}</VisuallyHidden>
                   <Logo trimNegativeSpace={true} />
                 </Link>
               </Box>
-              <DisclosureButton>
-                <VisuallyHidden>Navigation</VisuallyHidden>
-                <HamburgerIcon isActive={mobileNavIsOpen} />
-              </DisclosureButton>
-            </Box>
-          </BoundedBox>
-          <DisclosurePanel>
-            <Box>
-              <Box as="nav">
-                <Box as="ul">
+              <Box styles={{ display: ['none', 'block'] }}>
+                <Inline as="nav" variant="ul" space={6}>
                   {navigation.primary.map(
                     (item) =>
                       item?.primary?.link?.url && (
@@ -229,6 +434,41 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                         </NavItem>
                       ),
                   )}
+                </Inline>
+              </Box>
+              <Box styles={{ display: [null, 'none'] }}>
+                <DisclosureButton>
+                  <VisuallyHidden>Navigation</VisuallyHidden>
+                  <HamburgerIcon isActive={mobileNavIsOpen} />
+                </DisclosureButton>
+              </Box>
+            </Box>
+          </BoundedBox>
+          <DisclosurePanel>
+            <Box styles={{ display: [null, 'none'] }}>
+              <Box as="nav">
+                <Box as="ul">
+                  {navigation.primary.map(
+                    (item) =>
+                      item?.primary?.link?.url && (
+                        <MobileNavItem
+                          key={item.primary.name}
+                          name={item.primary.name}
+                          href={item.primary.link.url}
+                        >
+                          {(item?.items ?? []).map(
+                            (child) =>
+                              child?.link?.url && (
+                                <MobileNavItemChild
+                                  key={child.name}
+                                  name={child.name}
+                                  href={child.link.url}
+                                />
+                              ),
+                          )}
+                        </MobileNavItem>
+                      ),
+                  )}
                 </Box>
               </Box>
               <Box
@@ -239,18 +479,19 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                 onSubmit={onSearchSubmit}
               >
                 <VisuallyHidden>
-                  <label htmlFor={searchQueryInputId}>Search</label>
+                  <label htmlFor={mobileSearchQueryInputId}>Search</label>
                 </VisuallyHidden>
                 <Box styles={{ position: 'relative' }}>
                   <Box
                     as="input"
                     name="query"
-                    id={searchQueryInputId}
+                    id={mobileSearchQueryInputId}
                     placeholder="Search&hellip;"
                     value={searchQuery}
                     onChange={onSearchQueryChange}
                     className={styles.placeholderColor}
                     styles={{
+                      backgroundColor: 'white',
                       fontFamily: 'sans',
                       paddingTop: 4,
                       paddingBottom: 4,
@@ -279,6 +520,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
         {siteSettings.newsletterSignUpHref && (
           <BoundedBox
             styles={{
+              display: [null, 'none'],
               backgroundColor: 'gray85',
               paddingTop: 5,
               paddingBottom: 5,

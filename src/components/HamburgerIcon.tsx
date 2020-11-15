@@ -9,7 +9,7 @@ const Bar = (props: BoxProps) => (
     {...props}
     styles={{
       backgroundColor: 'current',
-      height: '2px',
+      height: '0.125rem',
       position: 'absolute',
       width: 'full',
       ...props.styles,
