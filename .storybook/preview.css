@@ -34,3 +34,7 @@
   padding: 0;
   margin: 0;
 }
+
+.sbdocs-preview > div > div > div > div {
+  background-color: #666;
+}

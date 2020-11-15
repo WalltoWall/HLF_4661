@@ -98,6 +98,7 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     return (
       <Text
         as="p"
+        variant="serif-16-18"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseTextStyles, ...props.styles }}

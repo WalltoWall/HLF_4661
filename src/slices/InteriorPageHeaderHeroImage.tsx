@@ -60,7 +60,11 @@ export const InteriorPageHeaderHeroImage = ({
       }}
     >
       {heading && (
-        <Text variant="sans-32-60-caps" styles={{ position: 'relative' }}>
+        <Text
+          as="p"
+          variant="sans-32-60-caps"
+          styles={{ position: 'relative' }}
+        >
           {heading}
         </Text>
       )}

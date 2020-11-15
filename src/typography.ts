@@ -24,6 +24,13 @@ export const fontMetrics = {
     lineGap: 0,
     unitsPerEm: 1000,
   },
+  serif: {
+    capHeight: 700,
+    ascent: 1039,
+    descent: -286,
+    lineGap: 0,
+    unitsPerEm: 1000,
+  },
 } as const
 
 type Fontset = {

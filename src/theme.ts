@@ -29,7 +29,7 @@ export const colors = {
   gray95: '#f5f5f4',
   blue10: '#002244',
   orange50: '#f5782e',
-  orange55: '#ff9902',
+  orange55: '#ff9900',
   current: 'currentColor',
 } as const
 
@@ -135,6 +135,7 @@ export const theme = createCalicoTheme({
 
     fontFamily: {
       sans: 'proxima-nova, system-ui, sans-serif',
+      serif: '"PT Serif", Georgia, serif',
     },
 
     fontSize: {
@@ -152,6 +153,7 @@ export const theme = createCalicoTheme({
       xlarge: '75rem',
       '15rem': '15rem',
       '20rem': '20rem',
+      '30ch': '30ch',
     },
 
     minWidth: {

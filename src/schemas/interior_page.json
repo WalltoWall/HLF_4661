@@ -102,7 +102,8 @@
           "images": [],
           "text": [],
           "embed": [],
-          "video": []
+          "video": [],
+          "text_intro": []
         },
         "choices": {
           "text": {
@@ -164,6 +165,25 @@
                 "config": {
                   "label": "Video",
                   "placeholder": "URL of video to display"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "text_intro": {
+            "type": "Slice",
+            "fieldset": "Text Intro",
+            "description": "Introduction to following content",
+            "icon": "format_color_text",
+            "display": "list",
+            "non-repeat": {
+              "introductory_text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "Introductory Text",
+                  "placeholder": "Introductory text leading into the content that follows"
                 }
               }
             },
