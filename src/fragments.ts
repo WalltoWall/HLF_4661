@@ -59,3 +59,55 @@ export const PrismicPageParentRecursive = graphql`
     }
   }
 `
+
+export const PrismicInteriorPageParentRecursive = graphql`
+  fragment PrismicInteriorPageParentRecursive on PrismicInteriorPage {
+    ...PrismicInteriorPageParentFields
+    data {
+      parent {
+        document {
+          ... on PrismicInteriorPage {
+            ...PrismicInteriorPageParentFields
+            data {
+              parent {
+                document {
+                  ... on PrismicInteriorPage {
+                    ...PrismicInteriorPageParentFields
+                    data {
+                      parent {
+                        document {
+                          ... on PrismicInteriorPage {
+                            ...PrismicInteriorPageParentFields
+                            data {
+                              parent {
+                                document {
+                                  ... on PrismicInteriorPage {
+                                    ...PrismicInteriorPageParentFields
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  fragment PrismicInteriorPageParentFields on PrismicInteriorPage {
+    uid
+    url
+    data {
+      title {
+        text
+      }
+    }
+  }
+`

@@ -35,6 +35,36 @@ exports.createPages = (gatsbyContext) => {
   }
 
   /**
+   * Create pages for all Interior Page documents in Prismic. The document's
+   * UID is passed as context here to allow the template to query for the
+   * specific document.
+   *
+   * If a page defines a redirect in its Main tab, a redirect is created
+   * instead.
+   *
+   * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+   * @see https://www.gatsbyjs.org/docs/actions/#createRedirect
+   */
+  for (const page of getNodesByType('PrismicInteriorPage')) {
+    if (page.data.redirect_to.url) {
+      createRedirect({
+        fromPath: page.url,
+        toPath: page.data.redirect_to.url,
+        isPermanent: page.data.redirect_is_permanent,
+        redirectInBrowser: true,
+        force: true,
+      })
+      continue
+    }
+
+    createPage({
+      path: page.url,
+      component: path.resolve(__dirname, 'src/templates/interior_page.tsx'),
+      context: { uid: page.uid },
+    })
+  }
+
+  /**
    * Create global redirects defined in the Settings document.
    *
    * @see https://www.gatsbyjs.org/docs/actions/#createRedirect

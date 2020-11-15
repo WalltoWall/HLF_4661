@@ -18,6 +18,11 @@ const fontsets = {
     fontSizes: [1],
     lineGap: 1.2,
   },
+  'sans-32-60': {
+    fontMetrics: fontMetrics.sans,
+    fontSizes: [2, 2.75, 3.75],
+    lineGap: 1.2,
+  },
 }
 
 export const variants = styleMap((theme) => mapFontsets(theme, fontsets))

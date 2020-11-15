@@ -2,12 +2,12 @@ import * as React from 'react'
 import { graphql } from 'gatsby'
 import { getRichText } from '@walltowall/helpers'
 
+import { PageBodyTextFragment } from '../types.generated'
+import { PageTemplateEnhancerProps } from '../templates/page'
+import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
+
 import { BoundedBox } from '../components/BoundedBox'
 import { HTMLContent } from '../components/HTMLContent'
-
-import { PageBodyTextFragment } from '../types.generated'
-import { MapDataToPropsArgs } from '../types'
-import { PageTemplateEnhancerProps } from '../templates/page'
 
 export type PageBodyTextProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps

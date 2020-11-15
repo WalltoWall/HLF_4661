@@ -50,8 +50,46 @@
         "placeholder_false": "No",
         "placeholder_true": "Yes, redirect forever",
         "default_value": false,
-        "label": "Redirect Is Permanent",
-        "placeholder": "Test"
+        "label": "Redirect Is Permanent"
+      }
+    }
+  },
+  "Header": {
+    "header": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {
+          "hero_image": []
+        },
+        "choices": {
+          "hero_image": {
+            "type": "Slice",
+            "fieldset": "Hero Image",
+            "description": "Large image with text heading",
+            "icon": "photo_size_select_actual",
+            "display": "list",
+            "non-repeat": {
+              "heading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading1",
+                  "label": "Heading",
+                  "placeholder": "Heading displayed over the background image"
+                }
+              },
+              "background_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background Image"
+                }
+              }
+            },
+            "repeat": {}
+          }
+        }
       }
     }
   },
@@ -63,7 +101,8 @@
         "labels": {
           "images": [],
           "text": [],
-          "embed": []
+          "embed": [],
+          "video": []
         },
         "choices": {
           "text": {
@@ -76,7 +115,7 @@
               "text": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, heading1, strong, em, hyperlink, embed, list-item, o-list-item, o-list-item",
+                  "multi": "paragraph, heading1, heading2, strong, em, hyperlink, embed, list-item, o-list-item",
                   "allowTargetBlank": true,
                   "label": "Text",
                   "placeholder": "Text with formatting and rich content"
@@ -113,18 +152,18 @@
               }
             }
           },
-          "anchor": {
+          "video": {
             "type": "Slice",
-            "fieldset": "Anchor",
-            "description": "Page marker to jump a user down the page",
-            "icon": "adjust",
+            "fieldset": "Video",
+            "description": "Embeded video player",
+            "icon": "ondemand_video",
             "display": "list",
             "non-repeat": {
-              "id": {
-                "type": "Text",
+              "video": {
+                "type": "Embed",
                 "config": {
-                  "label": "ID",
-                  "placeholder": "Anchor ID used in links"
+                  "label": "Video",
+                  "placeholder": "URL of video to display"
                 }
               }
             },

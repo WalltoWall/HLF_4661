@@ -6,7 +6,8 @@
  */
 
 import { graphql } from 'gatsby'
-import * as R from 'rambdax'
+
+import { reshapeSlicesMap } from '../lib/mapSlicesToComponents'
 
 // 1. Import your slice
 import * as PageBodyFooter from './PageBodyFooter'
@@ -34,14 +35,4 @@ export const fragment = graphql`
   }
 `
 
-export const slicesMap = R.map((module) => {
-  const component: typeof module.default & {
-    mapDataToProps?: any
-    mapDataToContext?: any
-  } = module.default
-  if ('mapDataToProps' in module)
-    component.mapDataToProps = module.mapDataToProps
-  if ('mapDataToContext' in module)
-    component.mapDataToContext = module.mapDataToContext
-  return component
-}, slices)
+export const slicesMap = reshapeSlicesMap(slices)

@@ -5,13 +5,19 @@ import { withPreview } from 'gatsby-source-prismic'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
-import { PageTemplateQuery } from '../types.generated'
-import { PickPartial } from '../types'
+import { InteriorPageTemplateQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
-import { slicesMap } from '../slices/PageBody'
+import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
+import { slicesMap as interiorPageHeaderSlicesMap } from '../slices/InteriorPageHeader'
 
 import { Layout } from '../components/Layout'
 import { useSiteSettings } from '../hooks/useSiteSettings'
+
+// Merged slices map including PageBodyHeader and PageBodyFooter.
+const slicesMap = {
+  ...pageBodySlicesMap,
+  ...interiorPageHeaderSlicesMap,
+}
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -34,12 +40,7 @@ export const slicesMiddleware = <T,>(list: T[]) => [
  */
 export const mapDataToPropsEnhancer = (
   props: object | undefined,
-  {
-    context,
-    nextContext,
-    previousType,
-    previousData,
-  }: MapDataToPropsEnhancerArgs,
+  { context, nextContext }: MapDataToPropsEnhancerArgs,
 ) => {
   let nextSharesBg
 
@@ -48,34 +49,26 @@ export const mapDataToPropsEnhancer = (
   if (_nsbg.length === 1) nextSharesBg = _nsbg[0]
   else nextSharesBg = _nsbg.slice(0, 4) as [boolean, boolean, boolean, boolean]
 
-  return {
-    nextSharesBg,
-    id:
-      previousType === 'PageBodyAnchor'
-        ? (previousData?.primary?.id as string)
-        : undefined,
-    ...props,
-  }
+  return { nextSharesBg, ...props }
 }
 
 /**
- * Props added to all slices by `mapDataToPropsEnhancer` for `PageTemplate`.
+ * Props added to all slices by `mapDataToPropsEnhancer` for `InteriorPageTemplate`.
  * Intersect this type with a slice's known props to get a complete list of
  * available props.
  *
  * @see https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types
  */
-export type PageTemplateEnhancerProps = PickPartial<
-  ReturnType<typeof mapDataToPropsEnhancer>,
-  'id'
+export type InteriorPageTemplateEnhancerProps = ReturnType<
+  typeof mapDataToPropsEnhancer
 >
 
-export const PageTemplate = ({
+export const InteriorPageTemplate = ({
   data,
   location,
-}: PageProps<PageTemplateQuery>) => {
+}: PageProps<InteriorPageTemplateQuery>) => {
   const siteSettings = useSiteSettings()
-  const page = data?.prismicPage
+  const page = data?.prismicInteriorPage
 
   /**
    * Metadata made available in a slice's `mapDataToProps` and
@@ -103,7 +96,7 @@ export const PageTemplate = ({
         )}
       </Helmet>
       <MapSlicesToComponents
-        list={page?.data?.body}
+        list={page?.data?.header}
         map={slicesMap}
         meta={meta}
         listMiddleware={slicesMiddleware}
@@ -113,25 +106,25 @@ export const PageTemplate = ({
   )
 }
 
-export default withPreview(PageTemplate)
+export default withPreview(InteriorPageTemplate)
 
 export const query = graphql`
-  query PageTemplate($uid: String!) {
-    prismicPage(uid: { eq: $uid }) {
+  query InteriorPageTemplate($uid: String!) {
+    prismicInteriorPage(uid: { eq: $uid }) {
       _previewable
-      ...PrismicPageParentRecursive
+      ...PrismicInteriorPageParentRecursive
       data {
         title {
           text
         }
         meta_title
         meta_description
-        body {
+        header {
           __typename
           ... on Node {
             id
           }
-          ...SlicesPageBody
+          ...SlicesInteriorPageHeader
         }
       }
     }

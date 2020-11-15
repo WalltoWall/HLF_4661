@@ -12,8 +12,8 @@ const defaultElement = 'div'
 
 const variants = {
   base: {
-    paddingLeft: [4, 7, 10],
-    paddingRight: [4, 7, 10],
+    paddingLeft: [4, 7, 11],
+    paddingRight: [4, 7, 11],
     paddingTop: [10, 13, 16],
     paddingBottom: [10, 13, 16],
   },

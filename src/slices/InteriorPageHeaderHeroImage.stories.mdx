@@ -1,0 +1,67 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
+import faker from 'faker'
+import { buildImgixFluid } from 'gatsby-plugin-imgix'
+
+import * as Storybook from '../components/Storybook'
+import { titleize } from '../lib/titleize'
+
+import { InteriorPageHeaderHeroImage } from './InteriorPageHeaderHeroImage'
+
+export const heading = titleize(faker.lorem.words(4))
+
+export const backgroundImage = buildImgixFluid({
+  url: 'https://images.unsplash.com/photo-1603648407012-0f02e99cd050',
+  sourceWidth: 3 / 4,
+  sourceHeight: 1,
+})
+
+<Meta title="Interior Pages/Header/HeroImage" component={InteriorPageHeaderHeroImage} />
+
+##### Interior Page
+
+# Hero Image
+
+Large hero image with a heading placed over the image. This block is typically
+used as the main heading for a page above its body content.
+
+#### Slice fields
+
+<Storybook.SliceFieldsTable
+  customTypeId="interior_page"
+  sliceZoneId="header"
+  sliceId="hero_image"
+  fieldset="non-repeat"
+  overrides={{
+    background_image: {
+      description: 'Background image behind the heading',
+      isRequired: false
+    }
+  }}
+/>
+
+### With background image
+
+The background image is placed behind the heading text.
+
+<Canvas withSource="none">
+  <Story name="With background image">
+    <InteriorPageHeaderHeroImage
+      nextSharesBg={false}
+      heading={heading}
+      backgroundImageFluid={backgroundImage}
+    />
+  </Story>
+</Canvas>
+
+### Without background image
+
+If no background image is provided, a default background color is used instead.
+
+<Canvas withSource="none">
+  <Story name="Without background image">
+    <InteriorPageHeaderHeroImage
+      nextSharesBg={false}
+      heading={heading}
+    />
+  </Story>
+</Canvas>

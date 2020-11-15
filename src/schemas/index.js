@@ -7,7 +7,8 @@
  */
 
 module.exports = {
-  page: require('./page.json'),
+  interior_page: require('./interior_page.json'),
   navigation: require('./navigation.json'),
+  page: require('./page.json'),
   settings: require('./settings.json'),
 }

@@ -158,6 +158,11 @@ export const theme = createCalicoTheme({
       '14rem': '14rem',
     },
 
+    minHeight: {
+      '7rem': '7rem',
+      '10rem': '10rem',
+    },
+
     transitionDuration: {
       slow: '300ms',
       normal: '200ms',

@@ -22,6 +22,9 @@ const variants = {
   'sans-16': {
     fontFamily: 'sans',
   },
+  'sans-32-60': {
+    fontFamily: 'sans',
+  },
 } as const
 
 const styledVariants = {
@@ -45,6 +48,13 @@ const styledVariants = {
     styles: {
       textTransform: 'uppercase',
       letterSpacing: 's',
+    },
+  },
+  'sans-32-60-caps': {
+    variant: 'sans-32-60',
+    styles: {
+      textTransform: 'uppercase',
+      letterSpacing: 'xs',
     },
   },
 } as const

@@ -406,7 +406,10 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
               >
                 <Link href={withPrefix('/')}>
                   <VisuallyHidden>{siteSettings.siteName}</VisuallyHidden>
-                  <Logo trimNegativeSpace={true} />
+                  <Logo
+                    trimNegativeSpace={true}
+                    styles={{ marginLeft: [null, -1] }}
+                  />
                 </Link>
               </Box>
               <Box styles={{ display: ['none', 'block'] }}>
