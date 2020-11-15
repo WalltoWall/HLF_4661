@@ -66,7 +66,7 @@ const MobileNavItem = ({ href, name, children }: MobileNavItemProps) => {
               paddingTop: 5,
             }}
           >
-            <Text variant="sans-caps-16">{name}</Text>
+            <Text variant="sans-16-caps">{name}</Text>
           </Anchor>
           {hasChildren && (
             <Box
@@ -140,7 +140,7 @@ const MobileNavItemChild = ({ href, name }: MobileNavItemChildProps) => (
         paddingTop: 3.5,
       }}
     >
-      <Text variant="sans-caps-16">{name}</Text>
+      <Text variant="sans-16-caps">{name}</Text>
     </Anchor>
   </Box>
 )
@@ -165,7 +165,7 @@ const SecondaryNavItem = ({
 
   return (
     <Anchor href={href} styles={{ color: variant.color }}>
-      <Text variant="sans-caps-12">{name}</Text>
+      <Text variant="sans-12-caps">{name}</Text>
     </Anchor>
   )
 }
@@ -184,8 +184,8 @@ const NavItem = ({ href, name, children }: NavItemProps) => {
     <Box
       styles={{
         position: 'relative',
-        marginTop: -4,
-        marginBottom: -4,
+        marginTop: -5,
+        marginBottom: -5,
         marginLeft: -3,
         marginRight: -3,
       }}
@@ -196,39 +196,37 @@ const NavItem = ({ href, name, children }: NavItemProps) => {
         styles={{
           color: 'white',
           display: 'block',
-          paddingTop: 4,
-          paddingBottom: 4,
+          paddingTop: 5,
+          paddingBottom: 5,
           paddingLeft: 3,
           paddingRight: 3,
         }}
       >
-        <Text variant="sans-bold-caps-14">{name}</Text>
-        {hasChildren && (
-          <Box
-            as="ul"
-            className={clsx(
-              styles.navFocusTarget,
-              styles.transparentWhiteBackground,
-              styles.shadow,
-            )}
-            styles={{
-              opacity: 0,
-              pointerEvents: 'none',
-              position: 'absolute',
-              top: '100%',
-              right: 0,
-              marginRight: -2,
-              paddingTop: 2.5,
-              paddingBottom: 2.5,
-              minWidth: '14rem',
-              transitionDuration: 'slow',
-              transitionTimingFunction: 'easeInOut',
-            }}
-          >
-            {children}
-          </Box>
-        )}
+        <Text variant="sans-13-14-bold-caps">{name}</Text>
       </Anchor>
+      {hasChildren && (
+        <Box
+          as="ul"
+          className={clsx(styles.navFocusTarget, styles.shadow)}
+          styles={{
+            backgroundColor: 'white',
+            opacity: 0,
+            pointerEvents: 'none',
+            position: 'absolute',
+            top: '100%',
+            right: 0,
+            marginRight: -2,
+            paddingTop: 3,
+            paddingBottom: 2.5,
+            minWidth: '14rem',
+            transitionDuration: 'slow',
+            transitionTimingFunction: 'easeInOut',
+            zIndex: 1,
+          }}
+        >
+          {children}
+        </Box>
+      )}
     </Box>
   )
 }
@@ -245,14 +243,14 @@ const NavItemChild = ({ href, name }: NavItemChildProps) => (
       styles={{
         color: 'gray40',
         display: 'block',
-        paddingLeft: 8,
+        paddingLeft: 5,
         paddingRight: 5,
-        paddingTop: 2.5,
-        paddingBottom: 2.5,
+        paddingTop: 2,
+        paddingBottom: 2,
       }}
     >
       <Text
-        variant="sans-bold-caps-14"
+        variant="sans-13-14-bold-caps"
         styles={{ textAlign: 'right', whiteSpace: 'nowrap' }}
       >
         {name}
@@ -295,7 +293,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
       <Box
         as="header"
         styles={{
-          maxWidth: 'large',
+          maxWidth: 'xlarge',
           marginLeft: 'auto',
           marginRight: 'auto',
         }}
@@ -412,7 +410,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                 </Link>
               </Box>
               <Box styles={{ display: ['none', 'block'] }}>
-                <Inline as="nav" variant="ul" space={6}>
+                <Inline as="nav" variant="ul" space={[4, 4, 6]}>
                   {navigation.primary.map(
                     (item) =>
                       item?.primary?.link?.url && (
@@ -436,7 +434,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                   )}
                 </Inline>
               </Box>
-              <Box styles={{ display: [null, 'none'] }}>
+              <Box styles={{ display: ['flex', 'none'], alignItems: 'center' }}>
                 <DisclosureButton>
                   <VisuallyHidden>Navigation</VisuallyHidden>
                   <HamburgerIcon isActive={mobileNavIsOpen} />
@@ -535,7 +533,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                 textAlign: 'center',
               }}
             >
-              <Text variant="sans-caps-16" as="span">
+              <Text variant="sans-16-caps" as="span">
                 Sign Up for Updates
               </Text>
             </Anchor>

@@ -8,9 +8,9 @@ const fontsets = {
     fontSizes: [0.75],
     lineGap: 1.2,
   },
-  'sans-14': {
+  'sans-13-14': {
     fontMetrics: fontMetrics.sans,
-    fontSizes: [0.875],
+    fontSizes: [0.8125, 0.8125, 0.875],
     lineGap: 1.2,
   },
   'sans-16': {

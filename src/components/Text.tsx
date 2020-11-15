@@ -16,7 +16,7 @@ const variants = {
   'sans-12': {
     fontFamily: 'sans',
   },
-  'sans-14': {
+  'sans-13-14': {
     fontFamily: 'sans',
   },
   'sans-16': {
@@ -25,22 +25,22 @@ const variants = {
 } as const
 
 const styledVariants = {
-  'sans-caps-12': {
+  'sans-12-caps': {
     variant: 'sans-12',
     styles: {
       textTransform: 'uppercase',
       letterSpacing: 's',
     },
   },
-  'sans-bold-caps-14': {
-    variant: 'sans-14',
+  'sans-13-14-bold-caps': {
+    variant: 'sans-13-14',
     styles: {
       fontWeight: 'bold',
       textTransform: 'uppercase',
       letterSpacing: 's',
     },
   },
-  'sans-caps-16': {
+  'sans-16-caps': {
     variant: 'sans-16',
     styles: {
       textTransform: 'uppercase',
@@ -71,7 +71,7 @@ type TextProps<E extends React.ElementType = typeof defaultElement> = {
 } & BoxProps<E>
 
 export const Text = <E extends React.ElementType>({
-  variant: variantName = 'sans-14',
+  variant: variantName = 'sans-13-14',
   className,
   ...props
 }: TextProps<E>) => {
