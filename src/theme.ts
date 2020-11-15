@@ -110,8 +110,8 @@ export const theme = createCalicoTheme({
   breakpoints: {
     mobile: '0rem',
     tablet: '48rem',
-    desktop: '75rem',
-    desktopWide: '90rem',
+    desktop: '64rem',
+    desktopWide: '75rem',
   },
 
   rules: {
@@ -148,8 +148,8 @@ export const theme = createCalicoTheme({
 
     maxWidth: {
       medium: '48rem',
-      large: '75rem',
-      xlarge: '90rem',
+      large: '64rem',
+      xlarge: '75rem',
       '15rem': '15rem',
       '20rem': '20rem',
     },
