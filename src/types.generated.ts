@@ -5349,16 +5349,18 @@ export type PrismicPageParentFieldsFragment = (
 export type UseNavigationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UseNavigationQuery = { primary?: Maybe<{ data?: Maybe<{ main?: Maybe<Array<Maybe<(
-        Pick<PrismicNavigationMainNavItem, 'id'>
-        & { primary?: Maybe<(
-          Pick<PrismicNavigationMainNavItemPrimaryType, 'name'>
-          & { link?: Maybe<Pick<PrismicLinkType, 'url'>> }
-        )>, items?: Maybe<Array<Maybe<(
-          Pick<PrismicNavigationMainNavItemItemType, 'name'>
-          & { link?: Maybe<Pick<PrismicLinkType, 'url'>> }
-        )>>> }
-      )>>> }> }> };
+export type UseNavigationQuery = { primary?: Maybe<UseNavigationDataFragment>, secondary?: Maybe<UseNavigationDataFragment> };
+
+export type UseNavigationDataFragment = { data?: Maybe<{ main?: Maybe<Array<Maybe<(
+      Pick<PrismicNavigationMainNavItem, 'id'>
+      & { primary?: Maybe<(
+        Pick<PrismicNavigationMainNavItemPrimaryType, 'name'>
+        & { link?: Maybe<Pick<PrismicLinkType, 'url'>> }
+      )>, items?: Maybe<Array<Maybe<(
+        Pick<PrismicNavigationMainNavItemItemType, 'name'>
+        & { link?: Maybe<Pick<PrismicLinkType, 'url'>> }
+      )>>> }
+    )>>> }> };
 
 export type PrismicSiteSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 

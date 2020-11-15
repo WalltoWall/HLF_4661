@@ -138,6 +138,7 @@ export const theme = createCalicoTheme({
     },
 
     fontSize: {
+      '0.875rem': '0.875rem',
       '1rem': '1rem',
     },
 
@@ -150,6 +151,11 @@ export const theme = createCalicoTheme({
       large: '75rem',
       xlarge: '90rem',
       '15rem': '15rem',
+      '20rem': '20rem',
+    },
+
+    minWidth: {
+      '14rem': '14rem',
     },
 
     transitionDuration: {
@@ -168,14 +174,17 @@ export const theme = createCalicoTheme({
 
     width: {
       ...baseCalicoTheme.rules.width,
+      '1rem': '1rem',
       '1.25rem': '1.25rem',
       '1.75rem': '1.75rem',
+      '10rem': '10rem',
     },
 
     height: {
       ...baseCalicoTheme.rules.height,
+      '0.125rem': '0.125rem',
+      '0.375rem': '0.375rem',
       '1rem': '1rem',
-      '2px': '2px',
       '1.25rem': '1.25rem',
     },
 
@@ -200,6 +209,15 @@ export const theme = createCalicoTheme({
       '1px': '1px',
       '2px': '2px',
       '3px': '3px',
+    },
+
+    top: {
+      ...baseCalicoTheme.rules.top,
+      '100%': '100%',
+    },
+
+    whiteSpace: {
+      nowrap: 'nowrap',
     },
   },
 
