@@ -5,11 +5,11 @@ import { Box } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
 import { PageBodyImagesFragment } from '../types.generated'
+import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 import { PageTemplateEnhancerProps } from '../templates/page'
 
 import { BoundedBox } from '../components/BoundedBox'
 import { HTMLContent } from '../components/HTMLContent'
-import { MapDataToPropsArgs } from '../types'
 
 export type PageBodyImagesProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps

@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+import * as Storybook from '../components/Storybook'
+
+import { PageBodyAnchor } from './PageBodyAnchor'
+
+<Meta title="Pages/Anchor" />
+
+#### Page
+
+# Anchor
+
+Creates a linkable point on a page that will immediately be scrolled into view.
+The ID provided becomes a URL:
+
+`https://www.omidyarfellows.org/page-name/#your-id`
+
+`your-id` is replaced by the value of the ID field.
+
+<Storybook.SliceFieldsTable
+  customTypeId="page"
+  sliceZoneId="body"
+  sliceId="anchor"
+  fieldset="non-repeat"
+/>
+
+This slice has no user-facing interface.

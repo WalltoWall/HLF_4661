@@ -1,7 +1,7 @@
 import React from 'react'
 import faker from 'faker'
 
-import { titleize } from '../utils'
+import { titleize } from '../lib/titleize'
 
 import { Anchor } from './Anchor'
 import { Text } from './Text'
