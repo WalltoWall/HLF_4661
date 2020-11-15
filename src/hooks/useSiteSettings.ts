@@ -1,6 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-import { PrismicSiteSettingsQuery } from '../graphqlTypes'
+import { PrismicSiteSettingsQuery } from '../types.generated'
 
 const YEAR = new Date().getFullYear().toString()
 
@@ -21,11 +21,11 @@ export const useSiteSettings = () => {
           facebook_handle {
             text
           }
-          twitter_handle {
+          linkedin_handle {
             text
           }
-          instagram_handle {
-            text
+          newsletter_sign_up_link {
+            url
           }
         }
       }
@@ -39,7 +39,7 @@ export const useSiteSettings = () => {
     siteDescription: settings?.site_description?.text,
     siteCopyright: settings?.site_copyright?.text?.replace?.(/\$YEAR/g, YEAR),
     facebookHandle: settings?.facebook_handle?.text,
-    twitterHandle: settings?.twitter_handle?.text,
-    instagramHandle: settings?.instagram_handle?.text,
+    linkedInHandle: settings?.linkedin_handle?.text,
+    newsletterSignUpHref: settings?.newsletter_sign_up_link?.url,
   }
 }

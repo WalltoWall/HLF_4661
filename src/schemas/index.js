@@ -8,7 +8,6 @@
 
 module.exports = {
   page: require('./page.json'),
-  form: require('./form.json'),
   navigation: require('./navigation.json'),
   settings: require('./settings.json'),
 }

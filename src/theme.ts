@@ -21,9 +21,16 @@ export type Theme = typeof theme
 export const colors = {
   white: '#fff',
   black: '#000',
-  gray: '#777',
-  blue: '#00f',
-  red: '#f00',
+  gray10: '#222',
+  gray20: '#393838',
+  gray40: '#666',
+  gray80: '#ccc',
+  gray85: '#e2e0df',
+  gray95: '#f5f5f4',
+  blue10: '#002244',
+  orange50: '#f5782e',
+  orange55: '#ff9902',
+  current: 'currentColor',
 } as const
 
 const space = {
@@ -55,7 +62,7 @@ const space = {
   [-6]: '-1.5rem',
   [-5]: '-1.25rem',
   [-4]: '-1rem',
-  [-3.5]: '-0.875',
+  [-3.5]: '-0.875rem',
   [-3]: '-0.75rem',
   [-2.5]: '-0.625rem',
   [-2]: '-0.5rem',
@@ -69,7 +76,7 @@ const space = {
   2: '0.5rem',
   2.5: '0.625rem',
   3: '0.75rem',
-  3.5: '0.875',
+  3.5: '0.875rem',
   4: '1rem',
   5: '1.25rem',
   6: '1.5rem',
@@ -127,14 +134,22 @@ export const theme = createCalicoTheme({
     gap: space,
 
     fontFamily: {
-      sans: '"Proxima Nova", system-ui, sans-serif',
+      sans: 'proxima-nova, system-ui, sans-serif',
+    },
+
+    fontSize: {
+      '1rem': '1rem',
+    },
+
+    lineHeight: {
+      1: '1',
     },
 
     maxWidth: {
-      small: '0rem',
       medium: '48rem',
       large: '75rem',
       xlarge: '90rem',
+      '15rem': '15rem',
     },
 
     transitionDuration: {
@@ -143,17 +158,48 @@ export const theme = createCalicoTheme({
       fast: '100ms',
     },
 
-    opacity: {
-      0.25: 0.25,
-      1: 1,
-    },
-
     letterSpacing: {
       ...baseCalicoTheme.rules.letterSpacing,
       xs: '0.025em',
       s: '0.05em',
       m: '0.1em',
       l: '0.2em',
+    },
+
+    width: {
+      ...baseCalicoTheme.rules.width,
+      '1.25rem': '1.25rem',
+      '1.75rem': '1.75rem',
+    },
+
+    height: {
+      ...baseCalicoTheme.rules.height,
+      '1rem': '1rem',
+      '2px': '2px',
+      '1.25rem': '1.25rem',
+    },
+
+    transitionProperty: {
+      color: 'color',
+      opacity: 'opacity',
+      transform: 'transform',
+    },
+
+    gridTemplateColumns: {
+      ...baseCalicoTheme.rules.gridTemplateColumns,
+      '1fr auto': '1fr auto',
+    },
+
+    borderTopWidth: {
+      '1px': '1px',
+      '2px': '2px',
+      '3px': '3px',
+    },
+
+    borderBottomWidth: {
+      '1px': '1px',
+      '2px': '2px',
+      '3px': '3px',
     },
   },
 

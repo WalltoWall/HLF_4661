@@ -2015,6 +2015,23 @@
   resolved "https://registry.yarnpkg.com/@prismicio/richtext/-/richtext-1.1.0.tgz#c8769c3d953ae42854a2aba951e3b2121682b8c7"
   integrity sha512-925JuFiZiIkwu9jmlR9O/U8xCSZk/Y6BQDXKpavoVsKo+n90ml1hGdtWkglIupX+ITQO1ZINyDgUgiY1oG9dsA==
 
+"@reach/auto-id@0.11.2", "@reach/auto-id@^0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@reach/auto-id/-/auto-id-0.11.2.tgz#c66a905c5401d1ac3da8d26165b8d27d6e778fa6"
+  integrity sha512-YZ21b0Kb88wJ0t7QjSznWOYskARQMnmXY9Y2XZ5RyYcZ2krT4s3+ghghpfaPs6BKcrZDonZCrU65OFDJPa1jAw==
+  dependencies:
+    "@reach/utils" "0.11.2"
+    tslib "^2.0.0"
+
+"@reach/disclosure@^0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@reach/disclosure/-/disclosure-0.11.2.tgz#d572dfe22166646044a5e66d6b495f8eb081ed82"
+  integrity sha512-wCNBiWOVPbhyfUEQo0ixP5nTsXhQKhtfSpNCo/eZXQ+34R4tRqVfnTqf1qVHPdz0rpwW9Td5wgXyqLrpn8SGhw==
+  dependencies:
+    "@reach/auto-id" "0.11.2"
+    "@reach/utils" "0.11.2"
+    tslib "^2.0.0"
+
 "@reach/router@^1.3.3", "@reach/router@^1.3.4":
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/@reach/router/-/router-1.3.4.tgz#d2574b19370a70c80480ed91f3da840136d10f8c"
@@ -2041,6 +2058,13 @@
     "@types/warning" "^3.0.0"
     tslib "^2.0.0"
     warning "^4.0.3"
+
+"@reach/visually-hidden@^0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@reach/visually-hidden/-/visually-hidden-0.11.1.tgz#3d7a5742acf18372f35b9e216680edd8073f35e3"
+  integrity sha512-TZZNSttor2jG6ZPGI35s/8G0FNSz49QrJIhAZbnUqHyPf3+jtNqAC0dOWW8Nuk+mApDDDVYd2KZ9P2vnzllNnQ==
+  dependencies:
+    tslib "^2.0.0"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.1"

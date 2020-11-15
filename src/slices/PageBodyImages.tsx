@@ -4,7 +4,7 @@ import GatsbyImage, { FluidObject } from 'gatsby-image'
 import { Box } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
-import { PageBodyImagesFragment } from '../graphqlTypes'
+import { PageBodyImagesFragment } from '../types.generated'
 import { PageTemplateEnhancerProps } from '../templates/page'
 
 import { BoundedBox } from '../components/BoundedBox'

@@ -18,7 +18,10 @@
     "_copy-static-queries": "cp -r ./public/page-data/sq/d ./public/static"
   },
   "dependencies": {
+    "@reach/auto-id": "^0.11.2",
+    "@reach/disclosure": "^0.11.2",
     "@reach/skip-nav": "^0.11.2",
+    "@reach/visually-hidden": "^0.11.1",
     "@svgr/webpack": "^5.4.0",
     "@walltowall/calico": "^0.5.0",
     "@walltowall/helpers": "^6.2.0",
@@ -42,6 +45,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-prismic": "^3.2.1",
     "minireset.css": "^0.0.6",
+    "querystring": "^0.2.0",
     "rambdax": "^7.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

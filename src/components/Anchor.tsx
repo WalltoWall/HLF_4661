@@ -1,21 +1,39 @@
 import React from 'react'
+import {
+  useBoxStyles,
+  BaseBoxStylesProps,
+  BoxFocusProp,
+  BoxHoverProp,
+  usePseudoBoxStyles,
+} from '@walltowall/calico'
 import clsx from 'clsx'
-import { useBoxStyles, usePseudoBoxStyles } from '@walltowall/calico'
 
 import { Link, LinkProps } from './Link'
 
-export type AnchorProps = LinkProps
+export type AnchorProps = LinkProps & {
+  styles?: BaseBoxStylesProps
+  focusStyles?: BoxFocusProp
+  hoverStyles?: BoxHoverProp
+}
 
-export const Anchor = ({ className, ...props }: AnchorProps) => {
-  const classNames = clsx(
+export const Anchor = ({
+  styles,
+  focusStyles,
+  hoverStyles,
+  className,
+  ...props
+}: AnchorProps) => {
+  const cx = clsx(
     useBoxStyles({
-      color: 'blue',
-      transitionDuration: 'normal',
+      color: 'orange55',
+      transitionProperty: 'color',
+      transitionDuration: 'fast',
+      ...styles,
     }),
-    usePseudoBoxStyles({ color: 'red' }, 'hover'),
-    usePseudoBoxStyles({ color: 'red' }, 'focus'),
+    usePseudoBoxStyles({ color: 'orange50', ...focusStyles }, 'focus'),
+    usePseudoBoxStyles({ color: 'orange50', ...hoverStyles }, 'hover'),
     className,
   )
 
-  return <Link className={classNames} {...props} />
+  return <Link {...props} className={cx} />
 }

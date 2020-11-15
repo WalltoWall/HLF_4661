@@ -26,7 +26,6 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     return (
       <Text
         as="h3"
-        variant="sans-bold-20-48"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseHeadingStyles, ...props.styles }}
@@ -39,7 +38,6 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     return (
       <Text
         as="h5"
-        variant="sans-bold-20-48"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseHeadingStyles, ...props.styles }}
@@ -52,7 +50,6 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     return (
       <Text
         as="h6"
-        variant="sans-bold-20-48"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseHeadingStyles, ...props.styles }}
@@ -65,7 +62,6 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     return (
       <Text
         as="h6"
-        variant="sans-bold-20-48"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseTextStyles, ...props.styles }}
@@ -78,7 +74,6 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     return (
       <Text
         as="h6"
-        variant="sans-bold-20-48"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseTextStyles, ...props.styles }}
@@ -91,7 +86,6 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     return (
       <Text
         as="h6"
-        variant="sans-bold-20-48"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseTextStyles, ...props.styles }}

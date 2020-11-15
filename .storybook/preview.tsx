@@ -14,6 +14,7 @@ addDecorator((storyFn) => (
 export const parameters = {
   options: {
     storySort: {
+      method: 'alphabetical',
       // The "---" indicate where dividers are added using CSS in ./manager.css
       order: [
         'Documentation',
@@ -57,5 +58,5 @@ window.__BASE_PATH__ = ''
 // and uses to report what path a Link would be taking us to if it wasn't
 // inside a storybook
 window.___navigate = (pathname) => {
-  // action('NavigateTo:')(pathname)
+  console.log('Navigate to: ', pathname)
 }
