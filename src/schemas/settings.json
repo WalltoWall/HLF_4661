@@ -4,49 +4,55 @@
       "type": "StructuredText",
       "config": {
         "single": "heading1",
-        "label": "Title"
+        "label": "Title",
+        "placeholder": "Do not edit"
       }
     },
     "site_name": {
       "type": "StructuredText",
       "config": {
         "single": "heading1",
-        "label": "Site Name"
+        "label": "Site Name",
+        "placeholder": "Name of the site"
       }
     },
     "site_description": {
       "type": "StructuredText",
       "config": {
         "single": "paragraph",
-        "label": "Site Description"
+        "label": "Site Description",
+        "placeholder": "Description of the site provided to search engines"
       }
     },
     "site_copyright": {
       "type": "StructuredText",
       "config": {
         "single": "paragraph",
-        "label": "Site Copyright"
+        "label": "Site Copyright",
+        "placeholder": "Copyright text at the bottom of the site"
       }
     },
     "facebook_handle": {
       "type": "StructuredText",
       "config": {
         "single": "paragraph",
-        "label": "Facebook Handle"
+        "label": "Facebook Handle",
+        "placeholder": "Facebook URL handle"
       }
     },
-    "twitter_handle": {
+    "linkedin_handle": {
       "type": "StructuredText",
       "config": {
         "single": "paragraph",
-        "label": "Twitter Handle"
+        "label": "LinkedIn Handle",
+        "placeholder": "LinkedIn URL handle"
       }
     },
-    "instagram_handle": {
-      "type": "StructuredText",
+    "newsletter_sign_up_link": {
+      "type": "Link",
       "config": {
-        "single": "paragraph",
-        "label": "Instagram Handle"
+        "label": "Newsletter Sign Up Link",
+        "placeholder": "Link to a page allowing visitors to sign up for the newsletter"
       }
     }
   },
@@ -58,13 +64,15 @@
           "from_path": {
             "type": "Text",
             "config": {
-              "label": "From Path"
+              "label": "From Path",
+              "placeholder": "URL from which to redirect"
             }
           },
           "to_path": {
             "type": "Text",
             "config": {
-              "label": "To Path"
+              "label": "To Path",
+              "placeholder": "URL to which users will be redirect"
             }
           },
           "is_permanent": {
@@ -89,13 +97,15 @@
           "api_id": {
             "type": "Text",
             "config": {
-              "label": "API ID"
+              "label": "API ID",
+              "placeholder": "Custom type API ID"
             }
           },
           "page": {
             "type": "Link",
             "config": {
-              "label": "Page"
+              "label": "Page",
+              "placeholder": "Page to resolve documents of this custom type"
             }
           }
         },

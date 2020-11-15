@@ -5,7 +5,7 @@ import { withPreview } from 'gatsby-source-prismic'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
-import { PageTemplateQuery } from '../graphqlTypes'
+import { PageTemplateQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs, PickPartial } from '../types'
 import { slicesMap } from '../slices/PageBody'
 

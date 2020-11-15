@@ -10,7 +10,8 @@
     "uid": {
       "type": "UID",
       "config": {
-        "label": "UID"
+        "label": "UID",
+        "placeholder": "Unique identifier"
       }
     },
     "meta_title": {

@@ -13,26 +13,28 @@ import * as styleRefs from './Text.treat'
 const defaultElement = 'div'
 
 const variants = {
-  'sans-16': {
+  'sans-14': {
     fontFamily: 'sans',
   },
-  'sans-20-48': {
+  'sans-16': {
     fontFamily: 'sans',
   },
 } as const
 
 const styledVariants = {
+  'sans-semibold-caps-14': {
+    variant: 'sans-14',
+    styles: {
+      fontWeight: 'semibold',
+      textTransform: 'uppercase',
+      letterSpacing: 's',
+    },
+  },
   'sans-caps-16': {
     variant: 'sans-16',
     styles: {
       textTransform: 'uppercase',
-      letterSpacing: 'm',
-    },
-  },
-  'sans-bold-20-48': {
-    variant: 'sans-20-48',
-    styles: {
-      fontWeight: 'bold',
+      letterSpacing: 's',
     },
   },
 } as const
@@ -59,7 +61,7 @@ type TextProps<E extends React.ElementType = typeof defaultElement> = {
 } & BoxProps<E>
 
 export const Text = <E extends React.ElementType>({
-  variant: variantName = 'sans-16',
+  variant: variantName = 'sans-14',
   className,
   ...props
 }: TextProps<E>) => {

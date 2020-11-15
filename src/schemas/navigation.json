@@ -7,6 +7,13 @@
         "label": "Title"
       }
     },
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "Unique identifier"
+      }
+    },
     "main": {
       "type": "Slices",
       "fieldset": "Slice zone",
@@ -22,7 +29,8 @@
               "name": {
                 "type": "Text",
                 "config": {
-                  "label": "Name"
+                  "label": "Name",
+                  "placeholder": "Name of the link"
                 }
               },
               "link": {
@@ -37,7 +45,8 @@
               "name": {
                 "type": "Text",
                 "config": {
-                  "label": "Name"
+                  "label": "Name",
+                  "placeholder": "Name of the child link"
                 }
               },
               "link": {

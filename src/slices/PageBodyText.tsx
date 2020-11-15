@@ -5,7 +5,7 @@ import { getRichText } from '@walltowall/helpers'
 import { BoundedBox } from '../components/BoundedBox'
 import { HTMLContent } from '../components/HTMLContent'
 
-import { PageBodyTextFragment } from '../graphqlTypes'
+import { PageBodyTextFragment } from '../types.generated'
 import { MapDataToPropsArgs } from '../types'
 import { PageTemplateEnhancerProps } from '../templates/page'
 
