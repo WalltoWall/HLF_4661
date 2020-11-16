@@ -5,49 +5,52 @@ import { buildImgixFluid } from 'gatsby-plugin-imgix'
 import * as Storybook from '../components/Storybook'
 import { titleize } from '../lib/titleize'
 
-import { InteriorPageHeaderHeroImage } from './InteriorPageHeaderHeroImage'
+import { PageBodyHeroImage } from './PageBodyHeroImage'
 
-export const heading = titleize(faker.lorem.words(4))
+export const textHTML = `
+  <h1>${titleize(faker.lorem.words(4))}</h1>
+  <p>${faker.lorem.sentences(2)}</p>
+`
 
 export const backgroundImage = buildImgixFluid({
-  url: 'https://images.prismic.io/omidyarfellows/013446b9-15de-48ac-9ecd-c8c7164db4f4_Banner-LeadershipLearning.jpg',
-  sourceWidth: 3 / 4,
-  sourceHeight: 1,
+  url: 'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
+  sourceWidth: 1024,
+  sourceHeight: 368,
 })
 
-<Meta title="Interior Pages/Header/Hero Image" component={InteriorPageHeaderHeroImage} />
+<Meta title="Pages/Hero Image" component={PageBodyHeroImage} />
 
-##### Interior Page
+##### Page
 
 # Hero Image
 
-Large hero image with a heading placed over the image. This block is typically
-used as the main heading for a page above its body content.
+Large hero image with text placed over the image. This block is typically used
+as the main heading for a page above its body content.
 
 #### Slice fields
 
 <Storybook.SliceFieldsTable
-  customTypeId="interior_page"
-  sliceZoneId="header"
+  customTypeId="page"
+  sliceZoneId="body"
   sliceId="hero_image"
   fieldset="non-repeat"
   overrides={{
     background_image: {
-      description: 'Background image behind the heading',
-      isRequired: false
+      description: 'Background image behind the text',
+      isRequired: false,
     }
   }}
 />
 
 ### With background image
 
-The background image is placed behind the heading text.
+The background image is placed behind the text.
 
 <Canvas withSource="none">
   <Story name="With background image">
-    <InteriorPageHeaderHeroImage
+    <PageBodyHeroImage
       nextSharesBg={false}
-      heading={heading}
+      textHTML={textHTML}
       backgroundImageFluid={backgroundImage}
     />
   </Story>
@@ -59,9 +62,9 @@ If no background image is provided, a default background color is used instead.
 
 <Canvas withSource="none">
   <Story name="Without background image">
-    <InteriorPageHeaderHeroImage
+    <PageBodyHeroImage
       nextSharesBg={false}
-      heading={heading}
+      textHTML={textHTML}
     />
   </Story>
 </Canvas>
