@@ -82,7 +82,7 @@ export const VideoPlayer = <
     <Box as={defaultElement} {...props}>
       <AspectRatio x={x} y={y} className={positionRelative}>
         <Box
-          component="button"
+          as="button"
           onClick={play}
           className={styles.buttonFocusSensor}
           styles={{ height: 'full', width: 'full' }}

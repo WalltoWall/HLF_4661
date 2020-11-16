@@ -1,5 +1,5 @@
 import { style } from 'treat'
 
 export const transparentBlackBackground = style({
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  backgroundColor: 'rgba(0, 0, 0, 0.6)',
 })
