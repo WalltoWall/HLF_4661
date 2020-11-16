@@ -13,6 +13,7 @@ import { Link } from '../components/Link'
 import { Text } from '../components/Text'
 
 import * as styleRefs from './PageBodyFooter.treat'
+import VisuallyHidden from '@reach/visually-hidden'
 
 export type PageBodyFooter = PageTemplateEnhancerProps
 
@@ -28,7 +29,7 @@ const PageBodyFooter = ({ nextSharesBg }: PageBodyFooter) => {
       nextSharesBg={nextSharesBg}
       className={styles.transparentBlackBackground}
       styles={{
-        color: 'white',
+        color: 'gray80',
         maxWidth: 'xlarge',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -59,9 +60,15 @@ const PageBodyFooter = ({ nextSharesBg }: PageBodyFooter) => {
         <Inline space={4} direction={['column', null, 'row']} alignY="center">
           <Inline variant="ul" space={3} align="center">
             <Link href={siteSettings.facebookURL}>
+              <VisuallyHidden>
+                {siteSettings.siteName} Facebook Page
+              </VisuallyHidden>
               <Icon name="facebookColored" styles={{ width: '1.5rem' }} />
             </Link>
             <Link href={siteSettings.linkedinURL}>
+              <VisuallyHidden>
+                {siteSettings.siteName} LinkedIn Page
+              </VisuallyHidden>
               <Icon name="linkedinColored" styles={{ width: '1.5rem' }} />
             </Link>
           </Inline>

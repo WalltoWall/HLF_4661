@@ -41,7 +41,7 @@ const fontsets = {
   'serif-40-48': {
     fontMetrics: fontMetrics.serif,
     fontSizes: [2.5, 3],
-    lineGap: 1.35,
+    lineGap: 1.15,
   },
 }
 

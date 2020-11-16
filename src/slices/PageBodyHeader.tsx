@@ -501,6 +501,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                       lineHeight: 1,
                       fontSize: '1rem',
                       color: 'gray40',
+                      width: 'full',
                     }}
                   />
                   <Icon

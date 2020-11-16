@@ -159,7 +159,7 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{
           display: 'listItem',
-          marginBottom: 3,
+          marginBottom: 4,
           ...props.styles,
         }}
       >
