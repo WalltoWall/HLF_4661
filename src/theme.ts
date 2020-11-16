@@ -183,7 +183,9 @@ export const theme = createCalicoTheme({
       ...baseCalicoTheme.rules.width,
       '1rem': '1rem',
       '1.25rem': '1.25rem',
+      '1.5rem': '1.5rem',
       '1.75rem': '1.75rem',
+      '2rem': '2rem',
       '10rem': '10rem',
     },
 
@@ -196,6 +198,7 @@ export const theme = createCalicoTheme({
     },
 
     transitionProperty: {
+      backgroundColor: 'background-color',
       color: 'color',
       opacity: 'opacity',
       transform: 'transform',
@@ -220,6 +223,7 @@ export const theme = createCalicoTheme({
 
     top: {
       ...baseCalicoTheme.rules.top,
+      8: '2rem',
       '100%': '100%',
     },
 

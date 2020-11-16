@@ -16,7 +16,6 @@ import { slicesMap as interiorPageBodySlicesMap } from '../slices/InteriorPageBo
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
-import { Inline } from '../components/Inline'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -124,13 +123,19 @@ export const InteriorPageTemplate = ({
           display: 'grid',
           gap: 8,
           gridTemplateColumns: [null, '3'],
-          /* alignItems: 'baseline', */
         }}
       >
         <BoundedBox styles={{ paddingRight: 0 }}>
-          <Inline space={8}>
+          <Box
+            styles={{
+              display: 'grid',
+              gap: 8,
+              position: [null, 'sticky'],
+              top: 8,
+            }}
+          >
             {pageTitle && (
-              <Text variant="serif-48" as="h1" styles={{ color: 'gray10' }}>
+              <Text variant="serif-40-48" as="h1" styles={{ color: 'gray10' }}>
                 {pageTitle}
               </Text>
             )}
@@ -143,12 +148,13 @@ export const InteriorPageTemplate = ({
                 {pageDescription}
               </Text>
             )}
-          </Inline>
+          </Box>
         </BoundedBox>
         <Box
           styles={{
             gridColumn: 'span-2',
-            paddingTop: [4, 5, 7],
+            paddingTop: [null, 5, 7],
+            paddingBottom: [4, 5, 7],
           }}
         >
           <MapSlicesToComponents
