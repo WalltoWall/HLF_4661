@@ -11,6 +11,9 @@ export const useNavigation = () => {
       secondary: prismicNavigation(uid: { eq: "secondary" }) {
         ...UseNavigationData
       }
+      footer: prismicNavigation(uid: { eq: "footer" }) {
+        ...UseNavigationData
+      }
     }
 
     fragment UseNavigationData on PrismicNavigation {
@@ -39,5 +42,6 @@ export const useNavigation = () => {
   return {
     primary: queryData.primary?.data?.main ?? [],
     secondary: queryData.secondary?.data?.main ?? [],
+    footer: queryData.footer?.data?.main ?? [],
   }
 }

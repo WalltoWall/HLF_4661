@@ -16,6 +16,7 @@ type InlineProps<E extends React.ElementType> = {
   align?: NonNullable<BoxProps['styles']>['justifyContent']
   alignY?: NonNullable<BoxProps['styles']>['alignItems']
   wrap?: boolean
+  direction?: NonNullable<BoxProps['styles']>['flexDirection']
 } & Omit<BoxProps<E>, 'wrap'> & { as?: BoxProps<E>['as'] }
 
 export const Inline = <E extends React.ElementType = typeof defaultElement>({
@@ -26,6 +27,7 @@ export const Inline = <E extends React.ElementType = typeof defaultElement>({
   align,
   alignY,
   wrap = true,
+  direction = 'row',
   ...props
 }: InlineProps<E>) => {
   const negativeSpace = (Array.isArray(space)
@@ -55,6 +57,7 @@ export const Inline = <E extends React.ElementType = typeof defaultElement>({
           justifyContent: align,
           alignItems: alignY,
           marginLeft: negativeSpace,
+          flexDirection: direction,
         }}
       >
         {React.Children.map(
