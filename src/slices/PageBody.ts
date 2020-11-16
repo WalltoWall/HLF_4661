@@ -14,6 +14,7 @@ import * as PageBodyFooter from './PageBodyFooter'
 import * as PageBodyHeader from './PageBodyHeader'
 import * as PageBodyText from './PageBodyText'
 import * as PageBodyImages from './PageBodyImages'
+import * as PageBodyHeroImage from './PageBodyHeroImage'
 
 // 2. Add your slice
 const slices = {
@@ -21,6 +22,7 @@ const slices = {
   PageBodyHeader,
   PageBodyText,
   PageBodyImages,
+  PageBodyHeroImage,
 }
 
 // 3. Add your slice fragment
@@ -28,6 +30,7 @@ export const fragment = graphql`
   fragment SlicesPageBody on PrismicPageBodySlicesType {
     ...PageBodyImages
     ...PageBodyText
+    ...PageBodyHeroImage
 
     # The following slices do not have fragments:
     #...PageBodyFooter

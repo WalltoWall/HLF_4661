@@ -97,7 +97,7 @@ export const mapDataToContext = ({
   const hasBackgroundImage = Boolean(data.primary?.background_image?.fluid)
 
   return {
-    bg: hasBackgroundImage ? Symbol() : 'blue10',
+    bg: hasBackgroundImage ? Symbol() : 'gray20',
   }
 }
 

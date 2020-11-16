@@ -63,7 +63,8 @@
         "labels": {
           "images": [],
           "text": [],
-          "embed": []
+          "embed": [],
+          "hero_image": []
         },
         "choices": {
           "text": {
@@ -125,6 +126,47 @@
                 "config": {
                   "label": "ID",
                   "placeholder": "Anchor ID used in links"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "hero_image": {
+            "type": "Slice",
+            "fieldset": "Hero Image",
+            "description": "Large image with overlayed text and optional button",
+            "icon": "photo_size_select_actual",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading1",
+                  "label": "Text",
+                  "placeholder": "Text displayed over the background image"
+                }
+              },
+              "button_text": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Button Text",
+                  "placeholder": "Optional - Text for the button link"
+                }
+              },
+              "button_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Button Link",
+                  "placeholder": "Optional - Link for the button"
+                }
+              },
+              "background_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background Image"
                 }
               }
             },
