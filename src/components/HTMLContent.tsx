@@ -11,13 +11,22 @@ import { useUtilStyles } from '../hooks/useUtilStyles'
 const defaultElement = 'div'
 
 const baseHeadingStyles = {
-  marginTop: [8, 9, 10],
-  marginBottom: [7, 8],
+  marginTop: [10, 12, 13],
+  marginBottom: [6, 7, 8],
 } as const
 
 const baseTextStyles = {
   marginBottom: [6, 7, 8],
 } as const
+
+/**
+ * Custom styles can be added to Prismic Rich Text fields using labels. Styles
+ * defined here will be applied using the `span` component defined in
+ * `components` below.
+ *
+ * @see https://user-guides.prismic.io/en/articles/1943308-add-custom-styles-to-rich-text
+ */
+const labelStyles: Record<string, BoxProps['styles']> = {}
 
 const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
   h1: (props) => {
@@ -26,6 +35,7 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     return (
       <Text
         as="h3"
+        variant="sans-18-bold-caps"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{ ...baseHeadingStyles, ...props.styles }}
@@ -139,20 +149,22 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
       />
     )
   },
-  li: (props) => {
+  li: ({ children, ...props }) => {
     const { firstLastNoMargin } = useUtilStyles()
 
     return (
-      <Text
+      <Box
         as="li"
         {...props}
         className={clsx(firstLastNoMargin, props.className, props.class)}
         styles={{
           display: 'listItem',
-          marginBottom: 4,
+          marginBottom: 3,
           ...props.styles,
         }}
-      />
+      >
+        <Text variant="serif-16-18">{children}</Text>
+      </Box>
     )
   },
   a: ({ href, ...props }) => <Anchor href={href!} {...props} />,
@@ -160,6 +172,14 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
     <Box as="strong" styles={{ fontWeight: 'semibold', ...props.styles }}>
       {props.children}
     </Box>
+  ),
+  span: ({ class: className, ...props }: { class?: string }) => (
+    <Box
+      component="span"
+      data-test="test"
+      {...props}
+      styles={className ? labelStyles[className] : undefined}
+    />
   ),
 }
 

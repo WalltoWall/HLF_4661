@@ -18,10 +18,15 @@ const fontsets = {
     fontSizes: [1],
     lineGap: 1.3,
   },
+  'sans-18': {
+    fontMetrics: fontMetrics.sans,
+    fontSizes: [1.125],
+    lineGap: 1.3,
+  },
   'sans-32-60': {
     fontMetrics: fontMetrics.sans,
     fontSizes: [2, 2.75, 3.75],
-    lineGap: 1.3,
+    lineGap: 1.2,
   },
   'serif-16-18': {
     fontMetrics: fontMetrics.serif,
@@ -33,9 +38,9 @@ const fontsets = {
     fontSizes: [1.25, 1.5],
     lineGap: 1.35,
   },
-  'serif-48': {
+  'serif-40-48': {
     fontMetrics: fontMetrics.serif,
-    fontSizes: [3],
+    fontSizes: [2.5, 3],
     lineGap: 1.35,
   },
 }

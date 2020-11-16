@@ -17,7 +17,17 @@ export const InteriorPageBodyText = ({
   nextSharesBg,
 }: InteriorPageBodyTextProps) => (
   <BoundedBox as="section" variant="narrow" nextSharesBg={nextSharesBg}>
-    {textHTML && <HTMLContent html={textHTML} styles={{ color: 'gray40' }} />}
+    {textHTML && (
+      <HTMLContent
+        html={textHTML}
+        componentOverrides={{
+          h1: (Comp) => (props) => (
+            <Comp {...props} styles={{ color: 'gray20' }} />
+          ),
+        }}
+        styles={{ color: 'gray40' }}
+      />
+    )}
   </BoundedBox>
 )
 

@@ -52,6 +52,7 @@
     "react-helmet-async": "^1.0.7",
     "react-html-renderer": "^0.3.2",
     "react-map-to-components": "^1.2.1",
+    "react-player": "^2.6.2",
     "react-treat": "^1.6.1",
     "treat": "^1.6.1"
   },

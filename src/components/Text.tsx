@@ -22,6 +22,9 @@ const variants = {
   'sans-16': {
     fontFamily: 'sans',
   },
+  'sans-18': {
+    fontFamily: 'sans',
+  },
   'sans-32-60': {
     fontFamily: 'sans',
   },
@@ -31,7 +34,7 @@ const variants = {
   'serif-20-24': {
     fontFamily: 'serif',
   },
-  'serif-48': {
+  'serif-40-48': {
     fontFamily: 'serif',
   },
 } as const
@@ -63,6 +66,14 @@ const styledVariants = {
     styles: {
       textTransform: 'uppercase',
       letterSpacing: 's',
+    },
+  },
+  'sans-18-bold-caps': {
+    variant: 'sans-18',
+    styles: {
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      letterSpacing: 'm',
     },
   },
   'sans-32-60-caps': {

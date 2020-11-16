@@ -33,6 +33,7 @@ export const Typography = <TVariants extends string>({
   const variants = variantPrefix
     ? Comp.variants.filter((variant) => variant.startsWith(variantPrefix))
     : Comp.variants
+  const sortedVariants = variants.sort()
 
   return (
     <ul
@@ -45,7 +46,7 @@ export const Typography = <TVariants extends string>({
         alignItems: 'center',
       }}
     >
-      {variants.map((variant) => (
+      {sortedVariants.map((variant) => (
         <React.Fragment key={variant}>
           <span
             style={{
