@@ -39,7 +39,9 @@ export const useSiteSettings = () => {
     siteDescription: settings?.site_description?.text,
     siteCopyright: settings?.site_copyright?.text?.replace?.(/\$YEAR/g, YEAR),
     facebookHandle: settings?.facebook_handle?.text,
-    linkedInHandle: settings?.linkedin_handle?.text,
+    facebookURL: `https://facebook.com/${settings?.facebook_handle?.text}`,
+    linkedinHandle: settings?.linkedin_handle?.text,
+    linkedinURL: `https://linkedin.com/company/${settings?.linkedin_handle?.text}`,
     newsletterSignUpHref: settings?.newsletter_sign_up_link?.url,
   }
 }
