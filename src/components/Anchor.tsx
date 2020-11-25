@@ -1,9 +1,8 @@
 import React from 'react'
 import {
   useBoxStyles,
-  BaseBoxStylesProps,
-  BoxFocusProp,
-  BoxHoverProp,
+  UseBoxStylesProps,
+  UsePseudoBoxStylesProps,
   usePseudoBoxStyles,
 } from '@walltowall/calico'
 import clsx from 'clsx'
@@ -11,9 +10,9 @@ import clsx from 'clsx'
 import { Link, LinkProps } from './Link'
 
 export type AnchorProps = LinkProps & {
-  styles?: BaseBoxStylesProps
-  focusStyles?: BoxFocusProp
-  hoverStyles?: BoxHoverProp
+  styles?: UseBoxStylesProps
+  focusStyles?: UsePseudoBoxStylesProps<':focus'>
+  hoverStyles?: UsePseudoBoxStylesProps<':hover'>
 }
 
 export const Anchor = ({
@@ -30,8 +29,8 @@ export const Anchor = ({
       transitionDuration: 'fast',
       ...styles,
     }),
-    usePseudoBoxStyles({ color: 'orange50', ...focusStyles }, 'focus'),
-    usePseudoBoxStyles({ color: 'orange50', ...hoverStyles }, 'hover'),
+    usePseudoBoxStyles({ color: 'orange50', ...focusStyles }, ':focus'),
+    usePseudoBoxStyles({ color: 'orange50', ...hoverStyles }, ':hover'),
     className,
   )
 
