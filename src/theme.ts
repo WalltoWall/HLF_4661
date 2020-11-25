@@ -13,8 +13,10 @@
 
 import {
   createCalicoTheme,
-  baseCalicoTheme,
-} from '@walltowall/calico/src/createCalicoTheme'
+  mergeCalicoTokens,
+  sensibleTokens,
+  grid12ColumnTokens,
+} from '@walltowall/calico'
 
 export type Theme = typeof theme
 
@@ -107,12 +109,7 @@ const space = {
 } as const
 
 export const theme = createCalicoTheme({
-  breakpoints: {
-    mobile: '0rem',
-    tablet: '48rem',
-    desktop: '64rem',
-    desktopWide: '75rem',
-  },
+  // breakpoints: ['0', '48rem', '64rem', '75rem'],
 
   rules: {
     color: colors,
@@ -172,7 +169,6 @@ export const theme = createCalicoTheme({
     },
 
     letterSpacing: {
-      ...baseCalicoTheme.rules.letterSpacing,
       xs: '0.025em',
       s: '0.05em',
       m: '0.1em',
@@ -180,7 +176,6 @@ export const theme = createCalicoTheme({
     },
 
     width: {
-      ...baseCalicoTheme.rules.width,
       '1rem': '1rem',
       '1.25rem': '1.25rem',
       '1.5rem': '1.5rem',
@@ -190,7 +185,6 @@ export const theme = createCalicoTheme({
     },
 
     height: {
-      ...baseCalicoTheme.rules.height,
       '0.125rem': '0.125rem',
       '0.375rem': '0.375rem',
       '1rem': '1rem',
@@ -205,7 +199,6 @@ export const theme = createCalicoTheme({
     },
 
     gridTemplateColumns: {
-      ...baseCalicoTheme.rules.gridTemplateColumns,
       '1fr auto': '1fr auto',
     },
 
@@ -222,7 +215,6 @@ export const theme = createCalicoTheme({
     },
 
     top: {
-      ...baseCalicoTheme.rules.top,
       8: '2rem',
       '100%': '100%',
     },
@@ -232,9 +224,8 @@ export const theme = createCalicoTheme({
     },
   },
 
-  variants: {
-    opacity: {
-      hover: true,
-    },
-  },
-})
+  // pseudos: {
+  //   color: [':hover', ':focus'],
+  //   opacity: [':hover'],
+  // },
+} as const)

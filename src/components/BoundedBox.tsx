@@ -4,9 +4,10 @@ import {
   BoxProps,
   BaseBoxStylesProps,
   ResponsiveProp,
-  normalizeResponsiveProp,
 } from '@walltowall/calico'
 import * as RA from 'fp-ts/ReadonlyArray'
+
+import { normalizeResponsiveProp } from '../lib/normalizeResponsiveProp'
 
 const defaultElement = 'div'
 

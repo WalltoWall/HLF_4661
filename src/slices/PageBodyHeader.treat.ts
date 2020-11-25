@@ -12,7 +12,7 @@ export const verticallyCenter = style({
 export const placeholderColor = style((theme) => ({
   '::placeholder': {
     color: theme.rules.color.gray40,
-    opacity: theme.rules.opacity[50],
+    opacity: '50%',
   },
 }))
 
