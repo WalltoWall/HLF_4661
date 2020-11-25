@@ -11,7 +11,6 @@ import { Theme } from 'treat/theme'
 import capsize, { FontMetrics } from 'capsize'
 import * as R from 'fp-ts/Record'
 import * as A from 'fp-ts/Array'
-import * as RA from 'fp-ts/ReadonlyArray'
 import * as O from 'fp-ts/Option'
 import * as S from 'fp-ts/Semigroup'
 import { Ord, ordNumber } from 'fp-ts/Ord'
@@ -74,7 +73,11 @@ const capsizeStyle = (fontset: Fontset, baseFontSize: number) => (
 const fontsetToStyle = (theme: Theme, baseFontSize: number) => (
   fontset: Fontset,
 ) => {
-  const bpMinWidths = pipe(theme.breakpoints, RA.sort(breakpointOrd))
+  const bpMinWidths = pipe(
+    theme.breakpoints,
+    R.collect((_, minWidth) => minWidth),
+    A.sort(breakpointOrd),
+  )
   const bpStyles = pipe(
     fontset.fontSizes,
     A.map(O.fromNullable),
@@ -82,10 +85,10 @@ const fontsetToStyle = (theme: Theme, baseFontSize: number) => (
   )
 
   return pipe(
-    RA.zipWith(bpMinWidths, bpStyles, (bpMinWidth, bpStyle) =>
+    A.zipWith(bpMinWidths, bpStyles, (bpMinWidth, bpStyle) =>
       pipe(bpStyle, O.map(responsiveStyle(bpMinWidth))),
     ),
-    RA.compact,
+    A.compact,
     S.fold(semigroupStyle)({}),
   )
 }

@@ -16,7 +16,7 @@ import {
   mergeCalicoTokens,
   sensibleTokens,
   grid12ColumnTokens,
-} from '@walltowall/calico'
+} from '@walltowall/calico/treat'
 
 export type Theme = typeof theme
 
@@ -108,124 +108,131 @@ const space = {
   30: '7.5rem',
 } as const
 
-export const theme = createCalicoTheme({
-  // breakpoints: ['0', '48rem', '64rem', '75rem'],
-
-  rules: {
-    color: colors,
-    backgroundColor: colors,
-    borderColor: colors,
-
-    margin: space,
-    marginTop: space,
-    marginBottom: space,
-    marginLeft: space,
-    marginRight: space,
-
-    padding: space,
-    paddingTop: space,
-    paddingBottom: space,
-    paddingLeft: space,
-    paddingRight: space,
-
-    gap: space,
-
-    fontFamily: {
-      sans: 'proxima-nova, system-ui, sans-serif',
-      serif: '"PT Serif", Georgia, serif',
+export const theme = createCalicoTheme(
+  mergeCalicoTokens(sensibleTokens, grid12ColumnTokens, {
+    breakpoints: {
+      _: '0',
+      tablet: '48rem',
+      desktop: '64rem',
+      desktopWide: '75rem',
     },
 
-    fontSize: {
-      '0.875rem': '0.875rem',
-      '1rem': '1rem',
+    rules: {
+      color: colors,
+      backgroundColor: colors,
+      borderColor: colors,
+
+      margin: space,
+      marginTop: space,
+      marginBottom: space,
+      marginLeft: space,
+      marginRight: space,
+
+      padding: space,
+      paddingTop: space,
+      paddingBottom: space,
+      paddingLeft: space,
+      paddingRight: space,
+
+      gap: space,
+
+      fontFamily: {
+        sans: 'proxima-nova, system-ui, sans-serif',
+        serif: '"PT Serif", Georgia, serif',
+      },
+
+      fontSize: {
+        '0.875rem': '0.875rem',
+        '1rem': '1rem',
+      },
+
+      lineHeight: {
+        1: '1',
+      },
+
+      maxWidth: {
+        medium: '48rem',
+        large: '64rem',
+        xlarge: '75rem',
+        '15rem': '15rem',
+        '20rem': '20rem',
+        '30ch': '30ch',
+      },
+
+      minWidth: {
+        '14rem': '14rem',
+      },
+
+      minHeight: {
+        '7rem': '7rem',
+        '10rem': '10rem',
+      },
+
+      transitionDuration: {
+        slow: '300ms',
+        normal: '200ms',
+        fast: '100ms',
+      },
+
+      letterSpacing: {
+        xs: '0.025em',
+        s: '0.05em',
+        m: '0.1em',
+        l: '0.2em',
+      },
+
+      width: {
+        '1rem': '1rem',
+        '1.25rem': '1.25rem',
+        '1.5rem': '1.5rem',
+        '1.75rem': '1.75rem',
+        '2rem': '2rem',
+        '10rem': '10rem',
+      },
+
+      height: {
+        '0.125rem': '0.125rem',
+        '0.375rem': '0.375rem',
+        '1rem': '1rem',
+        '1.25rem': '1.25rem',
+      },
+
+      transitionProperty: {
+        backgroundColor: 'background-color',
+        color: 'color',
+        opacity: 'opacity',
+        transform: 'transform',
+      },
+
+      gridTemplateColumns: {
+        '1fr auto': '1fr auto',
+      },
+
+      borderTopWidth: {
+        '1px': '1px',
+        '2px': '2px',
+        '3px': '3px',
+      },
+
+      borderBottomWidth: {
+        '1px': '1px',
+        '2px': '2px',
+        '3px': '3px',
+      },
+
+      top: {
+        8: '2rem',
+        '100%': '100%',
+      },
+
+      whiteSpace: {
+        nowrap: 'nowrap',
+      },
     },
 
-    lineHeight: {
-      1: '1',
+    pseudos: {
+      color: [':hover', ':focus'],
+      opacity: [':hover'],
     },
-
-    maxWidth: {
-      medium: '48rem',
-      large: '64rem',
-      xlarge: '75rem',
-      '15rem': '15rem',
-      '20rem': '20rem',
-      '30ch': '30ch',
-    },
-
-    minWidth: {
-      '14rem': '14rem',
-    },
-
-    minHeight: {
-      '7rem': '7rem',
-      '10rem': '10rem',
-    },
-
-    transitionDuration: {
-      slow: '300ms',
-      normal: '200ms',
-      fast: '100ms',
-    },
-
-    letterSpacing: {
-      xs: '0.025em',
-      s: '0.05em',
-      m: '0.1em',
-      l: '0.2em',
-    },
-
-    width: {
-      '1rem': '1rem',
-      '1.25rem': '1.25rem',
-      '1.5rem': '1.5rem',
-      '1.75rem': '1.75rem',
-      '2rem': '2rem',
-      '10rem': '10rem',
-    },
-
-    height: {
-      '0.125rem': '0.125rem',
-      '0.375rem': '0.375rem',
-      '1rem': '1rem',
-      '1.25rem': '1.25rem',
-    },
-
-    transitionProperty: {
-      backgroundColor: 'background-color',
-      color: 'color',
-      opacity: 'opacity',
-      transform: 'transform',
-    },
-
-    gridTemplateColumns: {
-      '1fr auto': '1fr auto',
-    },
-
-    borderTopWidth: {
-      '1px': '1px',
-      '2px': '2px',
-      '3px': '3px',
-    },
-
-    borderBottomWidth: {
-      '1px': '1px',
-      '2px': '2px',
-      '3px': '3px',
-    },
-
-    top: {
-      8: '2rem',
-      '100%': '100%',
-    },
-
-    whiteSpace: {
-      nowrap: 'nowrap',
-    },
-  },
-
-  // pseudos: {
-  //   color: [':hover', ':focus'],
-  //   opacity: [':hover'],
-  // },
-} as const)
+  } as const),
+)
