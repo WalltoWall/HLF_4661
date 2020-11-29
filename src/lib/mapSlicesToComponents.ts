@@ -3,14 +3,25 @@ import { MapSlicesToComponentsProps } from '@walltowall/react-map-slices-to-comp
 import * as R from 'fp-ts/Record'
 import { pipe } from 'fp-ts/function'
 
+/**
+ * Arguments provided to @walltowall/react-map-slices-to-components'
+ * `mapDataToPropsEnhancer` function.
+ */
 export type MapDataToPropsEnhancerArgs = Parameters<
   NonNullable<MapSlicesToComponentsProps['mapDataToPropsEnhancer']>
 >[1]
 
+/**
+ * Meta information provided to @walltowall/react-map-to-components' items.
+ */
 export interface Meta<RootDataQuery = any> {
   rootData: RootDataQuery
 }
 
+/**
+ * Arguments provided to a @walltowall/react-map-slices-to-components' item's
+ * `mapDataToProps` function.
+ */
 export type MapDataToPropsArgs<
   TDataFragment = any,
   TContextFn extends (...args: any) => any = (...args: any) => any,
@@ -30,6 +41,10 @@ export type MapDataToPropsArgs<
   >
 >[0]
 
+/**
+ * Arguments provided to a @walltowall/react-map-slices-to-components' item's
+ * `mapDataToContext` function.
+ */
 export type MapDataToContextArgs<
   TDataFragment = any,
   TRootQuery = any,
@@ -43,12 +58,20 @@ export type MapDataToContextArgs<
   TMapDataToContextFn<T, TMap, TDataFragment, Meta<TRootQuery>, TContext>
 >[0]
 
+/**
+ * Module containing a React component with
+ * @walltowall/react-map-slices-to-components specific properties.
+ */
 type SliceModule<TProps = any> = {
   default: React.ComponentType<TProps>
   mapDataToProps?: (props: MapDataToPropsArgs) => Record<string, unknown>
   mapDataToContext?: (props: MapDataToContextArgs) => Record<string, unknown>
 }
 
+/**
+ * A React component with @walltowall/react-map-slices-to-components specific
+ * properties.
+ */
 type SliceForMap<TProps = any> = React.ComponentType<TProps> & {
   mapDataToProps?: (props: MapDataToPropsArgs) => Record<string, unknown>
   mapDataToContext?: (props: MapDataToContextArgs) => Record<string, unknown>
