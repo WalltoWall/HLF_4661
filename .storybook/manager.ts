@@ -3,8 +3,6 @@
 
 // import brandImage from './sb-logo.png'
 
-import './manager.css'
-
 // addons.setConfig({
 //   theme: create({
 //     base: 'light',

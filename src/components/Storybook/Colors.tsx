@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import * as R from 'rambdax'
 
 import * as styleRefs from './Colors.treat'
 
@@ -139,13 +138,11 @@ export const Colors = ({ colors }: ColorsProps) => {
           gridTemplateColumns: `repeat(9, ${COLUMN_WIDTH_REM})`,
         }}
       >
-        {R.times(
-          (idx) => (
+        {Array(numRows * 9)
+          .fill(undefined)
+          .map((_, idx) => (
             <div key={idx} className={styleRefs.gridCell} />
-          ),
-          numRows * 9,
-        )}
-
+          ))}
         {allColorBuckets.map((bucketColors, bucketIdx) =>
           bucketColors.map((color) => (
             <Color
