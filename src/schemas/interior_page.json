@@ -103,7 +103,8 @@
           "text": [],
           "embed": [],
           "video": [],
-          "text_intro": []
+          "text_intro": [],
+          "cohort_schedule": []
         },
         "choices": {
           "text": {
@@ -184,6 +185,25 @@
                   "allowTargetBlank": true,
                   "label": "Introductory Text",
                   "placeholder": "Introductory text leading into the content that follows"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "cohort_schedule": {
+            "type": "Slice",
+            "fieldset": "Cohort Schedule",
+            "description": "A cohort schedule in table format",
+            "icon": "featured_play_list",
+            "display": "list",
+            "non-repeat": {
+              "cohort_schedule": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": ["cohort_schedule"],
+                  "label": "Cohort Schedule",
+                  "placeholder": "Cohort schedule to display"
                 }
               }
             },

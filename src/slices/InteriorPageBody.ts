@@ -13,12 +13,14 @@ import { reshapeSlicesMap } from '../lib/mapSlicesToComponents'
 import * as InteriorPageBodyText from './InteriorPageBodyText'
 import * as InteriorPageBodyTextIntro from './InteriorPageBodyTextIntro'
 import * as InteriorPageBodyVideo from './InteriorPageBodyVideo'
+import * as InteriorPageBodyCohortSchedule from './InteriorPageBodyCohortSchedule'
 
 // 2. Add your slice
 const slices = {
   InteriorPageBodyText,
   InteriorPageBodyTextIntro,
   InteriorPageBodyVideo,
+  InteriorPageBodyCohortSchedule,
 }
 
 // 3. Add your slice fragment
@@ -27,6 +29,7 @@ export const fragment = graphql`
     ...InteriorPageBodyText
     ...InteriorPageBodyTextIntro
     ...InteriorPageBodyVideo
+    ...InteriorPageBodyCohortSchedule
   }
 `
 

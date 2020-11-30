@@ -1285,7 +1285,7 @@ export type PageInfo = {
   totalCount: Scalars['Int'];
 };
 
-export type PrismicAllDocumentTypes = PrismicCohort | PrismicFellow | PrismicInteriorPage | PrismicNavigation | PrismicPage | PrismicSettings;
+export type PrismicAllDocumentTypes = PrismicCohort | PrismicCohortSchedule | PrismicFellow | PrismicInteriorPage | PrismicNavigation | PrismicPage | PrismicSettings;
 
 export type PrismicCohort = PrismicDocument & Node & {
   data?: Maybe<PrismicCohortDataType>;
@@ -1504,6 +1504,424 @@ export type PrismicCohortGroupConnection = {
   pageInfo: PageInfo;
   field: Scalars['String'];
   fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicCohortSchedule = PrismicDocument & Node & {
+  data?: Maybe<PrismicCohortScheduleDataType>;
+  dataRaw: Scalars['JSON'];
+  dataString: Scalars['String'];
+  first_publication_date: Scalars['Date'];
+  href: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
+  lang: Scalars['String'];
+  last_publication_date: Scalars['Date'];
+  tags: Array<Scalars['String']>;
+  alternate_languages: Array<PrismicLinkType>;
+  type: Scalars['String'];
+  prismicId: Scalars['ID'];
+  _previewable: Scalars['ID'];
+  uid?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type PrismicCohortScheduleFirst_Publication_DateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type PrismicCohortScheduleLast_Publication_DateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type PrismicCohortScheduleBodySection = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  primary?: Maybe<PrismicCohortScheduleBodySectionPrimaryType>;
+  items?: Maybe<Array<Maybe<PrismicCohortScheduleBodySectionItemType>>>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicCohortScheduleBodySectionConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicCohortScheduleBodySectionEdge>;
+  nodes: Array<PrismicCohortScheduleBodySection>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicCohortScheduleBodySectionGroupConnection>;
+};
+
+
+export type PrismicCohortScheduleBodySectionConnectionDistinctArgs = {
+  field: PrismicCohortScheduleBodySectionFieldsEnum;
+};
+
+
+export type PrismicCohortScheduleBodySectionConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicCohortScheduleBodySectionFieldsEnum;
+};
+
+export type PrismicCohortScheduleBodySectionEdge = {
+  next?: Maybe<PrismicCohortScheduleBodySection>;
+  node: PrismicCohortScheduleBodySection;
+  previous?: Maybe<PrismicCohortScheduleBodySection>;
+};
+
+export enum PrismicCohortScheduleBodySectionFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  PrimaryDescriptionHeadingHtml = 'primary___description_heading___html',
+  PrimaryDescriptionHeadingText = 'primary___description_heading___text',
+  PrimaryDescriptionHeadingRaw = 'primary___description_heading___raw',
+  PrimaryDatesHeadingHtml = 'primary___dates_heading___html',
+  PrimaryDatesHeadingText = 'primary___dates_heading___text',
+  PrimaryDatesHeadingRaw = 'primary___dates_heading___raw',
+  Items = 'items',
+  ItemsEventDescriptionHtml = 'items___event_description___html',
+  ItemsEventDescriptionText = 'items___event_description___text',
+  ItemsEventDescriptionRaw = 'items___event_description___raw',
+  ItemsEventDateHtml = 'items___event_date___html',
+  ItemsEventDateText = 'items___event_date___text',
+  ItemsEventDateRaw = 'items___event_date___raw',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicCohortScheduleBodySectionFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicCohortScheduleBodySectionPrimaryTypeFilterInput>;
+  items?: Maybe<PrismicCohortScheduleBodySectionItemTypeFilterListInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicCohortScheduleBodySectionGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicCohortScheduleBodySectionEdge>;
+  nodes: Array<PrismicCohortScheduleBodySection>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicCohortScheduleBodySectionItemType = {
+  event_description?: Maybe<PrismicStructuredTextType>;
+  event_date?: Maybe<PrismicStructuredTextType>;
+};
+
+export type PrismicCohortScheduleBodySectionItemTypeFilterInput = {
+  event_description?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  event_date?: Maybe<PrismicStructuredTextTypeFilterInput>;
+};
+
+export type PrismicCohortScheduleBodySectionItemTypeFilterListInput = {
+  elemMatch?: Maybe<PrismicCohortScheduleBodySectionItemTypeFilterInput>;
+};
+
+export type PrismicCohortScheduleBodySectionPrimaryType = {
+  description_heading?: Maybe<PrismicStructuredTextType>;
+  dates_heading?: Maybe<PrismicStructuredTextType>;
+};
+
+export type PrismicCohortScheduleBodySectionPrimaryTypeFilterInput = {
+  description_heading?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  dates_heading?: Maybe<PrismicStructuredTextTypeFilterInput>;
+};
+
+export type PrismicCohortScheduleBodySectionSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicCohortScheduleBodySectionFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicCohortScheduleBodySlicesType = PrismicCohortScheduleBodySection;
+
+export type PrismicCohortScheduleConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicCohortScheduleEdge>;
+  nodes: Array<PrismicCohortSchedule>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicCohortScheduleGroupConnection>;
+};
+
+
+export type PrismicCohortScheduleConnectionDistinctArgs = {
+  field: PrismicCohortScheduleFieldsEnum;
+};
+
+
+export type PrismicCohortScheduleConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicCohortScheduleFieldsEnum;
+};
+
+export type PrismicCohortScheduleDataType = {
+  title?: Maybe<PrismicStructuredTextType>;
+  body?: Maybe<Array<Maybe<PrismicCohortScheduleBodySlicesType>>>;
+};
+
+export type PrismicCohortScheduleDataTypeFilterInput = {
+  title?: Maybe<PrismicStructuredTextTypeFilterInput>;
+};
+
+export type PrismicCohortScheduleEdge = {
+  next?: Maybe<PrismicCohortSchedule>;
+  node: PrismicCohortSchedule;
+  previous?: Maybe<PrismicCohortSchedule>;
+};
+
+export enum PrismicCohortScheduleFieldsEnum {
+  DataTitleHtml = 'data___title___html',
+  DataTitleText = 'data___title___text',
+  DataTitleRaw = 'data___title___raw',
+  DataRaw = 'dataRaw',
+  DataString = 'dataString',
+  FirstPublicationDate = 'first_publication_date',
+  Href = 'href',
+  Url = 'url',
+  Lang = 'lang',
+  LastPublicationDate = 'last_publication_date',
+  Tags = 'tags',
+  AlternateLanguages = 'alternate_languages',
+  AlternateLanguagesLinkType = 'alternate_languages___link_type',
+  AlternateLanguagesIsBroken = 'alternate_languages___isBroken',
+  AlternateLanguagesUrl = 'alternate_languages___url',
+  AlternateLanguagesTarget = 'alternate_languages___target',
+  AlternateLanguagesSize = 'alternate_languages___size',
+  AlternateLanguagesId = 'alternate_languages___id',
+  AlternateLanguagesType = 'alternate_languages___type',
+  AlternateLanguagesTags = 'alternate_languages___tags',
+  AlternateLanguagesLang = 'alternate_languages___lang',
+  AlternateLanguagesSlug = 'alternate_languages___slug',
+  AlternateLanguagesUid = 'alternate_languages___uid',
+  AlternateLanguagesRaw = 'alternate_languages___raw',
+  Type = 'type',
+  PrismicId = 'prismicId',
+  Previewable = '_previewable',
+  Uid = 'uid',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicCohortScheduleFilterInput = {
+  data?: Maybe<PrismicCohortScheduleDataTypeFilterInput>;
+  dataRaw?: Maybe<JsonQueryOperatorInput>;
+  dataString?: Maybe<StringQueryOperatorInput>;
+  first_publication_date?: Maybe<DateQueryOperatorInput>;
+  href?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
+  lang?: Maybe<StringQueryOperatorInput>;
+  last_publication_date?: Maybe<DateQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  alternate_languages?: Maybe<PrismicLinkTypeFilterListInput>;
+  type?: Maybe<StringQueryOperatorInput>;
+  prismicId?: Maybe<IdQueryOperatorInput>;
+  _previewable?: Maybe<IdQueryOperatorInput>;
+  uid?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicCohortScheduleGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicCohortScheduleEdge>;
+  nodes: Array<PrismicCohortSchedule>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicCohortScheduleSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicCohortScheduleFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
 export type PrismicCohortSortInput = {
@@ -2145,6 +2563,178 @@ export type PrismicInteriorPageLast_Publication_DateArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
+export type PrismicInteriorPageBodyCohortSchedule = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  primary?: Maybe<PrismicInteriorPageBodyCohortSchedulePrimaryType>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicInteriorPageBodyCohortScheduleConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicInteriorPageBodyCohortScheduleEdge>;
+  nodes: Array<PrismicInteriorPageBodyCohortSchedule>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicInteriorPageBodyCohortScheduleGroupConnection>;
+};
+
+
+export type PrismicInteriorPageBodyCohortScheduleConnectionDistinctArgs = {
+  field: PrismicInteriorPageBodyCohortScheduleFieldsEnum;
+};
+
+
+export type PrismicInteriorPageBodyCohortScheduleConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicInteriorPageBodyCohortScheduleFieldsEnum;
+};
+
+export type PrismicInteriorPageBodyCohortScheduleEdge = {
+  next?: Maybe<PrismicInteriorPageBodyCohortSchedule>;
+  node: PrismicInteriorPageBodyCohortSchedule;
+  previous?: Maybe<PrismicInteriorPageBodyCohortSchedule>;
+};
+
+export enum PrismicInteriorPageBodyCohortScheduleFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  PrimaryCohortScheduleLinkType = 'primary___cohort_schedule___link_type',
+  PrimaryCohortScheduleIsBroken = 'primary___cohort_schedule___isBroken',
+  PrimaryCohortScheduleUrl = 'primary___cohort_schedule___url',
+  PrimaryCohortScheduleTarget = 'primary___cohort_schedule___target',
+  PrimaryCohortScheduleSize = 'primary___cohort_schedule___size',
+  PrimaryCohortScheduleId = 'primary___cohort_schedule___id',
+  PrimaryCohortScheduleType = 'primary___cohort_schedule___type',
+  PrimaryCohortScheduleTags = 'primary___cohort_schedule___tags',
+  PrimaryCohortScheduleLang = 'primary___cohort_schedule___lang',
+  PrimaryCohortScheduleSlug = 'primary___cohort_schedule___slug',
+  PrimaryCohortScheduleUid = 'primary___cohort_schedule___uid',
+  PrimaryCohortScheduleRaw = 'primary___cohort_schedule___raw',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicInteriorPageBodyCohortScheduleFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicInteriorPageBodyCohortSchedulePrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicInteriorPageBodyCohortScheduleGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicInteriorPageBodyCohortScheduleEdge>;
+  nodes: Array<PrismicInteriorPageBodyCohortSchedule>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicInteriorPageBodyCohortSchedulePrimaryType = {
+  cohort_schedule?: Maybe<PrismicLinkType>;
+};
+
+export type PrismicInteriorPageBodyCohortSchedulePrimaryTypeFilterInput = {
+  cohort_schedule?: Maybe<PrismicLinkTypeFilterInput>;
+};
+
+export type PrismicInteriorPageBodyCohortScheduleSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicInteriorPageBodyCohortScheduleFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type PrismicInteriorPageBodyImages = PrismicSliceType & Node & {
   slice_type: Scalars['String'];
   slice_label?: Maybe<Scalars['String']>;
@@ -2369,7 +2959,7 @@ export type PrismicInteriorPageBodyImagesSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type PrismicInteriorPageBodySlicesType = PrismicInteriorPageBodyText | PrismicInteriorPageBodyImages | PrismicInteriorPageBodyVideo | PrismicInteriorPageBodyTextIntro;
+export type PrismicInteriorPageBodySlicesType = PrismicInteriorPageBodyText | PrismicInteriorPageBodyImages | PrismicInteriorPageBodyVideo | PrismicInteriorPageBodyTextIntro | PrismicInteriorPageBodyCohortSchedule;
 
 export type PrismicInteriorPageBodyText = PrismicSliceType & Node & {
   slice_type: Scalars['String'];
@@ -5708,6 +6298,10 @@ export type Query = {
   allSitePage: SitePageConnection;
   prismicCohort?: Maybe<PrismicCohort>;
   allPrismicCohort: PrismicCohortConnection;
+  prismicCohortScheduleBodySection?: Maybe<PrismicCohortScheduleBodySection>;
+  allPrismicCohortScheduleBodySection: PrismicCohortScheduleBodySectionConnection;
+  prismicCohortSchedule?: Maybe<PrismicCohortSchedule>;
+  allPrismicCohortSchedule: PrismicCohortScheduleConnection;
   prismicFellow?: Maybe<PrismicFellow>;
   allPrismicFellow: PrismicFellowConnection;
   prismicInteriorPageHeaderHeroImage?: Maybe<PrismicInteriorPageHeaderHeroImage>;
@@ -5720,6 +6314,8 @@ export type Query = {
   allPrismicInteriorPageBodyVideo: PrismicInteriorPageBodyVideoConnection;
   prismicInteriorPageBodyTextIntro?: Maybe<PrismicInteriorPageBodyTextIntro>;
   allPrismicInteriorPageBodyTextIntro: PrismicInteriorPageBodyTextIntroConnection;
+  prismicInteriorPageBodyCohortSchedule?: Maybe<PrismicInteriorPageBodyCohortSchedule>;
+  allPrismicInteriorPageBodyCohortSchedule: PrismicInteriorPageBodyCohortScheduleConnection;
   prismicInteriorPage?: Maybe<PrismicInteriorPage>;
   allPrismicInteriorPage: PrismicInteriorPageConnection;
   prismicNavigationMainNavItem?: Maybe<PrismicNavigationMainNavItem>;
@@ -5921,6 +6517,56 @@ export type QueryAllPrismicCohortArgs = {
 };
 
 
+export type QueryPrismicCohortScheduleBodySectionArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicCohortScheduleBodySectionPrimaryTypeFilterInput>;
+  items?: Maybe<PrismicCohortScheduleBodySectionItemTypeFilterListInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicCohortScheduleBodySectionArgs = {
+  filter?: Maybe<PrismicCohortScheduleBodySectionFilterInput>;
+  sort?: Maybe<PrismicCohortScheduleBodySectionSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicCohortScheduleArgs = {
+  data?: Maybe<PrismicCohortScheduleDataTypeFilterInput>;
+  dataRaw?: Maybe<JsonQueryOperatorInput>;
+  dataString?: Maybe<StringQueryOperatorInput>;
+  first_publication_date?: Maybe<DateQueryOperatorInput>;
+  href?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
+  lang?: Maybe<StringQueryOperatorInput>;
+  last_publication_date?: Maybe<DateQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  alternate_languages?: Maybe<PrismicLinkTypeFilterListInput>;
+  type?: Maybe<StringQueryOperatorInput>;
+  prismicId?: Maybe<IdQueryOperatorInput>;
+  _previewable?: Maybe<IdQueryOperatorInput>;
+  uid?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicCohortScheduleArgs = {
+  filter?: Maybe<PrismicCohortScheduleFilterInput>;
+  sort?: Maybe<PrismicCohortScheduleSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryPrismicFellowArgs = {
   data?: Maybe<PrismicFellowDataTypeFilterInput>;
   dataRaw?: Maybe<JsonQueryOperatorInput>;
@@ -6041,6 +6687,25 @@ export type QueryPrismicInteriorPageBodyTextIntroArgs = {
 export type QueryAllPrismicInteriorPageBodyTextIntroArgs = {
   filter?: Maybe<PrismicInteriorPageBodyTextIntroFilterInput>;
   sort?: Maybe<PrismicInteriorPageBodyTextIntroSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicInteriorPageBodyCohortScheduleArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicInteriorPageBodyCohortSchedulePrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicInteriorPageBodyCohortScheduleArgs = {
+  filter?: Maybe<PrismicInteriorPageBodyCohortScheduleFilterInput>;
+  sort?: Maybe<PrismicInteriorPageBodyCohortScheduleSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -7288,6 +7953,7 @@ export type SitePluginPluginOptionsHeadersFilterInput = {
 
 export type SitePluginPluginOptionsSchemas = {
   cohort?: Maybe<SitePluginPluginOptionsSchemasCohort>;
+  cohort_schedule?: Maybe<SitePluginPluginOptionsSchemasCohort_Schedule>;
   fellow?: Maybe<SitePluginPluginOptionsSchemasFellow>;
   interior_page?: Maybe<SitePluginPluginOptionsSchemasInterior_Page>;
   navigation?: Maybe<SitePluginPluginOptionsSchemasNavigation>;
@@ -7297,6 +7963,224 @@ export type SitePluginPluginOptionsSchemas = {
 
 export type SitePluginPluginOptionsSchemasCohort = {
   Main?: Maybe<SitePluginPluginOptionsSchemasCohortMain>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_Schedule = {
+  Main?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMain>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleFilterInput = {
+  Main?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMain = {
+  title?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainTitle>;
+  uid?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainUid>;
+  body?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBody>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBody = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfig = {
+  choices?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoices>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoices = {
+  section?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSection>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesFilterInput = {
+  section?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSection = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_Repeat>;
+  repeat?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeat>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatFilterInput>;
+  repeat?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_Repeat = {
+  description_heading?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDescription_Heading>;
+  dates_heading?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDates_Heading>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDates_Heading = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDates_HeadingConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDates_HeadingConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDates_HeadingConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDates_HeadingFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDates_HeadingConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDescription_Heading = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDescription_HeadingConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDescription_HeadingConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDescription_HeadingConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDescription_HeadingFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDescription_HeadingConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatFilterInput = {
+  description_heading?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDescription_HeadingFilterInput>;
+  dates_heading?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionNon_RepeatDates_HeadingFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeat = {
+  event_description?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_Description>;
+  event_date?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_Date>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_Date = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DateConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DateConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DateConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DateFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DateConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_Description = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DescriptionConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DescriptionConfig = {
+  multi?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DescriptionConfigFilterInput = {
+  multi?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DescriptionFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DescriptionConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatFilterInput = {
+  event_description?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DescriptionFilterInput>;
+  event_date?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesSectionRepeatEvent_DateFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigFilterInput = {
+  choices?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigChoicesFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainFilterInput = {
+  title?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainTitleFilterInput>;
+  uid?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainUidFilterInput>;
+  body?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainBodyFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainTitle = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainTitleConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainTitleConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainTitleConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainTitleFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainTitleConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainUid = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainUidConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainUidConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainUidConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohort_ScheduleMainUidFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleMainUidConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasCohortFilterInput = {
@@ -7487,6 +8371,7 @@ export type SitePluginPluginOptionsSchemasFellowMainUidFilterInput = {
 
 export type SitePluginPluginOptionsSchemasFilterInput = {
   cohort?: Maybe<SitePluginPluginOptionsSchemasCohortFilterInput>;
+  cohort_schedule?: Maybe<SitePluginPluginOptionsSchemasCohort_ScheduleFilterInput>;
   fellow?: Maybe<SitePluginPluginOptionsSchemasFellowFilterInput>;
   interior_page?: Maybe<SitePluginPluginOptionsSchemasInterior_PageFilterInput>;
   navigation?: Maybe<SitePluginPluginOptionsSchemasNavigationFilterInput>;
@@ -7519,6 +8404,57 @@ export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoices = {
   images?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesImages>;
   video?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesVideo>;
   text_intro?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesText_Intro>;
+  cohort_schedule?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_Schedule>;
+};
+
+export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_Schedule = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_Repeat>;
+};
+
+export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_Repeat = {
+  cohort_schedule?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatCohort_Schedule>;
+};
+
+export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatCohort_Schedule = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatCohort_ScheduleConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatCohort_ScheduleConfig = {
+  select?: Maybe<Scalars['String']>;
+  customtypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatCohort_ScheduleConfigFilterInput = {
+  select?: Maybe<StringQueryOperatorInput>;
+  customtypes?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatCohort_ScheduleFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatCohort_ScheduleConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatFilterInput = {
+  cohort_schedule?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleNon_RepeatCohort_ScheduleFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesFilterInput = {
@@ -7526,6 +8462,7 @@ export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesFilt
   images?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesImagesFilterInput>;
   video?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesVideoFilterInput>;
   text_intro?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesText_IntroFilterInput>;
+  cohort_schedule?: Maybe<SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesCohort_ScheduleFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasInterior_PageBodyBodyConfigChoicesImages = {
@@ -9556,6 +10493,8 @@ type SlicesInteriorPageBody_PrismicInteriorPageBodyTextIntro_Fragment = Interior
 
 export type SlicesInteriorPageBodyFragment = SlicesInteriorPageBody_PrismicInteriorPageBodyText_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyVideo_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyTextIntro_Fragment;
 
+export type InteriorPageBodyCohortScheduleFragment = { primary?: Maybe<{ cohort_schedule?: Maybe<{ document?: Maybe<{ data?: Maybe<{ body?: Maybe<Array<Maybe<{ primary?: Maybe<{ description_heading?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, dates_heading?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }>, items?: Maybe<Array<Maybe<{ event_description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, event_date?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }>>> }>>> }> }> }> }> };
+
 export type InteriorPageBodyTextFragment = { primary?: Maybe<{ text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }> };
 
 export type InteriorPageBodyTextIntroFragment = { primary?: Maybe<{ introductory_text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }> };
@@ -9572,7 +10511,9 @@ type SlicesPageBody_PrismicPageBodyImages_Fragment = PageBodyImagesFragment;
 
 type SlicesPageBody_PrismicPageBodyHeroImage_Fragment = PageBodyHeroImageFragment;
 
-export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyImages_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment;
+type SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment = PageBodyLearningExcursionMapFragment;
+
+export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyImages_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment | SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment;
 
 export type PageBodyAnchorFragment = { primary?: Maybe<Pick<PrismicPageBodyAnchorPrimaryType, 'id'>> };
 
@@ -9630,6 +10571,10 @@ export type InteriorPageTemplateQuery = { prismicInteriorPage?: Maybe<(
         { __typename: 'PrismicInteriorPageBodyTextIntro' }
         & Pick<PrismicInteriorPageBodyTextIntro, 'id'>
         & SlicesInteriorPageBody_PrismicInteriorPageBodyTextIntro_Fragment
+      ) | (
+        { __typename: 'PrismicInteriorPageBodyCohortSchedule' }
+        & Pick<PrismicInteriorPageBodyCohortSchedule, 'id'>
+        & SlicesInteriorPageBody_PrismicInteriorPageBodyCohortSchedule_Fragment
       )>>> }
     )> }
     & PrismicInteriorPageParentRecursiveFragment
