@@ -1,6 +1,10 @@
 import * as React from 'react'
 
-export const useInterval = (callback: () => void, interval: number) => {
+export const useInterval = (
+  callback: () => void,
+  interval: number,
+  autoplay = true,
+) => {
   const callbackRef = React.useRef(callback)
   const id = React.useRef<NodeJS.Timeout>()
 
@@ -24,10 +28,10 @@ export const useInterval = (callback: () => void, interval: number) => {
   }, [interval])
 
   React.useEffect(() => {
-    start()
+    if (autoplay) start()
 
     return () => stop()
-  }, [start])
+  }, [start, autoplay])
 
   return React.useMemo(() => [start, stop] as const, [start])
 }

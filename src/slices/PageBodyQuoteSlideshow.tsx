@@ -27,14 +27,11 @@ export type PageBodyQuoteSlideshowProps = ReturnType<typeof mapDataToProps> &
 export const PageBodyQuoteSlideshow = ({
   children,
 }: PageBodyQuoteSlideshowProps) => {
-  /* const [activeIndex, setActiveIndex] = React.useState(0) */
   const [start, stop] = useInterval(() => slider.next(), SLIDE_DURATION)
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: true,
     dragStart: () => stop(),
     dragEnd: () => start(),
-    /* slideChanged: (instance) => */
-    /*   setActiveIndex(instance.details().relativeSlide), */
   })
 
   return (
