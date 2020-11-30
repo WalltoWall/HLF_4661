@@ -7,6 +7,8 @@ import { ReactComponent as AssetIconSearch } from '../assets/icon-search.svg'
 import { ReactComponent as AssetIconPlay } from '../assets/icon-play.svg'
 import { ReactComponent as AssetIconFacebookColored } from '../assets/icon-facebook-colored.svg'
 import { ReactComponent as AssetIconLinkedinColored } from '../assets/icon-linkedin-colored.svg'
+import { ReactComponent as AssetIconDoubleQuoteLeft } from '../assets/icon-dquo-left.svg'
+import { ReactComponent as AssetIconDoubleQuoteRight } from '../assets/icon-dquo-right.svg'
 
 const icons = {
   chevronDown: AssetIconChevronDown,
@@ -15,6 +17,8 @@ const icons = {
   play: AssetIconPlay,
   facebookColored: AssetIconFacebookColored,
   linkedinColored: AssetIconLinkedinColored,
+  doubleQuoteLeft: AssetIconDoubleQuoteLeft,
+  doubleQuoteRight: AssetIconDoubleQuoteRight,
 }
 
 export type IconProps = {

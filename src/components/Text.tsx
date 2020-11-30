@@ -22,6 +22,9 @@ const variants = {
   'sans-16': {
     fontFamily: 'sans',
   },
+  'sans-16-18': {
+    fontFamily: 'sans',
+  },
   'sans-18': {
     fontFamily: 'sans',
   },

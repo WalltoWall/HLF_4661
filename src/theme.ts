@@ -40,7 +40,7 @@ export const theme = createCalicoTheme(
   mergeCalicoTokens(sensibleTokens, spaceQuarterRemTokens, grid12ColumnTokens, {
     breakpoints: {
       _: '0',
-      tablet: '48rem',
+      tablet: '40rem',
       desktop: '64rem',
       desktopWide: '75rem',
     },
@@ -65,6 +65,7 @@ export const theme = createCalicoTheme(
       },
 
       maxWidth: {
+        none: 'none',
         medium: '48rem',
         large: '64rem',
         xlarge: '75rem',
@@ -141,6 +142,10 @@ export const theme = createCalicoTheme(
 
       whiteSpace: {
         nowrap: 'nowrap',
+      },
+
+      verticalAlign: {
+        top: 'top',
       },
     },
 

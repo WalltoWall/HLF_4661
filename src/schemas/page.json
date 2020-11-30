@@ -64,7 +64,8 @@
           "images": [],
           "text": [],
           "embed": [],
-          "hero_image": []
+          "hero_image": [],
+          "quote_slideshow": []
         },
         "choices": {
           "text": {
@@ -171,6 +172,48 @@
               }
             },
             "repeat": {}
+          },
+          "quote_slideshow": {
+            "type": "Slice",
+            "fieldset": "Quote Slideshow",
+            "description": "Slideshow of quotes with optional photo",
+            "icon": "format_quote",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "photo": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Photo"
+                }
+              },
+              "quote": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Quote",
+                  "placeholder": "Quote to display (without quotation marks)"
+                }
+              },
+              "quotee_name": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Quotee Name",
+                  "placeholder": "Name of the quotee"
+                }
+              },
+              "quotee_title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Quotee Title",
+                  "placeholder": "Title of the quotee (or Cohort #)"
+                }
+              }
+            }
           }
         }
       }
