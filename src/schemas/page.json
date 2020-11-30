@@ -32,7 +32,7 @@
       "type": "Link",
       "config": {
         "select": "document",
-        "customtypes": ["page"],
+        "customtypes": ["page", "interior_page"],
         "label": "Parent",
         "placeholder": "Optional - Parent of the page"
       }
@@ -65,7 +65,8 @@
           "text": [],
           "embed": [],
           "hero_image": [],
-          "quote_slideshow": []
+          "quote_slideshow": [],
+          "learning_excursion_map": []
         },
         "choices": {
           "text": {
@@ -211,6 +212,55 @@
                   "single": "paragraph",
                   "label": "Quotee Title",
                   "placeholder": "Title of the quotee (or Cohort #)"
+                }
+              }
+            }
+          },
+          "learning_excursion_map": {
+            "type": "Slice",
+            "fieldset": "Learning Excursion Map",
+            "description": "Map of learning excursions with text and videos",
+            "icon": "map",
+            "display": "grid",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading1, strong, em, hyperlink",
+                  "label": "Text",
+                  "placeholder": "Introductory text explaining the learning excursions and the map"
+                }
+              },
+              "map_url": {
+                "type": "Text",
+                "config": {
+                  "label": "Map URL",
+                  "placeholder": "URL to the map embed"
+                }
+              }
+            },
+            "repeat": {
+              "fellow_photo": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Fellow Photo"
+                }
+              },
+              "fellow_name": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Fellow Name",
+                  "placeholder": "Name of the fellow"
+                }
+              },
+              "video_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Video Link",
+                  "placeholder": "Link to the fellow's video"
                 }
               }
             }

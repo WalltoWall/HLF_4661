@@ -36,7 +36,7 @@ const fontsets = {
   'serif-16-18': {
     fontMetrics: fontMetrics.serif,
     fontSizes: [1, 1.125],
-    lineGap: 1.45,
+    lineGap: 1.5,
   },
   'serif-20-24': {
     fontMetrics: fontMetrics.serif,

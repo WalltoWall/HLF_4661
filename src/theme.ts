@@ -147,6 +147,14 @@ export const theme = createCalicoTheme(
       verticalAlign: {
         top: 'top',
       },
+
+      borderWidth: {
+        '3px': '3px',
+      },
+
+      rowGap: {
+        8: '2rem',
+      },
     },
 
     pseudos: {
