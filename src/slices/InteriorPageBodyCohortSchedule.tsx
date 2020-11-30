@@ -8,7 +8,7 @@ import { PageTemplateEnhancerProps } from '../templates/page'
 import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 
 import { BoundedBox } from '../components/BoundedBox'
-import { HTMLContent, HTMLContentProps } from '../components/HTMLContent'
+import { HTMLContent } from '../components/HTMLContent'
 import { Text } from '../components/Text'
 
 export type InteriorPageBodyCohortScheduleProps = ReturnType<
