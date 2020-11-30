@@ -33,6 +33,8 @@ export const colors = {
   blue10: '#002244',
   orange50: '#f5782e',
   orange55: '#ff9900',
+  aqua80: '#c9e8e5',
+  aqua90: '#e2f3f6',
   current: 'currentColor',
 } as const
 
