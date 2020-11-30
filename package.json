@@ -45,6 +45,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.17",
     "gatsby-source-prismic": "^3.2.1",
+    "keen-slider": "^5.3.5",
     "minireset.css": "^0.0.6",
     "querystring": "^0.2.0",
     "react": "^17.0.1",

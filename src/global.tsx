@@ -14,6 +14,7 @@
 
 import 'minireset.css'
 import '@reach/skip-nav/styles.css'
+import 'keen-slider/keen-slider.min.css'
 import '@walltowall/siamese/dist/siamese.cjs.development.css'
 
 import './index.css'

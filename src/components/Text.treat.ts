@@ -18,6 +18,11 @@ const fontsets = {
     fontSizes: [1],
     lineGap: 1.3,
   },
+  'sans-16-18': {
+    fontMetrics: fontMetrics.sans,
+    fontSizes: [1, 1.125],
+    lineGap: 1.3,
+  },
   'sans-18': {
     fontMetrics: fontMetrics.sans,
     fontSizes: [1.125],

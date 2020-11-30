@@ -1,3 +1,7 @@
+body {
+  background: #fff;
+}
+
 .sb-show-main {
   box-sizing: inherit !important;
   background-color: #fff;

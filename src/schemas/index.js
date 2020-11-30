@@ -7,6 +7,8 @@
  */
 
 module.exports = {
+  cohort: require('./cohort.json'),
+  fellow: require('./fellow.json'),
   interior_page: require('./interior_page.json'),
   navigation: require('./navigation.json'),
   page: require('./page.json'),

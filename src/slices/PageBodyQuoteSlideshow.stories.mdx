@@ -1,0 +1,105 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
+import { buildImgixFluid } from 'gatsby-plugin-imgix'
+import faker from 'faker'
+
+import * as Storybook from '../components/Storybook'
+import { titleize } from '../lib/titleize'
+
+import { PageBodyQuoteSlideshow } from './PageBodyQuoteSlideshow'
+
+export const quote = faker.lorem.sentences(5)
+
+export const photos = [
+  buildImgixFluid({
+    url:
+      'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
+    sourceWidth: 1024,
+    sourceHeight: 368,
+  }),
+  buildImgixFluid({
+    url:
+      'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
+    sourceWidth: 1024,
+    sourceHeight: 368,
+  }),
+  buildImgixFluid({
+    url:
+      'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
+    sourceWidth: 1024,
+    sourceHeight: 368,
+  }),
+]
+
+<Meta title="Pages/Quote Slideshow" component={PageBodyQuoteSlideshow} />
+
+##### Page
+
+# Quote Slideshow
+
+A slideshow of quotes with optional photos that plays automatically. One quote
+is shown at a time with the ability to drag slides to navigate through them
+manually.
+
+#### Repeatable fields
+
+Each item represents a slide in the slideshow. Each slide contains a quote,
+information about the quotee, and an optional photo.
+
+<Storybook.SliceFieldsTable
+  customTypeId="page"
+  sliceZoneId="body"
+  sliceId="quote_slideshow"
+  fieldset="repeat"
+  overrides={{
+    photo: {
+      description: 'Photo of the quotee',
+      isRequired: false,
+    },
+  }}
+/>
+
+### With multiple slides
+
+One slide is shown at a time and automatically cycles through each slide.
+
+<Canvas withSource="none">
+  <Story name="With multiple slides">
+    <PageBodyQuoteSlideshow nextSharesBg={false}>
+      <PageBodyQuoteSlideshow.Slide
+        quote={quote}
+        quoteeName={faker.name.findName()}
+        quoteeTitle="Cohort VI"
+        imageFluid={photos[0]}
+      />
+      <PageBodyQuoteSlideshow.Slide
+        quote={quote}
+        quoteeName={faker.name.findName()}
+        quoteeTitle="Cohort III"
+        imageFluid={photos[1]}
+      />
+      <PageBodyQuoteSlideshow.Slide
+        quote={quote}
+        quoteeName={faker.name.findName()}
+        quoteeTitle="Cohort IV"
+        imageFluid={photos[2]}
+      />
+    </PageBodyQuoteSlideshow>
+  </Story>
+</Canvas>
+
+### With one slide
+
+If only one slide is configured, the slideshow functionality is omitted.
+
+<Canvas withSource="none">
+  <Story name="With one slide">
+    <PageBodyQuoteSlideshow nextSharesBg={false}>
+      <PageBodyQuoteSlideshow.Slide
+        quote={quote}
+        quoteeName={faker.name.findName()}
+        quoteeTitle="Cohort VI"
+        imageFluid={photos[0]}
+      />
+    </PageBodyQuoteSlideshow>
+  </Story>
+</Canvas>
