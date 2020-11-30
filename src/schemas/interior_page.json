@@ -32,7 +32,7 @@
       "type": "Link",
       "config": {
         "select": "document",
-        "customtypes": ["page"],
+        "customtypes": ["page", "interior_page"],
         "label": "Parent",
         "placeholder": "Optional - Parent of the page"
       }

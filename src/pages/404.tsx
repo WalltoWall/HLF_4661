@@ -8,6 +8,7 @@ import { Layout } from '../components/Layout'
 import { slicesMap } from '../slices/PageBody'
 import { mapDataToPropsEnhancer, PageTemplate } from '../templates/page'
 import { useSiteSettings } from '../hooks/useSiteSettings'
+import { InteriorPageTemplate } from '../templates/interior_page'
 
 /**
  * Mapping of Prismic custom type API IDs to their templates. Add mappings here
@@ -17,6 +18,7 @@ import { useSiteSettings } from '../hooks/useSiteSettings'
  */
 const customTypeToTemplate = {
   page: PageTemplate,
+  interior_page: InteriorPageTemplate,
 }
 
 const sliceList = [

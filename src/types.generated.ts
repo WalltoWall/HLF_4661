@@ -4484,6 +4484,260 @@ export type PrismicPageBodyImagesSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type PrismicPageBodyLearningExcursionMap = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  primary?: Maybe<PrismicPageBodyLearningExcursionMapPrimaryType>;
+  items?: Maybe<Array<Maybe<PrismicPageBodyLearningExcursionMapItemType>>>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicPageBodyLearningExcursionMapConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicPageBodyLearningExcursionMapEdge>;
+  nodes: Array<PrismicPageBodyLearningExcursionMap>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicPageBodyLearningExcursionMapGroupConnection>;
+};
+
+
+export type PrismicPageBodyLearningExcursionMapConnectionDistinctArgs = {
+  field: PrismicPageBodyLearningExcursionMapFieldsEnum;
+};
+
+
+export type PrismicPageBodyLearningExcursionMapConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicPageBodyLearningExcursionMapFieldsEnum;
+};
+
+export type PrismicPageBodyLearningExcursionMapEdge = {
+  next?: Maybe<PrismicPageBodyLearningExcursionMap>;
+  node: PrismicPageBodyLearningExcursionMap;
+  previous?: Maybe<PrismicPageBodyLearningExcursionMap>;
+};
+
+export enum PrismicPageBodyLearningExcursionMapFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  PrimaryTextHtml = 'primary___text___html',
+  PrimaryTextText = 'primary___text___text',
+  PrimaryTextRaw = 'primary___text___raw',
+  PrimaryMapUrl = 'primary___map_url',
+  Items = 'items',
+  ItemsFellowPhotoAlt = 'items___fellow_photo___alt',
+  ItemsFellowPhotoCopyright = 'items___fellow_photo___copyright',
+  ItemsFellowPhotoDimensionsWidth = 'items___fellow_photo___dimensions___width',
+  ItemsFellowPhotoDimensionsHeight = 'items___fellow_photo___dimensions___height',
+  ItemsFellowPhotoUrl = 'items___fellow_photo___url',
+  ItemsFellowPhotoFixedBase64 = 'items___fellow_photo___fixed___base64',
+  ItemsFellowPhotoFixedSrc = 'items___fellow_photo___fixed___src',
+  ItemsFellowPhotoFixedSrcSet = 'items___fellow_photo___fixed___srcSet',
+  ItemsFellowPhotoFixedSrcWebp = 'items___fellow_photo___fixed___srcWebp',
+  ItemsFellowPhotoFixedSrcSetWebp = 'items___fellow_photo___fixed___srcSetWebp',
+  ItemsFellowPhotoFixedSizes = 'items___fellow_photo___fixed___sizes',
+  ItemsFellowPhotoFixedWidth = 'items___fellow_photo___fixed___width',
+  ItemsFellowPhotoFixedHeight = 'items___fellow_photo___fixed___height',
+  ItemsFellowPhotoFluidBase64 = 'items___fellow_photo___fluid___base64',
+  ItemsFellowPhotoFluidSrc = 'items___fellow_photo___fluid___src',
+  ItemsFellowPhotoFluidSrcSet = 'items___fellow_photo___fluid___srcSet',
+  ItemsFellowPhotoFluidSrcWebp = 'items___fellow_photo___fluid___srcWebp',
+  ItemsFellowPhotoFluidSrcSetWebp = 'items___fellow_photo___fluid___srcSetWebp',
+  ItemsFellowPhotoFluidSizes = 'items___fellow_photo___fluid___sizes',
+  ItemsFellowPhotoFluidAspectRatio = 'items___fellow_photo___fluid___aspectRatio',
+  ItemsFellowPhotoLocalFileSourceInstanceName = 'items___fellow_photo___localFile___sourceInstanceName',
+  ItemsFellowPhotoLocalFileAbsolutePath = 'items___fellow_photo___localFile___absolutePath',
+  ItemsFellowPhotoLocalFileRelativePath = 'items___fellow_photo___localFile___relativePath',
+  ItemsFellowPhotoLocalFileExtension = 'items___fellow_photo___localFile___extension',
+  ItemsFellowPhotoLocalFileSize = 'items___fellow_photo___localFile___size',
+  ItemsFellowPhotoLocalFilePrettySize = 'items___fellow_photo___localFile___prettySize',
+  ItemsFellowPhotoLocalFileModifiedTime = 'items___fellow_photo___localFile___modifiedTime',
+  ItemsFellowPhotoLocalFileAccessTime = 'items___fellow_photo___localFile___accessTime',
+  ItemsFellowPhotoLocalFileChangeTime = 'items___fellow_photo___localFile___changeTime',
+  ItemsFellowPhotoLocalFileBirthTime = 'items___fellow_photo___localFile___birthTime',
+  ItemsFellowPhotoLocalFileRoot = 'items___fellow_photo___localFile___root',
+  ItemsFellowPhotoLocalFileDir = 'items___fellow_photo___localFile___dir',
+  ItemsFellowPhotoLocalFileBase = 'items___fellow_photo___localFile___base',
+  ItemsFellowPhotoLocalFileExt = 'items___fellow_photo___localFile___ext',
+  ItemsFellowPhotoLocalFileName = 'items___fellow_photo___localFile___name',
+  ItemsFellowPhotoLocalFileRelativeDirectory = 'items___fellow_photo___localFile___relativeDirectory',
+  ItemsFellowPhotoLocalFileDev = 'items___fellow_photo___localFile___dev',
+  ItemsFellowPhotoLocalFileMode = 'items___fellow_photo___localFile___mode',
+  ItemsFellowPhotoLocalFileNlink = 'items___fellow_photo___localFile___nlink',
+  ItemsFellowPhotoLocalFileUid = 'items___fellow_photo___localFile___uid',
+  ItemsFellowPhotoLocalFileGid = 'items___fellow_photo___localFile___gid',
+  ItemsFellowPhotoLocalFileRdev = 'items___fellow_photo___localFile___rdev',
+  ItemsFellowPhotoLocalFileIno = 'items___fellow_photo___localFile___ino',
+  ItemsFellowPhotoLocalFileAtimeMs = 'items___fellow_photo___localFile___atimeMs',
+  ItemsFellowPhotoLocalFileMtimeMs = 'items___fellow_photo___localFile___mtimeMs',
+  ItemsFellowPhotoLocalFileCtimeMs = 'items___fellow_photo___localFile___ctimeMs',
+  ItemsFellowPhotoLocalFileAtime = 'items___fellow_photo___localFile___atime',
+  ItemsFellowPhotoLocalFileMtime = 'items___fellow_photo___localFile___mtime',
+  ItemsFellowPhotoLocalFileCtime = 'items___fellow_photo___localFile___ctime',
+  ItemsFellowPhotoLocalFileBirthtime = 'items___fellow_photo___localFile___birthtime',
+  ItemsFellowPhotoLocalFileBirthtimeMs = 'items___fellow_photo___localFile___birthtimeMs',
+  ItemsFellowPhotoLocalFileId = 'items___fellow_photo___localFile___id',
+  ItemsFellowPhotoLocalFileChildren = 'items___fellow_photo___localFile___children',
+  ItemsFellowPhotoThumbnails = 'items___fellow_photo___thumbnails',
+  ItemsFellowNameHtml = 'items___fellow_name___html',
+  ItemsFellowNameText = 'items___fellow_name___text',
+  ItemsFellowNameRaw = 'items___fellow_name___raw',
+  ItemsVideoLinkLinkType = 'items___video_link___link_type',
+  ItemsVideoLinkIsBroken = 'items___video_link___isBroken',
+  ItemsVideoLinkUrl = 'items___video_link___url',
+  ItemsVideoLinkTarget = 'items___video_link___target',
+  ItemsVideoLinkSize = 'items___video_link___size',
+  ItemsVideoLinkId = 'items___video_link___id',
+  ItemsVideoLinkType = 'items___video_link___type',
+  ItemsVideoLinkTags = 'items___video_link___tags',
+  ItemsVideoLinkLang = 'items___video_link___lang',
+  ItemsVideoLinkSlug = 'items___video_link___slug',
+  ItemsVideoLinkUid = 'items___video_link___uid',
+  ItemsVideoLinkRaw = 'items___video_link___raw',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicPageBodyLearningExcursionMapFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicPageBodyLearningExcursionMapPrimaryTypeFilterInput>;
+  items?: Maybe<PrismicPageBodyLearningExcursionMapItemTypeFilterListInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicPageBodyLearningExcursionMapGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicPageBodyLearningExcursionMapEdge>;
+  nodes: Array<PrismicPageBodyLearningExcursionMap>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicPageBodyLearningExcursionMapItemType = {
+  fellow_photo?: Maybe<PrismicImageType>;
+  fellow_name?: Maybe<PrismicStructuredTextType>;
+  video_link?: Maybe<PrismicLinkType>;
+};
+
+export type PrismicPageBodyLearningExcursionMapItemTypeFilterInput = {
+  fellow_photo?: Maybe<PrismicImageTypeFilterInput>;
+  fellow_name?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  video_link?: Maybe<PrismicLinkTypeFilterInput>;
+};
+
+export type PrismicPageBodyLearningExcursionMapItemTypeFilterListInput = {
+  elemMatch?: Maybe<PrismicPageBodyLearningExcursionMapItemTypeFilterInput>;
+};
+
+export type PrismicPageBodyLearningExcursionMapPrimaryType = {
+  text?: Maybe<PrismicStructuredTextType>;
+  map_url?: Maybe<Scalars['String']>;
+};
+
+export type PrismicPageBodyLearningExcursionMapPrimaryTypeFilterInput = {
+  text?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  map_url?: Maybe<StringQueryOperatorInput>;
+};
+
+export type PrismicPageBodyLearningExcursionMapSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicPageBodyLearningExcursionMapFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type PrismicPageBodyQuoteSlideshow = PrismicSliceType & Node & {
   slice_type: Scalars['String'];
   slice_label?: Maybe<Scalars['String']>;
@@ -4718,7 +4972,7 @@ export type PrismicPageBodyQuoteSlideshowSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type PrismicPageBodySlicesType = PrismicPageBodyText | PrismicPageBodyImages | PrismicPageBodyAnchor | PrismicPageBodyHeroImage | PrismicPageBodyQuoteSlideshow;
+export type PrismicPageBodySlicesType = PrismicPageBodyText | PrismicPageBodyImages | PrismicPageBodyAnchor | PrismicPageBodyHeroImage | PrismicPageBodyQuoteSlideshow | PrismicPageBodyLearningExcursionMap;
 
 export type PrismicPageBodyText = PrismicSliceType & Node & {
   slice_type: Scalars['String'];
@@ -5482,6 +5736,8 @@ export type Query = {
   allPrismicPageBodyHeroImage: PrismicPageBodyHeroImageConnection;
   prismicPageBodyQuoteSlideshow?: Maybe<PrismicPageBodyQuoteSlideshow>;
   allPrismicPageBodyQuoteSlideshow: PrismicPageBodyQuoteSlideshowConnection;
+  prismicPageBodyLearningExcursionMap?: Maybe<PrismicPageBodyLearningExcursionMap>;
+  allPrismicPageBodyLearningExcursionMap: PrismicPageBodyLearningExcursionMapConnection;
   prismicPage?: Maybe<PrismicPage>;
   allPrismicPage: PrismicPageConnection;
   prismicSettings?: Maybe<PrismicSettings>;
@@ -5960,6 +6216,26 @@ export type QueryPrismicPageBodyQuoteSlideshowArgs = {
 export type QueryAllPrismicPageBodyQuoteSlideshowArgs = {
   filter?: Maybe<PrismicPageBodyQuoteSlideshowFilterInput>;
   sort?: Maybe<PrismicPageBodyQuoteSlideshowSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicPageBodyLearningExcursionMapArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicPageBodyLearningExcursionMapPrimaryTypeFilterInput>;
+  items?: Maybe<PrismicPageBodyLearningExcursionMapItemTypeFilterListInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicPageBodyLearningExcursionMapArgs = {
+  filter?: Maybe<PrismicPageBodyLearningExcursionMapFilterInput>;
+  sort?: Maybe<PrismicPageBodyLearningExcursionMapSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -6592,10 +6868,6 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsCacheDigest = 'pluginCreator___pluginOptions___cacheDigest',
   PluginCreatorPluginOptionsTypekitId = 'pluginCreator___pluginOptions___typekit___id',
   PluginCreatorPluginOptionsGoogleFamilies = 'pluginCreator___pluginOptions___google___families',
-  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
-  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
-  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
-  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorPluginOptionsHeadersX = 'pluginCreator___pluginOptions___headers____x',
   PluginCreatorPluginOptionsMergeSecurityHeaders = 'pluginCreator___pluginOptions___mergeSecurityHeaders',
   PluginCreatorPluginOptionsPath = 'pluginCreator___pluginOptions___path',
@@ -6603,6 +6875,10 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsAllExtensions = 'pluginCreator___pluginOptions___allExtensions',
   PluginCreatorPluginOptionsIsTsx = 'pluginCreator___pluginOptions___isTSX',
   PluginCreatorPluginOptionsJsxPragma = 'pluginCreator___pluginOptions___jsxPragma',
+  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
+  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
+  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
+  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorNodeApIs = 'pluginCreator___nodeAPIs',
   PluginCreatorBrowserApIs = 'pluginCreator___browserAPIs',
   PluginCreatorSsrApIs = 'pluginCreator___ssrAPIs',
@@ -6807,10 +7083,6 @@ export enum SitePluginFieldsEnum {
   PluginOptionsCacheDigest = 'pluginOptions___cacheDigest',
   PluginOptionsTypekitId = 'pluginOptions___typekit___id',
   PluginOptionsGoogleFamilies = 'pluginOptions___google___families',
-  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
-  PluginOptionsAccessToken = 'pluginOptions___accessToken',
-  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
-  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   PluginOptionsHeadersX = 'pluginOptions___headers____x',
   PluginOptionsMergeSecurityHeaders = 'pluginOptions___mergeSecurityHeaders',
   PluginOptionsPath = 'pluginOptions___path',
@@ -6818,6 +7090,10 @@ export enum SitePluginFieldsEnum {
   PluginOptionsAllExtensions = 'pluginOptions___allExtensions',
   PluginOptionsIsTsx = 'pluginOptions___isTSX',
   PluginOptionsJsxPragma = 'pluginOptions___jsxPragma',
+  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
+  PluginOptionsAccessToken = 'pluginOptions___accessToken',
+  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
+  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   NodeApIs = 'nodeAPIs',
   BrowserApIs = 'browserAPIs',
   SsrApIs = 'ssrAPIs',
@@ -6948,11 +7224,6 @@ export type SitePluginPluginOptions = {
   cacheDigest?: Maybe<Scalars['String']>;
   typekit?: Maybe<SitePluginPluginOptionsTypekit>;
   google?: Maybe<SitePluginPluginOptionsGoogle>;
-  repositoryName?: Maybe<Scalars['String']>;
-  accessToken?: Maybe<Scalars['String']>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
-  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
-  prismicToolbar?: Maybe<Scalars['String']>;
   headers?: Maybe<SitePluginPluginOptionsHeaders>;
   mergeSecurityHeaders?: Maybe<Scalars['Boolean']>;
   path?: Maybe<Scalars['String']>;
@@ -6960,6 +7231,11 @@ export type SitePluginPluginOptions = {
   allExtensions?: Maybe<Scalars['Boolean']>;
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
+  repositoryName?: Maybe<Scalars['String']>;
+  accessToken?: Maybe<Scalars['String']>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
+  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
+  prismicToolbar?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
@@ -6980,11 +7256,6 @@ export type SitePluginPluginOptionsFilterInput = {
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   typekit?: Maybe<SitePluginPluginOptionsTypekitFilterInput>;
   google?: Maybe<SitePluginPluginOptionsGoogleFilterInput>;
-  repositoryName?: Maybe<StringQueryOperatorInput>;
-  accessToken?: Maybe<StringQueryOperatorInput>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
-  fetchLinks?: Maybe<StringQueryOperatorInput>;
-  prismicToolbar?: Maybe<StringQueryOperatorInput>;
   headers?: Maybe<SitePluginPluginOptionsHeadersFilterInput>;
   mergeSecurityHeaders?: Maybe<BooleanQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
@@ -6992,6 +7263,11 @@ export type SitePluginPluginOptionsFilterInput = {
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
+  repositoryName?: Maybe<StringQueryOperatorInput>;
+  accessToken?: Maybe<StringQueryOperatorInput>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
+  fetchLinks?: Maybe<StringQueryOperatorInput>;
+  prismicToolbar?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsGoogle = {
@@ -8001,6 +8277,7 @@ export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoices = {
   anchor?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesAnchor>;
   hero_image?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_Image>;
   quote_slideshow?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesQuote_Slideshow>;
+  learning_excursion_map?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_Map>;
 };
 
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesAnchor = {
@@ -8055,6 +8332,7 @@ export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFilterInput =
   anchor?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesAnchorFilterInput>;
   hero_image?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_ImageFilterInput>;
   quote_slideshow?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesQuote_SlideshowFilterInput>;
+  learning_excursion_map?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_Image = {
@@ -8247,6 +8525,150 @@ export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesImagesRepeatI
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesImagesRepeatImageFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesImagesRepeatImageConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_Map = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_Repeat>;
+  repeat?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeat>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatFilterInput>;
+  repeat?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_Repeat = {
+  text?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatText>;
+  map_url?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatMap_Url>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatFilterInput = {
+  text?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatTextFilterInput>;
+  map_url?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatMap_UrlFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatMap_Url = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatMap_UrlConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatMap_UrlConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatMap_UrlConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatMap_UrlFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatMap_UrlConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatText = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatTextConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatTextConfig = {
+  multi?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatTextConfigFilterInput = {
+  multi?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatTextFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapNon_RepeatTextConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeat = {
+  fellow_photo?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_Photo>;
+  fellow_name?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_Name>;
+  video_link?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatVideo_Link>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_Name = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_NameConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_NameConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_NameConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_NameFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_NameConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_Photo = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_PhotoConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_PhotoConfig = {
+  label?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_PhotoConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_PhotoFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_PhotoConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFilterInput = {
+  fellow_photo?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_PhotoFilterInput>;
+  fellow_name?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatFellow_NameFilterInput>;
+  video_link?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatVideo_LinkFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatVideo_Link = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatVideo_LinkConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatVideo_LinkConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatVideo_LinkConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatVideo_LinkFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapRepeatVideo_LinkConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesQuote_Slideshow = {
@@ -9118,6 +9540,10 @@ export type NotFoundPageQuery = { prismicPage?: Maybe<(
         { __typename: 'PrismicPageBodyQuoteSlideshow' }
         & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
         & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
       )>>> }
     )> }
   )> };
@@ -9160,7 +9586,15 @@ export type PageBodyImagesFragment = { items?: Maybe<Array<Maybe<{ image?: Maybe
       & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
     )>, caption?: Maybe<Pick<PrismicStructuredTextType, 'html' | 'text'>> }>>> };
 
-export type PageBodyQuoteSlideshowFragment = { items?: Maybe<Array<Maybe<{ quote?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, quotee_name?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, quotee_title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, photo?: Maybe<(
+export type PageBodyLearningExcursionMapFragment = { primary?: Maybe<(
+    Pick<PrismicPageBodyLearningExcursionMapPrimaryType, 'map_url'>
+    & { text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }
+  )>, items?: Maybe<Array<Maybe<{ video_link?: Maybe<Pick<PrismicLinkType, 'url'>>, fellow_name?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, fellow_photo?: Maybe<(
+      Pick<PrismicImageType, 'alt'>
+      & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+    )> }>>> };
+
+export type PageBodyQuoteSlideshowFragment = { items?: Maybe<Array<Maybe<{ quote?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, quotee_name?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, quotee_title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, photo?: Maybe<(
       Pick<PrismicImageType, 'alt'>
       & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
     )> }>>> };
@@ -9230,6 +9664,10 @@ export type PageTemplateQuery = { prismicPage?: Maybe<(
         { __typename: 'PrismicPageBodyQuoteSlideshow' }
         & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
         & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
       )>>> }
     )> }
     & PrismicPageParentRecursiveFragment

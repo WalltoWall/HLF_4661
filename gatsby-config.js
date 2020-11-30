@@ -55,7 +55,7 @@ module.exports = {
         accessToken: process.env.GATSBY_PRISMIC_ACCESS_TOKEN,
         schemas: require('./src/schemas'),
         linkResolver: require('./src/linkResolver').linkResolver,
-        fetchLinks: ['page.parent'],
+        fetchLinks: ['page.parent', 'interior_page.parent'],
         prismicToolbar: 'legacy',
       },
     },
