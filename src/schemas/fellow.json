@@ -32,6 +32,14 @@
         "placeholder": "Short biography about the fellow"
       }
     },
+    "portrait": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Portrait"
+      }
+    },
     "photo": {
       "type": "Image",
       "config": {
