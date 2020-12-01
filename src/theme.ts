@@ -157,6 +157,10 @@ export const theme = createCalicoTheme(
       rowGap: {
         8: '2rem',
       },
+
+      cursor: {
+        grab: 'grab',
+      },
     },
 
     pseudos: {

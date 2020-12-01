@@ -44,7 +44,11 @@ export const PageBodyQuoteSlideshow = ({
       }}
     >
       {children && (
-        <Box ref={sliderRef} className="keen-slider">
+        <Box
+          ref={sliderRef}
+          className="keen-slider"
+          styles={{ cursor: 'grab' }}
+        >
           {children}
         </Box>
       )}
@@ -122,7 +126,7 @@ const Slide = ({
                   position: 'absolute',
                   top: 0,
                   left: 0,
-                  marginTop: -2,
+                  marginTop: [-2, -3],
                 }}
               />
               {preventWidow(quote)}
