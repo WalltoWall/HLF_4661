@@ -35,6 +35,7 @@ export const colors = {
   orange55: '#ff9900',
   aqua80: '#c9e8e5',
   aqua90: '#e2f3f6',
+  transparent: 'transparent',
   current: 'currentColor',
 } as const
 
@@ -74,6 +75,7 @@ export const theme = createCalicoTheme(
         '15rem': '15rem',
         '20rem': '20rem',
         '30ch': '30ch',
+        '70ch': '70ch',
       },
 
       minWidth: {
@@ -119,6 +121,7 @@ export const theme = createCalicoTheme(
         color: 'color',
         opacity: 'opacity',
         transform: 'transform',
+        colorAndBorderColor: 'color, border-color',
       },
 
       gridTemplateColumns: {

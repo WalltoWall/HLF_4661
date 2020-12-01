@@ -1347,10 +1347,12 @@ export type PrismicCohortConnectionGroupArgs = {
 
 export type PrismicCohortDataType = {
   title?: Maybe<PrismicStructuredTextType>;
+  cohort_number?: Maybe<Scalars['Float']>;
 };
 
 export type PrismicCohortDataTypeFilterInput = {
   title?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  cohort_number?: Maybe<FloatQueryOperatorInput>;
 };
 
 export type PrismicCohortEdge = {
@@ -1363,6 +1365,7 @@ export enum PrismicCohortFieldsEnum {
   DataTitleHtml = 'data___title___html',
   DataTitleText = 'data___title___text',
   DataTitleRaw = 'data___title___raw',
+  DataCohortNumber = 'data___cohort_number',
   DataRaw = 'dataRaw',
   DataString = 'dataString',
   FirstPublicationDate = 'first_publication_date',
@@ -8416,11 +8419,33 @@ export type SitePluginPluginOptionsSchemasCohortFilterInput = {
 export type SitePluginPluginOptionsSchemasCohortMain = {
   title?: Maybe<SitePluginPluginOptionsSchemasCohortMainTitle>;
   uid?: Maybe<SitePluginPluginOptionsSchemasCohortMainUid>;
+  cohort_number?: Maybe<SitePluginPluginOptionsSchemasCohortMainCohort_Number>;
+};
+
+export type SitePluginPluginOptionsSchemasCohortMainCohort_Number = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohortMainCohort_NumberConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasCohortMainCohort_NumberConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasCohortMainCohort_NumberConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasCohortMainCohort_NumberFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasCohortMainCohort_NumberConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasCohortMainFilterInput = {
   title?: Maybe<SitePluginPluginOptionsSchemasCohortMainTitleFilterInput>;
   uid?: Maybe<SitePluginPluginOptionsSchemasCohortMainUidFilterInput>;
+  cohort_number?: Maybe<SitePluginPluginOptionsSchemasCohortMainCohort_NumberFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasCohortMainTitle = {
@@ -10693,6 +10718,17 @@ export type PrismicInteriorPageParentFieldsFragment = (
   & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
 );
 
+export type UseCohortsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UseCohortsQuery = { allPrismicCohort: { nodes: Array<(
+      Pick<PrismicCohort, 'uid'>
+      & { data?: Maybe<(
+        Pick<PrismicCohortDataType, 'cohort_number'>
+        & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }
+      )> }
+    )> } };
+
 export type UseFellowsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10700,7 +10736,10 @@ export type UseFellowsQuery = { allPrismicFellow: { nodes: Array<(
       Pick<PrismicFellow, 'uid'>
       & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, cohort?: Maybe<{ document?: Maybe<(
             Pick<PrismicCohort, 'uid'>
-            & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+            & { data?: Maybe<(
+              Pick<PrismicCohortDataType, 'cohort_number'>
+              & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }
+            )> }
           )> }>, biography?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, portrait?: Maybe<(
           Pick<PrismicImageType, 'alt'>
           & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
@@ -10805,8 +10844,6 @@ type SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment = PageBodyLearn
 export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyImages_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment | SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment | SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment;
 
 export type PageBodyAnchorFragment = { primary?: Maybe<Pick<PrismicPageBodyAnchorPrimaryType, 'id'>> };
-
-export type PageBodyFellowsGridFragment = { __typename: 'PrismicPageBodyFellowsGrid' };
 
 export type PageBodyHeroImageFragment = { primary?: Maybe<{ text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, button_text?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, button_link?: Maybe<Pick<PrismicLinkType, 'url'>>, background_image?: Maybe<(
       Pick<PrismicImageType, 'alt'>

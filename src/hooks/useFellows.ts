@@ -27,6 +27,7 @@ export const useFellows = () => {
                     title {
                       text
                     }
+                    cohort_number
                   }
                 }
               }
@@ -59,6 +60,7 @@ export const useFellows = () => {
       name: node.data?.name?.text,
       cohortUID: node.data?.cohort?.document?.uid,
       cohortTitle: node.data?.cohort?.document?.data?.title?.text,
+      cohortNumber: node.data?.cohort?.document?.data?.cohort_number,
       biographyHTML: getRichText(node.data?.biography),
       portraitFluid: node.data?.portrait?.fluid,
       portraitAlt: node.data?.portrait?.alt,
