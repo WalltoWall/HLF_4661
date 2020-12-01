@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks'
+
+import { PageBodyFellowsGrid } from './PageBodyFellowsGrid'
+
+<Meta title="Pages/Fellows Grid" component={PageBodyFellowsGrid} />
+
+##### Page
+
+# Fellows Grid
+
+Grid of Fellows, each with their portrait, name, and cohort number and a link
+to a biography. Fellows are displayed in two tabs: one displaying just the most
+recent cohort, and another displaying fellows from all cohorts.
+
+#### Slice fields
+
+This slice has no fields.
+
+### Typical usage
+
+By default, just the current cohort will be displayed. The user can click the
+"Forum of Fellows" button to toggle to the full list of Fellows.
+
+<Canvas withSource="none">
+  <Story name="Typical usage">
+    <PageBodyFellowsGrid nextSharesBg={false} />
+  </Story>
+</Canvas>
