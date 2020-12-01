@@ -135,8 +135,6 @@ const FellowsGridTab = ({ index, children }: FellowsGridTabProps) => {
     <Box
       styles={{
         paddingBottom: 2.5,
-        paddingLeft: 1,
-        paddingRight: 1,
         borderWidth: 'none',
         borderBottomWidth: '3px',
         borderColor: isSelected ? 'orange55' : 'transparent',
@@ -144,12 +142,14 @@ const FellowsGridTab = ({ index, children }: FellowsGridTabProps) => {
         transitionProperty: 'colorAndBorderColor',
         transitionDuration: 'normal',
         transitionTimingFunction: 'easeOut',
+        color: isSelected ? 'gray10' : 'gray40',
       }}
+      focusStyles={{ color: isSelected ? undefined : 'gray10' }}
+      hoverStyles={{ color: isSelected ? undefined : 'gray10' }}
     >
       <Text
-        variant="sans-18"
+        variant="sans-16-caps"
         styles={{
-          color: isSelected ? 'gray10' : 'gray40',
           fontWeight: isSelected ? 'bold' : 'normal',
         }}
       >
@@ -316,7 +316,7 @@ export const PageBodyFellowsGrid = ({
             gridAutoFlow: ['row', 'column'],
             justifyItems: 'center',
             justifyContent: 'center',
-            marginBottom: [4, 6, 8],
+            marginBottom: [4, 6],
           }}
         >
           <Tab>
