@@ -14,6 +14,13 @@
         "label": "UID",
         "placeholder": "Unique identifier"
       }
+    },
+    "cohort_number": {
+      "type": "Number",
+      "config": {
+        "label": "Cohort Number",
+        "placeholder": "Number used to sort cohorts"
+      }
     }
   }
 }
