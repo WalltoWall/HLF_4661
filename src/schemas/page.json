@@ -66,7 +66,8 @@
           "embed": [],
           "hero_image": [],
           "quote_slideshow": [],
-          "learning_excursion_map": []
+          "learning_excursion_map": [],
+          "fellows_grid": []
         },
         "choices": {
           "text": {
@@ -264,6 +265,15 @@
                 }
               }
             }
+          },
+          "fellows_grid": {
+            "type": "Slice",
+            "fieldset": "Fellows Grid",
+            "description": "Grid of Fellows with toggle to see current or all cohorts",
+            "icon": "supervisor_account",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {}
           }
         }
       }

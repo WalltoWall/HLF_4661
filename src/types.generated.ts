@@ -2119,6 +2119,7 @@ export type PrismicFellowDataType = {
   name?: Maybe<PrismicStructuredTextType>;
   cohort?: Maybe<PrismicLinkType>;
   biography?: Maybe<PrismicStructuredTextType>;
+  portrait?: Maybe<PrismicImageType>;
   photo?: Maybe<PrismicImageType>;
 };
 
@@ -2126,6 +2127,7 @@ export type PrismicFellowDataTypeFilterInput = {
   name?: Maybe<PrismicStructuredTextTypeFilterInput>;
   cohort?: Maybe<PrismicLinkTypeFilterInput>;
   biography?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  portrait?: Maybe<PrismicImageTypeFilterInput>;
   photo?: Maybe<PrismicImageTypeFilterInput>;
 };
 
@@ -2154,6 +2156,60 @@ export enum PrismicFellowFieldsEnum {
   DataBiographyHtml = 'data___biography___html',
   DataBiographyText = 'data___biography___text',
   DataBiographyRaw = 'data___biography___raw',
+  DataPortraitAlt = 'data___portrait___alt',
+  DataPortraitCopyright = 'data___portrait___copyright',
+  DataPortraitDimensionsWidth = 'data___portrait___dimensions___width',
+  DataPortraitDimensionsHeight = 'data___portrait___dimensions___height',
+  DataPortraitUrl = 'data___portrait___url',
+  DataPortraitFixedBase64 = 'data___portrait___fixed___base64',
+  DataPortraitFixedSrc = 'data___portrait___fixed___src',
+  DataPortraitFixedSrcSet = 'data___portrait___fixed___srcSet',
+  DataPortraitFixedSrcWebp = 'data___portrait___fixed___srcWebp',
+  DataPortraitFixedSrcSetWebp = 'data___portrait___fixed___srcSetWebp',
+  DataPortraitFixedSizes = 'data___portrait___fixed___sizes',
+  DataPortraitFixedWidth = 'data___portrait___fixed___width',
+  DataPortraitFixedHeight = 'data___portrait___fixed___height',
+  DataPortraitFluidBase64 = 'data___portrait___fluid___base64',
+  DataPortraitFluidSrc = 'data___portrait___fluid___src',
+  DataPortraitFluidSrcSet = 'data___portrait___fluid___srcSet',
+  DataPortraitFluidSrcWebp = 'data___portrait___fluid___srcWebp',
+  DataPortraitFluidSrcSetWebp = 'data___portrait___fluid___srcSetWebp',
+  DataPortraitFluidSizes = 'data___portrait___fluid___sizes',
+  DataPortraitFluidAspectRatio = 'data___portrait___fluid___aspectRatio',
+  DataPortraitLocalFileSourceInstanceName = 'data___portrait___localFile___sourceInstanceName',
+  DataPortraitLocalFileAbsolutePath = 'data___portrait___localFile___absolutePath',
+  DataPortraitLocalFileRelativePath = 'data___portrait___localFile___relativePath',
+  DataPortraitLocalFileExtension = 'data___portrait___localFile___extension',
+  DataPortraitLocalFileSize = 'data___portrait___localFile___size',
+  DataPortraitLocalFilePrettySize = 'data___portrait___localFile___prettySize',
+  DataPortraitLocalFileModifiedTime = 'data___portrait___localFile___modifiedTime',
+  DataPortraitLocalFileAccessTime = 'data___portrait___localFile___accessTime',
+  DataPortraitLocalFileChangeTime = 'data___portrait___localFile___changeTime',
+  DataPortraitLocalFileBirthTime = 'data___portrait___localFile___birthTime',
+  DataPortraitLocalFileRoot = 'data___portrait___localFile___root',
+  DataPortraitLocalFileDir = 'data___portrait___localFile___dir',
+  DataPortraitLocalFileBase = 'data___portrait___localFile___base',
+  DataPortraitLocalFileExt = 'data___portrait___localFile___ext',
+  DataPortraitLocalFileName = 'data___portrait___localFile___name',
+  DataPortraitLocalFileRelativeDirectory = 'data___portrait___localFile___relativeDirectory',
+  DataPortraitLocalFileDev = 'data___portrait___localFile___dev',
+  DataPortraitLocalFileMode = 'data___portrait___localFile___mode',
+  DataPortraitLocalFileNlink = 'data___portrait___localFile___nlink',
+  DataPortraitLocalFileUid = 'data___portrait___localFile___uid',
+  DataPortraitLocalFileGid = 'data___portrait___localFile___gid',
+  DataPortraitLocalFileRdev = 'data___portrait___localFile___rdev',
+  DataPortraitLocalFileIno = 'data___portrait___localFile___ino',
+  DataPortraitLocalFileAtimeMs = 'data___portrait___localFile___atimeMs',
+  DataPortraitLocalFileMtimeMs = 'data___portrait___localFile___mtimeMs',
+  DataPortraitLocalFileCtimeMs = 'data___portrait___localFile___ctimeMs',
+  DataPortraitLocalFileAtime = 'data___portrait___localFile___atime',
+  DataPortraitLocalFileMtime = 'data___portrait___localFile___mtime',
+  DataPortraitLocalFileCtime = 'data___portrait___localFile___ctime',
+  DataPortraitLocalFileBirthtime = 'data___portrait___localFile___birthtime',
+  DataPortraitLocalFileBirthtimeMs = 'data___portrait___localFile___birthtimeMs',
+  DataPortraitLocalFileId = 'data___portrait___localFile___id',
+  DataPortraitLocalFileChildren = 'data___portrait___localFile___children',
+  DataPortraitThumbnails = 'data___portrait___thumbnails',
   DataPhotoAlt = 'data___photo___alt',
   DataPhotoCopyright = 'data___photo___copyright',
   DataPhotoDimensionsWidth = 'data___photo___dimensions___width',
@@ -4612,6 +4668,156 @@ export type PrismicPageBodyAnchorSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type PrismicPageBodyFellowsGrid = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicPageBodyFellowsGridConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicPageBodyFellowsGridEdge>;
+  nodes: Array<PrismicPageBodyFellowsGrid>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicPageBodyFellowsGridGroupConnection>;
+};
+
+
+export type PrismicPageBodyFellowsGridConnectionDistinctArgs = {
+  field: PrismicPageBodyFellowsGridFieldsEnum;
+};
+
+
+export type PrismicPageBodyFellowsGridConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicPageBodyFellowsGridFieldsEnum;
+};
+
+export type PrismicPageBodyFellowsGridEdge = {
+  next?: Maybe<PrismicPageBodyFellowsGrid>;
+  node: PrismicPageBodyFellowsGrid;
+  previous?: Maybe<PrismicPageBodyFellowsGrid>;
+};
+
+export enum PrismicPageBodyFellowsGridFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicPageBodyFellowsGridFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicPageBodyFellowsGridGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicPageBodyFellowsGridEdge>;
+  nodes: Array<PrismicPageBodyFellowsGrid>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicPageBodyFellowsGridSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicPageBodyFellowsGridFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type PrismicPageBodyHeroImage = PrismicSliceType & Node & {
   slice_type: Scalars['String'];
   slice_label?: Maybe<Scalars['String']>;
@@ -5562,7 +5768,7 @@ export type PrismicPageBodyQuoteSlideshowSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type PrismicPageBodySlicesType = PrismicPageBodyText | PrismicPageBodyImages | PrismicPageBodyAnchor | PrismicPageBodyHeroImage | PrismicPageBodyQuoteSlideshow | PrismicPageBodyLearningExcursionMap;
+export type PrismicPageBodySlicesType = PrismicPageBodyText | PrismicPageBodyImages | PrismicPageBodyAnchor | PrismicPageBodyHeroImage | PrismicPageBodyQuoteSlideshow | PrismicPageBodyLearningExcursionMap | PrismicPageBodyFellowsGrid;
 
 export type PrismicPageBodyText = PrismicSliceType & Node & {
   slice_type: Scalars['String'];
@@ -6334,6 +6540,8 @@ export type Query = {
   allPrismicPageBodyQuoteSlideshow: PrismicPageBodyQuoteSlideshowConnection;
   prismicPageBodyLearningExcursionMap?: Maybe<PrismicPageBodyLearningExcursionMap>;
   allPrismicPageBodyLearningExcursionMap: PrismicPageBodyLearningExcursionMapConnection;
+  prismicPageBodyFellowsGrid?: Maybe<PrismicPageBodyFellowsGrid>;
+  allPrismicPageBodyFellowsGrid: PrismicPageBodyFellowsGridConnection;
   prismicPage?: Maybe<PrismicPage>;
   allPrismicPage: PrismicPageConnection;
   prismicSettings?: Maybe<PrismicSettings>;
@@ -6901,6 +7109,24 @@ export type QueryPrismicPageBodyLearningExcursionMapArgs = {
 export type QueryAllPrismicPageBodyLearningExcursionMapArgs = {
   filter?: Maybe<PrismicPageBodyLearningExcursionMapFilterInput>;
   sort?: Maybe<PrismicPageBodyLearningExcursionMapSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicPageBodyFellowsGridArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicPageBodyFellowsGridArgs = {
+  filter?: Maybe<PrismicPageBodyFellowsGridFilterInput>;
+  sort?: Maybe<PrismicPageBodyFellowsGridSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -8252,6 +8478,7 @@ export type SitePluginPluginOptionsSchemasFellowMain = {
   uid?: Maybe<SitePluginPluginOptionsSchemasFellowMainUid>;
   cohort?: Maybe<SitePluginPluginOptionsSchemasFellowMainCohort>;
   biography?: Maybe<SitePluginPluginOptionsSchemasFellowMainBiography>;
+  portrait?: Maybe<SitePluginPluginOptionsSchemasFellowMainPortrait>;
   photo?: Maybe<SitePluginPluginOptionsSchemasFellowMainPhoto>;
 };
 
@@ -8306,6 +8533,7 @@ export type SitePluginPluginOptionsSchemasFellowMainFilterInput = {
   uid?: Maybe<SitePluginPluginOptionsSchemasFellowMainUidFilterInput>;
   cohort?: Maybe<SitePluginPluginOptionsSchemasFellowMainCohortFilterInput>;
   biography?: Maybe<SitePluginPluginOptionsSchemasFellowMainBiographyFilterInput>;
+  portrait?: Maybe<SitePluginPluginOptionsSchemasFellowMainPortraitFilterInput>;
   photo?: Maybe<SitePluginPluginOptionsSchemasFellowMainPhotoFilterInput>;
 };
 
@@ -8347,6 +8575,24 @@ export type SitePluginPluginOptionsSchemasFellowMainPhotoConfigFilterInput = {
 export type SitePluginPluginOptionsSchemasFellowMainPhotoFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   config?: Maybe<SitePluginPluginOptionsSchemasFellowMainPhotoConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasFellowMainPortrait = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasFellowMainPortraitConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasFellowMainPortraitConfig = {
+  label?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasFellowMainPortraitConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasFellowMainPortraitFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasFellowMainPortraitConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasFellowMainUid = {
@@ -9215,6 +9461,7 @@ export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoices = {
   hero_image?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_Image>;
   quote_slideshow?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesQuote_Slideshow>;
   learning_excursion_map?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_Map>;
+  fellows_grid?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFellows_Grid>;
 };
 
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesAnchor = {
@@ -9263,6 +9510,22 @@ export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesAnchorNon_Rep
   config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesAnchorNon_RepeatIdConfigFilterInput>;
 };
 
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFellows_Grid = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFellows_GridFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+};
+
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFilterInput = {
   text?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesTextFilterInput>;
   images?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesImagesFilterInput>;
@@ -9270,6 +9533,7 @@ export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFilterInput =
   hero_image?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_ImageFilterInput>;
   quote_slideshow?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesQuote_SlideshowFilterInput>;
   learning_excursion_map?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesLearning_Excursion_MapFilterInput>;
+  fellows_grid?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFellows_GridFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_Image = {
@@ -10429,6 +10693,23 @@ export type PrismicInteriorPageParentFieldsFragment = (
   & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
 );
 
+export type UseFellowsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UseFellowsQuery = { allPrismicFellow: { nodes: Array<(
+      Pick<PrismicFellow, 'uid'>
+      & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, cohort?: Maybe<{ document?: Maybe<(
+            Pick<PrismicCohort, 'uid'>
+            & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+          )> }>, biography?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, portrait?: Maybe<(
+          Pick<PrismicImageType, 'alt'>
+          & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+        )>, photo?: Maybe<(
+          Pick<PrismicImageType, 'alt'>
+          & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+        )> }> }
+    )> } };
+
 export type UseNavigationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10481,6 +10762,10 @@ export type NotFoundPageQuery = { prismicPage?: Maybe<(
         { __typename: 'PrismicPageBodyLearningExcursionMap' }
         & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
         & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
       )>>> }
     )> }
   )> };
@@ -10491,7 +10776,9 @@ type SlicesInteriorPageBody_PrismicInteriorPageBodyVideo_Fragment = InteriorPage
 
 type SlicesInteriorPageBody_PrismicInteriorPageBodyTextIntro_Fragment = InteriorPageBodyTextIntroFragment;
 
-export type SlicesInteriorPageBodyFragment = SlicesInteriorPageBody_PrismicInteriorPageBodyText_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyVideo_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyTextIntro_Fragment;
+type SlicesInteriorPageBody_PrismicInteriorPageBodyCohortSchedule_Fragment = InteriorPageBodyCohortScheduleFragment;
+
+export type SlicesInteriorPageBodyFragment = SlicesInteriorPageBody_PrismicInteriorPageBodyText_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyVideo_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyTextIntro_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyCohortSchedule_Fragment;
 
 export type InteriorPageBodyCohortScheduleFragment = { primary?: Maybe<{ cohort_schedule?: Maybe<{ document?: Maybe<{ data?: Maybe<{ body?: Maybe<Array<Maybe<{ primary?: Maybe<{ description_heading?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, dates_heading?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }>, items?: Maybe<Array<Maybe<{ event_description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, event_date?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }>>> }>>> }> }> }> }> };
 
@@ -10511,11 +10798,15 @@ type SlicesPageBody_PrismicPageBodyImages_Fragment = PageBodyImagesFragment;
 
 type SlicesPageBody_PrismicPageBodyHeroImage_Fragment = PageBodyHeroImageFragment;
 
+type SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment = PageBodyQuoteSlideshowFragment;
+
 type SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment = PageBodyLearningExcursionMapFragment;
 
-export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyImages_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment | SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment;
+export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyImages_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment | SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment | SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment;
 
 export type PageBodyAnchorFragment = { primary?: Maybe<Pick<PrismicPageBodyAnchorPrimaryType, 'id'>> };
+
+export type PageBodyFellowsGridFragment = { __typename: 'PrismicPageBodyFellowsGrid' };
 
 export type PageBodyHeroImageFragment = { primary?: Maybe<{ text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, button_text?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, button_link?: Maybe<Pick<PrismicLinkType, 'url'>>, background_image?: Maybe<(
       Pick<PrismicImageType, 'alt'>
@@ -10613,6 +10904,10 @@ export type PageTemplateQuery = { prismicPage?: Maybe<(
         { __typename: 'PrismicPageBodyLearningExcursionMap' }
         & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
         & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
       )>>> }
     )> }
     & PrismicPageParentRecursiveFragment
