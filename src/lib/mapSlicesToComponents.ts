@@ -16,6 +16,7 @@ export type MapDataToPropsEnhancerArgs = Parameters<
  */
 export interface Meta<RootDataQuery = any> {
   rootData: RootDataQuery
+  location: Location
 }
 
 /**

@@ -10,12 +10,14 @@ import {
   DisclosurePanel,
 } from '@reach/disclosure'
 import { useId } from '@reach/auto-id'
+import { isBrowser, isPathActive } from '@walltowall/helpers'
 import querystring from 'querystring'
 import clsx from 'clsx'
 
 import { PageTemplateEnhancerProps } from '../templates/page'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 import { useNavigation } from '../hooks/useNavigation'
+import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 
 import { Anchor, AnchorProps } from '../components/Anchor'
 import { BoundedBox } from '../components/BoundedBox'
@@ -34,10 +36,17 @@ type MobileNavItemProps = {
   href: AnchorProps['href']
   name?: string
   children?: React.ReactNode
+  location?: Location
 }
 
-const MobileNavItem = ({ href, name, children }: MobileNavItemProps) => {
-  const [isOpen, toggleIsOpen] = React.useReducer((state) => !state, false)
+const MobileNavItem = ({
+  href,
+  name,
+  children,
+  location,
+}: MobileNavItemProps) => {
+  const isActive = location ? isPathActive(href, location) : false
+  const [isOpen, toggleIsOpen] = React.useReducer((state) => !state, isActive)
 
   const styles = useStyles(styleRefs)
   const hasChildren = React.Children.count(children) > 0
@@ -59,14 +68,16 @@ const MobileNavItem = ({ href, name, children }: MobileNavItemProps) => {
             href={href}
             styles={{
               flexGrow: 1,
-              color: 'gray40',
+              color: isActive ? 'orange50' : 'gray40',
               paddingLeft: 4,
               paddingRight: 4,
               paddingBottom: 5,
               paddingTop: 5,
             }}
           >
-            <Text variant="sans-16-caps">{name}</Text>
+            <Text variant={isActive ? 'sans-16-bold-caps' : 'sans-16-caps'}>
+              {isActive ? `{ ${name} }` : name}
+            </Text>
           </Anchor>
           {hasChildren && (
             <Box
@@ -116,34 +127,45 @@ const MobileNavItem = ({ href, name, children }: MobileNavItemProps) => {
 type MobileNavItemChildProps = {
   href: AnchorProps['href']
   name?: string
+  location?: Location
 }
 
-const MobileNavItemChild = ({ href, name }: MobileNavItemChildProps) => (
-  <Box
-    as="li"
-    styles={{
-      backgroundColor: 'gray95',
-      borderWidth: 'none',
-      borderTopWidth: '1px',
-      borderColor: 'gray85',
-      borderStyle: 'solid',
-    }}
-  >
-    <Anchor
-      href={href}
+const MobileNavItemChild = ({
+  href,
+  name,
+  location,
+}: MobileNavItemChildProps) => {
+  const isActive = location ? isPathActive(href, location) : false
+
+  return (
+    <Box
+      as="li"
       styles={{
-        display: 'block',
-        color: 'gray40',
-        paddingLeft: 8,
-        paddingRight: 4,
-        paddingBottom: 3.5,
-        paddingTop: 3.5,
+        backgroundColor: 'gray95',
+        borderWidth: 'none',
+        borderTopWidth: '1px',
+        borderColor: 'gray85',
+        borderStyle: 'solid',
       }}
     >
-      <Text variant="sans-16-caps">{name}</Text>
-    </Anchor>
-  </Box>
-)
+      <Anchor
+        href={href}
+        styles={{
+          display: 'block',
+          color: isActive ? 'orange50' : 'gray40',
+          paddingLeft: 8,
+          paddingRight: 4,
+          paddingBottom: 3.5,
+          paddingTop: 3.5,
+        }}
+      >
+        <Text variant={isActive ? 'sans-16-bold-caps' : 'sans-16-caps'}>
+          {name}
+        </Text>
+      </Anchor>
+    </Box>
+  )
+}
 
 const secondaryNavItemVariants = {
   gray: { color: 'gray40' },
@@ -174,11 +196,13 @@ type NavItemProps = {
   href: AnchorProps['href']
   name?: string
   children?: React.ReactNode
+  location?: Location
 }
 
-const NavItem = ({ href, name, children }: NavItemProps) => {
+const NavItem = ({ href, name, location, children }: NavItemProps) => {
   const styles = useStyles(styleRefs)
   const hasChildren = React.Children.count(children) > 0
+  const isActive = location ? isPathActive(href, location) : false
 
   return (
     <Box
@@ -194,7 +218,7 @@ const NavItem = ({ href, name, children }: NavItemProps) => {
         href={href}
         className={styles.navFocusSensor}
         styles={{
-          color: 'white',
+          color: isActive ? 'orange50' : 'white',
           display: 'block',
           paddingTop: 5,
           paddingBottom: 5,
@@ -202,7 +226,9 @@ const NavItem = ({ href, name, children }: NavItemProps) => {
           paddingRight: 3,
         }}
       >
-        <Text variant="sans-13-14-bold-caps">{name}</Text>
+        <Text variant="sans-13-14-bold-caps">
+          {isActive ? `{ ${name} }` : name}
+        </Text>
       </Anchor>
       {hasChildren && (
         <Box
@@ -234,34 +260,43 @@ const NavItem = ({ href, name, children }: NavItemProps) => {
 type NavItemChildProps = {
   href: AnchorProps['href']
   name?: string
+  location?: Location
 }
 
-const NavItemChild = ({ href, name }: NavItemChildProps) => (
-  <Box as="li">
-    <Anchor
-      href={href}
-      styles={{
-        color: 'gray40',
-        display: 'block',
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 2,
-        paddingBottom: 2,
-      }}
-    >
-      <Text
-        variant="sans-13-14-bold-caps"
-        styles={{ textAlign: 'right', whiteSpace: 'nowrap' }}
+const NavItemChild = ({ href, name, location }: NavItemChildProps) => {
+  const isActive = location ? isPathActive(href, location) : false
+
+  return (
+    <Box as="li">
+      <Anchor
+        href={href}
+        styles={{
+          color: isActive ? 'orange50' : 'gray40',
+          display: 'block',
+          paddingLeft: 5,
+          paddingRight: 5,
+          paddingTop: 2,
+          paddingBottom: 2,
+        }}
       >
-        {name}
-      </Text>
-    </Anchor>
-  </Box>
-)
+        <Text
+          variant="sans-13-14-bold-caps"
+          styles={{ textAlign: 'right', whiteSpace: 'nowrap' }}
+        >
+          {name}
+        </Text>
+      </Anchor>
+    </Box>
+  )
+}
 
-export type PageBodyHeaderProps = PageTemplateEnhancerProps
+export type PageBodyHeaderProps = ReturnType<typeof mapDataToProps> &
+  PageTemplateEnhancerProps
 
-const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
+const PageBodyHeader = ({
+  nextSharesBg,
+  location = isBrowser ? window.location : undefined,
+}: PageBodyHeaderProps) => {
   const [mobileNavIsOpen, toggleMobileNavIsOpen] = React.useReducer(
     (state) => !state,
     false,
@@ -421,6 +456,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                           key={item.primary.name}
                           name={item.primary.name}
                           href={item.primary.link.url}
+                          location={location}
                         >
                           {(item?.items ?? []).map(
                             (child) =>
@@ -429,6 +465,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                                   key={child.name}
                                   name={child.name}
                                   href={child.link.url}
+                                  location={location}
                                 />
                               ),
                           )}
@@ -456,6 +493,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                           key={item.primary.name}
                           name={item.primary.name}
                           href={item.primary.link.url}
+                          location={location}
                         >
                           {(item?.items ?? []).map(
                             (child) =>
@@ -464,6 +502,7 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
                                   key={child.name}
                                   name={child.name}
                                   href={child.link.url}
+                                  location={location}
                                 />
                               ),
                           )}
@@ -548,6 +587,12 @@ const PageBodyHeader = ({ nextSharesBg }: PageBodyHeaderProps) => {
     </>
   )
 }
+
+export const mapDataToProps = ({
+  meta,
+}: MapDataToPropsArgs<never, typeof mapDataToContext>) => ({
+  location: meta?.location,
+})
 
 export const mapDataToContext = () => ({
   bg: [Symbol(), 'blue10'],
