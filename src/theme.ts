@@ -33,6 +33,7 @@ export const colors = {
   blue10: '#002244',
   orange50: '#f5782e',
   orange55: '#ff9900',
+  orange95: '#f5f0e8',
   aqua80: '#c9e8e5',
   aqua90: '#e2f3f6',
   transparent: 'transparent',
@@ -141,7 +142,9 @@ export const theme = createCalicoTheme(
       },
 
       top: {
-        8: '2rem',
+        10: '2.5rem',
+        13: '3.25rem',
+        16: '4rem',
         '100%': '100%',
       },
 

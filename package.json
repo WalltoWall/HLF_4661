@@ -57,6 +57,7 @@
     "react-map-to-components": "^1.2.1",
     "react-player": "^2.7.0",
     "react-treat": "^1.6.1",
+    "slugify": "^1.4.6",
     "treat": "^1.6.1"
   },
   "devDependencies": {
