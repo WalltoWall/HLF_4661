@@ -17,6 +17,7 @@ import * as InteriorPageBodyCohortSchedule from './InteriorPageBodyCohortSchedul
 import * as InteriorPageBodyImages from './InteriorPageBodyImages'
 import * as InteriorPageBodyAnchor from './InteriorPageBodyAnchor'
 import * as InteriorPageBodyDivider from './InteriorPageBodyDivider'
+import * as InteriorPageBodyStaffDirectory from './InteriorPageBodyStaffDirectory'
 
 // 2. Add your slice
 const slices = {
@@ -27,6 +28,7 @@ const slices = {
   InteriorPageBodyImages,
   InteriorPageBodyAnchor,
   InteriorPageBodyDivider,
+  InteriorPageBodyStaffDirectory,
 }
 
 // 3. Add your slice fragment
@@ -38,6 +40,7 @@ export const fragment = graphql`
     ...InteriorPageBodyCohortSchedule
     ...InteriorPageBodyImages
     ...InteriorPageBodyAnchor
+    ...InteriorPageBodyStaffDirectory
 
     # The following slices do not have fragments:
     #...InteriorPageBodyDivider

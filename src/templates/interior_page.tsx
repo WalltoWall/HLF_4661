@@ -145,7 +145,7 @@ export const InteriorPageTemplate = ({
               display: 'grid',
               gap: 8,
               position: [null, 'sticky'],
-              top: 8,
+              top: [10, 13, 16],
             }}
           >
             {pageTitle && (

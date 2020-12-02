@@ -105,7 +105,8 @@
           "video": [],
           "text_intro": [],
           "cohort_schedule": [],
-          "divider": []
+          "divider": [],
+          "staff_directory": []
         },
         "choices": {
           "text": {
@@ -243,6 +244,48 @@
             "display": "list",
             "non-repeat": {},
             "repeat": {}
+          },
+          "staff_directory": {
+            "type": "Slice",
+            "fieldset": "Staff Directory",
+            "description": "List of key staff members with photos and bios",
+            "icon": "account_box",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "photo": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Photo"
+                }
+              },
+              "name": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Name",
+                  "placeholder": "Full name of the staff member"
+                }
+              },
+              "staff_title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Staff Title",
+                  "placeholder": "Title of the staff member"
+                }
+              },
+              "biography": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink, list-item, o-list-item",
+                  "label": "Biography",
+                  "placeholder": "Short biography about the staff member"
+                }
+              }
+            }
           }
         }
       }
