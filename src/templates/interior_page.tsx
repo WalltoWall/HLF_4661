@@ -16,6 +16,7 @@ import { slicesMap as interiorPageBodySlicesMap } from '../slices/InteriorPageBo
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
+import { PickPartial } from '../types'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -49,7 +50,12 @@ export const footerSliceList = [{ __typename: 'PageBodyFooter', id: 'footer' }]
  */
 export const mapDataToPropsEnhancer = (
   props: object | undefined,
-  { context, nextContext }: MapDataToPropsEnhancerArgs,
+  {
+    context,
+    nextContext,
+    previousType,
+    previousData,
+  }: MapDataToPropsEnhancerArgs,
 ) => {
   let nextSharesBg
 
@@ -58,7 +64,14 @@ export const mapDataToPropsEnhancer = (
   if (_nsbg.length === 1) nextSharesBg = _nsbg[0]
   else nextSharesBg = _nsbg.slice(0, 4) as [boolean, boolean, boolean, boolean]
 
-  return { nextSharesBg, ...props }
+  return {
+    nextSharesBg,
+    id:
+      previousType === 'InteriorPageBodyAnchor'
+        ? (previousData?.primary?.id as string)
+        : undefined,
+    ...props,
+  }
 }
 
 /**
@@ -68,8 +81,9 @@ export const mapDataToPropsEnhancer = (
  *
  * @see https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types
  */
-export type InteriorPageTemplateEnhancerProps = ReturnType<
-  typeof mapDataToPropsEnhancer
+export type InteriorPageTemplateEnhancerProps = PickPartial<
+  ReturnType<typeof mapDataToPropsEnhancer>,
+  'id'
 >
 
 export const InteriorPageTemplate = ({
@@ -122,7 +136,7 @@ export const InteriorPageTemplate = ({
           marginRight: 'auto',
           display: 'grid',
           gap: 8,
-          gridTemplateColumns: [null, '3'],
+          gridTemplateColumns: [null, 3],
         }}
       >
         <BoundedBox styles={{ paddingRight: 0 }}>

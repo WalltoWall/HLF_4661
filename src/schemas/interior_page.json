@@ -104,7 +104,8 @@
           "embed": [],
           "video": [],
           "text_intro": [],
-          "cohort_schedule": []
+          "cohort_schedule": [],
+          "divider": []
         },
         "choices": {
           "text": {
@@ -167,6 +168,14 @@
                   "label": "Video",
                   "placeholder": "URL of video to display"
                 }
+              },
+              "poster": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Poster"
+                }
               }
             },
             "repeat": {}
@@ -190,6 +199,23 @@
             },
             "repeat": {}
           },
+          "anchor": {
+            "type": "Slice",
+            "fieldset": "Anchor",
+            "description": "Page marker to jump a user down the page",
+            "icon": "adjust",
+            "display": "list",
+            "non-repeat": {
+              "id": {
+                "type": "Text",
+                "config": {
+                  "label": "ID",
+                  "placeholder": "Anchor ID used in links"
+                }
+              }
+            },
+            "repeat": {}
+          },
           "cohort_schedule": {
             "type": "Slice",
             "fieldset": "Cohort Schedule",
@@ -207,6 +233,15 @@
                 }
               }
             },
+            "repeat": {}
+          },
+          "divider": {
+            "type": "Slice",
+            "fieldset": "Divider",
+            "description": "Horizontal divider between Slices",
+            "icon": "remove",
+            "display": "list",
+            "non-repeat": {},
             "repeat": {}
           }
         }

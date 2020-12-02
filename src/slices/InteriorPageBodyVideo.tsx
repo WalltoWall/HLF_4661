@@ -15,6 +15,8 @@ export const InteriorPageBodyVideo = ({
   videoURL,
   videoThumbnailURL,
   videoThumbnailAspectRatio,
+  posterFluid,
+  posterAlt,
   nextSharesBg,
 }: InteriorPageBodyVideoProps) => (
   <BoundedBox as="section" variant="narrow" nextSharesBg={nextSharesBg}>
@@ -23,6 +25,8 @@ export const InteriorPageBodyVideo = ({
         x={16}
         y={9}
         videoURL={videoURL}
+        posterFluid={posterFluid}
+        posterAlt={posterAlt}
         posterURL={videoThumbnailURL}
         posterAspectRatio={videoThumbnailAspectRatio}
       />
@@ -47,6 +51,8 @@ export const mapDataToProps = ({
     videoURL: data.primary?.video?.embed_url,
     videoThumbnailURL: data.primary?.video?.thumbnail_url,
     videoThumbnailAspectRatio,
+    posterFluid: data.primary?.poster?.fluid,
+    posterAlt: data.primary?.poster?.alt,
   }
 }
 
@@ -62,6 +68,12 @@ export const fragment = graphql`
         thumbnail_url
         thumbnail_height
         thumbnail_width
+      }
+      poster {
+        alt
+        fluid(maxWidth: 800) {
+          ...GatsbyPrismicImageFluid
+        }
       }
     }
   }
