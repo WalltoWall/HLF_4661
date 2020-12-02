@@ -15,8 +15,9 @@ export type InteriorPageBodyTextProps = ReturnType<typeof mapDataToProps> &
 export const InteriorPageBodyText = ({
   textHTML,
   nextSharesBg,
+  id,
 }: InteriorPageBodyTextProps) => (
-  <BoundedBox as="section" variant="narrow" nextSharesBg={nextSharesBg}>
+  <BoundedBox as="section" variant="narrow" nextSharesBg={nextSharesBg} id={id}>
     {textHTML && (
       <HTMLContent
         html={textHTML}
