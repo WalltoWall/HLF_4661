@@ -1,0 +1,64 @@
+import { Canvas, Story, Meta } from '@storybook/addon-docs/blocks'
+import faker from 'faker'
+
+import { titleize } from '../lib/titleize'
+import { mockGatsbyImageFluid } from '../lib/mockGatsbyImage'
+import * as Storybook from '../components/Storybook'
+
+import { InteriorPageBodyVideo } from './InteriorPageBodyVideo'
+
+export const videoURL = 'https://vimeo.com/304626830'
+export const videoThumbnailURL = 'https://i.vimeocdn.com/video/757950873_590x332.jpg'
+export const videoThumbnailAspectRatio = 16 / 9
+export const posterFluid = mockGatsbyImageFluid(
+  'https://i.vimeocdn.com/video/757950873.jpg',
+  16/9
+)
+
+<Meta title="Interior Pages/Video" />
+
+#### Interior Page
+
+# Video
+
+Displays a video from a third-party service such as YouTube or Vimeo. By
+default, the cover image (a.k.a. poster image) from the third-party service
+will be used. A higher-quality poster can be provided as an override.
+
+#### Slice fields
+
+<Storybook.SliceFieldsTable
+  customTypeId="interior_page"
+  sliceZoneId="body"
+  sliceId="video"
+  fieldset="non-repeat"
+  overrides={{
+    poster: {
+      description: 'Cover image displayed before the video is played',
+      isRequired: false
+    }
+  }}
+/>
+
+### With poster override
+
+The poster image provided to the Slice will be displayed before the user plays
+the video. Providing an image allows you to use a higher quality image that the
+default.
+
+<Canvas withSource="none">
+  <Story name="With a long introduction">
+    <InteriorPageBodyVideo nextSharesBg={false} videoURL={videoURL} posterFluid={posterFluid} />
+  </Story>
+</Canvas>
+
+### Without poster override
+
+The default poster image from the third-party service will be used, but will
+generally be of low quality.
+
+<Canvas withSource="none">
+  <Story name="With a short introduction">
+    <InteriorPageBodyVideo nextSharesBg={false}  videoURL={videoURL} videoThumbnailURL={videoThumbnailURL} videoThumbnailAspectRatio={videoThumbnailAspectRatio} />
+  </Story>
+</Canvas>

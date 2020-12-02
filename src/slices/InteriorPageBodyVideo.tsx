@@ -19,7 +19,12 @@ export const InteriorPageBodyVideo = ({
   posterAlt,
   nextSharesBg,
 }: InteriorPageBodyVideoProps) => (
-  <BoundedBox as="section" variant="narrow" nextSharesBg={nextSharesBg}>
+  <BoundedBox
+    as="section"
+    variant="narrow"
+    nextSharesBg={nextSharesBg}
+    styles={{ backgroundColor: 'white' }}
+  >
     {videoURL && (
       <VideoPlayer
         x={16}

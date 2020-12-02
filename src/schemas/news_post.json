@@ -1,0 +1,194 @@
+{
+  "Main": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Title of the news post"
+      }
+    },
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "Unique identifier"
+      }
+    },
+    "published_at": {
+      "type": "Date",
+      "config": {
+        "label": "Published At",
+        "placeholder": "Published at date override (default: original publish date)"
+      }
+    },
+    "news_categories": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "news_category": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["news_category"],
+              "label": "News Category",
+              "placeholder": "News category to categorize the news post"
+            }
+          }
+        },
+        "label": "News Categories"
+      }
+    },
+    "related_links": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "related_link": {
+            "type": "Link",
+            "config": {
+              "label": "Related Link",
+              "placeholder": "Link to a related article"
+            }
+          }
+        },
+        "label": "Related Links"
+      }
+    },
+    "featured_image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Featured Image"
+      }
+    }
+  },
+  "Body": {
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "text": {
+            "type": "Slice",
+            "fieldset": "Text",
+            "description": "Rich text with headings and links",
+            "icon": "text_fields",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading1, heading2, strong, em, hyperlink, embed, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "Text",
+                  "placeholder": "Text with formatting and rich content"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "images": {
+            "type": "Slice",
+            "fieldset": "Images",
+            "description": "One or more images with optional captions",
+            "icon": "burst_mode",
+            "display": "grid",
+            "non-repeat": {},
+            "repeat": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "width": 2000
+                  },
+                  "thumbnails": [],
+                  "label": "Image"
+                }
+              },
+              "caption": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Caption",
+                  "placeholder": "Optional - Caption below image"
+                }
+              }
+            }
+          },
+          "video": {
+            "type": "Slice",
+            "fieldset": "Video",
+            "description": "Embeded video player",
+            "icon": "ondemand_video",
+            "display": "list",
+            "non-repeat": {
+              "video": {
+                "type": "Embed",
+                "config": {
+                  "label": "Video",
+                  "placeholder": "URL of video to display"
+                }
+              },
+              "poster": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Poster"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "text_intro": {
+            "type": "Slice",
+            "fieldset": "Text Intro",
+            "description": "Introduction to following content",
+            "icon": "format_color_text",
+            "display": "list",
+            "non-repeat": {
+              "introductory_text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "Introductory Text",
+                  "placeholder": "Introductory text leading into the content that follows"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "anchor": {
+            "type": "Slice",
+            "fieldset": "Anchor",
+            "description": "Page marker to jump a user down the page",
+            "icon": "adjust",
+            "display": "list",
+            "non-repeat": {
+              "id": {
+                "type": "Text",
+                "config": {
+                  "label": "ID",
+                  "placeholder": "Anchor ID used in links"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "divider": {
+            "type": "Slice",
+            "fieldset": "Divider",
+            "description": "Horizontal divider between Slices",
+            "icon": "remove",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {}
+          }
+        }
+      }
+    }
+  }
+}
