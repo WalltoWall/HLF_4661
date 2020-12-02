@@ -17,6 +17,8 @@ import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
 import { PickPartial } from '../types'
+import { useNavigation } from '../hooks/useNavigation'
+import { Anchor } from '../components/Anchor'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -110,6 +112,12 @@ export const InteriorPageTemplate = ({
     [data, location],
   )
 
+  const navigation = useNavigation()
+  const parentPageOrSelfURL = page?.data?.parent?.document?.url ?? page?.url
+  const siblingPages = navigation.primary.find(
+    (item) => item?.primary?.link?.url === parentPageOrSelfURL,
+  )?.items
+
   return (
     <Layout>
       <Helmet>
@@ -140,7 +148,11 @@ export const InteriorPageTemplate = ({
         }}
       >
         <BoundedBox
-          styles={{ paddingRight: [4, 0], paddingBottom: [2, 13, 16] }}
+          styles={{
+            paddingRight: [4, 0],
+            paddingBottom: [2, 13, 16],
+            maxWidth: '30ch',
+          }}
         >
           <Box
             styles={{
@@ -159,10 +171,49 @@ export const InteriorPageTemplate = ({
               <Text
                 variant="sans-16-italic"
                 as="p"
-                styles={{ color: 'orange55', maxWidth: '30ch' }}
+                styles={{ color: 'orange55' }}
               >
                 {pageDescription}
               </Text>
+            )}
+            {siblingPages && (
+              <Box
+                as="ul"
+                styles={{
+                  borderWidth: 'none',
+                  borderTopWidth: '1px',
+                  borderColor: 'gray40',
+                  borderStyle: 'solid',
+                }}
+              >
+                {siblingPages.map(
+                  (siblingPage) =>
+                    siblingPage?.link?.url && (
+                      <Box
+                        key={siblingPage.link.url}
+                        as="li"
+                        styles={{
+                          borderWidth: 'none',
+                          borderBottomWidth: '1px',
+                          borderColor: 'gray40',
+                          borderStyle: 'solid',
+                        }}
+                      >
+                        <Anchor
+                          href={siblingPage.link.url}
+                          styles={{
+                            display: 'block',
+                            color: 'gray40',
+                            paddingBottom: 5,
+                            paddingTop: 5,
+                          }}
+                        >
+                          <Text variant="sans-16-caps">{siblingPage.name}</Text>
+                        </Anchor>
+                      </Box>
+                    ),
+                )}
+              </Box>
             )}
           </Box>
         </BoundedBox>
