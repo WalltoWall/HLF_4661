@@ -135,11 +135,13 @@ export const InteriorPageTemplate = ({
           marginLeft: 'auto',
           marginRight: 'auto',
           display: 'grid',
-          gap: 8,
+          gap: [null, 8],
           gridTemplateColumns: [null, 3],
         }}
       >
-        <BoundedBox styles={{ paddingRight: 0 }}>
+        <BoundedBox
+          styles={{ paddingRight: [4, 0], paddingBottom: [2, 13, 16] }}
+        >
           <Box
             styles={{
               display: 'grid',
@@ -168,7 +170,7 @@ export const InteriorPageTemplate = ({
           styles={{
             gridColumn: 'span-2',
             paddingTop: [null, 5, 7],
-            paddingBottom: [4, 5, 7],
+            paddingBottom: [10, 13],
           }}
         >
           <MapSlicesToComponents
