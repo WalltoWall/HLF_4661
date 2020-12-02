@@ -143,15 +143,15 @@ export const InteriorPageTemplate = ({
           marginLeft: 'auto',
           marginRight: 'auto',
           display: 'grid',
-          gap: [null, 8],
-          gridTemplateColumns: [null, 3],
+          gap: [null, null, 8],
+          gridTemplateColumns: [null, null, 3],
         }}
       >
         <BoundedBox
           styles={{
             paddingRight: [4, 0],
-            paddingBottom: [2, 13, 16],
-            maxWidth: '30ch',
+            paddingBottom: [2, null, 16],
+            maxWidth: [null, '30ch'],
           }}
         >
           <Box
@@ -219,8 +219,8 @@ export const InteriorPageTemplate = ({
         </BoundedBox>
         <Box
           styles={{
-            gridColumn: 'span-2',
-            paddingTop: [null, 5, 7],
+            gridColumn: [null, null, 'span-2'],
+            paddingTop: [null, null, 7],
             paddingBottom: [10, 13],
           }}
         >

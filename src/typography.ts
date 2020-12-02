@@ -46,11 +46,15 @@ const breakpointOrd: Ord<string> = {
 }
 
 const semigroupStyle: S.Semigroup<Style> = {
-  concat: (x, y) => ({
-    ...x,
-    ...y,
-    '@media': { ...x['@media'], ...y['@media'] },
-  }),
+  concat: (x, y) => {
+    return {
+      ...x,
+      ...y,
+      ...(x['@media'] || y['@media']
+        ? { '@media': { ...x['@media'], ...y['@media'] } }
+        : undefined),
+    }
+  },
 }
 
 const responsiveStyle = (minWidth: string) => (style: Style): Style =>

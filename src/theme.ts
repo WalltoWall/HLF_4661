@@ -86,6 +86,7 @@ export const theme = createCalicoTheme(
       minHeight: {
         '7rem': '7rem',
         '10rem': '10rem',
+        '16rem': '16rem',
       },
 
       transitionDuration: {
@@ -171,6 +172,7 @@ export const theme = createCalicoTheme(
 
     pseudos: {
       color: [':hover', ':focus'],
+      backgroundColor: [':hover', ':focus'],
       opacity: [':hover'],
     },
   } as const),
