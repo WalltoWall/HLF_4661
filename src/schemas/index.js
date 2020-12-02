@@ -12,6 +12,7 @@ module.exports = {
   fellow: require('./fellow.json'),
   interior_page: require('./interior_page.json'),
   navigation: require('./navigation.json'),
+  news_category: require('./news_category.json'),
   page: require('./page.json'),
   settings: require('./settings.json'),
 }

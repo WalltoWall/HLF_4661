@@ -16,7 +16,12 @@ export const InteriorPageBodyTextIntro = ({
   textHTML,
   nextSharesBg,
 }: InteriorPageBodyTextIntroProps) => (
-  <BoundedBox as="section" variant="narrow" nextSharesBg={nextSharesBg}>
+  <BoundedBox
+    as="section"
+    variant="narrow"
+    nextSharesBg={nextSharesBg}
+    styles={{ backgroundColor: 'white' }}
+  >
     {textHTML && (
       <HTMLContent
         html={textHTML}
