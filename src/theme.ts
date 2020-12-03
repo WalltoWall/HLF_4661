@@ -162,11 +162,19 @@ export const theme = createCalicoTheme(
       },
 
       rowGap: {
+        4: '1rem',
         8: '2rem',
+        12: '3rem',
+        20: '5rem',
       },
 
       cursor: {
         grab: 'grab',
+      },
+
+      textDecoration: {
+        none: 'none',
+        underline: 'underline',
       },
     },
 

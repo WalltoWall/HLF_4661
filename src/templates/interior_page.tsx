@@ -12,12 +12,12 @@ import { useSiteSettings } from '../hooks/useSiteSettings'
 import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
 import { slicesMap as interiorPageHeaderSlicesMap } from '../slices/InteriorPageHeader'
 import { slicesMap as interiorPageBodySlicesMap } from '../slices/InteriorPageBody'
+import { useNavigation } from '../hooks/useNavigation'
+import { PickPartial } from '../types'
 
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
-import { PickPartial } from '../types'
-import { useNavigation } from '../hooks/useNavigation'
 import { Anchor } from '../components/Anchor'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.

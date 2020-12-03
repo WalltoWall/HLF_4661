@@ -10,9 +10,9 @@ export type Scalars = {
   Int: number;
   Float: number;
   /** A date string, such as 2007-12-03, compliant with the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: any;
+  Date: unknown;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
-  JSON: any;
+  JSON: unknown;
   PrismicImageThumbnailsType: any;
 };
 
@@ -1285,7 +1285,7 @@ export type PageInfo = {
   totalCount: Scalars['Int'];
 };
 
-export type PrismicAllDocumentTypes = PrismicCohort | PrismicCohortSchedule | PrismicFellow | PrismicInteriorPage | PrismicNavigation | PrismicPage | PrismicSettings;
+export type PrismicAllDocumentTypes = PrismicCohort | PrismicCohortSchedule | PrismicFellow | PrismicInteriorPage | PrismicNavigation | PrismicNewsCategory | PrismicNewsPost | PrismicPage | PrismicSettings;
 
 export type PrismicCohort = PrismicDocument & Node & {
   data?: Maybe<PrismicCohortDataType>;
@@ -5074,6 +5074,1680 @@ export type PrismicNavigationSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type PrismicNewsCategory = PrismicDocument & Node & {
+  data?: Maybe<PrismicNewsCategoryDataType>;
+  dataRaw: Scalars['JSON'];
+  dataString: Scalars['String'];
+  first_publication_date: Scalars['Date'];
+  href: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
+  lang: Scalars['String'];
+  last_publication_date: Scalars['Date'];
+  tags: Array<Scalars['String']>;
+  alternate_languages: Array<PrismicLinkType>;
+  type: Scalars['String'];
+  prismicId: Scalars['ID'];
+  _previewable: Scalars['ID'];
+  uid?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type PrismicNewsCategoryFirst_Publication_DateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type PrismicNewsCategoryLast_Publication_DateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsCategoryConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsCategoryEdge>;
+  nodes: Array<PrismicNewsCategory>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsCategoryGroupConnection>;
+};
+
+
+export type PrismicNewsCategoryConnectionDistinctArgs = {
+  field: PrismicNewsCategoryFieldsEnum;
+};
+
+
+export type PrismicNewsCategoryConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsCategoryFieldsEnum;
+};
+
+export type PrismicNewsCategoryDataType = {
+  name?: Maybe<PrismicStructuredTextType>;
+};
+
+export type PrismicNewsCategoryDataTypeFilterInput = {
+  name?: Maybe<PrismicStructuredTextTypeFilterInput>;
+};
+
+export type PrismicNewsCategoryEdge = {
+  next?: Maybe<PrismicNewsCategory>;
+  node: PrismicNewsCategory;
+  previous?: Maybe<PrismicNewsCategory>;
+};
+
+export enum PrismicNewsCategoryFieldsEnum {
+  DataNameHtml = 'data___name___html',
+  DataNameText = 'data___name___text',
+  DataNameRaw = 'data___name___raw',
+  DataRaw = 'dataRaw',
+  DataString = 'dataString',
+  FirstPublicationDate = 'first_publication_date',
+  Href = 'href',
+  Url = 'url',
+  Lang = 'lang',
+  LastPublicationDate = 'last_publication_date',
+  Tags = 'tags',
+  AlternateLanguages = 'alternate_languages',
+  AlternateLanguagesLinkType = 'alternate_languages___link_type',
+  AlternateLanguagesIsBroken = 'alternate_languages___isBroken',
+  AlternateLanguagesUrl = 'alternate_languages___url',
+  AlternateLanguagesTarget = 'alternate_languages___target',
+  AlternateLanguagesSize = 'alternate_languages___size',
+  AlternateLanguagesId = 'alternate_languages___id',
+  AlternateLanguagesType = 'alternate_languages___type',
+  AlternateLanguagesTags = 'alternate_languages___tags',
+  AlternateLanguagesLang = 'alternate_languages___lang',
+  AlternateLanguagesSlug = 'alternate_languages___slug',
+  AlternateLanguagesUid = 'alternate_languages___uid',
+  AlternateLanguagesRaw = 'alternate_languages___raw',
+  Type = 'type',
+  PrismicId = 'prismicId',
+  Previewable = '_previewable',
+  Uid = 'uid',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsCategoryFilterInput = {
+  data?: Maybe<PrismicNewsCategoryDataTypeFilterInput>;
+  dataRaw?: Maybe<JsonQueryOperatorInput>;
+  dataString?: Maybe<StringQueryOperatorInput>;
+  first_publication_date?: Maybe<DateQueryOperatorInput>;
+  href?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
+  lang?: Maybe<StringQueryOperatorInput>;
+  last_publication_date?: Maybe<DateQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  alternate_languages?: Maybe<PrismicLinkTypeFilterListInput>;
+  type?: Maybe<StringQueryOperatorInput>;
+  prismicId?: Maybe<IdQueryOperatorInput>;
+  _previewable?: Maybe<IdQueryOperatorInput>;
+  uid?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsCategoryGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsCategoryEdge>;
+  nodes: Array<PrismicNewsCategory>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsCategorySortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsCategoryFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicNewsPost = PrismicDocument & Node & {
+  data?: Maybe<PrismicNewsPostDataType>;
+  dataRaw: Scalars['JSON'];
+  dataString: Scalars['String'];
+  first_publication_date: Scalars['Date'];
+  href: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
+  lang: Scalars['String'];
+  last_publication_date: Scalars['Date'];
+  tags: Array<Scalars['String']>;
+  alternate_languages: Array<PrismicLinkType>;
+  type: Scalars['String'];
+  prismicId: Scalars['ID'];
+  _previewable: Scalars['ID'];
+  uid?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type PrismicNewsPostFirst_Publication_DateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type PrismicNewsPostLast_Publication_DateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyAnchor = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  primary?: Maybe<PrismicNewsPostBodyAnchorPrimaryType>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicNewsPostBodyAnchorConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyAnchorEdge>;
+  nodes: Array<PrismicNewsPostBodyAnchor>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsPostBodyAnchorGroupConnection>;
+};
+
+
+export type PrismicNewsPostBodyAnchorConnectionDistinctArgs = {
+  field: PrismicNewsPostBodyAnchorFieldsEnum;
+};
+
+
+export type PrismicNewsPostBodyAnchorConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsPostBodyAnchorFieldsEnum;
+};
+
+export type PrismicNewsPostBodyAnchorEdge = {
+  next?: Maybe<PrismicNewsPostBodyAnchor>;
+  node: PrismicNewsPostBodyAnchor;
+  previous?: Maybe<PrismicNewsPostBodyAnchor>;
+};
+
+export enum PrismicNewsPostBodyAnchorFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  PrimaryId = 'primary___id',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsPostBodyAnchorFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyAnchorPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsPostBodyAnchorGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyAnchorEdge>;
+  nodes: Array<PrismicNewsPostBodyAnchor>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyAnchorPrimaryType = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyAnchorPrimaryTypeFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type PrismicNewsPostBodyAnchorSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsPostBodyAnchorFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicNewsPostBodyDivider = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicNewsPostBodyDividerConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyDividerEdge>;
+  nodes: Array<PrismicNewsPostBodyDivider>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsPostBodyDividerGroupConnection>;
+};
+
+
+export type PrismicNewsPostBodyDividerConnectionDistinctArgs = {
+  field: PrismicNewsPostBodyDividerFieldsEnum;
+};
+
+
+export type PrismicNewsPostBodyDividerConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsPostBodyDividerFieldsEnum;
+};
+
+export type PrismicNewsPostBodyDividerEdge = {
+  next?: Maybe<PrismicNewsPostBodyDivider>;
+  node: PrismicNewsPostBodyDivider;
+  previous?: Maybe<PrismicNewsPostBodyDivider>;
+};
+
+export enum PrismicNewsPostBodyDividerFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsPostBodyDividerFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsPostBodyDividerGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyDividerEdge>;
+  nodes: Array<PrismicNewsPostBodyDivider>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyDividerSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsPostBodyDividerFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicNewsPostBodyImages = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  items?: Maybe<Array<Maybe<PrismicNewsPostBodyImagesItemType>>>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicNewsPostBodyImagesConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyImagesEdge>;
+  nodes: Array<PrismicNewsPostBodyImages>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsPostBodyImagesGroupConnection>;
+};
+
+
+export type PrismicNewsPostBodyImagesConnectionDistinctArgs = {
+  field: PrismicNewsPostBodyImagesFieldsEnum;
+};
+
+
+export type PrismicNewsPostBodyImagesConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsPostBodyImagesFieldsEnum;
+};
+
+export type PrismicNewsPostBodyImagesEdge = {
+  next?: Maybe<PrismicNewsPostBodyImages>;
+  node: PrismicNewsPostBodyImages;
+  previous?: Maybe<PrismicNewsPostBodyImages>;
+};
+
+export enum PrismicNewsPostBodyImagesFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  Items = 'items',
+  ItemsImageAlt = 'items___image___alt',
+  ItemsImageCopyright = 'items___image___copyright',
+  ItemsImageDimensionsWidth = 'items___image___dimensions___width',
+  ItemsImageDimensionsHeight = 'items___image___dimensions___height',
+  ItemsImageUrl = 'items___image___url',
+  ItemsImageFixedBase64 = 'items___image___fixed___base64',
+  ItemsImageFixedSrc = 'items___image___fixed___src',
+  ItemsImageFixedSrcSet = 'items___image___fixed___srcSet',
+  ItemsImageFixedSrcWebp = 'items___image___fixed___srcWebp',
+  ItemsImageFixedSrcSetWebp = 'items___image___fixed___srcSetWebp',
+  ItemsImageFixedSizes = 'items___image___fixed___sizes',
+  ItemsImageFixedWidth = 'items___image___fixed___width',
+  ItemsImageFixedHeight = 'items___image___fixed___height',
+  ItemsImageFluidBase64 = 'items___image___fluid___base64',
+  ItemsImageFluidSrc = 'items___image___fluid___src',
+  ItemsImageFluidSrcSet = 'items___image___fluid___srcSet',
+  ItemsImageFluidSrcWebp = 'items___image___fluid___srcWebp',
+  ItemsImageFluidSrcSetWebp = 'items___image___fluid___srcSetWebp',
+  ItemsImageFluidSizes = 'items___image___fluid___sizes',
+  ItemsImageFluidAspectRatio = 'items___image___fluid___aspectRatio',
+  ItemsImageLocalFileSourceInstanceName = 'items___image___localFile___sourceInstanceName',
+  ItemsImageLocalFileAbsolutePath = 'items___image___localFile___absolutePath',
+  ItemsImageLocalFileRelativePath = 'items___image___localFile___relativePath',
+  ItemsImageLocalFileExtension = 'items___image___localFile___extension',
+  ItemsImageLocalFileSize = 'items___image___localFile___size',
+  ItemsImageLocalFilePrettySize = 'items___image___localFile___prettySize',
+  ItemsImageLocalFileModifiedTime = 'items___image___localFile___modifiedTime',
+  ItemsImageLocalFileAccessTime = 'items___image___localFile___accessTime',
+  ItemsImageLocalFileChangeTime = 'items___image___localFile___changeTime',
+  ItemsImageLocalFileBirthTime = 'items___image___localFile___birthTime',
+  ItemsImageLocalFileRoot = 'items___image___localFile___root',
+  ItemsImageLocalFileDir = 'items___image___localFile___dir',
+  ItemsImageLocalFileBase = 'items___image___localFile___base',
+  ItemsImageLocalFileExt = 'items___image___localFile___ext',
+  ItemsImageLocalFileName = 'items___image___localFile___name',
+  ItemsImageLocalFileRelativeDirectory = 'items___image___localFile___relativeDirectory',
+  ItemsImageLocalFileDev = 'items___image___localFile___dev',
+  ItemsImageLocalFileMode = 'items___image___localFile___mode',
+  ItemsImageLocalFileNlink = 'items___image___localFile___nlink',
+  ItemsImageLocalFileUid = 'items___image___localFile___uid',
+  ItemsImageLocalFileGid = 'items___image___localFile___gid',
+  ItemsImageLocalFileRdev = 'items___image___localFile___rdev',
+  ItemsImageLocalFileIno = 'items___image___localFile___ino',
+  ItemsImageLocalFileAtimeMs = 'items___image___localFile___atimeMs',
+  ItemsImageLocalFileMtimeMs = 'items___image___localFile___mtimeMs',
+  ItemsImageLocalFileCtimeMs = 'items___image___localFile___ctimeMs',
+  ItemsImageLocalFileAtime = 'items___image___localFile___atime',
+  ItemsImageLocalFileMtime = 'items___image___localFile___mtime',
+  ItemsImageLocalFileCtime = 'items___image___localFile___ctime',
+  ItemsImageLocalFileBirthtime = 'items___image___localFile___birthtime',
+  ItemsImageLocalFileBirthtimeMs = 'items___image___localFile___birthtimeMs',
+  ItemsImageLocalFileId = 'items___image___localFile___id',
+  ItemsImageLocalFileChildren = 'items___image___localFile___children',
+  ItemsImageThumbnails = 'items___image___thumbnails',
+  ItemsCaptionHtml = 'items___caption___html',
+  ItemsCaptionText = 'items___caption___text',
+  ItemsCaptionRaw = 'items___caption___raw',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsPostBodyImagesFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  items?: Maybe<PrismicNewsPostBodyImagesItemTypeFilterListInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsPostBodyImagesGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyImagesEdge>;
+  nodes: Array<PrismicNewsPostBodyImages>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyImagesItemType = {
+  image?: Maybe<PrismicImageType>;
+  caption?: Maybe<PrismicStructuredTextType>;
+};
+
+export type PrismicNewsPostBodyImagesItemTypeFilterInput = {
+  image?: Maybe<PrismicImageTypeFilterInput>;
+  caption?: Maybe<PrismicStructuredTextTypeFilterInput>;
+};
+
+export type PrismicNewsPostBodyImagesItemTypeFilterListInput = {
+  elemMatch?: Maybe<PrismicNewsPostBodyImagesItemTypeFilterInput>;
+};
+
+export type PrismicNewsPostBodyImagesSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsPostBodyImagesFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicNewsPostBodySlicesType = PrismicNewsPostBodyText | PrismicNewsPostBodyImages | PrismicNewsPostBodyVideo | PrismicNewsPostBodyTextIntro | PrismicNewsPostBodyAnchor | PrismicNewsPostBodyDivider;
+
+export type PrismicNewsPostBodyText = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  primary?: Maybe<PrismicNewsPostBodyTextPrimaryType>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicNewsPostBodyTextConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyTextEdge>;
+  nodes: Array<PrismicNewsPostBodyText>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsPostBodyTextGroupConnection>;
+};
+
+
+export type PrismicNewsPostBodyTextConnectionDistinctArgs = {
+  field: PrismicNewsPostBodyTextFieldsEnum;
+};
+
+
+export type PrismicNewsPostBodyTextConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsPostBodyTextFieldsEnum;
+};
+
+export type PrismicNewsPostBodyTextEdge = {
+  next?: Maybe<PrismicNewsPostBodyText>;
+  node: PrismicNewsPostBodyText;
+  previous?: Maybe<PrismicNewsPostBodyText>;
+};
+
+export enum PrismicNewsPostBodyTextFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  PrimaryTextHtml = 'primary___text___html',
+  PrimaryTextText = 'primary___text___text',
+  PrimaryTextRaw = 'primary___text___raw',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsPostBodyTextFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyTextPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsPostBodyTextGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyTextEdge>;
+  nodes: Array<PrismicNewsPostBodyText>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyTextIntro = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  primary?: Maybe<PrismicNewsPostBodyTextIntroPrimaryType>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicNewsPostBodyTextIntroConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyTextIntroEdge>;
+  nodes: Array<PrismicNewsPostBodyTextIntro>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsPostBodyTextIntroGroupConnection>;
+};
+
+
+export type PrismicNewsPostBodyTextIntroConnectionDistinctArgs = {
+  field: PrismicNewsPostBodyTextIntroFieldsEnum;
+};
+
+
+export type PrismicNewsPostBodyTextIntroConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsPostBodyTextIntroFieldsEnum;
+};
+
+export type PrismicNewsPostBodyTextIntroEdge = {
+  next?: Maybe<PrismicNewsPostBodyTextIntro>;
+  node: PrismicNewsPostBodyTextIntro;
+  previous?: Maybe<PrismicNewsPostBodyTextIntro>;
+};
+
+export enum PrismicNewsPostBodyTextIntroFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  PrimaryIntroductoryTextHtml = 'primary___introductory_text___html',
+  PrimaryIntroductoryTextText = 'primary___introductory_text___text',
+  PrimaryIntroductoryTextRaw = 'primary___introductory_text___raw',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsPostBodyTextIntroFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyTextIntroPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsPostBodyTextIntroGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyTextIntroEdge>;
+  nodes: Array<PrismicNewsPostBodyTextIntro>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyTextIntroPrimaryType = {
+  introductory_text?: Maybe<PrismicStructuredTextType>;
+};
+
+export type PrismicNewsPostBodyTextIntroPrimaryTypeFilterInput = {
+  introductory_text?: Maybe<PrismicStructuredTextTypeFilterInput>;
+};
+
+export type PrismicNewsPostBodyTextIntroSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsPostBodyTextIntroFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicNewsPostBodyTextPrimaryType = {
+  text?: Maybe<PrismicStructuredTextType>;
+};
+
+export type PrismicNewsPostBodyTextPrimaryTypeFilterInput = {
+  text?: Maybe<PrismicStructuredTextTypeFilterInput>;
+};
+
+export type PrismicNewsPostBodyTextSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsPostBodyTextFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicNewsPostBodyVideo = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  primary?: Maybe<PrismicNewsPostBodyVideoPrimaryType>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicNewsPostBodyVideoConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyVideoEdge>;
+  nodes: Array<PrismicNewsPostBodyVideo>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsPostBodyVideoGroupConnection>;
+};
+
+
+export type PrismicNewsPostBodyVideoConnectionDistinctArgs = {
+  field: PrismicNewsPostBodyVideoFieldsEnum;
+};
+
+
+export type PrismicNewsPostBodyVideoConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsPostBodyVideoFieldsEnum;
+};
+
+export type PrismicNewsPostBodyVideoEdge = {
+  next?: Maybe<PrismicNewsPostBodyVideo>;
+  node: PrismicNewsPostBodyVideo;
+  previous?: Maybe<PrismicNewsPostBodyVideo>;
+};
+
+export enum PrismicNewsPostBodyVideoFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  PrimaryVideoAuthorId = 'primary___video___author_id',
+  PrimaryVideoAuthorName = 'primary___video___author_name',
+  PrimaryVideoAuthorUrl = 'primary___video___author_url',
+  PrimaryVideoCacheAge = 'primary___video___cache_age',
+  PrimaryVideoEmbedUrl = 'primary___video___embed_url',
+  PrimaryVideoHtml = 'primary___video___html',
+  PrimaryVideoName = 'primary___video___name',
+  PrimaryVideoProviderName = 'primary___video___provider_name',
+  PrimaryVideoProviderUrl = 'primary___video___provider_url',
+  PrimaryVideoThumbnailHeight = 'primary___video___thumbnail_height',
+  PrimaryVideoThumbnailUrl = 'primary___video___thumbnail_url',
+  PrimaryVideoThumbnailWidth = 'primary___video___thumbnail_width',
+  PrimaryVideoTitle = 'primary___video___title',
+  PrimaryVideoType = 'primary___video___type',
+  PrimaryVideoVersion = 'primary___video___version',
+  PrimaryVideoUrl = 'primary___video___url',
+  PrimaryVideoWidth = 'primary___video___width',
+  PrimaryVideoHeight = 'primary___video___height',
+  PrimaryVideoMediaId = 'primary___video___media_id',
+  PrimaryVideoDescription = 'primary___video___description',
+  PrimaryPosterAlt = 'primary___poster___alt',
+  PrimaryPosterCopyright = 'primary___poster___copyright',
+  PrimaryPosterDimensionsWidth = 'primary___poster___dimensions___width',
+  PrimaryPosterDimensionsHeight = 'primary___poster___dimensions___height',
+  PrimaryPosterUrl = 'primary___poster___url',
+  PrimaryPosterFixedBase64 = 'primary___poster___fixed___base64',
+  PrimaryPosterFixedSrc = 'primary___poster___fixed___src',
+  PrimaryPosterFixedSrcSet = 'primary___poster___fixed___srcSet',
+  PrimaryPosterFixedSrcWebp = 'primary___poster___fixed___srcWebp',
+  PrimaryPosterFixedSrcSetWebp = 'primary___poster___fixed___srcSetWebp',
+  PrimaryPosterFixedSizes = 'primary___poster___fixed___sizes',
+  PrimaryPosterFixedWidth = 'primary___poster___fixed___width',
+  PrimaryPosterFixedHeight = 'primary___poster___fixed___height',
+  PrimaryPosterFluidBase64 = 'primary___poster___fluid___base64',
+  PrimaryPosterFluidSrc = 'primary___poster___fluid___src',
+  PrimaryPosterFluidSrcSet = 'primary___poster___fluid___srcSet',
+  PrimaryPosterFluidSrcWebp = 'primary___poster___fluid___srcWebp',
+  PrimaryPosterFluidSrcSetWebp = 'primary___poster___fluid___srcSetWebp',
+  PrimaryPosterFluidSizes = 'primary___poster___fluid___sizes',
+  PrimaryPosterFluidAspectRatio = 'primary___poster___fluid___aspectRatio',
+  PrimaryPosterLocalFileSourceInstanceName = 'primary___poster___localFile___sourceInstanceName',
+  PrimaryPosterLocalFileAbsolutePath = 'primary___poster___localFile___absolutePath',
+  PrimaryPosterLocalFileRelativePath = 'primary___poster___localFile___relativePath',
+  PrimaryPosterLocalFileExtension = 'primary___poster___localFile___extension',
+  PrimaryPosterLocalFileSize = 'primary___poster___localFile___size',
+  PrimaryPosterLocalFilePrettySize = 'primary___poster___localFile___prettySize',
+  PrimaryPosterLocalFileModifiedTime = 'primary___poster___localFile___modifiedTime',
+  PrimaryPosterLocalFileAccessTime = 'primary___poster___localFile___accessTime',
+  PrimaryPosterLocalFileChangeTime = 'primary___poster___localFile___changeTime',
+  PrimaryPosterLocalFileBirthTime = 'primary___poster___localFile___birthTime',
+  PrimaryPosterLocalFileRoot = 'primary___poster___localFile___root',
+  PrimaryPosterLocalFileDir = 'primary___poster___localFile___dir',
+  PrimaryPosterLocalFileBase = 'primary___poster___localFile___base',
+  PrimaryPosterLocalFileExt = 'primary___poster___localFile___ext',
+  PrimaryPosterLocalFileName = 'primary___poster___localFile___name',
+  PrimaryPosterLocalFileRelativeDirectory = 'primary___poster___localFile___relativeDirectory',
+  PrimaryPosterLocalFileDev = 'primary___poster___localFile___dev',
+  PrimaryPosterLocalFileMode = 'primary___poster___localFile___mode',
+  PrimaryPosterLocalFileNlink = 'primary___poster___localFile___nlink',
+  PrimaryPosterLocalFileUid = 'primary___poster___localFile___uid',
+  PrimaryPosterLocalFileGid = 'primary___poster___localFile___gid',
+  PrimaryPosterLocalFileRdev = 'primary___poster___localFile___rdev',
+  PrimaryPosterLocalFileIno = 'primary___poster___localFile___ino',
+  PrimaryPosterLocalFileAtimeMs = 'primary___poster___localFile___atimeMs',
+  PrimaryPosterLocalFileMtimeMs = 'primary___poster___localFile___mtimeMs',
+  PrimaryPosterLocalFileCtimeMs = 'primary___poster___localFile___ctimeMs',
+  PrimaryPosterLocalFileAtime = 'primary___poster___localFile___atime',
+  PrimaryPosterLocalFileMtime = 'primary___poster___localFile___mtime',
+  PrimaryPosterLocalFileCtime = 'primary___poster___localFile___ctime',
+  PrimaryPosterLocalFileBirthtime = 'primary___poster___localFile___birthtime',
+  PrimaryPosterLocalFileBirthtimeMs = 'primary___poster___localFile___birthtimeMs',
+  PrimaryPosterLocalFileId = 'primary___poster___localFile___id',
+  PrimaryPosterLocalFileChildren = 'primary___poster___localFile___children',
+  PrimaryPosterThumbnails = 'primary___poster___thumbnails',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsPostBodyVideoFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyVideoPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsPostBodyVideoGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyVideoEdge>;
+  nodes: Array<PrismicNewsPostBodyVideo>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyVideoPrimaryType = {
+  video?: Maybe<PrismicEmbedType>;
+  poster?: Maybe<PrismicImageType>;
+};
+
+export type PrismicNewsPostBodyVideoPrimaryTypeFilterInput = {
+  video?: Maybe<PrismicEmbedTypeFilterInput>;
+  poster?: Maybe<PrismicImageTypeFilterInput>;
+};
+
+export type PrismicNewsPostBodyVideoSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsPostBodyVideoFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicNewsPostConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostEdge>;
+  nodes: Array<PrismicNewsPost>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsPostGroupConnection>;
+};
+
+
+export type PrismicNewsPostConnectionDistinctArgs = {
+  field: PrismicNewsPostFieldsEnum;
+};
+
+
+export type PrismicNewsPostConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsPostFieldsEnum;
+};
+
+export type PrismicNewsPostDataType = {
+  title?: Maybe<PrismicStructuredTextType>;
+  published_at?: Maybe<Scalars['Date']>;
+  excerpt?: Maybe<PrismicStructuredTextType>;
+  news_categories?: Maybe<Array<Maybe<PrismicNewsPostNewsCategoriesGroupType>>>;
+  related_links?: Maybe<Array<Maybe<PrismicNewsPostRelatedLinksGroupType>>>;
+  featured_image?: Maybe<PrismicImageType>;
+  body?: Maybe<Array<Maybe<PrismicNewsPostBodySlicesType>>>;
+};
+
+
+export type PrismicNewsPostDataTypePublished_AtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostDataTypeFilterInput = {
+  title?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  published_at?: Maybe<DateQueryOperatorInput>;
+  excerpt?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  news_categories?: Maybe<PrismicNewsPostNewsCategoriesGroupTypeFilterListInput>;
+  related_links?: Maybe<PrismicNewsPostRelatedLinksGroupTypeFilterListInput>;
+  featured_image?: Maybe<PrismicImageTypeFilterInput>;
+};
+
+export type PrismicNewsPostEdge = {
+  next?: Maybe<PrismicNewsPost>;
+  node: PrismicNewsPost;
+  previous?: Maybe<PrismicNewsPost>;
+};
+
+export enum PrismicNewsPostFieldsEnum {
+  DataTitleHtml = 'data___title___html',
+  DataTitleText = 'data___title___text',
+  DataTitleRaw = 'data___title___raw',
+  DataPublishedAt = 'data___published_at',
+  DataExcerptHtml = 'data___excerpt___html',
+  DataExcerptText = 'data___excerpt___text',
+  DataExcerptRaw = 'data___excerpt___raw',
+  DataNewsCategories = 'data___news_categories',
+  DataNewsCategoriesNewsCategoryLinkType = 'data___news_categories___news_category___link_type',
+  DataNewsCategoriesNewsCategoryIsBroken = 'data___news_categories___news_category___isBroken',
+  DataNewsCategoriesNewsCategoryUrl = 'data___news_categories___news_category___url',
+  DataNewsCategoriesNewsCategoryTarget = 'data___news_categories___news_category___target',
+  DataNewsCategoriesNewsCategorySize = 'data___news_categories___news_category___size',
+  DataNewsCategoriesNewsCategoryId = 'data___news_categories___news_category___id',
+  DataNewsCategoriesNewsCategoryType = 'data___news_categories___news_category___type',
+  DataNewsCategoriesNewsCategoryTags = 'data___news_categories___news_category___tags',
+  DataNewsCategoriesNewsCategoryLang = 'data___news_categories___news_category___lang',
+  DataNewsCategoriesNewsCategorySlug = 'data___news_categories___news_category___slug',
+  DataNewsCategoriesNewsCategoryUid = 'data___news_categories___news_category___uid',
+  DataNewsCategoriesNewsCategoryRaw = 'data___news_categories___news_category___raw',
+  DataRelatedLinks = 'data___related_links',
+  DataRelatedLinksRelatedLinkLinkType = 'data___related_links___related_link___link_type',
+  DataRelatedLinksRelatedLinkIsBroken = 'data___related_links___related_link___isBroken',
+  DataRelatedLinksRelatedLinkUrl = 'data___related_links___related_link___url',
+  DataRelatedLinksRelatedLinkTarget = 'data___related_links___related_link___target',
+  DataRelatedLinksRelatedLinkSize = 'data___related_links___related_link___size',
+  DataRelatedLinksRelatedLinkId = 'data___related_links___related_link___id',
+  DataRelatedLinksRelatedLinkType = 'data___related_links___related_link___type',
+  DataRelatedLinksRelatedLinkTags = 'data___related_links___related_link___tags',
+  DataRelatedLinksRelatedLinkLang = 'data___related_links___related_link___lang',
+  DataRelatedLinksRelatedLinkSlug = 'data___related_links___related_link___slug',
+  DataRelatedLinksRelatedLinkUid = 'data___related_links___related_link___uid',
+  DataRelatedLinksRelatedLinkRaw = 'data___related_links___related_link___raw',
+  DataFeaturedImageAlt = 'data___featured_image___alt',
+  DataFeaturedImageCopyright = 'data___featured_image___copyright',
+  DataFeaturedImageDimensionsWidth = 'data___featured_image___dimensions___width',
+  DataFeaturedImageDimensionsHeight = 'data___featured_image___dimensions___height',
+  DataFeaturedImageUrl = 'data___featured_image___url',
+  DataFeaturedImageFixedBase64 = 'data___featured_image___fixed___base64',
+  DataFeaturedImageFixedSrc = 'data___featured_image___fixed___src',
+  DataFeaturedImageFixedSrcSet = 'data___featured_image___fixed___srcSet',
+  DataFeaturedImageFixedSrcWebp = 'data___featured_image___fixed___srcWebp',
+  DataFeaturedImageFixedSrcSetWebp = 'data___featured_image___fixed___srcSetWebp',
+  DataFeaturedImageFixedSizes = 'data___featured_image___fixed___sizes',
+  DataFeaturedImageFixedWidth = 'data___featured_image___fixed___width',
+  DataFeaturedImageFixedHeight = 'data___featured_image___fixed___height',
+  DataFeaturedImageFluidBase64 = 'data___featured_image___fluid___base64',
+  DataFeaturedImageFluidSrc = 'data___featured_image___fluid___src',
+  DataFeaturedImageFluidSrcSet = 'data___featured_image___fluid___srcSet',
+  DataFeaturedImageFluidSrcWebp = 'data___featured_image___fluid___srcWebp',
+  DataFeaturedImageFluidSrcSetWebp = 'data___featured_image___fluid___srcSetWebp',
+  DataFeaturedImageFluidSizes = 'data___featured_image___fluid___sizes',
+  DataFeaturedImageFluidAspectRatio = 'data___featured_image___fluid___aspectRatio',
+  DataFeaturedImageLocalFileSourceInstanceName = 'data___featured_image___localFile___sourceInstanceName',
+  DataFeaturedImageLocalFileAbsolutePath = 'data___featured_image___localFile___absolutePath',
+  DataFeaturedImageLocalFileRelativePath = 'data___featured_image___localFile___relativePath',
+  DataFeaturedImageLocalFileExtension = 'data___featured_image___localFile___extension',
+  DataFeaturedImageLocalFileSize = 'data___featured_image___localFile___size',
+  DataFeaturedImageLocalFilePrettySize = 'data___featured_image___localFile___prettySize',
+  DataFeaturedImageLocalFileModifiedTime = 'data___featured_image___localFile___modifiedTime',
+  DataFeaturedImageLocalFileAccessTime = 'data___featured_image___localFile___accessTime',
+  DataFeaturedImageLocalFileChangeTime = 'data___featured_image___localFile___changeTime',
+  DataFeaturedImageLocalFileBirthTime = 'data___featured_image___localFile___birthTime',
+  DataFeaturedImageLocalFileRoot = 'data___featured_image___localFile___root',
+  DataFeaturedImageLocalFileDir = 'data___featured_image___localFile___dir',
+  DataFeaturedImageLocalFileBase = 'data___featured_image___localFile___base',
+  DataFeaturedImageLocalFileExt = 'data___featured_image___localFile___ext',
+  DataFeaturedImageLocalFileName = 'data___featured_image___localFile___name',
+  DataFeaturedImageLocalFileRelativeDirectory = 'data___featured_image___localFile___relativeDirectory',
+  DataFeaturedImageLocalFileDev = 'data___featured_image___localFile___dev',
+  DataFeaturedImageLocalFileMode = 'data___featured_image___localFile___mode',
+  DataFeaturedImageLocalFileNlink = 'data___featured_image___localFile___nlink',
+  DataFeaturedImageLocalFileUid = 'data___featured_image___localFile___uid',
+  DataFeaturedImageLocalFileGid = 'data___featured_image___localFile___gid',
+  DataFeaturedImageLocalFileRdev = 'data___featured_image___localFile___rdev',
+  DataFeaturedImageLocalFileIno = 'data___featured_image___localFile___ino',
+  DataFeaturedImageLocalFileAtimeMs = 'data___featured_image___localFile___atimeMs',
+  DataFeaturedImageLocalFileMtimeMs = 'data___featured_image___localFile___mtimeMs',
+  DataFeaturedImageLocalFileCtimeMs = 'data___featured_image___localFile___ctimeMs',
+  DataFeaturedImageLocalFileAtime = 'data___featured_image___localFile___atime',
+  DataFeaturedImageLocalFileMtime = 'data___featured_image___localFile___mtime',
+  DataFeaturedImageLocalFileCtime = 'data___featured_image___localFile___ctime',
+  DataFeaturedImageLocalFileBirthtime = 'data___featured_image___localFile___birthtime',
+  DataFeaturedImageLocalFileBirthtimeMs = 'data___featured_image___localFile___birthtimeMs',
+  DataFeaturedImageLocalFileId = 'data___featured_image___localFile___id',
+  DataFeaturedImageLocalFileChildren = 'data___featured_image___localFile___children',
+  DataFeaturedImageThumbnails = 'data___featured_image___thumbnails',
+  DataRaw = 'dataRaw',
+  DataString = 'dataString',
+  FirstPublicationDate = 'first_publication_date',
+  Href = 'href',
+  Url = 'url',
+  Lang = 'lang',
+  LastPublicationDate = 'last_publication_date',
+  Tags = 'tags',
+  AlternateLanguages = 'alternate_languages',
+  AlternateLanguagesLinkType = 'alternate_languages___link_type',
+  AlternateLanguagesIsBroken = 'alternate_languages___isBroken',
+  AlternateLanguagesUrl = 'alternate_languages___url',
+  AlternateLanguagesTarget = 'alternate_languages___target',
+  AlternateLanguagesSize = 'alternate_languages___size',
+  AlternateLanguagesId = 'alternate_languages___id',
+  AlternateLanguagesType = 'alternate_languages___type',
+  AlternateLanguagesTags = 'alternate_languages___tags',
+  AlternateLanguagesLang = 'alternate_languages___lang',
+  AlternateLanguagesSlug = 'alternate_languages___slug',
+  AlternateLanguagesUid = 'alternate_languages___uid',
+  AlternateLanguagesRaw = 'alternate_languages___raw',
+  Type = 'type',
+  PrismicId = 'prismicId',
+  Previewable = '_previewable',
+  Uid = 'uid',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsPostFilterInput = {
+  data?: Maybe<PrismicNewsPostDataTypeFilterInput>;
+  dataRaw?: Maybe<JsonQueryOperatorInput>;
+  dataString?: Maybe<StringQueryOperatorInput>;
+  first_publication_date?: Maybe<DateQueryOperatorInput>;
+  href?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
+  lang?: Maybe<StringQueryOperatorInput>;
+  last_publication_date?: Maybe<DateQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  alternate_languages?: Maybe<PrismicLinkTypeFilterListInput>;
+  type?: Maybe<StringQueryOperatorInput>;
+  prismicId?: Maybe<IdQueryOperatorInput>;
+  _previewable?: Maybe<IdQueryOperatorInput>;
+  uid?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsPostGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostEdge>;
+  nodes: Array<PrismicNewsPost>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostNewsCategoriesGroupType = {
+  news_category?: Maybe<PrismicLinkType>;
+};
+
+export type PrismicNewsPostNewsCategoriesGroupTypeFilterInput = {
+  news_category?: Maybe<PrismicLinkTypeFilterInput>;
+};
+
+export type PrismicNewsPostNewsCategoriesGroupTypeFilterListInput = {
+  elemMatch?: Maybe<PrismicNewsPostNewsCategoriesGroupTypeFilterInput>;
+};
+
+export type PrismicNewsPostRelatedLinksGroupType = {
+  related_link?: Maybe<PrismicLinkType>;
+};
+
+export type PrismicNewsPostRelatedLinksGroupTypeFilterInput = {
+  related_link?: Maybe<PrismicLinkTypeFilterInput>;
+};
+
+export type PrismicNewsPostRelatedLinksGroupTypeFilterListInput = {
+  elemMatch?: Maybe<PrismicNewsPostRelatedLinksGroupTypeFilterInput>;
+};
+
+export type PrismicNewsPostSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsPostFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type PrismicPage = PrismicDocument & Node & {
   data?: Maybe<PrismicPageDataType>;
   dataRaw: Scalars['JSON'];
@@ -7138,6 +8812,22 @@ export type Query = {
   allPrismicNavigationMainNavItem: PrismicNavigationMainNavItemConnection;
   prismicNavigation?: Maybe<PrismicNavigation>;
   allPrismicNavigation: PrismicNavigationConnection;
+  prismicNewsCategory?: Maybe<PrismicNewsCategory>;
+  allPrismicNewsCategory: PrismicNewsCategoryConnection;
+  prismicNewsPostBodyText?: Maybe<PrismicNewsPostBodyText>;
+  allPrismicNewsPostBodyText: PrismicNewsPostBodyTextConnection;
+  prismicNewsPostBodyImages?: Maybe<PrismicNewsPostBodyImages>;
+  allPrismicNewsPostBodyImages: PrismicNewsPostBodyImagesConnection;
+  prismicNewsPostBodyVideo?: Maybe<PrismicNewsPostBodyVideo>;
+  allPrismicNewsPostBodyVideo: PrismicNewsPostBodyVideoConnection;
+  prismicNewsPostBodyTextIntro?: Maybe<PrismicNewsPostBodyTextIntro>;
+  allPrismicNewsPostBodyTextIntro: PrismicNewsPostBodyTextIntroConnection;
+  prismicNewsPostBodyAnchor?: Maybe<PrismicNewsPostBodyAnchor>;
+  allPrismicNewsPostBodyAnchor: PrismicNewsPostBodyAnchorConnection;
+  prismicNewsPostBodyDivider?: Maybe<PrismicNewsPostBodyDivider>;
+  allPrismicNewsPostBodyDivider: PrismicNewsPostBodyDividerConnection;
+  prismicNewsPost?: Maybe<PrismicNewsPost>;
+  allPrismicNewsPost: PrismicNewsPostConnection;
   prismicPageBodyText?: Maybe<PrismicPageBodyText>;
   allPrismicPageBodyText: PrismicPageBodyTextConnection;
   prismicPageBodyImages?: Maybe<PrismicPageBodyImages>;
@@ -7660,6 +9350,179 @@ export type QueryPrismicNavigationArgs = {
 export type QueryAllPrismicNavigationArgs = {
   filter?: Maybe<PrismicNavigationFilterInput>;
   sort?: Maybe<PrismicNavigationSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicNewsCategoryArgs = {
+  data?: Maybe<PrismicNewsCategoryDataTypeFilterInput>;
+  dataRaw?: Maybe<JsonQueryOperatorInput>;
+  dataString?: Maybe<StringQueryOperatorInput>;
+  first_publication_date?: Maybe<DateQueryOperatorInput>;
+  href?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
+  lang?: Maybe<StringQueryOperatorInput>;
+  last_publication_date?: Maybe<DateQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  alternate_languages?: Maybe<PrismicLinkTypeFilterListInput>;
+  type?: Maybe<StringQueryOperatorInput>;
+  prismicId?: Maybe<IdQueryOperatorInput>;
+  _previewable?: Maybe<IdQueryOperatorInput>;
+  uid?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsCategoryArgs = {
+  filter?: Maybe<PrismicNewsCategoryFilterInput>;
+  sort?: Maybe<PrismicNewsCategorySortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicNewsPostBodyTextArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyTextPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsPostBodyTextArgs = {
+  filter?: Maybe<PrismicNewsPostBodyTextFilterInput>;
+  sort?: Maybe<PrismicNewsPostBodyTextSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicNewsPostBodyImagesArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  items?: Maybe<PrismicNewsPostBodyImagesItemTypeFilterListInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsPostBodyImagesArgs = {
+  filter?: Maybe<PrismicNewsPostBodyImagesFilterInput>;
+  sort?: Maybe<PrismicNewsPostBodyImagesSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicNewsPostBodyVideoArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyVideoPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsPostBodyVideoArgs = {
+  filter?: Maybe<PrismicNewsPostBodyVideoFilterInput>;
+  sort?: Maybe<PrismicNewsPostBodyVideoSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicNewsPostBodyTextIntroArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyTextIntroPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsPostBodyTextIntroArgs = {
+  filter?: Maybe<PrismicNewsPostBodyTextIntroFilterInput>;
+  sort?: Maybe<PrismicNewsPostBodyTextIntroSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicNewsPostBodyAnchorArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyAnchorPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsPostBodyAnchorArgs = {
+  filter?: Maybe<PrismicNewsPostBodyAnchorFilterInput>;
+  sort?: Maybe<PrismicNewsPostBodyAnchorSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicNewsPostBodyDividerArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsPostBodyDividerArgs = {
+  filter?: Maybe<PrismicNewsPostBodyDividerFilterInput>;
+  sort?: Maybe<PrismicNewsPostBodyDividerSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPrismicNewsPostArgs = {
+  data?: Maybe<PrismicNewsPostDataTypeFilterInput>;
+  dataRaw?: Maybe<JsonQueryOperatorInput>;
+  dataString?: Maybe<StringQueryOperatorInput>;
+  first_publication_date?: Maybe<DateQueryOperatorInput>;
+  href?: Maybe<StringQueryOperatorInput>;
+  url?: Maybe<StringQueryOperatorInput>;
+  lang?: Maybe<StringQueryOperatorInput>;
+  last_publication_date?: Maybe<DateQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  alternate_languages?: Maybe<PrismicLinkTypeFilterListInput>;
+  type?: Maybe<StringQueryOperatorInput>;
+  prismicId?: Maybe<IdQueryOperatorInput>;
+  _previewable?: Maybe<IdQueryOperatorInput>;
+  uid?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsPostArgs = {
+  filter?: Maybe<PrismicNewsPostFilterInput>;
+  sort?: Maybe<PrismicNewsPostSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -8261,10 +10124,14 @@ export type SitePageConnectionGroupArgs = {
 
 export type SitePageContext = {
   uid?: Maybe<Scalars['String']>;
+  nextUID?: Maybe<Scalars['String']>;
+  prevUID?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
   uid?: Maybe<StringQueryOperatorInput>;
+  nextUID?: Maybe<StringQueryOperatorInput>;
+  prevUID?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -8367,6 +10234,8 @@ export enum SitePageFieldsEnum {
   InternalType = 'internal___type',
   IsCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
   ContextUid = 'context___uid',
+  ContextNextUid = 'context___nextUID',
+  ContextPrevUid = 'context___prevUID',
   PluginCreatorId = 'pluginCreator___id',
   PluginCreatorParentId = 'pluginCreator___parent___id',
   PluginCreatorParentParentId = 'pluginCreator___parent___parent___id',
@@ -8425,6 +10294,10 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsCacheDigest = 'pluginCreator___pluginOptions___cacheDigest',
   PluginCreatorPluginOptionsTypekitId = 'pluginCreator___pluginOptions___typekit___id',
   PluginCreatorPluginOptionsGoogleFamilies = 'pluginCreator___pluginOptions___google___families',
+  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
+  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
+  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
+  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorPluginOptionsHeadersX = 'pluginCreator___pluginOptions___headers____x',
   PluginCreatorPluginOptionsMergeSecurityHeaders = 'pluginCreator___pluginOptions___mergeSecurityHeaders',
   PluginCreatorPluginOptionsPath = 'pluginCreator___pluginOptions___path',
@@ -8432,10 +10305,6 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsAllExtensions = 'pluginCreator___pluginOptions___allExtensions',
   PluginCreatorPluginOptionsIsTsx = 'pluginCreator___pluginOptions___isTSX',
   PluginCreatorPluginOptionsJsxPragma = 'pluginCreator___pluginOptions___jsxPragma',
-  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
-  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
-  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
-  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorNodeApIs = 'pluginCreator___nodeAPIs',
   PluginCreatorBrowserApIs = 'pluginCreator___browserAPIs',
   PluginCreatorSsrApIs = 'pluginCreator___ssrAPIs',
@@ -8640,6 +10509,10 @@ export enum SitePluginFieldsEnum {
   PluginOptionsCacheDigest = 'pluginOptions___cacheDigest',
   PluginOptionsTypekitId = 'pluginOptions___typekit___id',
   PluginOptionsGoogleFamilies = 'pluginOptions___google___families',
+  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
+  PluginOptionsAccessToken = 'pluginOptions___accessToken',
+  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
+  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   PluginOptionsHeadersX = 'pluginOptions___headers____x',
   PluginOptionsMergeSecurityHeaders = 'pluginOptions___mergeSecurityHeaders',
   PluginOptionsPath = 'pluginOptions___path',
@@ -8647,10 +10520,6 @@ export enum SitePluginFieldsEnum {
   PluginOptionsAllExtensions = 'pluginOptions___allExtensions',
   PluginOptionsIsTsx = 'pluginOptions___isTSX',
   PluginOptionsJsxPragma = 'pluginOptions___jsxPragma',
-  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
-  PluginOptionsAccessToken = 'pluginOptions___accessToken',
-  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
-  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   NodeApIs = 'nodeAPIs',
   BrowserApIs = 'browserAPIs',
   SsrApIs = 'ssrAPIs',
@@ -8781,6 +10650,11 @@ export type SitePluginPluginOptions = {
   cacheDigest?: Maybe<Scalars['String']>;
   typekit?: Maybe<SitePluginPluginOptionsTypekit>;
   google?: Maybe<SitePluginPluginOptionsGoogle>;
+  repositoryName?: Maybe<Scalars['String']>;
+  accessToken?: Maybe<Scalars['String']>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
+  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
+  prismicToolbar?: Maybe<Scalars['String']>;
   headers?: Maybe<SitePluginPluginOptionsHeaders>;
   mergeSecurityHeaders?: Maybe<Scalars['Boolean']>;
   path?: Maybe<Scalars['String']>;
@@ -8788,11 +10662,6 @@ export type SitePluginPluginOptions = {
   allExtensions?: Maybe<Scalars['Boolean']>;
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
-  repositoryName?: Maybe<Scalars['String']>;
-  accessToken?: Maybe<Scalars['String']>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
-  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
-  prismicToolbar?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
@@ -8813,6 +10682,11 @@ export type SitePluginPluginOptionsFilterInput = {
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   typekit?: Maybe<SitePluginPluginOptionsTypekitFilterInput>;
   google?: Maybe<SitePluginPluginOptionsGoogleFilterInput>;
+  repositoryName?: Maybe<StringQueryOperatorInput>;
+  accessToken?: Maybe<StringQueryOperatorInput>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
+  fetchLinks?: Maybe<StringQueryOperatorInput>;
+  prismicToolbar?: Maybe<StringQueryOperatorInput>;
   headers?: Maybe<SitePluginPluginOptionsHeadersFilterInput>;
   mergeSecurityHeaders?: Maybe<BooleanQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
@@ -8820,11 +10694,6 @@ export type SitePluginPluginOptionsFilterInput = {
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
-  repositoryName?: Maybe<StringQueryOperatorInput>;
-  accessToken?: Maybe<StringQueryOperatorInput>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
-  fetchLinks?: Maybe<StringQueryOperatorInput>;
-  prismicToolbar?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsGoogle = {
@@ -8849,6 +10718,8 @@ export type SitePluginPluginOptionsSchemas = {
   fellow?: Maybe<SitePluginPluginOptionsSchemasFellow>;
   interior_page?: Maybe<SitePluginPluginOptionsSchemasInterior_Page>;
   navigation?: Maybe<SitePluginPluginOptionsSchemasNavigation>;
+  news_category?: Maybe<SitePluginPluginOptionsSchemasNews_Category>;
+  news_post?: Maybe<SitePluginPluginOptionsSchemasNews_Post>;
   page?: Maybe<SitePluginPluginOptionsSchemasPage>;
   settings?: Maybe<SitePluginPluginOptionsSchemasSettings>;
 };
@@ -9309,6 +11180,8 @@ export type SitePluginPluginOptionsSchemasFilterInput = {
   fellow?: Maybe<SitePluginPluginOptionsSchemasFellowFilterInput>;
   interior_page?: Maybe<SitePluginPluginOptionsSchemasInterior_PageFilterInput>;
   navigation?: Maybe<SitePluginPluginOptionsSchemasNavigationFilterInput>;
+  news_category?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryFilterInput>;
+  news_post?: Maybe<SitePluginPluginOptionsSchemasNews_PostFilterInput>;
   page?: Maybe<SitePluginPluginOptionsSchemasPageFilterInput>;
   settings?: Maybe<SitePluginPluginOptionsSchemasSettingsFilterInput>;
 };
@@ -10325,6 +12198,650 @@ export type SitePluginPluginOptionsSchemasNavigationMainUidConfigFilterInput = {
 export type SitePluginPluginOptionsSchemasNavigationMainUidFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   config?: Maybe<SitePluginPluginOptionsSchemasNavigationMainUidConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_Category = {
+  Main?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMain>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryFilterInput = {
+  Main?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMain = {
+  name?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainName>;
+  uid?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainUid>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainFilterInput = {
+  name?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainNameFilterInput>;
+  uid?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainUidFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainName = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainNameConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainNameConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainNameConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainNameFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainNameConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainUid = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainUidConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainUidConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainUidConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_CategoryMainUidFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_CategoryMainUidConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_Post = {
+  Main?: Maybe<SitePluginPluginOptionsSchemasNews_PostMain>;
+  Body?: Maybe<SitePluginPluginOptionsSchemasNews_PostBody>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBody = {
+  body?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBody>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBody = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfig = {
+  choices?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoices>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoices = {
+  text?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText>;
+  images?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImages>;
+  video?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideo>;
+  text_intro?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_Intro>;
+  anchor?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchor>;
+  divider?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesDivider>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchor = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_Repeat>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_Repeat = {
+  id?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatId>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatFilterInput = {
+  id?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatIdFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatId = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatIdConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatIdConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatIdConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatIdFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorNon_RepeatIdConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesDivider = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesDividerFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesFilterInput = {
+  text?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextFilterInput>;
+  images?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesFilterInput>;
+  video?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoFilterInput>;
+  text_intro?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroFilterInput>;
+  anchor?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorFilterInput>;
+  divider?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesDividerFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImages = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeat>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeat = {
+  image?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImage>;
+  caption?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatCaption>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatCaption = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatCaptionConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatCaptionConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatCaptionConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatCaptionFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatCaptionConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatFilterInput = {
+  image?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageFilterInput>;
+  caption?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatCaptionFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImage = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfig = {
+  constraint?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfigConstraint>;
+  label?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfigConstraint = {
+  width?: Maybe<Scalars['Int']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfigConstraintFilterInput = {
+  width?: Maybe<IntQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfigFilterInput = {
+  constraint?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfigConstraintFilterInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_Repeat>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_Intro = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_Repeat>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_Repeat = {
+  introductory_text?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatIntroductory_Text>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatFilterInput = {
+  introductory_text?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatIntroductory_TextFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatIntroductory_Text = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatIntroductory_TextConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatIntroductory_TextConfig = {
+  multi?: Maybe<Scalars['String']>;
+  allowTargetBlank?: Maybe<Scalars['Boolean']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatIntroductory_TextConfigFilterInput = {
+  multi?: Maybe<StringQueryOperatorInput>;
+  allowTargetBlank?: Maybe<BooleanQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatIntroductory_TextFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroNon_RepeatIntroductory_TextConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_Repeat = {
+  text?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatText>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatFilterInput = {
+  text?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatTextFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatText = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatTextConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatTextConfig = {
+  multi?: Maybe<Scalars['String']>;
+  allowTargetBlank?: Maybe<Scalars['Boolean']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatTextConfigFilterInput = {
+  multi?: Maybe<StringQueryOperatorInput>;
+  allowTargetBlank?: Maybe<BooleanQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatTextFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesTextNon_RepeatTextConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideo = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_Repeat>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_Repeat = {
+  video?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatVideo>;
+  poster?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatPoster>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatFilterInput = {
+  video?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatVideoFilterInput>;
+  poster?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatPosterFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatPoster = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatPosterConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatPosterConfig = {
+  label?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatPosterConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatPosterFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatPosterConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatVideo = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatVideoConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatVideoConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatVideoConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatVideoFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesVideoNon_RepeatVideoConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigFilterInput = {
+  choices?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyFilterInput = {
+  body?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostFilterInput = {
+  Main?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainFilterInput>;
+  Body?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMain = {
+  title?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainTitle>;
+  uid?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainUid>;
+  published_at?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainPublished_At>;
+  excerpt?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainExcerpt>;
+  news_categories?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_Categories>;
+  related_links?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_Links>;
+  featured_image?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainFeatured_Image>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainExcerpt = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainExcerptConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainExcerptConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainExcerptConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainExcerptFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainExcerptConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainFeatured_Image = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainFeatured_ImageConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainFeatured_ImageConfig = {
+  label?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainFeatured_ImageConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainFeatured_ImageFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainFeatured_ImageConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainFilterInput = {
+  title?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainTitleFilterInput>;
+  uid?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainUidFilterInput>;
+  published_at?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainPublished_AtFilterInput>;
+  excerpt?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainExcerptFilterInput>;
+  news_categories?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesFilterInput>;
+  related_links?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksFilterInput>;
+  featured_image?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainFeatured_ImageFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_Categories = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfig = {
+  fields?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFields>;
+  label?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFields = {
+  news_category?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsNews_Category>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsFilterInput = {
+  news_category?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsNews_CategoryFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsNews_Category = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsNews_CategoryConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsNews_CategoryConfig = {
+  select?: Maybe<Scalars['String']>;
+  customtypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsNews_CategoryConfigFilterInput = {
+  select?: Maybe<StringQueryOperatorInput>;
+  customtypes?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsNews_CategoryFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsNews_CategoryConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFilterInput = {
+  fields?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFieldsFilterInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainNews_CategoriesConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainPublished_At = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainPublished_AtConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainPublished_AtConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainPublished_AtConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainPublished_AtFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainPublished_AtConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_Links = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfig = {
+  fields?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFields>;
+  label?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFields = {
+  related_link?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsRelated_Link>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsFilterInput = {
+  related_link?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsRelated_LinkFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsRelated_Link = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsRelated_LinkConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsRelated_LinkConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsRelated_LinkConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsRelated_LinkFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsRelated_LinkConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFilterInput = {
+  fields?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFieldsFilterInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainRelated_LinksConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainTitle = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainTitleConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainTitleConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainTitleConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainTitleFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainTitleConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainUid = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainUidConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainUidConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainUidConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostMainUidFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostMainUidConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasPage = {
@@ -11688,7 +14205,9 @@ type SlicesInteriorPageBody_PrismicInteriorPageBodyAnchor_Fragment = InteriorPag
 
 type SlicesInteriorPageBody_PrismicInteriorPageBodyCohortSchedule_Fragment = InteriorPageBodyCohortScheduleFragment;
 
-export type SlicesInteriorPageBodyFragment = SlicesInteriorPageBody_PrismicInteriorPageBodyText_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyImages_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyVideo_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyTextIntro_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyAnchor_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyCohortSchedule_Fragment;
+type SlicesInteriorPageBody_PrismicInteriorPageBodyStaffDirectory_Fragment = InteriorPageBodyStaffDirectoryFragment;
+
+export type SlicesInteriorPageBodyFragment = SlicesInteriorPageBody_PrismicInteriorPageBodyText_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyImages_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyVideo_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyTextIntro_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyAnchor_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyCohortSchedule_Fragment | SlicesInteriorPageBody_PrismicInteriorPageBodyStaffDirectory_Fragment;
 
 export type InteriorPageBodyAnchorFragment = { primary?: Maybe<Pick<PrismicInteriorPageBodyAnchorPrimaryType, 'id'>> };
 
@@ -11716,6 +14235,34 @@ export type InteriorPageBodyVideoFragment = { primary?: Maybe<{ video?: Maybe<Pi
 export type SlicesInteriorPageHeaderFragment = InteriorPageHeaderHeroImageFragment;
 
 export type InteriorPageHeaderHeroImageFragment = { primary?: Maybe<{ heading?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, background_image?: Maybe<{ fluid?: Maybe<GatsbyPrismicImageFluidFragment> }> }> };
+
+type SlicesNewsPostBody_PrismicNewsPostBodyText_Fragment = NewsPostBodyTextFragment;
+
+type SlicesNewsPostBody_PrismicNewsPostBodyImages_Fragment = NewsPostBodyImagesFragment;
+
+type SlicesNewsPostBody_PrismicNewsPostBodyVideo_Fragment = NewsPostBodyVideoFragment;
+
+type SlicesNewsPostBody_PrismicNewsPostBodyTextIntro_Fragment = NewsPostBodyTextIntroFragment;
+
+type SlicesNewsPostBody_PrismicNewsPostBodyAnchor_Fragment = NewsPostBodyAnchorFragment;
+
+export type SlicesNewsPostBodyFragment = SlicesNewsPostBody_PrismicNewsPostBodyText_Fragment | SlicesNewsPostBody_PrismicNewsPostBodyImages_Fragment | SlicesNewsPostBody_PrismicNewsPostBodyVideo_Fragment | SlicesNewsPostBody_PrismicNewsPostBodyTextIntro_Fragment | SlicesNewsPostBody_PrismicNewsPostBodyAnchor_Fragment;
+
+export type NewsPostBodyAnchorFragment = { primary?: Maybe<Pick<PrismicNewsPostBodyAnchorPrimaryType, 'id'>> };
+
+export type NewsPostBodyImagesFragment = { items?: Maybe<Array<Maybe<{ image?: Maybe<(
+      Pick<PrismicImageType, 'alt' | 'url'>
+      & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+    )>, caption?: Maybe<Pick<PrismicStructuredTextType, 'html' | 'text'>> }>>> };
+
+export type NewsPostBodyTextFragment = { primary?: Maybe<{ text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }> };
+
+export type NewsPostBodyTextIntroFragment = { primary?: Maybe<{ introductory_text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }> };
+
+export type NewsPostBodyVideoFragment = { primary?: Maybe<{ video?: Maybe<Pick<PrismicEmbedType, 'embed_url' | 'thumbnail_url' | 'thumbnail_height' | 'thumbnail_width'>>, poster?: Maybe<(
+      Pick<PrismicImageType, 'alt'>
+      & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+    )> }> };
 
 type SlicesPageBody_PrismicPageBodyText_Fragment = PageBodyTextFragment;
 
@@ -11805,6 +14352,62 @@ export type InteriorPageTemplateQuery = { prismicInteriorPage?: Maybe<(
     )> }
     & PrismicInteriorPageParentRecursiveFragment
   )> };
+
+export type NewsPostTemplateQueryVariables = Exact<{
+  uid: Scalars['String'];
+  nextUID?: Maybe<Scalars['String']>;
+  prevUID?: Maybe<Scalars['String']>;
+}>;
+
+
+export type NewsPostTemplateQuery = { prismicNewsPost?: Maybe<(
+    Pick<PrismicNewsPost, '_previewable' | 'uid' | 'first_publication_date'>
+    & { data?: Maybe<(
+      Pick<PrismicNewsPostDataType, 'published_at'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, excerpt?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, news_categories?: Maybe<Array<Maybe<{ news_category?: Maybe<{ document?: Maybe<(
+            Pick<PrismicNewsCategory, 'uid' | 'url'>
+            & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+          )> }> }>>>, featured_image?: Maybe<(
+        Pick<PrismicImageType, 'alt'>
+        & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+      )>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicNewsPostBodyText' }
+        & Pick<PrismicNewsPostBodyText, 'id'>
+        & SlicesNewsPostBody_PrismicNewsPostBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicNewsPostBodyImages' }
+        & Pick<PrismicNewsPostBodyImages, 'id'>
+        & SlicesNewsPostBody_PrismicNewsPostBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicNewsPostBodyVideo' }
+        & Pick<PrismicNewsPostBodyVideo, 'id'>
+        & SlicesNewsPostBody_PrismicNewsPostBodyVideo_Fragment
+      ) | (
+        { __typename: 'PrismicNewsPostBodyTextIntro' }
+        & Pick<PrismicNewsPostBodyTextIntro, 'id'>
+        & SlicesNewsPostBody_PrismicNewsPostBodyTextIntro_Fragment
+      ) | (
+        { __typename: 'PrismicNewsPostBodyAnchor' }
+        & Pick<PrismicNewsPostBodyAnchor, 'id'>
+        & SlicesNewsPostBody_PrismicNewsPostBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicNewsPostBodyDivider' }
+        & Pick<PrismicNewsPostBodyDivider, 'id'>
+        & SlicesNewsPostBody_PrismicNewsPostBodyDivider_Fragment
+      )>>> }
+    )> }
+  )>, nextPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment>, prevPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment> };
+
+export type NewsPostTemplatePaginatedNewsPostFragment = (
+  Pick<PrismicNewsPost, 'url' | 'first_publication_date'>
+  & { data?: Maybe<(
+    Pick<PrismicNewsPostDataType, 'published_at'>
+    & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, excerpt?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, featured_image?: Maybe<(
+      Pick<PrismicImageType, 'alt'>
+      & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+    )> }
+  )> }
+);
 
 export type PageTemplateQueryVariables = Exact<{
   uid: Scalars['String'];

@@ -5,12 +5,12 @@ import { PageTemplateEnhancerProps } from '../templates/page'
 import { BoundedBox } from '../components/BoundedBox'
 import { Divider } from '../components/Divider'
 
-export type InteriorPageBodyDividerProps = PageTemplateEnhancerProps
+export type NewsPostBodyDividerProps = PageTemplateEnhancerProps
 
-export const InteriorPageBodyDivider = ({
+export const NewsPostBodyDivider = ({
   nextSharesBg,
   id,
-}: InteriorPageBodyDividerProps) => (
+}: NewsPostBodyDividerProps) => (
   <BoundedBox
     as="section"
     variant="narrow"
@@ -26,4 +26,4 @@ export const mapDataToContext = () => ({
   bg: 'white',
 })
 
-export default InteriorPageBodyDivider
+export default NewsPostBodyDivider

@@ -167,7 +167,13 @@ const components: React.ComponentProps<typeof HTMLRenderer>['components'] = {
       </Box>
     )
   },
-  a: ({ href, ...props }) => <Anchor href={href!} {...props} />,
+  a: ({ href, ...props }) => (
+    <Anchor
+      href={href!}
+      {...props}
+      styles={{ textDecoration: 'underline', ...props.styles }}
+    />
+  ),
   strong: (props) => (
     <Box as="strong" styles={{ fontWeight: 'semibold', ...props.styles }}>
       {props.children}
