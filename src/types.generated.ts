@@ -14193,6 +14193,58 @@ export type NotFoundPageQuery = { prismicPage?: Maybe<(
     )> }
   )> };
 
+export type NewsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NewsPageQuery = { prismicPage?: Maybe<(
+    Pick<PrismicPage, '_previewable'>
+    & { data?: Maybe<(
+      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicPageBodyText' }
+        & Pick<PrismicPageBodyText, 'id'>
+        & SlicesPageBody_PrismicPageBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImages' }
+        & Pick<PrismicPageBodyImages, 'id'>
+        & SlicesPageBody_PrismicPageBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyAnchor' }
+        & Pick<PrismicPageBodyAnchor, 'id'>
+        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImage' }
+        & Pick<PrismicPageBodyHeroImage, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyQuoteSlideshow' }
+        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
+        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
+      )>>> }
+    )> }
+    & PrismicPageParentRecursiveFragment
+  )>, allPrismicNewsPost: { nodes: Array<(
+      Pick<PrismicNewsPost, 'url' | 'first_publication_date'>
+      & { data?: Maybe<(
+        Pick<PrismicNewsPostDataType, 'published_at'>
+        & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, excerpt?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, news_categories?: Maybe<Array<Maybe<{ news_category?: Maybe<{ document?: Maybe<(
+              Pick<PrismicNewsCategory, 'uid' | 'url'>
+              & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+            )> }> }>>>, featured_image?: Maybe<(
+          Pick<PrismicImageType, 'alt'>
+          & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+        )> }
+      )> }
+    )> } };
+
 type SlicesInteriorPageBody_PrismicInteriorPageBodyText_Fragment = InteriorPageBodyTextFragment;
 
 type SlicesInteriorPageBody_PrismicInteriorPageBodyImages_Fragment = InteriorPageBodyImagesFragment;

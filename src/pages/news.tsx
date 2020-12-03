@@ -2,24 +2,23 @@ import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import { withPreview } from 'gatsby-source-prismic'
-import { propPairsEq, undefIfEmpty } from '@walltowall/helpers'
+import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 import { Box } from '@walltowall/calico'
 
-import { InteriorPageTemplateQuery } from '../types.generated'
+import { NewsPageQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
 import { slicesMap as interiorPageHeaderSlicesMap } from '../slices/InteriorPageHeader'
 import { slicesMap as interiorPageBodySlicesMap } from '../slices/InteriorPageBody'
-import { useNavigation } from '../hooks/useNavigation'
 import { useCommonStyles } from '../hooks/useCommonStyles'
 import { PickPartial } from '../types'
 
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
-import { Anchor } from '../components/Anchor'
+import { NewsPostCard } from '../components/NewsPostCard'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -37,6 +36,7 @@ const slicesMap = {
 // prettier-ignore
 export const slicesMiddleware = <T,>(list: T[]) => [
   { __typename: 'PageBodyHeader', id: 'header' },
+  { __typename: 'PageBodyHeroImage', id: 'hero-image' },
   ...list,
 ]
 
@@ -92,12 +92,14 @@ export type InteriorPageTemplateEnhancerProps = PickPartial<
 export const InteriorPageTemplate = ({
   data,
   location,
-}: PageProps<InteriorPageTemplateQuery>) => {
+}: PageProps<NewsPageQuery>) => {
   const siteSettings = useSiteSettings()
-  const page = data?.prismicInteriorPage
+  const page = data?.prismicPage
 
   const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
   const pageDescription = page?.data?.meta_description
+
+  const newsPosts = data.allPrismicNewsPost.nodes
 
   /**
    * Metadata made available in a slice's `mapDataToProps` and
@@ -113,12 +115,6 @@ export const InteriorPageTemplate = ({
     [data, location],
   )
 
-  const navigation = useNavigation()
-  const parentPageOrSelfURL = page?.data?.parent?.document?.url ?? page?.url
-  const siblingPages = navigation.primary.find(
-    (item) => item?.primary?.link?.url === parentPageOrSelfURL,
-  )?.items
-
   const commonStyles = useCommonStyles()
 
   return (
@@ -133,7 +129,7 @@ export const InteriorPageTemplate = ({
         )}
       </Helmet>
       <MapSlicesToComponents
-        list={page?.data?.header}
+        list={page?.data?.body}
         map={slicesMap}
         meta={meta}
         listMiddleware={slicesMiddleware}
@@ -180,47 +176,6 @@ export const InteriorPageTemplate = ({
                   {pageDescription}
                 </Text>
               )}
-              {undefIfEmpty(siblingPages) && (
-                <Box
-                  as="ul"
-                  styles={{
-                    borderWidth: 'none',
-                    borderTopWidth: '1px',
-                    borderColor: 'gray80',
-                    borderStyle: 'solid',
-                  }}
-                >
-                  {siblingPages.map(
-                    (siblingPage) =>
-                      siblingPage?.link?.url && (
-                        <Box
-                          key={siblingPage.link.url}
-                          as="li"
-                          styles={{
-                            borderWidth: 'none',
-                            borderBottomWidth: '1px',
-                            borderColor: 'gray80',
-                            borderStyle: 'solid',
-                          }}
-                        >
-                          <Anchor
-                            href={siblingPage.link.url}
-                            styles={{
-                              display: 'block',
-                              color: 'gray40',
-                              paddingBottom: 5,
-                              paddingTop: 5,
-                            }}
-                          >
-                            <Text variant="sans-16-caps">
-                              {siblingPage.name}
-                            </Text>
-                          </Anchor>
-                        </Box>
-                      ),
-                  )}
-                </Box>
-              )}
             </Box>
           </BoundedBox>
         </Box>
@@ -231,12 +186,38 @@ export const InteriorPageTemplate = ({
             paddingBottom: [10, 13],
           }}
         >
-          <MapSlicesToComponents
-            list={page?.data?.body}
-            map={slicesMap}
-            meta={meta}
-            mapDataToPropsEnhancer={mapDataToPropsEnhancer}
-          />
+          <BoundedBox>
+            <Box as="ul" styles={{ display: 'grid', gap: [6, 8, 10] }}>
+              {newsPosts.map((newsPost) => {
+                const newsCategories =
+                  newsPost?.data?.news_categories?.map?.(
+                    (category) => category?.news_category?.document,
+                  ) ?? []
+                const primaryNewsCategory = newsCategories[0]
+
+                return (
+                  newsPost.url && (
+                    <Box as="li">
+                      <NewsPostCard
+                        href={newsPost.url}
+                        topLabel={primaryNewsCategory?.data?.name?.text}
+                        title={newsPost.data?.title?.text}
+                        excerpt={newsPost.data?.excerpt?.text}
+                        date={
+                          (newsPost?.data?.published_at as string) ??
+                          (newsPost?.first_publication_date as string)
+                        }
+                        featuredImageFluid={
+                          newsPost.data?.featured_image?.fluid
+                        }
+                        featuredImageAlt={newsPost.data?.featured_image?.alt}
+                      />
+                    </Box>
+                  )
+                )
+              })}
+            </Box>
+          </BoundedBox>
         </Box>
       </Box>
       <MapSlicesToComponents
@@ -252,29 +233,59 @@ export const InteriorPageTemplate = ({
 export default withPreview(InteriorPageTemplate)
 
 export const query = graphql`
-  query InteriorPageTemplate($uid: String!) {
-    prismicInteriorPage(uid: { eq: $uid }) {
+  query NewsPage {
+    prismicPage(uid: { eq: "news" }) {
       _previewable
-      ...PrismicInteriorPageParentRecursive
+      ...PrismicPageParentRecursive
       data {
         title {
           text
         }
         meta_title
         meta_description
-        header {
-          __typename
-          ... on Node {
-            id
-          }
-          ...SlicesInteriorPageHeader
-        }
         body {
           __typename
           ... on Node {
             id
           }
-          ...SlicesInteriorPageBody
+          ...SlicesPageBody
+        }
+      }
+    }
+
+    allPrismicNewsPost {
+      nodes {
+        url
+        first_publication_date(formatString: "MMMM D, YYYY")
+        data {
+          title {
+            text
+          }
+          published_at(formatString: "MMMM D, YYYY")
+          excerpt {
+            text
+          }
+          news_categories {
+            news_category {
+              document {
+                ... on PrismicNewsCategory {
+                  uid
+                  url
+                  data {
+                    name {
+                      text
+                    }
+                  }
+                }
+              }
+            }
+          }
+          featured_image {
+            alt
+            fluid(maxWidth: 400) {
+              ...GatsbyPrismicImageFluid
+            }
+          }
         }
       }
     }
