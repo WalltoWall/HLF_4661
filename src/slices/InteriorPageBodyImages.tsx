@@ -14,7 +14,7 @@ import { HTMLContent } from '../components/HTMLContent'
 export type InteriorPageBodyImagesProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
 
-const InteriorPageBodyImages = ({
+export const InteriorPageBodyImages = ({
   children,
   nextSharesBg,
 }: InteriorPageBodyImagesProps) => {
