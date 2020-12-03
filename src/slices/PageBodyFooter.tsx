@@ -124,9 +124,9 @@ const PageBodyFooter = ({ nextSharesBg }: PageBodyFooter) => {
               align="spaceBetween"
               alignY="baseline"
             >
-              <Inline space={4} alignY="center">
+              <Inline space={3} alignY="center">
                 <Text variant="sans-13-14">{siteSettings.siteCopyright}</Text>
-                <Inline variant="ul" space={4}>
+                <Inline variant="ul" space={3}>
                   {navigation.footer.map(
                     (item) =>
                       item?.primary?.link?.url && (

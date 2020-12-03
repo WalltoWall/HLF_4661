@@ -43,7 +43,9 @@ export const NewsPostCard = <
         ...props.styles,
       }}
     >
-      <Box styles={{ gridColumn: [null, 'span-1'] }}>
+      <Box
+        styles={{ gridColumn: [null, 'span-1'], maxWidth: ['20rem', 'none'] }}
+      >
         <Link href={href}>
           {featuredImageFluid ? (
             <GatsbyImage fluid={featuredImageFluid} alt={featuredImageAlt} />
