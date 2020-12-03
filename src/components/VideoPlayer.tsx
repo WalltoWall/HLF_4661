@@ -1,11 +1,10 @@
 import * as React from 'react'
 import GatsbyImage, { FluidObject } from 'gatsby-image'
 import { useStyles } from 'react-treat'
-import { Box, useBoxStyles, BoxProps } from '@walltowall/calico'
+import { Box, BoxProps } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
 import VisuallyHidden from '@reach/visually-hidden'
 import ReactPlayer, { ReactPlayerProps } from 'react-player'
-import clsx from 'clsx'
 
 import { Icon } from '../components/Icon'
 import { mockGatsbyImageFluid } from '../lib/mockGatsbyImage'
@@ -66,21 +65,9 @@ export const VideoPlayer = <
     }
   }
 
-  const hideWhenPlaying = useBoxStyles({
-    opacity: isPlaying ? 0 : 100,
-    transitionDuration: 'normal',
-    transitionProperty: 'opacity',
-    transitionTimingFunction: 'easeOut',
-  })
-  const fullSize = useBoxStyles({
-    height: 'full',
-    width: 'full',
-  })
-  const positionRelative = useBoxStyles({ position: 'relative' })
-
   return (
     <Box as={defaultElement} {...props}>
-      <AspectRatio x={x} y={y} className={positionRelative}>
+      <Box as={AspectRatio} x={x} y={y} styles={{ position: 'relative' }}>
         <Box
           as="button"
           onClick={play}
@@ -107,15 +94,24 @@ export const VideoPlayer = <
           >
             <VisuallyHidden>Play video</VisuallyHidden>
             {posterFluid && (
-              <GatsbyImage
+              <Box
+                as={GatsbyImage}
                 fluid={posterFluid}
                 alt={posterAlt}
-                className={clsx(fullSize, hideWhenPlaying)}
+                styles={{
+                  height: 'full',
+                  width: 'full',
+                  opacity: isPlaying ? 0 : 100,
+                  transitionDuration: 'normal',
+                  transitionProperty: 'opacity',
+                  transitionTimingFunction: 'easeOut',
+                }}
               />
             )}
             <Box
-              className={clsx(hideWhenPlaying, styles.buttonFocusTarget)}
+              className={styles.buttonFocusTarget}
               styles={{
+                opacity: isPlaying ? 0 : 100,
                 paddingTop: [4, 5],
                 paddingBottom: [4, 5],
                 paddingLeft: [10, 12],
@@ -123,6 +119,7 @@ export const VideoPlayer = <
                 position: 'absolute',
                 transitionDuration: 'normal',
                 transitionProperty: 'backgroundColor',
+                transitionTimingFunction: 'easeOut',
               }}
             >
               <Icon
@@ -149,7 +146,7 @@ export const VideoPlayer = <
             />
           )}
         </Box>
-      </AspectRatio>
+      </Box>
     </Box>
   )
 }

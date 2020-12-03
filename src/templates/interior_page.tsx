@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
+import { useStyles } from 'react-treat'
 import { Helmet } from 'react-helmet-async'
 import { withPreview } from 'gatsby-source-prismic'
-import { propPairsEq } from '@walltowall/helpers'
+import { propPairsEq, undefIfEmpty } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 import { Box } from '@walltowall/calico'
 
@@ -19,6 +20,8 @@ import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
 import { Anchor } from '../components/Anchor'
+
+import * as styleRefs from './interior_page.treat'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -118,6 +121,8 @@ export const InteriorPageTemplate = ({
     (item) => item?.primary?.link?.url === parentPageOrSelfURL,
   )?.items
 
+  const styles = useStyles(styleRefs)
+
   return (
     <Layout>
       <Helmet>
@@ -143,80 +148,84 @@ export const InteriorPageTemplate = ({
           marginLeft: 'auto',
           marginRight: 'auto',
           display: 'grid',
-          gap: [null, null, 8],
           gridTemplateColumns: [null, null, 3],
         }}
       >
-        <BoundedBox
-          styles={{
-            paddingRight: [4, 0],
-            paddingBottom: [2, null, 16],
-            maxWidth: [null, '30ch'],
-          }}
-        >
-          <Box
+        <Box className={styles.lightGrayGradientBackground}>
+          <BoundedBox
             styles={{
-              display: 'grid',
-              gap: 8,
               position: [null, 'sticky'],
-              top: [10, 13, 16],
+              top: 0,
             }}
           >
-            {pageTitle && (
-              <Text variant="serif-40-48" as="h1" styles={{ color: 'gray10' }}>
-                {pageTitle}
-              </Text>
-            )}
-            {pageDescription && (
-              <Text
-                variant="sans-16-italic"
-                as="p"
-                styles={{ color: 'orange55' }}
-              >
-                {pageDescription}
-              </Text>
-            )}
-            {siblingPages && (
-              <Box
-                as="ul"
-                styles={{
-                  borderWidth: 'none',
-                  borderTopWidth: '1px',
-                  borderColor: 'gray40',
-                  borderStyle: 'solid',
-                }}
-              >
-                {siblingPages.map(
-                  (siblingPage) =>
-                    siblingPage?.link?.url && (
-                      <Box
-                        key={siblingPage.link.url}
-                        as="li"
-                        styles={{
-                          borderWidth: 'none',
-                          borderBottomWidth: '1px',
-                          borderColor: 'gray40',
-                          borderStyle: 'solid',
-                        }}
-                      >
-                        <Anchor
-                          href={siblingPage.link.url}
+            <Box
+              styles={{
+                display: 'grid',
+                gap: 8,
+              }}
+            >
+              {pageTitle && (
+                <Text
+                  variant="serif-40-48"
+                  as="h1"
+                  styles={{ color: 'gray10' }}
+                >
+                  {pageTitle}
+                </Text>
+              )}
+              {pageDescription && (
+                <Text
+                  variant="sans-16-italic"
+                  as="p"
+                  styles={{ color: 'orange55' }}
+                >
+                  {pageDescription}
+                </Text>
+              )}
+              {undefIfEmpty(siblingPages) && (
+                <Box
+                  as="ul"
+                  styles={{
+                    borderWidth: 'none',
+                    borderTopWidth: '1px',
+                    borderColor: 'gray80',
+                    borderStyle: 'solid',
+                  }}
+                >
+                  {siblingPages.map(
+                    (siblingPage) =>
+                      siblingPage?.link?.url && (
+                        <Box
+                          key={siblingPage.link.url}
+                          as="li"
                           styles={{
-                            display: 'block',
-                            color: 'gray40',
-                            paddingBottom: 5,
-                            paddingTop: 5,
+                            borderWidth: 'none',
+                            borderBottomWidth: '1px',
+                            borderColor: 'gray80',
+                            borderStyle: 'solid',
                           }}
                         >
-                          <Text variant="sans-16-caps">{siblingPage.name}</Text>
-                        </Anchor>
-                      </Box>
-                    ),
-                )}
-              </Box>
-            )}
-          </Box>
-        </BoundedBox>
+                          <Anchor
+                            href={siblingPage.link.url}
+                            styles={{
+                              display: 'block',
+                              color: 'gray40',
+                              paddingBottom: 5,
+                              paddingTop: 5,
+                            }}
+                          >
+                            <Text variant="sans-16-caps">
+                              {siblingPage.name}
+                            </Text>
+                          </Anchor>
+                        </Box>
+                      ),
+                  )}
+                </Box>
+              )}
+            </Box>
+          </BoundedBox>
+        </Box>
         <Box
           styles={{
             gridColumn: [null, null, 'span-2'],

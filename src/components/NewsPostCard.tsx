@@ -38,7 +38,7 @@ export const NewsPostCard = <
       {...props}
       styles={{
         display: 'grid',
-        gap: 6,
+        gap: [4, 6],
         gridTemplateColumns: [null, 3],
         ...props.styles,
       }}
@@ -60,7 +60,7 @@ export const NewsPostCard = <
       <Box
         styles={{
           display: 'grid',
-          gap: 8,
+          gap: [6, 8],
           gridColumn: [null, 'span-2'],
           paddingTop: 2,
         }}
