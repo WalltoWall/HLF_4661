@@ -13,20 +13,20 @@ const defaultElement = 'div'
 
 const variants = {
   base: {
-    paddingLeft: [4, 7, 11],
-    paddingRight: [4, 7, 11],
+    paddingLeft: [5, 8, 11, 14],
+    paddingRight: [5, 8, 11, 14],
     paddingTop: [10, 13, 16],
     paddingBottom: [10, 13, 16],
   },
   narrow: {
-    paddingLeft: [4, 7, 11],
-    paddingRight: [4, 7, 11],
+    paddingLeft: [5, 8, 11, 14],
+    paddingRight: [5, 8, 11, 14],
     paddingTop: [8, 10, 11],
     paddingBottom: [8, 10, 11],
   },
   extraNarrow: {
-    paddingLeft: [4, 7, 11],
-    paddingRight: [4, 7, 11],
+    paddingLeft: [5, 8, 11, 14],
+    paddingRight: [5, 8, 11, 14],
     paddingTop: [6, 7, 8],
     paddingBottom: [6, 7, 8],
   },

@@ -3,6 +3,7 @@ import { graphql, PageProps } from 'gatsby'
 import { useStyles } from 'react-treat'
 import { Helmet } from 'react-helmet-async'
 import { withPreview } from 'gatsby-source-prismic'
+import GatsbyImage from 'gatsby-image'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 import { Box } from '@walltowall/calico'
@@ -17,12 +18,12 @@ import { PickPartial } from '../types'
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
-
-import * as styleRefs from './news_post.treat'
 import { Anchor } from '../components/Anchor'
 import { Divider } from '../components/Divider'
 import { NewsPostCard } from '../components/NewsPostCard'
-import GatsbyImage from 'gatsby-image'
+
+import * as styleRefs from './news_post.treat'
+import { AspectRatio } from '@walltowall/siamese'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -147,21 +148,34 @@ export const NewsPostTemplate = ({
           marginLeft: 'auto',
           marginRight: 'auto',
           display: 'grid',
-          gap: [null, null, 8],
           gridTemplateColumns: [null, null, 3],
         }}
       >
-        <Box
-          className={styles.lightGrayGradientBackground}
-          styles={{
-            paddingBottom: [2, null, 16],
-          }}
-        >
+        <Box className={styles.lightGrayGradientBackground}>
           {newsPostFeaturedImageFluid && (
-            <GatsbyImage
-              fluid={newsPostFeaturedImageFluid}
-              alt={newsPostFeaturedImageAlt}
-            />
+            <>
+              <Box
+                as={AspectRatio}
+                x={16}
+                y={9}
+                styles={{ display: [null, null, 'none'] }}
+              >
+                <Box
+                  as={GatsbyImage}
+                  fluid={newsPostFeaturedImageFluid}
+                  alt={newsPostFeaturedImageAlt}
+                  styles={{ width: 'full', height: 'full' }}
+                />
+              </Box>
+              <Box
+                as={GatsbyImage}
+                fluid={newsPostFeaturedImageFluid}
+                alt={newsPostFeaturedImageAlt}
+                styles={{
+                  display: ['none', null, 'block'],
+                }}
+              />
+            </>
           )}
         </Box>
         <Box styles={{ gridColumn: [null, null, 'span-2'] }}>
