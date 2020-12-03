@@ -1,18 +1,19 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
-import { useStyles } from 'react-treat'
 import { Helmet } from 'react-helmet-async'
 import { withPreview } from 'gatsby-source-prismic'
 import GatsbyImage from 'gatsby-image'
+import { Box } from '@walltowall/calico'
+import { AspectRatio } from '@walltowall/siamese'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
-import { Box } from '@walltowall/calico'
 
 import { NewsPostTemplateQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
 import { slicesMap as newsPostBodySlicesMap } from '../slices/NewsPostBody'
+import { useCommonStyles } from '../hooks/useCommonStyles'
 import { PickPartial } from '../types'
 
 import { Layout } from '../components/Layout'
@@ -21,9 +22,6 @@ import { Text } from '../components/Text'
 import { Anchor } from '../components/Anchor'
 import { Divider } from '../components/Divider'
 import { NewsPostCard } from '../components/NewsPostCard'
-
-import * as styleRefs from './news_post.treat'
-import { AspectRatio } from '@walltowall/siamese'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -122,7 +120,7 @@ export const NewsPostTemplate = ({
     [data, location],
   )
 
-  const styles = useStyles(styleRefs)
+  const commonStyles = useCommonStyles()
 
   return (
     <Layout>
@@ -151,7 +149,7 @@ export const NewsPostTemplate = ({
           gridTemplateColumns: [null, null, 3],
         }}
       >
-        <Box className={styles.lightGrayGradientBackground}>
+        <Box className={commonStyles.lightGrayGradientBackground}>
           {newsPostFeaturedImageFluid && (
             <>
               <Box

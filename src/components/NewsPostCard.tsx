@@ -40,6 +40,7 @@ export const NewsPostCard = <
         display: 'grid',
         gap: [4, 6],
         gridTemplateColumns: [null, 3],
+        alignItems: 'start',
         ...props.styles,
       }}
     >

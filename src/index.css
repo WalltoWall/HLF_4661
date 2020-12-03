@@ -53,13 +53,16 @@ button {
   cursor: pointer;
 }
 
-[data-system-gatsby-image-container] .gatsby-image-outer-wrapper,
-[data-system-gatsby-image-container] .gatsby-image-wrapper {
-  height: 100%;
+[data-system-aspect-ratio] {
+  position: relative;
 }
-
 [data-system-aspect-ratio-inner] {
   display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 /* Skip @reach styles */
