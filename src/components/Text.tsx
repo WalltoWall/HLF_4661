@@ -53,6 +53,13 @@ const styledVariants = {
       letterSpacing: 's',
     },
   },
+  'sans-13-14-caps': {
+    variant: 'sans-13-14',
+    styles: {
+      textTransform: 'uppercase',
+      letterSpacing: 's',
+    },
+  },
   'sans-13-14-bold-caps': {
     variant: 'sans-13-14',
     styles: {

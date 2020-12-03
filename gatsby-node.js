@@ -65,6 +65,40 @@ exports.createPages = (gatsbyContext) => {
   }
 
   /**
+   * Create pages for all News Post documents in Prismic. The document's UID is
+   * passed as context here to allow the template to query for the specific
+   * document.
+   *
+   * News post pages have links to the next and/or previous post. Here, we sort
+   * all news posts by published date and also pass the next/previous post UIDs
+   * as context.
+   *
+   * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+   */
+  {
+    const newsPosts = getNodesByType('PrismicNewsPost').sort(
+      (a, b) =>
+        Date.parse(b.data?.published_at ?? b.first_published_date) -
+        Date.parse(a.data?.published_at ?? a.first_published_date),
+    )
+    for (let i = 0; i < newsPosts.length; i++) {
+      const newsPost = newsPosts[i]
+      const nextNewsPost = newsPosts[i + 1]
+      const prevNewsPost = newsPosts[i - 1]
+
+      createPage({
+        path: newsPost.url,
+        component: path.resolve(__dirname, 'src/templates/news_post.tsx'),
+        context: {
+          uid: newsPost.uid,
+          nextUID: nextNewsPost?.uid,
+          prevUID: prevNewsPost?.uid,
+        },
+      })
+    }
+  }
+
+  /**
    * Create global redirects defined in the Settings document.
    *
    * @see https://www.gatsbyjs.org/docs/actions/#createRedirect

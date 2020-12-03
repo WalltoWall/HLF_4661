@@ -13,6 +13,7 @@ module.exports = {
   interior_page: require('./interior_page.json'),
   navigation: require('./navigation.json'),
   news_category: require('./news_category.json'),
+  news_post: require('./news_post.json'),
   page: require('./page.json'),
   settings: require('./settings.json'),
 }

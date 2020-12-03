@@ -1,0 +1,76 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
+import faker from 'faker'
+import { buildImgixFluid } from 'gatsby-plugin-imgix'
+
+import * as Storybook from '../components/Storybook'
+
+import NewsPostBodyImages from './NewsPostBodyImages'
+
+export const images = [
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1500961585473-b554ed1bcff5',
+    sourceWidth: 4 / 3,
+    sourceHeight: 1,
+  }),
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1519662978799-2f05096d3636',
+    sourceWidth: 4 / 3,
+    sourceHeight: 1,
+  })
+]
+
+<Meta title="News Posts/Images" component={NewsPostBodyImages} />
+
+##### News Post
+
+# Images
+
+Set of images or photos displayed as a group with optional captions. On mobile,
+images are positioned in a single column and set to the full width of the
+device. On desktop, images are positioned in a single row.
+
+#### Repeatable fields
+
+Each item represents an image and optional caption.
+
+<Storybook.SliceFieldsTable
+  customTypeId="news_post"
+  sliceZoneId="body"
+  sliceId="images"
+  fieldset="repeat"
+  overrides={{ image: { description: 'Image to display' } }}
+/>
+
+### With one image
+
+This slice can support one or more images.
+
+<Canvas withSource="none">
+  <Story name="With one image">
+    <NewsPostBodyImages nextSharesBg={false}>
+      <NewsPostBodyImages.Image
+        imageFluid={images[0]}
+        captionHTML={`<p>${faker.lorem.sentences(2)}</p>`}
+      />
+    </NewsPostBodyImages>
+  </Story>
+</Canvas>
+
+### With two images
+
+Images are spaced evenly as shown below.
+
+<Canvas withSource="none">
+  <Story name="With two images">
+    <NewsPostBodyImages nextSharesBg={false}>
+      <NewsPostBodyImages.Image
+        imageFluid={images[0]}
+        captionHTML={`<p>${faker.lorem.sentences(2)}</p>`}
+      />
+      <NewsPostBodyImages.Image
+        imageFluid={images[1]}
+        captionHTML={`<p>${faker.lorem.sentences(2)}</p>`}
+      />
+    </NewsPostBodyImages>
+  </Story>
+</Canvas>

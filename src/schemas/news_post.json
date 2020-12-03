@@ -22,6 +22,14 @@
         "placeholder": "Published at date override (default: original publish date)"
       }
     },
+    "excerpt": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Excerpt",
+        "placeholder": "Short excerpt from or summary of the post"
+      }
+    },
     "news_categories": {
       "type": "Group",
       "config": {
