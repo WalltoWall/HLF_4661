@@ -8,6 +8,10 @@ exports.linkResolver = () => (doc) => {
     case 'news_category':
       return `/news/${doc.uid}/`
 
+    case 'project':
+    case 'project_category':
+      return `/impact/projects/${doc.uid}/`
+
     case 'page':
     case 'interior_page':
     default:
