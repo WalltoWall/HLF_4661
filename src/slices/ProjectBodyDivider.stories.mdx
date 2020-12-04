@@ -1,0 +1,27 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
+
+import * as Storybook from '../components/Storybook'
+
+import ProjectBodyDivider from './ProjectBodyDivider'
+
+<Meta title="News Posts/Divider" component={ProjectBodyDivider} />
+
+##### News Post
+
+# Divider
+
+Horizontal divider between slices to separate content.
+
+#### Slice fields
+
+This slice has no fields.
+
+### Typical usage
+
+This slice simply displays a divider with surrounding space.
+
+<Canvas withSource="none">
+  <Story name="Typical usage">
+    <ProjectBodyDivider nextSharesBg={false} />
+  </Story>
+</Canvas>
