@@ -5,7 +5,7 @@
       "config": {
         "single": "heading1",
         "label": "Title",
-        "placeholder": "Title of the news post"
+        "placeholder": "Title of the project"
       }
     },
     "uid": {
@@ -15,36 +15,29 @@
         "placeholder": "Unique identifier"
       }
     },
-    "published_at": {
-      "type": "Date",
-      "config": {
-        "label": "Published At",
-        "placeholder": "Published at date override (default: original publish date)"
-      }
-    },
-    "excerpt": {
+    "description": {
       "type": "StructuredText",
       "config": {
         "single": "paragraph",
-        "label": "Excerpt",
-        "placeholder": "Short excerpt from or summary of the post"
+        "label": "Description",
+        "placeholder": "Short description about the project"
       }
     },
-    "news_categories": {
+    "project_categories": {
       "type": "Group",
       "config": {
         "fields": {
-          "news_category": {
+          "project_category": {
             "type": "Link",
             "config": {
               "select": "document",
-              "customtypes": ["news_category"],
-              "label": "News Category",
-              "placeholder": "News category to categorize the news post"
+              "customtypes": ["project_category"],
+              "label": "Project Category",
+              "placeholder": "Project category to categorize the project"
             }
           }
         },
-        "label": "News Categories"
+        "label": "Project Categories"
       }
     },
     "featured_image": {

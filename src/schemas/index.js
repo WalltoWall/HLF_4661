@@ -15,5 +15,7 @@ module.exports = {
   news_category: require('./news_category.json'),
   news_post: require('./news_post.json'),
   page: require('./page.json'),
+  project: require('./project.json'),
+  project_category: require('./project_category.json'),
   settings: require('./settings.json'),
 }

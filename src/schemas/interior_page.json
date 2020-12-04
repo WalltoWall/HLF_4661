@@ -109,6 +109,25 @@
           "staff_directory": []
         },
         "choices": {
+          "text_intro": {
+            "type": "Slice",
+            "fieldset": "Text Intro",
+            "description": "Introduction to following content",
+            "icon": "format_color_text",
+            "display": "list",
+            "non-repeat": {
+              "introductory_text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "Introductory Text",
+                  "placeholder": "Introductory text leading into the content that follows"
+                }
+              }
+            },
+            "repeat": {}
+          },
           "text": {
             "type": "Slice",
             "fieldset": "Text",
@@ -181,23 +200,38 @@
             },
             "repeat": {}
           },
-          "text_intro": {
+          "link_card": {
             "type": "Slice",
-            "fieldset": "Text Intro",
-            "description": "Introduction to following content",
-            "icon": "format_color_text",
+            "fieldset": "Link Card",
+            "description": "Link to a page or file",
+            "icon": "open_in_new",
             "display": "list",
             "non-repeat": {
-              "introductory_text": {
+              "link_title": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, strong, em, hyperlink",
-                  "allowTargetBlank": true,
-                  "label": "Introductory Text",
-                  "placeholder": "Introductory text leading into the content that follows"
+                  "single": "heading3",
+                  "label": "Link Title",
+                  "placeholder": "Title of the link"
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "Link to display"
                 }
               }
             },
+            "repeat": {}
+          },
+          "divider": {
+            "type": "Slice",
+            "fieldset": "Divider",
+            "description": "Horizontal divider between Slices",
+            "icon": "remove",
+            "display": "list",
+            "non-repeat": {},
             "repeat": {}
           },
           "anchor": {
@@ -234,15 +268,6 @@
                 }
               }
             },
-            "repeat": {}
-          },
-          "divider": {
-            "type": "Slice",
-            "fieldset": "Divider",
-            "description": "Horizontal divider between Slices",
-            "icon": "remove",
-            "display": "list",
-            "non-repeat": {},
             "repeat": {}
           },
           "staff_directory": {
