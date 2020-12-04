@@ -1,9 +1,14 @@
 const path = require('path')
 
 /**
- * Number of news posts to display on each paginated news post listing page.
+ * Number of news posts to display on each paginated news posts listing page.
  */
 const NEWS_POSTS_PER_PAGE = 2
+
+/**
+ * Number of projects to display on each paginated projects listing page.
+ */
+const PROJECTS_PER_PAGE = 2
 
 exports.createPages = (gatsbyContext) => {
   const { actions, getNodesByType, reporter } = gatsbyContext
@@ -162,6 +167,106 @@ exports.createPages = (gatsbyContext) => {
           uid: newsPost.uid,
           nextUID: nextNewsPost?.uid,
           prevUID: prevNewsPost?.uid,
+        },
+      })
+    }
+  }
+
+  /**
+   * Create all Project-related pages, including paginated project post
+   * listings and individual project pages.
+   */
+  {
+    const projects = getNodesByType('PrismicProject').sort((a, b) =>
+      Intl.Collator('en').compare(
+        a.data?.title?.text?.replace?.('ʻ', ''),
+        b.data?.title?.text?.replace?.('ʻ', ''),
+      ),
+    )
+
+    // /**
+    //  * Create paginated pages listing all projects. Pagination is done by
+    //  * passing limit and skip values as context. This allows the template to
+    //  * query a set of project posts for the page's pagination parameters.
+    //  *
+    //  * @see https://www.gatsbyjs.com/docs/adding-pagination/
+    //  * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+    //  */
+    // const numPages = Math.max(Math.ceil(projects.length / PROJECTS_PER_PAGE), 1)
+    // for (let i = 0; i < numPages; i++)
+    //   createPage({
+    //     path: i === 0 ? '/impact/projects/' : `/impact/projects/${i + 1}/`,
+    //     component: path.resolve(__dirname, 'src/templates/project.tsx'),
+    //     context: {
+    //       limit: PROJECTS_PER_PAGE,
+    //       skip: i * PROJECTS_PER_PAGE,
+    //       numPages,
+    //       currentPage: i + 1,
+    //       total: projects.length,
+    //     },
+    //   })
+
+    // /**
+    //  * Create paginated pages listing all projects for each project category.
+    //  * Pagination is done by passing limit and skip values as context. This
+    //  * allows the template to query a set of project posts for the page's
+    //  * pagination parameters.
+    //  *
+    //  * @see https://www.gatsbyjs.com/docs/adding-pagination/
+    //  * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+    //  */
+    // for (const projectCategory of getNodesByType('PrismicProjectCategory')) {
+    //   const projectCategoryPosts = projects.filter((project) =>
+    //     project.data?.project_categories?.find?.(
+    //       (item) => item?.project_category?.uid === projectCategory.uid,
+    //     ),
+    //   )
+    //   const numPages = Math.max(
+    //     Math.ceil(projectCategoryPosts.length / PROJECTS_PER_PAGE),
+    //     1,
+    //   )
+    //   for (let i = 0; i < numPages; i++)
+    //     createPage({
+    //       path:
+    //         i === 0 ? projectCategory.url : `${projectCategory.url}${i + 1}/`,
+    //       component: path.resolve(
+    //         __dirname,
+    //         'src/templates/project_category.tsx',
+    //       ),
+    //       context: {
+    //         uid: projectCategory.uid,
+    //         limit: PROJECTS_PER_PAGE,
+    //         skip: i * PROJECTS_PER_PAGE,
+    //         numPages,
+    //         currentPage: i + 1,
+    //         total: projectCategoryPosts.length,
+    //       },
+    //     })
+    // }
+
+    /**
+     * Create pages for all Project Post documents in Prismic. The document's UID
+     * is passed as context here to allow the template to query for the
+     * specific document.
+     *
+     * Project post pages have links to the next and/or previous post. Here, we
+     * sort all project posts by published date and also pass the next/previous
+     * post UIDs as context.
+     *
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    for (let i = 0; i < projects.length; i++) {
+      const project = projects[i]
+      const nextProject = projects[i + 1]
+      const prevProject = projects[i - 1]
+
+      createPage({
+        path: project.url,
+        component: path.resolve(__dirname, 'src/templates/project.tsx'),
+        context: {
+          uid: project.uid,
+          nextUID: nextProject?.uid,
+          prevUID: prevProject?.uid,
         },
       })
     }

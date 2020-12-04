@@ -18,9 +18,16 @@
     "description": {
       "type": "StructuredText",
       "config": {
-        "single": "paragraph",
+        "multi": "paragraph",
         "label": "Description",
         "placeholder": "Short description about the project"
+      }
+    },
+    "website_url": {
+      "type": "Link",
+      "config": {
+        "label": "Website URL",
+        "placeholder": "Optional - Link to the project's website"
       }
     },
     "project_categories": {
@@ -38,6 +45,23 @@
           }
         },
         "label": "Project Categories"
+      }
+    },
+    "involved_fellows": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "involved_fellow": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["fellow"],
+              "label": "Involved Fellow",
+              "placeholder": "Fellow who was involved in the project"
+            }
+          }
+        },
+        "label": "Involved Fellows"
       }
     },
     "featured_image": {
