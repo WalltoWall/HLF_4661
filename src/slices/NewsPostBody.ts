@@ -16,6 +16,7 @@ import * as NewsPostBodyVideo from './NewsPostBodyVideo'
 import * as NewsPostBodyImages from './NewsPostBodyImages'
 import * as NewsPostBodyAnchor from './NewsPostBodyAnchor'
 import * as NewsPostBodyDivider from './NewsPostBodyDivider'
+import * as NewsPostBodyLinkCard from './NewsPostBodyLinkCard'
 
 // 2. Add your slice
 const slices = {
@@ -25,6 +26,7 @@ const slices = {
   NewsPostBodyImages,
   NewsPostBodyAnchor,
   NewsPostBodyDivider,
+  NewsPostBodyLinkCard,
 }
 
 // 3. Add your slice fragment
@@ -35,6 +37,7 @@ export const fragment = graphql`
     ...NewsPostBodyVideo
     ...NewsPostBodyImages
     ...NewsPostBodyAnchor
+    ...NewsPostBodyLinkCard
 
     # The following slices do not have fragments:
     #...NewsPostBodyDivider

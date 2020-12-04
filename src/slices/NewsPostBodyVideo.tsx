@@ -10,7 +10,7 @@ import {
 
 export type NewsPostBodyVideoProps = InteriorPageBodyVideoProps
 
-const NewsPostBodyVideo = (props: NewsPostBodyVideoProps) => (
+export const NewsPostBodyVideo = (props: NewsPostBodyVideoProps) => (
   <InteriorPageBodyVideo {...props} />
 )
 

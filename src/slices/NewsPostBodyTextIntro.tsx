@@ -10,7 +10,7 @@ import {
 
 export type NewsPostBodyTextIntroProps = InteriorPageBodyTextIntroProps
 
-const NewsPostBodyTextIntro = (props: NewsPostBodyTextIntroProps) => (
+export const NewsPostBodyTextIntro = (props: NewsPostBodyTextIntroProps) => (
   <InteriorPageBodyTextIntro {...props} />
 )
 

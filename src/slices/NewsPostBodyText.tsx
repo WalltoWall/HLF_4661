@@ -10,7 +10,7 @@ import {
 
 export type NewsPostBodyTextProps = InteriorPageBodyTextProps
 
-const NewsPostBodyText = (props: NewsPostBodyTextProps) => (
+export const NewsPostBodyText = (props: NewsPostBodyTextProps) => (
   <InteriorPageBodyText {...props} />
 )
 

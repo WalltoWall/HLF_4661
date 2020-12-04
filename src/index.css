@@ -65,6 +65,11 @@ button {
   left: 0;
 }
 
+[data-system-gatsby-image-container] .gatsby-image-outer-wrapper,
+[data-system-gatsby-image-container] .gatsby-image-wrapper {
+  height: 100%;
+}
+
 /* Skip @reach styles */
 :root {
   --reach-tabs: 1;

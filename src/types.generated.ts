@@ -5870,7 +5870,184 @@ export type PrismicNewsPostBodyImagesSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type PrismicNewsPostBodySlicesType = PrismicNewsPostBodyText | PrismicNewsPostBodyImages | PrismicNewsPostBodyVideo | PrismicNewsPostBodyTextIntro | PrismicNewsPostBodyAnchor | PrismicNewsPostBodyDivider;
+export type PrismicNewsPostBodyLinkCard = PrismicSliceType & Node & {
+  slice_type: Scalars['String'];
+  slice_label?: Maybe<Scalars['String']>;
+  primary?: Maybe<PrismicNewsPostBodyLinkCardPrimaryType>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type PrismicNewsPostBodyLinkCardConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyLinkCardEdge>;
+  nodes: Array<PrismicNewsPostBodyLinkCard>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<PrismicNewsPostBodyLinkCardGroupConnection>;
+};
+
+
+export type PrismicNewsPostBodyLinkCardConnectionDistinctArgs = {
+  field: PrismicNewsPostBodyLinkCardFieldsEnum;
+};
+
+
+export type PrismicNewsPostBodyLinkCardConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: PrismicNewsPostBodyLinkCardFieldsEnum;
+};
+
+export type PrismicNewsPostBodyLinkCardEdge = {
+  next?: Maybe<PrismicNewsPostBodyLinkCard>;
+  node: PrismicNewsPostBodyLinkCard;
+  previous?: Maybe<PrismicNewsPostBodyLinkCard>;
+};
+
+export enum PrismicNewsPostBodyLinkCardFieldsEnum {
+  SliceType = 'slice_type',
+  SliceLabel = 'slice_label',
+  PrimaryLinkTitleHtml = 'primary___link_title___html',
+  PrimaryLinkTitleText = 'primary___link_title___text',
+  PrimaryLinkTitleRaw = 'primary___link_title___raw',
+  PrimaryLinkLinkType = 'primary___link___link_type',
+  PrimaryLinkIsBroken = 'primary___link___isBroken',
+  PrimaryLinkUrl = 'primary___link___url',
+  PrimaryLinkTarget = 'primary___link___target',
+  PrimaryLinkSize = 'primary___link___size',
+  PrimaryLinkId = 'primary___link___id',
+  PrimaryLinkType = 'primary___link___type',
+  PrimaryLinkTags = 'primary___link___tags',
+  PrimaryLinkLang = 'primary___link___lang',
+  PrimaryLinkSlug = 'primary___link___slug',
+  PrimaryLinkUid = 'primary___link___uid',
+  PrimaryLinkRaw = 'primary___link___raw',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type PrismicNewsPostBodyLinkCardFilterInput = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyLinkCardPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type PrismicNewsPostBodyLinkCardGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<PrismicNewsPostBodyLinkCardEdge>;
+  nodes: Array<PrismicNewsPostBodyLinkCard>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicNewsPostBodyLinkCardPrimaryType = {
+  link_title?: Maybe<PrismicStructuredTextType>;
+  link?: Maybe<PrismicLinkType>;
+};
+
+export type PrismicNewsPostBodyLinkCardPrimaryTypeFilterInput = {
+  link_title?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  link?: Maybe<PrismicLinkTypeFilterInput>;
+};
+
+export type PrismicNewsPostBodyLinkCardSortInput = {
+  fields?: Maybe<Array<Maybe<PrismicNewsPostBodyLinkCardFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type PrismicNewsPostBodySlicesType = PrismicNewsPostBodyText | PrismicNewsPostBodyImages | PrismicNewsPostBodyVideo | PrismicNewsPostBodyTextIntro | PrismicNewsPostBodyAnchor | PrismicNewsPostBodyDivider | PrismicNewsPostBodyLinkCard;
 
 export type PrismicNewsPostBodyText = PrismicSliceType & Node & {
   slice_type: Scalars['String'];
@@ -8826,6 +9003,8 @@ export type Query = {
   allPrismicNewsPostBodyAnchor: PrismicNewsPostBodyAnchorConnection;
   prismicNewsPostBodyDivider?: Maybe<PrismicNewsPostBodyDivider>;
   allPrismicNewsPostBodyDivider: PrismicNewsPostBodyDividerConnection;
+  prismicNewsPostBodyLinkCard?: Maybe<PrismicNewsPostBodyLinkCard>;
+  allPrismicNewsPostBodyLinkCard: PrismicNewsPostBodyLinkCardConnection;
   prismicNewsPost?: Maybe<PrismicNewsPost>;
   allPrismicNewsPost: PrismicNewsPostConnection;
   prismicPageBodyText?: Maybe<PrismicPageBodyText>;
@@ -9498,6 +9677,25 @@ export type QueryAllPrismicNewsPostBodyDividerArgs = {
 };
 
 
+export type QueryPrismicNewsPostBodyLinkCardArgs = {
+  slice_type?: Maybe<StringQueryOperatorInput>;
+  slice_label?: Maybe<StringQueryOperatorInput>;
+  primary?: Maybe<PrismicNewsPostBodyLinkCardPrimaryTypeFilterInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllPrismicNewsPostBodyLinkCardArgs = {
+  filter?: Maybe<PrismicNewsPostBodyLinkCardFilterInput>;
+  sort?: Maybe<PrismicNewsPostBodyLinkCardSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryPrismicNewsPostArgs = {
   data?: Maybe<PrismicNewsPostDataTypeFilterInput>;
   dataRaw?: Maybe<JsonQueryOperatorInput>;
@@ -10123,12 +10321,22 @@ export type SitePageConnectionGroupArgs = {
 };
 
 export type SitePageContext = {
+  limit?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  numPages?: Maybe<Scalars['Int']>;
+  currentPage?: Maybe<Scalars['Int']>;
+  total?: Maybe<Scalars['Int']>;
   uid?: Maybe<Scalars['String']>;
   nextUID?: Maybe<Scalars['String']>;
   prevUID?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
+  limit?: Maybe<IntQueryOperatorInput>;
+  skip?: Maybe<IntQueryOperatorInput>;
+  numPages?: Maybe<IntQueryOperatorInput>;
+  currentPage?: Maybe<IntQueryOperatorInput>;
+  total?: Maybe<IntQueryOperatorInput>;
   uid?: Maybe<StringQueryOperatorInput>;
   nextUID?: Maybe<StringQueryOperatorInput>;
   prevUID?: Maybe<StringQueryOperatorInput>;
@@ -10233,6 +10441,11 @@ export enum SitePageFieldsEnum {
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
   IsCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
+  ContextLimit = 'context___limit',
+  ContextSkip = 'context___skip',
+  ContextNumPages = 'context___numPages',
+  ContextCurrentPage = 'context___currentPage',
+  ContextTotal = 'context___total',
   ContextUid = 'context___uid',
   ContextNextUid = 'context___nextUID',
   ContextPrevUid = 'context___prevUID',
@@ -10294,10 +10507,6 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsCacheDigest = 'pluginCreator___pluginOptions___cacheDigest',
   PluginCreatorPluginOptionsTypekitId = 'pluginCreator___pluginOptions___typekit___id',
   PluginCreatorPluginOptionsGoogleFamilies = 'pluginCreator___pluginOptions___google___families',
-  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
-  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
-  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
-  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorPluginOptionsHeadersX = 'pluginCreator___pluginOptions___headers____x',
   PluginCreatorPluginOptionsMergeSecurityHeaders = 'pluginCreator___pluginOptions___mergeSecurityHeaders',
   PluginCreatorPluginOptionsPath = 'pluginCreator___pluginOptions___path',
@@ -10305,6 +10514,10 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsAllExtensions = 'pluginCreator___pluginOptions___allExtensions',
   PluginCreatorPluginOptionsIsTsx = 'pluginCreator___pluginOptions___isTSX',
   PluginCreatorPluginOptionsJsxPragma = 'pluginCreator___pluginOptions___jsxPragma',
+  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
+  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
+  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
+  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorNodeApIs = 'pluginCreator___nodeAPIs',
   PluginCreatorBrowserApIs = 'pluginCreator___browserAPIs',
   PluginCreatorSsrApIs = 'pluginCreator___ssrAPIs',
@@ -10509,10 +10722,6 @@ export enum SitePluginFieldsEnum {
   PluginOptionsCacheDigest = 'pluginOptions___cacheDigest',
   PluginOptionsTypekitId = 'pluginOptions___typekit___id',
   PluginOptionsGoogleFamilies = 'pluginOptions___google___families',
-  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
-  PluginOptionsAccessToken = 'pluginOptions___accessToken',
-  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
-  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   PluginOptionsHeadersX = 'pluginOptions___headers____x',
   PluginOptionsMergeSecurityHeaders = 'pluginOptions___mergeSecurityHeaders',
   PluginOptionsPath = 'pluginOptions___path',
@@ -10520,6 +10729,10 @@ export enum SitePluginFieldsEnum {
   PluginOptionsAllExtensions = 'pluginOptions___allExtensions',
   PluginOptionsIsTsx = 'pluginOptions___isTSX',
   PluginOptionsJsxPragma = 'pluginOptions___jsxPragma',
+  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
+  PluginOptionsAccessToken = 'pluginOptions___accessToken',
+  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
+  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   NodeApIs = 'nodeAPIs',
   BrowserApIs = 'browserAPIs',
   SsrApIs = 'ssrAPIs',
@@ -10650,11 +10863,6 @@ export type SitePluginPluginOptions = {
   cacheDigest?: Maybe<Scalars['String']>;
   typekit?: Maybe<SitePluginPluginOptionsTypekit>;
   google?: Maybe<SitePluginPluginOptionsGoogle>;
-  repositoryName?: Maybe<Scalars['String']>;
-  accessToken?: Maybe<Scalars['String']>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
-  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
-  prismicToolbar?: Maybe<Scalars['String']>;
   headers?: Maybe<SitePluginPluginOptionsHeaders>;
   mergeSecurityHeaders?: Maybe<Scalars['Boolean']>;
   path?: Maybe<Scalars['String']>;
@@ -10662,6 +10870,11 @@ export type SitePluginPluginOptions = {
   allExtensions?: Maybe<Scalars['Boolean']>;
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
+  repositoryName?: Maybe<Scalars['String']>;
+  accessToken?: Maybe<Scalars['String']>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
+  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
+  prismicToolbar?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
@@ -10682,11 +10895,6 @@ export type SitePluginPluginOptionsFilterInput = {
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   typekit?: Maybe<SitePluginPluginOptionsTypekitFilterInput>;
   google?: Maybe<SitePluginPluginOptionsGoogleFilterInput>;
-  repositoryName?: Maybe<StringQueryOperatorInput>;
-  accessToken?: Maybe<StringQueryOperatorInput>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
-  fetchLinks?: Maybe<StringQueryOperatorInput>;
-  prismicToolbar?: Maybe<StringQueryOperatorInput>;
   headers?: Maybe<SitePluginPluginOptionsHeadersFilterInput>;
   mergeSecurityHeaders?: Maybe<BooleanQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
@@ -10694,6 +10902,11 @@ export type SitePluginPluginOptionsFilterInput = {
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
+  repositoryName?: Maybe<StringQueryOperatorInput>;
+  accessToken?: Maybe<StringQueryOperatorInput>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
+  fetchLinks?: Maybe<StringQueryOperatorInput>;
+  prismicToolbar?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsGoogle = {
@@ -12286,6 +12499,7 @@ export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoices = {
   text_intro?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_Intro>;
   anchor?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchor>;
   divider?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesDivider>;
+  link_card?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_Card>;
 };
 
 export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchor = {
@@ -12357,6 +12571,7 @@ export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesFilterIn
   text_intro?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText_IntroFilterInput>;
   anchor?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesAnchorFilterInput>;
   divider?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesDividerFilterInput>;
+  link_card?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImages = {
@@ -12435,6 +12650,76 @@ export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRe
 export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesImagesRepeatImageConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_Card = {
+  type?: Maybe<Scalars['String']>;
+  fieldset?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  display?: Maybe<Scalars['String']>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_Repeat>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  fieldset?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  icon?: Maybe<StringQueryOperatorInput>;
+  display?: Maybe<StringQueryOperatorInput>;
+  non_repeat?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_Repeat = {
+  link_title?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink_Title>;
+  link?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatFilterInput = {
+  link_title?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink_TitleFilterInput>;
+  link?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLinkFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLinkConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink_Title = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink_TitleConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink_TitleConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink_TitleConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink_TitleFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLink_TitleConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLinkConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLinkConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLinkFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesLink_CardNon_RepeatLinkConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasNews_PostBodyBodyConfigChoicesText = {
@@ -14142,12 +14427,25 @@ export type UseNavigationDataFragment = { data?: Maybe<{ main?: Maybe<Array<Mayb
       Pick<PrismicNavigationMainNavItem, 'id'>
       & { primary?: Maybe<(
         Pick<PrismicNavigationMainNavItemPrimaryType, 'name'>
-        & { link?: Maybe<Pick<PrismicLinkType, 'url'>> }
+        & { link?: Maybe<Pick<PrismicLinkType, 'uid' | 'url'>> }
       )>, items?: Maybe<Array<Maybe<(
         Pick<PrismicNavigationMainNavItemItemType, 'name'>
-        & { link?: Maybe<Pick<PrismicLinkType, 'url'>> }
+        & { link?: Maybe<Pick<PrismicLinkType, 'uid' | 'url'>> }
       )>>> }
     )>>> }> };
+
+export type UseNewsCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UseNewsCategoriesQuery = { allPrismicNewsCategory: { nodes: Array<(
+      Pick<PrismicNewsCategory, 'uid'>
+      & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+    )> } };
+
+export type UseSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UseSiteMetadataQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'titleShort' | 'description' | 'siteUrl'>> }> };
 
 export type PrismicSiteSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -14192,58 +14490,6 @@ export type NotFoundPageQuery = { prismicPage?: Maybe<(
       )>>> }
     )> }
   )> };
-
-export type NewsPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NewsPageQuery = { prismicPage?: Maybe<(
-    Pick<PrismicPage, '_previewable'>
-    & { data?: Maybe<(
-      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
-      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
-        { __typename: 'PrismicPageBodyText' }
-        & Pick<PrismicPageBodyText, 'id'>
-        & SlicesPageBody_PrismicPageBodyText_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyImages' }
-        & Pick<PrismicPageBodyImages, 'id'>
-        & SlicesPageBody_PrismicPageBodyImages_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyAnchor' }
-        & Pick<PrismicPageBodyAnchor, 'id'>
-        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyHeroImage' }
-        & Pick<PrismicPageBodyHeroImage, 'id'>
-        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyQuoteSlideshow' }
-        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
-        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyLearningExcursionMap' }
-        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
-        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyFellowsGrid' }
-        & Pick<PrismicPageBodyFellowsGrid, 'id'>
-        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
-      )>>> }
-    )> }
-    & PrismicPageParentRecursiveFragment
-  )>, allPrismicNewsPost: { nodes: Array<(
-      Pick<PrismicNewsPost, 'url' | 'first_publication_date'>
-      & { data?: Maybe<(
-        Pick<PrismicNewsPostDataType, 'published_at'>
-        & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, excerpt?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, news_categories?: Maybe<Array<Maybe<{ news_category?: Maybe<{ document?: Maybe<(
-              Pick<PrismicNewsCategory, 'uid' | 'url'>
-              & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
-            )> }> }>>>, featured_image?: Maybe<(
-          Pick<PrismicImageType, 'alt'>
-          & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
-        )> }
-      )> }
-    )> } };
 
 type SlicesInteriorPageBody_PrismicInteriorPageBodyText_Fragment = InteriorPageBodyTextFragment;
 
@@ -14306,6 +14552,8 @@ export type NewsPostBodyImagesFragment = { items?: Maybe<Array<Maybe<{ image?: M
       Pick<PrismicImageType, 'alt' | 'url'>
       & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
     )>, caption?: Maybe<Pick<PrismicStructuredTextType, 'html' | 'text'>> }>>> };
+
+export type NewsPostBodyLinkCardFragment = { primary?: Maybe<{ link_title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, link?: Maybe<Pick<PrismicLinkType, 'url'>> }> };
 
 export type NewsPostBodyTextFragment = { primary?: Maybe<{ text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }> };
 
@@ -14405,6 +14653,120 @@ export type InteriorPageTemplateQuery = { prismicInteriorPage?: Maybe<(
     & PrismicInteriorPageParentRecursiveFragment
   )> };
 
+export type NewsTemplateQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
+
+
+export type NewsTemplateQuery = { prismicPage?: Maybe<(
+    Pick<PrismicPage, '_previewable'>
+    & { data?: Maybe<(
+      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicPageBodyText' }
+        & Pick<PrismicPageBodyText, 'id'>
+        & SlicesPageBody_PrismicPageBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImages' }
+        & Pick<PrismicPageBodyImages, 'id'>
+        & SlicesPageBody_PrismicPageBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyAnchor' }
+        & Pick<PrismicPageBodyAnchor, 'id'>
+        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImage' }
+        & Pick<PrismicPageBodyHeroImage, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyQuoteSlideshow' }
+        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
+        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
+      )>>> }
+    )> }
+    & PrismicPageParentRecursiveFragment
+  )>, allPrismicNewsPost: { nodes: Array<(
+      Pick<PrismicNewsPost, 'url' | 'first_publication_date'>
+      & { data?: Maybe<(
+        Pick<PrismicNewsPostDataType, 'published_at'>
+        & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, excerpt?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, news_categories?: Maybe<Array<Maybe<{ news_category?: Maybe<{ document?: Maybe<(
+              Pick<PrismicNewsCategory, 'uid' | 'url'>
+              & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+            )> }> }>>>, featured_image?: Maybe<(
+          Pick<PrismicImageType, 'alt'>
+          & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+        )> }
+      )> }
+    )> } };
+
+export type NewsCategoryTemplateQueryVariables = Exact<{
+  uid: Scalars['String'];
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
+
+
+export type NewsCategoryTemplateQuery = { prismicPage?: Maybe<(
+    Pick<PrismicPage, '_previewable'>
+    & { data?: Maybe<(
+      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicPageBodyText' }
+        & Pick<PrismicPageBodyText, 'id'>
+        & SlicesPageBody_PrismicPageBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImages' }
+        & Pick<PrismicPageBodyImages, 'id'>
+        & SlicesPageBody_PrismicPageBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyAnchor' }
+        & Pick<PrismicPageBodyAnchor, 'id'>
+        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImage' }
+        & Pick<PrismicPageBodyHeroImage, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyQuoteSlideshow' }
+        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
+        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
+      )>>> }
+    )> }
+    & PrismicPageParentRecursiveFragment
+  )>, prismicNewsCategory?: Maybe<(
+    Pick<PrismicNewsCategory, '_previewable' | 'uid' | 'url'>
+    & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+  )>, allPrismicNewsPost: { nodes: Array<(
+      Pick<PrismicNewsPost, 'url' | 'first_publication_date'>
+      & { data?: Maybe<(
+        Pick<PrismicNewsPostDataType, 'published_at'>
+        & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, excerpt?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, news_categories?: Maybe<Array<Maybe<{ news_category?: Maybe<{ document?: Maybe<(
+              Pick<PrismicNewsCategory, 'uid' | 'url'>
+              & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+            )> }> }>>>, featured_image?: Maybe<(
+          Pick<PrismicImageType, 'alt'>
+          & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+        )> }
+      )> }
+    )> } };
+
 export type NewsPostTemplateQueryVariables = Exact<{
   uid: Scalars['String'];
   nextUID?: Maybe<Scalars['String']>;
@@ -14446,6 +14808,10 @@ export type NewsPostTemplateQuery = { prismicNewsPost?: Maybe<(
         { __typename: 'PrismicNewsPostBodyDivider' }
         & Pick<PrismicNewsPostBodyDivider, 'id'>
         & SlicesNewsPostBody_PrismicNewsPostBodyDivider_Fragment
+      ) | (
+        { __typename: 'PrismicNewsPostBodyLinkCard' }
+        & Pick<PrismicNewsPostBodyLinkCard, 'id'>
+        & SlicesNewsPostBody_PrismicNewsPostBodyLinkCard_Fragment
       )>>> }
     )> }
   )>, nextPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment>, prevPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment> };

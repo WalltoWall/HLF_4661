@@ -10,9 +10,11 @@ import {
 
 export type NewsPostBodyImagesProps = InteriorPageBodyImagesProps
 
-const NewsPostBodyImages = (props: NewsPostBodyImagesProps) => (
+export const NewsPostBodyImages = (props: NewsPostBodyImagesProps) => (
   <InteriorPageBodyImages {...props} />
 )
+
+NewsPostBodyImages.Image = InteriorPageBodyImages.Image
 
 export { mapDataToProps, mapDataToContext }
 
