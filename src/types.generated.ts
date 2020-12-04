@@ -17471,6 +17471,38 @@ export type PageBodyQuoteSlideshowFragment = { items?: Maybe<Array<Maybe<{ quote
 
 export type PageBodyTextFragment = { primary?: Maybe<{ text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }> };
 
+type SlicesProjectBody_PrismicProjectBodyTextIntro_Fragment = ProjectBodyTextIntroFragment;
+
+type SlicesProjectBody_PrismicProjectBodyText_Fragment = ProjectBodyTextFragment;
+
+type SlicesProjectBody_PrismicProjectBodyImages_Fragment = ProjectBodyImagesFragment;
+
+type SlicesProjectBody_PrismicProjectBodyVideo_Fragment = ProjectBodyVideoFragment;
+
+type SlicesProjectBody_PrismicProjectBodyLinkCard_Fragment = ProjectBodyLinkCardFragment;
+
+type SlicesProjectBody_PrismicProjectBodyAnchor_Fragment = ProjectBodyAnchorFragment;
+
+export type SlicesProjectBodyFragment = SlicesProjectBody_PrismicProjectBodyTextIntro_Fragment | SlicesProjectBody_PrismicProjectBodyText_Fragment | SlicesProjectBody_PrismicProjectBodyImages_Fragment | SlicesProjectBody_PrismicProjectBodyVideo_Fragment | SlicesProjectBody_PrismicProjectBodyLinkCard_Fragment | SlicesProjectBody_PrismicProjectBodyAnchor_Fragment;
+
+export type ProjectBodyAnchorFragment = { primary?: Maybe<Pick<PrismicProjectBodyAnchorPrimaryType, 'id'>> };
+
+export type ProjectBodyImagesFragment = { items?: Maybe<Array<Maybe<{ image?: Maybe<(
+      Pick<PrismicImageType, 'alt' | 'url'>
+      & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+    )>, caption?: Maybe<Pick<PrismicStructuredTextType, 'html' | 'text'>> }>>> };
+
+export type ProjectBodyLinkCardFragment = { primary?: Maybe<{ link_title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, link?: Maybe<Pick<PrismicLinkType, 'url'>> }> };
+
+export type ProjectBodyTextFragment = { primary?: Maybe<{ text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }> };
+
+export type ProjectBodyTextIntroFragment = { primary?: Maybe<{ introductory_text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>> }> };
+
+export type ProjectBodyVideoFragment = { primary?: Maybe<{ video?: Maybe<Pick<PrismicEmbedType, 'embed_url' | 'thumbnail_url' | 'thumbnail_height' | 'thumbnail_width'>>, poster?: Maybe<(
+      Pick<PrismicImageType, 'alt'>
+      & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+    )> }> };
+
 export type InteriorPageTemplateQueryVariables = Exact<{
   uid: Scalars['String'];
 }>;
