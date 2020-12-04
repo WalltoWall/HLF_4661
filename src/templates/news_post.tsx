@@ -2,9 +2,7 @@ import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import { withPreview } from 'gatsby-source-prismic'
-import GatsbyImage from 'gatsby-image'
 import { Box } from '@walltowall/calico'
-import { AspectRatio } from '@walltowall/siamese'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
@@ -13,7 +11,6 @@ import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
 import { slicesMap as newsPostBodySlicesMap } from '../slices/NewsPostBody'
-import { useCommonStyles } from '../hooks/useCommonStyles'
 import { PickPartial } from '../types'
 
 import { Layout } from '../components/Layout'
@@ -22,6 +19,7 @@ import { Text } from '../components/Text'
 import { Anchor } from '../components/Anchor'
 import { Divider } from '../components/Divider'
 import { NewsPostCard } from '../components/NewsPostCard'
+import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -120,8 +118,6 @@ export const NewsPostTemplate = ({
     [data, location],
   )
 
-  const commonStyles = useCommonStyles()
-
   return (
     <Layout>
       <Helmet>
@@ -149,33 +145,10 @@ export const NewsPostTemplate = ({
           gridTemplateColumns: [null, null, 3],
         }}
       >
-        <Box className={commonStyles.lightGrayGradientBackground}>
-          {newsPostFeaturedImageFluid && (
-            <>
-              <Box
-                as={AspectRatio}
-                x={16}
-                y={9}
-                styles={{ display: [null, null, 'none'] }}
-              >
-                <Box
-                  as={GatsbyImage}
-                  fluid={newsPostFeaturedImageFluid}
-                  alt={newsPostFeaturedImageAlt}
-                  styles={{ width: 'full', height: 'full' }}
-                />
-              </Box>
-              <Box
-                as={GatsbyImage}
-                fluid={newsPostFeaturedImageFluid}
-                alt={newsPostFeaturedImageAlt}
-                styles={{
-                  display: ['none', null, 'block'],
-                }}
-              />
-            </>
-          )}
-        </Box>
+        <InteriorPageSidebar
+          imageFluid={newsPostFeaturedImageFluid}
+          imageAlt={newsPostFeaturedImageAlt}
+        />
         <Box styles={{ gridColumn: [null, null, 'span-2'] }}>
           <BoundedBox nextSharesBg={true}>
             <Box styles={{ display: 'grid', gap: 6, justifyItems: 'start' }}>

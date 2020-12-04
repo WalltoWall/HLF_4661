@@ -55,7 +55,7 @@ export const NewsPostCard = <
               as={AspectRatio}
               x={4}
               y={3}
-              styles={{ backgroundColor: 'gray40' }}
+              styles={{ backgroundColor: 'gray95' }}
             />
           )}
         </Link>

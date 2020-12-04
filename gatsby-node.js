@@ -1,5 +1,10 @@
 const path = require('path')
 
+/**
+ * Number of news posts to display on each paginated news post listing page.
+ */
+const NEWS_POSTS_PER_PAGE = 2
+
 exports.createPages = (gatsbyContext) => {
   const { actions, getNodesByType, reporter } = gatsbyContext
   const { createPage, createRedirect } = actions
@@ -65,15 +70,8 @@ exports.createPages = (gatsbyContext) => {
   }
 
   /**
-   * Create pages for all News Post documents in Prismic. The document's UID is
-   * passed as context here to allow the template to query for the specific
-   * document.
-   *
-   * News post pages have links to the next and/or previous post. Here, we sort
-   * all news posts by published date and also pass the next/previous post UIDs
-   * as context.
-   *
-   * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+   * Create all News-related pages, including paginated news post listings and
+   * individual news post pages.
    */
   {
     const newsPosts = getNodesByType('PrismicNewsPost').sort(
@@ -81,6 +79,77 @@ exports.createPages = (gatsbyContext) => {
         Date.parse(b.data?.published_at ?? b.first_published_date) -
         Date.parse(a.data?.published_at ?? a.first_published_date),
     )
+
+    /**
+     * Create paginated pages listing all news posts. Pagination is done by
+     * passing limit and skip values as context. This allows the template to
+     * query a set of news posts for the page's pagination parameters.
+     *
+     * @see https://www.gatsbyjs.com/docs/adding-pagination/
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    const numPages = Math.max(
+      Math.ceil(newsPosts.length / NEWS_POSTS_PER_PAGE),
+      1,
+    )
+    for (let i = 0; i < numPages; i++)
+      createPage({
+        path: i === 0 ? '/news/' : `/news/${i + 1}/`,
+        component: path.resolve(__dirname, 'src/templates/news.tsx'),
+        context: {
+          limit: NEWS_POSTS_PER_PAGE,
+          skip: i * NEWS_POSTS_PER_PAGE,
+          numPages,
+          currentPage: i + 1,
+          total: newsPosts.length,
+        },
+      })
+
+    /**
+     * Create paginated pages listing all news posts for each news category.
+     * Pagination is done by passing limit and skip values as context. This
+     * allows the template to query a set of news posts for the page's
+     * pagination parameters.
+     *
+     * @see https://www.gatsbyjs.com/docs/adding-pagination/
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    for (const newsCategory of getNodesByType('PrismicNewsCategory')) {
+      const newsCategoryPosts = newsPosts.filter((newsPost) =>
+        newsPost.data?.news_categories?.find?.(
+          (item) => item?.news_category?.uid === newsCategory.uid,
+        ),
+      )
+      const numPages = Math.max(
+        Math.ceil(newsCategoryPosts.length / NEWS_POSTS_PER_PAGE),
+        1,
+      )
+      for (let i = 0; i < numPages; i++)
+        createPage({
+          path: i === 0 ? newsCategory.url : `${newsCategory.url}${i + 1}/`,
+          component: path.resolve(__dirname, 'src/templates/news_category.tsx'),
+          context: {
+            uid: newsCategory.uid,
+            limit: NEWS_POSTS_PER_PAGE,
+            skip: i * NEWS_POSTS_PER_PAGE,
+            numPages,
+            currentPage: i + 1,
+            total: newsCategoryPosts.length,
+          },
+        })
+    }
+
+    /**
+     * Create pages for all News Post documents in Prismic. The document's UID
+     * is passed as context here to allow the template to query for the
+     * specific document.
+     *
+     * News post pages have links to the next and/or previous post. Here, we
+     * sort all news posts by published date and also pass the next/previous
+     * post UIDs as context.
+     *
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
     for (let i = 0; i < newsPosts.length; i++) {
       const newsPost = newsPosts[i]
       const nextNewsPost = newsPosts[i + 1]

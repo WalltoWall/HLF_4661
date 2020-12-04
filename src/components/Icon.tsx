@@ -6,6 +6,9 @@ import { ReactComponent as AssetIconChevronUp } from '../assets/icon-chevron-up.
 import { ReactComponent as AssetIconSearch } from '../assets/icon-search.svg'
 import { ReactComponent as AssetIconPlay } from '../assets/icon-play.svg'
 import { ReactComponent as AssetIconClose } from '../assets/icon-close.svg'
+import { ReactComponent as AssetIconExternal } from '../assets/icon-external.svg'
+import { ReactComponent as AssetIconTriangleRight } from '../assets/icon-triangle-right.svg'
+import { ReactComponent as AssetIconTriangleLeft } from '../assets/icon-triangle-left.svg'
 import { ReactComponent as AssetIconFacebookColored } from '../assets/icon-facebook-colored.svg'
 import { ReactComponent as AssetIconLinkedinColored } from '../assets/icon-linkedin-colored.svg'
 import { ReactComponent as AssetIconDoubleQuoteLeft } from '../assets/icon-dquo-left.svg'
@@ -17,6 +20,9 @@ const icons = {
   search: AssetIconSearch,
   play: AssetIconPlay,
   close: AssetIconClose,
+  external: AssetIconExternal,
+  triangleRight: AssetIconTriangleRight,
+  triangleLeft: AssetIconTriangleLeft,
   facebookColored: AssetIconFacebookColored,
   linkedinColored: AssetIconLinkedinColored,
   doubleQuoteLeft: AssetIconDoubleQuoteLeft,

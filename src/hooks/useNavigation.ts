@@ -24,12 +24,14 @@ export const useNavigation = () => {
             primary {
               name
               link {
+                uid
                 url
               }
             }
             items {
               name
               link {
+                uid
                 url
               }
             }

@@ -6,26 +6,19 @@ import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 import { Box } from '@walltowall/calico'
 
-import { NewsPageQuery } from '../types.generated'
+import { NewsTemplateQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
 import { useSiteSettings } from '../hooks/useSiteSettings'
-import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
-import { slicesMap as interiorPageHeaderSlicesMap } from '../slices/InteriorPageHeader'
-import { slicesMap as interiorPageBodySlicesMap } from '../slices/InteriorPageBody'
-import { useCommonStyles } from '../hooks/useCommonStyles'
-import { PickPartial } from '../types'
+import { slicesMap } from '../slices/PageBody'
+import { useNavigation } from '../hooks/useNavigation'
 
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
-import { Text } from '../components/Text'
 import { NewsPostCard } from '../components/NewsPostCard'
-
-// Merged slices map including PageBodyHeader and PageBodyFooter.
-const slicesMap = {
-  ...pageBodySlicesMap,
-  ...interiorPageHeaderSlicesMap,
-  ...interiorPageBodySlicesMap,
-}
+import { PaginationNavigation } from '../components/PaginationNavigation'
+import { NewsPostCardsList } from '../components/NewsPostCardsList'
+import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
+import { Text } from '../components/Text'
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -36,7 +29,6 @@ const slicesMap = {
 // prettier-ignore
 export const slicesMiddleware = <T,>(list: T[]) => [
   { __typename: 'PageBodyHeader', id: 'header' },
-  { __typename: 'PageBodyHeroImage', id: 'hero-image' },
   ...list,
 ]
 
@@ -53,12 +45,7 @@ export const footerSliceList = [{ __typename: 'PageBodyFooter', id: 'footer' }]
  */
 export const mapDataToPropsEnhancer = (
   props: object | undefined,
-  {
-    context,
-    nextContext,
-    previousType,
-    previousData,
-  }: MapDataToPropsEnhancerArgs,
+  { context, nextContext }: MapDataToPropsEnhancerArgs,
 ) => {
   let nextSharesBg
 
@@ -67,32 +54,38 @@ export const mapDataToPropsEnhancer = (
   if (_nsbg.length === 1) nextSharesBg = _nsbg[0]
   else nextSharesBg = _nsbg.slice(0, 4) as [boolean, boolean, boolean, boolean]
 
-  return {
-    nextSharesBg,
-    id:
-      previousType === 'InteriorPageBodyAnchor'
-        ? (previousData?.primary?.id as string)
-        : undefined,
-    ...props,
-  }
+  return { nextSharesBg, ...props }
 }
 
 /**
- * Props added to all slices by `mapDataToPropsEnhancer` for `InteriorPageTemplate`.
+ * Context passed from `gatsby-node.js` used for pagination.
+ *
+ * @see https://www.gatsbyjs.com/docs/creating-and-modifying-pages/#pass-context-to-pages
+ */
+export type NewsTemplateContext = {
+  limit: number
+  skip: number
+  numPages: number
+  currentPage: number
+  total: number
+}
+
+/**
+ * Props added to all slices by `mapDataToPropsEnhancer` for `NewsPageTemplate`.
  * Intersect this type with a slice's known props to get a complete list of
  * available props.
  *
  * @see https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types
  */
-export type InteriorPageTemplateEnhancerProps = PickPartial<
-  ReturnType<typeof mapDataToPropsEnhancer>,
-  'id'
+export type NewsTemplateEnhancerProps = ReturnType<
+  typeof mapDataToPropsEnhancer
 >
 
-export const InteriorPageTemplate = ({
+export const NewsTemplate = ({
   data,
   location,
-}: PageProps<NewsPageQuery>) => {
+  pageContext,
+}: PageProps<NewsTemplateQuery, NewsTemplateContext>) => {
   const siteSettings = useSiteSettings()
   const page = data?.prismicPage
 
@@ -100,6 +93,29 @@ export const InteriorPageTemplate = ({
   const pageDescription = page?.data?.meta_description
 
   const newsPosts = data.allPrismicNewsPost.nodes
+  const newsPostsStartCount = pageContext.skip + 1
+  const newsPostsEndCount = pageContext.skip + newsPosts.length
+  const newsPostsTotalCount = pageContext.total
+
+  const nextPageHref =
+    pageContext.currentPage < pageContext.numPages
+      ? `/news/${pageContext.currentPage + 1}/`
+      : undefined
+  const previousPageHref =
+    pageContext.currentPage > 2
+      ? `/news/${pageContext.currentPage - 1}/`
+      : pageContext.currentPage === 2
+      ? '/news/'
+      : undefined
+  const hasPaginationLinks = Boolean(nextPageHref || previousPageHref)
+
+  const navigation = useNavigation()
+  const newsNavigation = navigation.primary
+    .find((item) => item?.primary?.link?.uid === 'news')
+    ?.items?.map?.((item) => ({
+      url: item?.link?.url,
+      name: item?.name,
+    }))
 
   /**
    * Metadata made available in a slice's `mapDataToProps` and
@@ -114,8 +130,6 @@ export const InteriorPageTemplate = ({
     }),
     [data, location],
   )
-
-  const commonStyles = useCommonStyles()
 
   return (
     <Layout>
@@ -145,49 +159,30 @@ export const InteriorPageTemplate = ({
           gridTemplateColumns: [null, null, 3],
         }}
       >
-        <Box className={commonStyles.lightGrayGradientBackground}>
-          <BoundedBox
-            styles={{
-              position: [null, 'sticky'],
-              top: 0,
-            }}
-          >
-            <Box
-              styles={{
-                display: 'grid',
-                gap: 8,
-              }}
-            >
-              {pageTitle && (
-                <Text
-                  variant="serif-40-48"
-                  as="h1"
-                  styles={{ color: 'gray10' }}
-                >
-                  {pageTitle}
-                </Text>
-              )}
-              {pageDescription && (
-                <Text
-                  variant="sans-16-italic"
-                  as="p"
-                  styles={{ color: 'orange55' }}
-                >
-                  {pageDescription}
-                </Text>
-              )}
-            </Box>
-          </BoundedBox>
-        </Box>
+        <InteriorPageSidebar
+          title={pageTitle}
+          description={pageDescription}
+          navigationItems={newsNavigation}
+        />
         <Box
           styles={{
             gridColumn: [null, null, 'span-2'],
             paddingTop: [null, null, 7],
-            paddingBottom: [10, 13],
           }}
         >
-          <BoundedBox>
-            <Box as="ul" styles={{ display: 'grid', gap: [6, 8, 10] }}>
+          <BoundedBox variant="narrow" nextSharesBg={true}>
+            <Box styles={{ display: 'grid', gap: 4 }}>
+              <Text variant="serif-20-24" styles={{ color: 'gray20' }}>
+                All articles
+              </Text>
+              <Text variant="sans-16" styles={{ color: 'gray40' }}>
+                Showing {newsPostsStartCount}&ndash;{newsPostsEndCount} of{' '}
+                {newsPostsTotalCount} article{newsPostsTotalCount !== 1 && 's'}
+              </Text>
+            </Box>
+          </BoundedBox>
+          <BoundedBox variant="narrow" nextSharesBg={hasPaginationLinks}>
+            <NewsPostCardsList>
               {newsPosts.map((newsPost) => {
                 const newsCategories =
                   newsPost?.data?.news_categories?.map?.(
@@ -197,27 +192,32 @@ export const InteriorPageTemplate = ({
 
                 return (
                   newsPost.url && (
-                    <Box as="li">
-                      <NewsPostCard
-                        href={newsPost.url}
-                        topLabel={primaryNewsCategory?.data?.name?.text}
-                        title={newsPost.data?.title?.text}
-                        excerpt={newsPost.data?.excerpt?.text}
-                        date={
-                          (newsPost?.data?.published_at as string) ??
-                          (newsPost?.first_publication_date as string)
-                        }
-                        featuredImageFluid={
-                          newsPost.data?.featured_image?.fluid
-                        }
-                        featuredImageAlt={newsPost.data?.featured_image?.alt}
-                      />
-                    </Box>
+                    <NewsPostCard
+                      key={newsPost.url}
+                      href={newsPost.url}
+                      topLabel={primaryNewsCategory?.data?.name?.text}
+                      title={newsPost.data?.title?.text}
+                      excerpt={newsPost.data?.excerpt?.text}
+                      date={
+                        (newsPost?.data?.published_at as string) ??
+                        (newsPost?.first_publication_date as string)
+                      }
+                      featuredImageFluid={newsPost.data?.featured_image?.fluid}
+                      featuredImageAlt={newsPost.data?.featured_image?.alt}
+                    />
                   )
                 )
               })}
-            </Box>
+            </NewsPostCardsList>
           </BoundedBox>
+          {hasPaginationLinks && (
+            <BoundedBox>
+              <PaginationNavigation
+                nextHref={nextPageHref}
+                previousHref={previousPageHref}
+              />
+            </BoundedBox>
+          )}
         </Box>
       </Box>
       <MapSlicesToComponents
@@ -230,10 +230,10 @@ export const InteriorPageTemplate = ({
   )
 }
 
-export default withPreview(InteriorPageTemplate)
+export default withPreview(NewsTemplate)
 
 export const query = graphql`
-  query NewsPage {
+  query NewsTemplate($limit: Int!, $skip: Int!) {
     prismicPage(uid: { eq: "news" }) {
       _previewable
       ...PrismicPageParentRecursive
@@ -253,7 +253,14 @@ export const query = graphql`
       }
     }
 
-    allPrismicNewsPost {
+    allPrismicNewsPost(
+      sort: {
+        fields: [data___published_at, first_publication_date]
+        order: DESC
+      }
+      limit: $limit
+      skip: $skip
+    ) {
       nodes {
         url
         first_publication_date(formatString: "MMMM D, YYYY")
