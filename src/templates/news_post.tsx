@@ -182,20 +182,22 @@ export const NewsPostTemplate = ({
             mapDataToPropsEnhancer={mapDataToPropsEnhancer}
           />
           <BoundedBox styles={{ paddingTop: [6, 7, 8] }}>
-            <Divider styles={{ marginBottom: 8 }} />
             {nextNewsPost && nextNewsPost.url && (
-              <NewsPostCard
-                href={nextNewsPost.url}
-                topLabel="Next Article"
-                title={nextNewsPost.data?.title?.text}
-                excerpt={nextNewsPost.data?.excerpt?.text}
-                date={
-                  (nextNewsPost?.data?.published_at as string) ??
-                  (nextNewsPost?.first_publication_date as string)
-                }
-                featuredImageFluid={nextNewsPost.data?.featured_image?.fluid}
-                featuredImageAlt={nextNewsPost.data?.featured_image?.alt}
-              />
+              <>
+                <Divider styles={{ marginBottom: 8 }} />
+                <NewsPostCard
+                  href={nextNewsPost.url}
+                  topLabel="Next Article"
+                  title={nextNewsPost.data?.title?.text}
+                  excerpt={nextNewsPost.data?.excerpt?.text}
+                  date={
+                    (nextNewsPost?.data?.published_at as string) ??
+                    (nextNewsPost?.first_publication_date as string)
+                  }
+                  featuredImageFluid={nextNewsPost.data?.featured_image?.fluid}
+                  featuredImageAlt={nextNewsPost.data?.featured_image?.alt}
+                />
+              </>
             )}
           </BoundedBox>
         </Box>
