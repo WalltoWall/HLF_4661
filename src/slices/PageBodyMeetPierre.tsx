@@ -67,7 +67,7 @@ export const PageBodyMeetPierre = ({
             display: 'grid',
             gap: [6, 8],
             justifyItems: 'start',
-            paddingTop: [null, 2, 4],
+            paddingTop: [1, 2],
           }}
         >
           <Box styles={{ display: 'grid', gap: 5 }}>
