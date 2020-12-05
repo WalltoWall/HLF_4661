@@ -293,7 +293,7 @@ const NavItemChild = ({ href, name, location }: NavItemChildProps) => {
 export type PageBodyHeaderProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
 
-const PageBodyHeader = ({
+export const PageBodyHeader = ({
   nextSharesBg,
   location = isBrowser ? window.location : undefined,
 }: PageBodyHeaderProps) => {
