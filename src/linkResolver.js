@@ -12,6 +12,9 @@ exports.linkResolver = () => (doc) => {
     case 'project_category':
       return `/impact/projects/${doc.uid}/`
 
+    case 'fellow':
+      return `/fellows/`
+
     case 'page':
     case 'interior_page':
     default:

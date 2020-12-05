@@ -8,7 +8,7 @@ const NEWS_POSTS_PER_PAGE = 2
 /**
  * Number of projects to display on each paginated projects listing page.
  */
-const PROJECTS_PER_PAGE = 2
+const PROJECTS_PER_PAGE = 6
 
 exports.createPages = (gatsbyContext) => {
   const { actions, getNodesByType, reporter } = gatsbyContext
@@ -184,65 +184,65 @@ exports.createPages = (gatsbyContext) => {
       ),
     )
 
-    // /**
-    //  * Create paginated pages listing all projects. Pagination is done by
-    //  * passing limit and skip values as context. This allows the template to
-    //  * query a set of project posts for the page's pagination parameters.
-    //  *
-    //  * @see https://www.gatsbyjs.com/docs/adding-pagination/
-    //  * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
-    //  */
-    // const numPages = Math.max(Math.ceil(projects.length / PROJECTS_PER_PAGE), 1)
-    // for (let i = 0; i < numPages; i++)
-    //   createPage({
-    //     path: i === 0 ? '/impact/projects/' : `/impact/projects/${i + 1}/`,
-    //     component: path.resolve(__dirname, 'src/templates/project.tsx'),
-    //     context: {
-    //       limit: PROJECTS_PER_PAGE,
-    //       skip: i * PROJECTS_PER_PAGE,
-    //       numPages,
-    //       currentPage: i + 1,
-    //       total: projects.length,
-    //     },
-    //   })
+    /**
+     * Create paginated pages listing all projects. Pagination is done by
+     * passing limit and skip values as context. This allows the template to
+     * query a set of project posts for the page's pagination parameters.
+     *
+     * @see https://www.gatsbyjs.com/docs/adding-pagination/
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    const numPages = Math.max(Math.ceil(projects.length / PROJECTS_PER_PAGE), 1)
+    for (let i = 0; i < numPages; i++)
+      createPage({
+        path: i === 0 ? '/impact/projects/' : `/impact/projects/${i + 1}/`,
+        component: path.resolve(__dirname, 'src/templates/projects.tsx'),
+        context: {
+          limit: PROJECTS_PER_PAGE,
+          skip: i * PROJECTS_PER_PAGE,
+          numPages,
+          currentPage: i + 1,
+          total: projects.length,
+        },
+      })
 
-    // /**
-    //  * Create paginated pages listing all projects for each project category.
-    //  * Pagination is done by passing limit and skip values as context. This
-    //  * allows the template to query a set of project posts for the page's
-    //  * pagination parameters.
-    //  *
-    //  * @see https://www.gatsbyjs.com/docs/adding-pagination/
-    //  * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
-    //  */
-    // for (const projectCategory of getNodesByType('PrismicProjectCategory')) {
-    //   const projectCategoryPosts = projects.filter((project) =>
-    //     project.data?.project_categories?.find?.(
-    //       (item) => item?.project_category?.uid === projectCategory.uid,
-    //     ),
-    //   )
-    //   const numPages = Math.max(
-    //     Math.ceil(projectCategoryPosts.length / PROJECTS_PER_PAGE),
-    //     1,
-    //   )
-    //   for (let i = 0; i < numPages; i++)
-    //     createPage({
-    //       path:
-    //         i === 0 ? projectCategory.url : `${projectCategory.url}${i + 1}/`,
-    //       component: path.resolve(
-    //         __dirname,
-    //         'src/templates/project_category.tsx',
-    //       ),
-    //       context: {
-    //         uid: projectCategory.uid,
-    //         limit: PROJECTS_PER_PAGE,
-    //         skip: i * PROJECTS_PER_PAGE,
-    //         numPages,
-    //         currentPage: i + 1,
-    //         total: projectCategoryPosts.length,
-    //       },
-    //     })
-    // }
+    /**
+     * Create paginated pages listing all projects for each project category.
+     * Pagination is done by passing limit and skip values as context. This
+     * allows the template to query a set of project posts for the page's
+     * pagination parameters.
+     *
+     * @see https://www.gatsbyjs.com/docs/adding-pagination/
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    for (const projectCategory of getNodesByType('PrismicProjectCategory')) {
+      const projectCategoryPosts = projects.filter((project) =>
+        project.data?.project_categories?.find?.(
+          (item) => item?.project_category?.uid === projectCategory.uid,
+        ),
+      )
+      const numPages = Math.max(
+        Math.ceil(projectCategoryPosts.length / PROJECTS_PER_PAGE),
+        1,
+      )
+      for (let i = 0; i < numPages; i++)
+        createPage({
+          path:
+            i === 0 ? projectCategory.url : `${projectCategory.url}${i + 1}/`,
+          component: path.resolve(
+            __dirname,
+            'src/templates/project_category.tsx',
+          ),
+          context: {
+            uid: projectCategory.uid,
+            limit: PROJECTS_PER_PAGE,
+            skip: i * PROJECTS_PER_PAGE,
+            numPages,
+            currentPage: i + 1,
+            total: projectCategoryPosts.length,
+          },
+        })
+    }
 
     /**
      * Create pages for all Project Post documents in Prismic. The document's UID

@@ -2,15 +2,16 @@ import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import { withPreview } from 'gatsby-source-prismic'
-import { propPairsEq } from '@walltowall/helpers'
+import { getRichText, propPairsEq } from '@walltowall/helpers'
 import { Box } from '@walltowall/calico'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
-import { NewsTemplateQuery } from '../types.generated'
+import { ProjectsTemplateQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 import { slicesMap } from '../slices/PageBody'
 import { useNavigation } from '../hooks/useNavigation'
+import { prettyURL } from '../lib/prettyURL'
 
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
@@ -61,7 +62,7 @@ export const mapDataToPropsEnhancer = (
  *
  * @see https://www.gatsbyjs.com/docs/creating-and-modifying-pages/#pass-context-to-pages
  */
-export type NewsTemplateContext = {
+export type ProjectsTemplateContext = {
   limit: number
   skip: number
   numPages: number
@@ -70,46 +71,46 @@ export type NewsTemplateContext = {
 }
 
 /**
- * Props added to all slices by `mapDataToPropsEnhancer` for `NewsPageTemplate`.
+ * Props added to all slices by `mapDataToPropsEnhancer` for `ProjectPageTemplate`.
  * Intersect this type with a slice's known props to get a complete list of
  * available props.
  *
  * @see https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types
  */
-export type NewsTemplateEnhancerProps = ReturnType<
+export type ProjectsTemplateEnhancerProps = ReturnType<
   typeof mapDataToPropsEnhancer
 >
 
-export const NewsTemplate = ({
+export const ProjectsTemplate = ({
   data,
   location,
   pageContext,
-}: PageProps<NewsTemplateQuery, NewsTemplateContext>) => {
+}: PageProps<ProjectsTemplateQuery, ProjectsTemplateContext>) => {
   const siteSettings = useSiteSettings()
   const page = data?.prismicPage
 
   const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
   const pageDescription = page?.data?.meta_description
 
-  const newsPosts = data.allPrismicNewsPost.nodes
-  const newsPostsStartCount = pageContext.skip + 1
-  const newsPostsEndCount = pageContext.skip + newsPosts.length
-  const newsPostsTotalCount = pageContext.total
+  const projects = data.allPrismicProject.nodes
+  const projectsStartCount = pageContext.skip + 1
+  const projectsEndCount = pageContext.skip + projects.length
+  const projectsTotalCount = pageContext.total
 
   const nextPageHref =
     pageContext.currentPage < pageContext.numPages
-      ? `/news/${pageContext.currentPage + 1}/`
+      ? `/impact/projects/${pageContext.currentPage + 1}/`
       : undefined
   const previousPageHref =
     pageContext.currentPage > 2
-      ? `/news/${pageContext.currentPage - 1}/`
+      ? `/impact/projects/${pageContext.currentPage - 1}/`
       : pageContext.currentPage === 2
-      ? '/news/'
+      ? '/impact/projects/'
       : undefined
 
   const navigation = useNavigation()
-  const newsNavigation = navigation.primary
-    .find((item) => item?.primary?.link?.uid === 'news')
+  const impactNavigation = navigation.primary
+    .find((item) => item?.primary?.link?.uid === 'impact')
     ?.items?.map?.((item) => ({
       url: item?.link?.url,
       name: item?.name,
@@ -160,7 +161,7 @@ export const NewsTemplate = ({
         <InteriorPageSidebar
           title={pageTitle}
           description={pageDescription}
-          navigationItems={newsNavigation}
+          navigationItems={impactNavigation}
         />
         <Box
           styles={{
@@ -171,11 +172,11 @@ export const NewsTemplate = ({
           <BoundedBox variant="narrow" nextSharesBg={true}>
             <Box styles={{ display: 'grid', gap: 4 }}>
               <Text variant="serif-20-24" styles={{ color: 'gray20' }}>
-                All articles
+                All projects
               </Text>
               <Text variant="sans-16" styles={{ color: 'gray40' }}>
-                Showing {newsPostsStartCount}&ndash;{newsPostsEndCount} of{' '}
-                {newsPostsTotalCount} article{newsPostsTotalCount !== 1 && 's'}
+                Showing {projectsStartCount}&ndash;{projectsEndCount} of{' '}
+                {projectsTotalCount} project{projectsTotalCount !== 1 && 's'}
               </Text>
             </Box>
           </BoundedBox>
@@ -184,27 +185,25 @@ export const NewsTemplate = ({
               nextPageHref={nextPageHref}
               previousPageHref={previousPageHref}
             >
-              {newsPosts.map((newsPost) => {
-                const newsCategories =
-                  newsPost?.data?.news_categories?.map?.(
-                    (category) => category?.news_category?.document,
+              {projects.map((project) => {
+                const projectCategories =
+                  project?.data?.project_categories?.map?.(
+                    (category) => category?.project_category?.document,
                   ) ?? []
-                const primaryNewsCategory = newsCategories[0]
+                const primaryProjectCategory = projectCategories[0]
 
                 return (
-                  newsPost.url && (
+                  project.url && (
                     <ContentCard
-                      key={newsPost.url}
-                      href={newsPost.url}
-                      topLabel={primaryNewsCategory?.data?.name?.text}
-                      title={newsPost.data?.title?.text}
-                      excerpt={newsPost.data?.excerpt?.text}
-                      date={
-                        (newsPost?.data?.published_at as string) ??
-                        (newsPost?.first_publication_date as string)
-                      }
-                      featuredImageFluid={newsPost.data?.featured_image?.fluid}
-                      featuredImageAlt={newsPost.data?.featured_image?.alt}
+                      key={project.url}
+                      href={project.url}
+                      topLabel={primaryProjectCategory?.data?.name?.text}
+                      title={project.data?.title?.text}
+                      excerptHTML={getRichText(project.data?.description)}
+                      featuredImageFluid={project.data?.featured_image?.fluid}
+                      featuredImageAlt={project.data?.featured_image?.alt}
+                      sublinkHref={project.data?.website_url?.url}
+                      sublinkText={prettyURL(project.data?.website_url?.url)}
                     />
                   )
                 )
@@ -223,11 +222,11 @@ export const NewsTemplate = ({
   )
 }
 
-export default withPreview(NewsTemplate)
+export default withPreview(ProjectsTemplate)
 
 export const query = graphql`
-  query NewsTemplate($limit: Int!, $skip: Int!) {
-    prismicPage(uid: { eq: "news" }) {
+  query ProjectsTemplate($limit: Int!, $skip: Int!) {
+    prismicPage(uid: { eq: "projects" }) {
       _previewable
       ...PrismicPageParentRecursive
       data {
@@ -246,29 +245,28 @@ export const query = graphql`
       }
     }
 
-    allPrismicNewsPost(
-      sort: {
-        fields: [data___published_at, first_publication_date]
-        order: DESC
-      }
+    allPrismicProject(
+      sort: { fields: [data___title___text], order: ASC }
       limit: $limit
       skip: $skip
     ) {
       nodes {
         url
-        first_publication_date(formatString: "MMMM D, YYYY")
         data {
           title {
             text
           }
-          published_at(formatString: "MMMM D, YYYY")
-          excerpt {
+          description {
             text
+            html
           }
-          news_categories {
-            news_category {
+          website_url {
+            url
+          }
+          project_categories {
+            project_category {
               document {
-                ... on PrismicNewsCategory {
+                ... on PrismicProjectCategory {
                   uid
                   url
                   data {
