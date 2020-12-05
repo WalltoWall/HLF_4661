@@ -10324,7 +10324,9 @@ export type PrismicProjectConnectionGroupArgs = {
 export type PrismicProjectDataType = {
   title?: Maybe<PrismicStructuredTextType>;
   description?: Maybe<PrismicStructuredTextType>;
+  website_url?: Maybe<PrismicLinkType>;
   project_categories?: Maybe<Array<Maybe<PrismicProjectProjectCategoriesGroupType>>>;
+  involved_fellows?: Maybe<Array<Maybe<PrismicProjectInvolvedFellowsGroupType>>>;
   featured_image?: Maybe<PrismicImageType>;
   body?: Maybe<Array<Maybe<PrismicProjectBodySlicesType>>>;
 };
@@ -10332,7 +10334,9 @@ export type PrismicProjectDataType = {
 export type PrismicProjectDataTypeFilterInput = {
   title?: Maybe<PrismicStructuredTextTypeFilterInput>;
   description?: Maybe<PrismicStructuredTextTypeFilterInput>;
+  website_url?: Maybe<PrismicLinkTypeFilterInput>;
   project_categories?: Maybe<PrismicProjectProjectCategoriesGroupTypeFilterListInput>;
+  involved_fellows?: Maybe<PrismicProjectInvolvedFellowsGroupTypeFilterListInput>;
   featured_image?: Maybe<PrismicImageTypeFilterInput>;
 };
 
@@ -10349,6 +10353,18 @@ export enum PrismicProjectFieldsEnum {
   DataDescriptionHtml = 'data___description___html',
   DataDescriptionText = 'data___description___text',
   DataDescriptionRaw = 'data___description___raw',
+  DataWebsiteUrlLinkType = 'data___website_url___link_type',
+  DataWebsiteUrlIsBroken = 'data___website_url___isBroken',
+  DataWebsiteUrlUrl = 'data___website_url___url',
+  DataWebsiteUrlTarget = 'data___website_url___target',
+  DataWebsiteUrlSize = 'data___website_url___size',
+  DataWebsiteUrlId = 'data___website_url___id',
+  DataWebsiteUrlType = 'data___website_url___type',
+  DataWebsiteUrlTags = 'data___website_url___tags',
+  DataWebsiteUrlLang = 'data___website_url___lang',
+  DataWebsiteUrlSlug = 'data___website_url___slug',
+  DataWebsiteUrlUid = 'data___website_url___uid',
+  DataWebsiteUrlRaw = 'data___website_url___raw',
   DataProjectCategories = 'data___project_categories',
   DataProjectCategoriesProjectCategoryLinkType = 'data___project_categories___project_category___link_type',
   DataProjectCategoriesProjectCategoryIsBroken = 'data___project_categories___project_category___isBroken',
@@ -10362,6 +10378,19 @@ export enum PrismicProjectFieldsEnum {
   DataProjectCategoriesProjectCategorySlug = 'data___project_categories___project_category___slug',
   DataProjectCategoriesProjectCategoryUid = 'data___project_categories___project_category___uid',
   DataProjectCategoriesProjectCategoryRaw = 'data___project_categories___project_category___raw',
+  DataInvolvedFellows = 'data___involved_fellows',
+  DataInvolvedFellowsInvolvedFellowLinkType = 'data___involved_fellows___involved_fellow___link_type',
+  DataInvolvedFellowsInvolvedFellowIsBroken = 'data___involved_fellows___involved_fellow___isBroken',
+  DataInvolvedFellowsInvolvedFellowUrl = 'data___involved_fellows___involved_fellow___url',
+  DataInvolvedFellowsInvolvedFellowTarget = 'data___involved_fellows___involved_fellow___target',
+  DataInvolvedFellowsInvolvedFellowSize = 'data___involved_fellows___involved_fellow___size',
+  DataInvolvedFellowsInvolvedFellowId = 'data___involved_fellows___involved_fellow___id',
+  DataInvolvedFellowsInvolvedFellowType = 'data___involved_fellows___involved_fellow___type',
+  DataInvolvedFellowsInvolvedFellowTags = 'data___involved_fellows___involved_fellow___tags',
+  DataInvolvedFellowsInvolvedFellowLang = 'data___involved_fellows___involved_fellow___lang',
+  DataInvolvedFellowsInvolvedFellowSlug = 'data___involved_fellows___involved_fellow___slug',
+  DataInvolvedFellowsInvolvedFellowUid = 'data___involved_fellows___involved_fellow___uid',
+  DataInvolvedFellowsInvolvedFellowRaw = 'data___involved_fellows___involved_fellow___raw',
   DataFeaturedImageAlt = 'data___featured_image___alt',
   DataFeaturedImageCopyright = 'data___featured_image___copyright',
   DataFeaturedImageDimensionsWidth = 'data___featured_image___dimensions___width',
@@ -10557,6 +10586,18 @@ export type PrismicProjectGroupConnection = {
   pageInfo: PageInfo;
   field: Scalars['String'];
   fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type PrismicProjectInvolvedFellowsGroupType = {
+  involved_fellow?: Maybe<PrismicLinkType>;
+};
+
+export type PrismicProjectInvolvedFellowsGroupTypeFilterInput = {
+  involved_fellow?: Maybe<PrismicLinkTypeFilterInput>;
+};
+
+export type PrismicProjectInvolvedFellowsGroupTypeFilterListInput = {
+  elemMatch?: Maybe<PrismicProjectInvolvedFellowsGroupTypeFilterInput>;
 };
 
 export type PrismicProjectProjectCategoriesGroupType = {
@@ -16639,7 +16680,9 @@ export type SitePluginPluginOptionsSchemasProjectMain = {
   title?: Maybe<SitePluginPluginOptionsSchemasProjectMainTitle>;
   uid?: Maybe<SitePluginPluginOptionsSchemasProjectMainUid>;
   description?: Maybe<SitePluginPluginOptionsSchemasProjectMainDescription>;
+  website_url?: Maybe<SitePluginPluginOptionsSchemasProjectMainWebsite_Url>;
   project_categories?: Maybe<SitePluginPluginOptionsSchemasProjectMainProject_Categories>;
+  involved_fellows?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_Fellows>;
   featured_image?: Maybe<SitePluginPluginOptionsSchemasProjectMainFeatured_Image>;
 };
 
@@ -16649,13 +16692,13 @@ export type SitePluginPluginOptionsSchemasProjectMainDescription = {
 };
 
 export type SitePluginPluginOptionsSchemasProjectMainDescriptionConfig = {
-  single?: Maybe<Scalars['String']>;
+  multi?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
   placeholder?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsSchemasProjectMainDescriptionConfigFilterInput = {
-  single?: Maybe<StringQueryOperatorInput>;
+  multi?: Maybe<StringQueryOperatorInput>;
   label?: Maybe<StringQueryOperatorInput>;
   placeholder?: Maybe<StringQueryOperatorInput>;
 };
@@ -16687,8 +16730,62 @@ export type SitePluginPluginOptionsSchemasProjectMainFilterInput = {
   title?: Maybe<SitePluginPluginOptionsSchemasProjectMainTitleFilterInput>;
   uid?: Maybe<SitePluginPluginOptionsSchemasProjectMainUidFilterInput>;
   description?: Maybe<SitePluginPluginOptionsSchemasProjectMainDescriptionFilterInput>;
+  website_url?: Maybe<SitePluginPluginOptionsSchemasProjectMainWebsite_UrlFilterInput>;
   project_categories?: Maybe<SitePluginPluginOptionsSchemasProjectMainProject_CategoriesFilterInput>;
+  involved_fellows?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsFilterInput>;
   featured_image?: Maybe<SitePluginPluginOptionsSchemasProjectMainFeatured_ImageFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_Fellows = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfig = {
+  fields?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFields>;
+  label?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFields = {
+  involved_fellow?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_Fellow>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsFilterInput = {
+  involved_fellow?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_Fellow = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowConfig = {
+  select?: Maybe<Scalars['String']>;
+  customtypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowConfigFilterInput = {
+  select?: Maybe<StringQueryOperatorInput>;
+  customtypes?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFilterInput = {
+  fields?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsFilterInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasProjectMainProject_Categories = {
@@ -16783,6 +16880,26 @@ export type SitePluginPluginOptionsSchemasProjectMainUidConfigFilterInput = {
 export type SitePluginPluginOptionsSchemasProjectMainUidFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   config?: Maybe<SitePluginPluginOptionsSchemasProjectMainUidConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainWebsite_Url = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasProjectMainWebsite_UrlConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainWebsite_UrlConfig = {
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainWebsite_UrlConfigFilterInput = {
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainWebsite_UrlFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasProjectMainWebsite_UrlConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasSettings = {
@@ -17772,3 +17889,197 @@ export type PageTemplateQuery = { prismicPage?: Maybe<(
     )> }
     & PrismicPageParentRecursiveFragment
   )> };
+
+export type ProjectTemplateQueryVariables = Exact<{
+  uid: Scalars['String'];
+  nextUID?: Maybe<Scalars['String']>;
+  prevUID?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ProjectTemplateQuery = { prismicProject?: Maybe<(
+    Pick<PrismicProject, '_previewable' | 'uid'>
+    & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, website_url?: Maybe<Pick<PrismicLinkType, 'url'>>, project_categories?: Maybe<Array<Maybe<{ project_category?: Maybe<{ document?: Maybe<(
+            Pick<PrismicProjectCategory, 'uid' | 'url'>
+            & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+          )> }> }>>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicProjectBodyTextIntro' }
+        & Pick<PrismicProjectBodyTextIntro, 'id'>
+        & SlicesProjectBody_PrismicProjectBodyTextIntro_Fragment
+      ) | (
+        { __typename: 'PrismicProjectBodyText' }
+        & Pick<PrismicProjectBodyText, 'id'>
+        & SlicesProjectBody_PrismicProjectBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicProjectBodyImages' }
+        & Pick<PrismicProjectBodyImages, 'id'>
+        & SlicesProjectBody_PrismicProjectBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicProjectBodyVideo' }
+        & Pick<PrismicProjectBodyVideo, 'id'>
+        & SlicesProjectBody_PrismicProjectBodyVideo_Fragment
+      ) | (
+        { __typename: 'PrismicProjectBodyLinkCard' }
+        & Pick<PrismicProjectBodyLinkCard, 'id'>
+        & SlicesProjectBody_PrismicProjectBodyLinkCard_Fragment
+      ) | (
+        { __typename: 'PrismicProjectBodyDivider' }
+        & Pick<PrismicProjectBodyDivider, 'id'>
+        & SlicesProjectBody_PrismicProjectBodyDivider_Fragment
+      ) | (
+        { __typename: 'PrismicProjectBodyAnchor' }
+        & Pick<PrismicProjectBodyAnchor, 'id'>
+        & SlicesProjectBody_PrismicProjectBodyAnchor_Fragment
+      )>>> }> }
+  )>, nextPrismicProject?: Maybe<ProjectTemplatePaginatedProjectFragment>, prevPrismicProject?: Maybe<ProjectTemplatePaginatedProjectFragment>, prismicPage?: Maybe<(
+    Pick<PrismicPage, '_previewable'>
+    & { data?: Maybe<(
+      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicPageBodyText' }
+        & Pick<PrismicPageBodyText, 'id'>
+        & SlicesPageBody_PrismicPageBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImages' }
+        & Pick<PrismicPageBodyImages, 'id'>
+        & SlicesPageBody_PrismicPageBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyAnchor' }
+        & Pick<PrismicPageBodyAnchor, 'id'>
+        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImage' }
+        & Pick<PrismicPageBodyHeroImage, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyQuoteSlideshow' }
+        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
+        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
+      )>>> }
+    )> }
+    & PrismicPageParentRecursiveFragment
+  )> };
+
+export type ProjectTemplatePaginatedProjectFragment = (
+  Pick<PrismicProject, 'url' | 'first_publication_date'>
+  & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, website_url?: Maybe<Pick<PrismicLinkType, 'url'>>, featured_image?: Maybe<(
+      Pick<PrismicImageType, 'alt'>
+      & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+    )> }> }
+);
+
+export type ProjectCategoryTemplateQueryVariables = Exact<{
+  uid: Scalars['String'];
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
+
+
+export type ProjectCategoryTemplateQuery = { prismicPage?: Maybe<(
+    Pick<PrismicPage, '_previewable'>
+    & { data?: Maybe<(
+      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicPageBodyText' }
+        & Pick<PrismicPageBodyText, 'id'>
+        & SlicesPageBody_PrismicPageBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImages' }
+        & Pick<PrismicPageBodyImages, 'id'>
+        & SlicesPageBody_PrismicPageBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyAnchor' }
+        & Pick<PrismicPageBodyAnchor, 'id'>
+        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImage' }
+        & Pick<PrismicPageBodyHeroImage, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyQuoteSlideshow' }
+        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
+        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
+      )>>> }
+    )> }
+    & PrismicPageParentRecursiveFragment
+  )>, prismicProjectCategory?: Maybe<(
+    Pick<PrismicProjectCategory, '_previewable' | 'uid' | 'url'>
+    & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+  )>, allPrismicProject: { nodes: Array<(
+      Pick<PrismicProject, 'url'>
+      & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, website_url?: Maybe<Pick<PrismicLinkType, 'url'>>, project_categories?: Maybe<Array<Maybe<{ project_category?: Maybe<{ document?: Maybe<(
+              Pick<PrismicProjectCategory, 'uid' | 'url'>
+              & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+            )> }> }>>>, featured_image?: Maybe<(
+          Pick<PrismicImageType, 'alt'>
+          & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+        )> }> }
+    )> } };
+
+export type ProjectsTemplateQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
+
+
+export type ProjectsTemplateQuery = { prismicPage?: Maybe<(
+    Pick<PrismicPage, '_previewable'>
+    & { data?: Maybe<(
+      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicPageBodyText' }
+        & Pick<PrismicPageBodyText, 'id'>
+        & SlicesPageBody_PrismicPageBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImages' }
+        & Pick<PrismicPageBodyImages, 'id'>
+        & SlicesPageBody_PrismicPageBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyAnchor' }
+        & Pick<PrismicPageBodyAnchor, 'id'>
+        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImage' }
+        & Pick<PrismicPageBodyHeroImage, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyQuoteSlideshow' }
+        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
+        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
+      )>>> }
+    )> }
+    & PrismicPageParentRecursiveFragment
+  )>, allPrismicProject: { nodes: Array<(
+      Pick<PrismicProject, 'url'>
+      & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, website_url?: Maybe<Pick<PrismicLinkType, 'url'>>, project_categories?: Maybe<Array<Maybe<{ project_category?: Maybe<{ document?: Maybe<(
+              Pick<PrismicProjectCategory, 'uid' | 'url'>
+              & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
+            )> }> }>>>, featured_image?: Maybe<(
+          Pick<PrismicImageType, 'alt'>
+          & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+        )> }> }
+    )> } };

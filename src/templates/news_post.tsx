@@ -18,7 +18,7 @@ import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
 import { Anchor } from '../components/Anchor'
 import { Divider } from '../components/Divider'
-import { NewsPostCard } from '../components/NewsPostCard'
+import { ContentCard } from '../components/ContentCard'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
@@ -185,7 +185,7 @@ export const NewsPostTemplate = ({
             {nextNewsPost && nextNewsPost.url && (
               <>
                 <Divider styles={{ marginBottom: 8 }} />
-                <NewsPostCard
+                <ContentCard
                   href={nextNewsPost.url}
                   topLabel="Next Article"
                   title={nextNewsPost.data?.title?.text}

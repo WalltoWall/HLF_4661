@@ -3,14 +3,16 @@ import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import { withPreview } from 'gatsby-source-prismic'
 import { Box } from '@walltowall/calico'
-import { propPairsEq } from '@walltowall/helpers'
+import { getRichText, propPairsEq, undefIfEmpty } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
 import { ProjectTemplateQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
 import { useSiteSettings } from '../hooks/useSiteSettings'
+import { useNavigation } from '../hooks/useNavigation'
 import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
 import { slicesMap as projectBodySlicesMap } from '../slices/ProjectBody'
+import { prettyURL } from '../lib/prettyURL'
 import { PickPartial } from '../types'
 
 import { Layout } from '../components/Layout'
@@ -18,8 +20,9 @@ import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
 import { Anchor } from '../components/Anchor'
 import { Divider } from '../components/Divider'
-import { ProjectCard } from '../components/ProjectCard'
+import { ContentCard } from '../components/ContentCard'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
+import ProjectBodyText from '../slices/ProjectBodyText'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -86,15 +89,22 @@ export const ProjectTemplate = ({
   location,
 }: PageProps<ProjectTemplateQuery>) => {
   const siteSettings = useSiteSettings()
-  const project = data?.prismicProject
 
+  const page = data?.prismicPage
+  const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
+  const pageDescription = page?.data?.meta_description
+
+  const navigation = useNavigation()
+  const impactNavigation = navigation.primary
+    .find((item) => item?.primary?.link?.uid === 'impact')
+    ?.items?.map?.((item) => ({
+      url: item?.link?.url,
+      name: item?.name,
+    }))
+
+  const project = data?.prismicProject
   const projectTitle = project?.data?.title?.text
-  const projectPublishedAt =
-    (project?.data?.published_at as string) ??
-    (project?.first_publication_date as string)
-  const projectExcerpt = project?.data?.excerpt?.text
-  const projectFeaturedImageFluid = project?.data?.featured_image?.fluid
-  const projectFeaturedImageAlt = project?.data?.featured_image?.alt
+  const projectWebsiteHref = project?.data?.website_url?.url
 
   const projectCategories =
     project?.data?.project_categories?.map?.(
@@ -125,7 +135,6 @@ export const ProjectTemplate = ({
           {projectTitle ?? ''}
           {project?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`}
         </title>
-        {projectExcerpt && <meta name="description" content={projectExcerpt} />}
       </Helmet>
       <MapSlicesToComponents
         list={headerSliceList}
@@ -144,8 +153,9 @@ export const ProjectTemplate = ({
         }}
       >
         <InteriorPageSidebar
-          imageFluid={projectFeaturedImageFluid}
-          imageAlt={projectFeaturedImageAlt}
+          title={pageTitle}
+          description={pageDescription}
+          navigationItems={impactNavigation}
         />
         <Box styles={{ gridColumn: [null, null, 'span-2'] }}>
           <BoundedBox nextSharesBg={true}>
@@ -165,35 +175,41 @@ export const ProjectTemplate = ({
                   {project?.data?.title?.text}
                 </Text>
               )}
+              {projectWebsiteHref && (
+                <Anchor href={projectWebsiteHref}>
+                  <Text variant="serif-16-18">
+                    {prettyURL(projectWebsiteHref)}
+                  </Text>
+                </Anchor>
+              )}
             </Box>
-            <Text
-              variant="sans-16"
-              styles={{ color: 'gray40', marginTop: [8, 10, 12] }}
-            >
-              {projectPublishedAt}
-            </Text>
           </BoundedBox>
-          <MapSlicesToComponents
-            list={project?.data?.body}
-            map={slicesMap}
-            meta={meta}
-            mapDataToPropsEnhancer={mapDataToPropsEnhancer}
-          />
+          {undefIfEmpty(project?.data?.body) ? (
+            <MapSlicesToComponents
+              list={project?.data?.body}
+              map={slicesMap}
+              meta={meta}
+              mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+            />
+          ) : (
+            <ProjectBodyText
+              textHTML={getRichText(project?.data?.description)}
+              nextSharesBg={false}
+            />
+          )}
           <BoundedBox styles={{ paddingTop: [6, 7, 8] }}>
             {nextProject && nextProject.url && (
               <>
                 <Divider styles={{ marginBottom: 8 }} />
-                <ProjectCard
+                <ContentCard
                   href={nextProject.url}
-                  topLabel="Next Article"
+                  topLabel="Next Project"
                   title={nextProject.data?.title?.text}
-                  excerpt={nextProject.data?.excerpt?.text}
-                  date={
-                    (nextProject?.data?.published_at as string) ??
-                    (nextProject?.first_publication_date as string)
-                  }
+                  excerptHTML={getRichText(nextProject.data?.description)}
                   featuredImageFluid={nextProject.data?.featured_image?.fluid}
                   featuredImageAlt={nextProject.data?.featured_image?.alt}
+                  sublinkHref={nextProject.data?.website_url?.url}
+                  sublinkText={prettyURL(nextProject.data?.website_url?.url)}
                 />
               </>
             )}
@@ -220,6 +236,13 @@ export const query = graphql`
       data {
         title {
           text
+        }
+        description {
+          text
+          html
+        }
+        website_url {
+          url
         }
         project_categories {
           project_category {
@@ -253,6 +276,25 @@ export const query = graphql`
     prevPrismicProject: prismicProject(uid: { eq: $prevUID }) {
       ...ProjectTemplatePaginatedProject
     }
+
+    prismicPage(uid: { eq: "projects" }) {
+      _previewable
+      ...PrismicPageParentRecursive
+      data {
+        title {
+          text
+        }
+        meta_title
+        meta_description
+        body {
+          __typename
+          ... on Node {
+            id
+          }
+          ...SlicesPageBody
+        }
+      }
+    }
   }
 
   fragment ProjectTemplatePaginatedProject on PrismicProject {
@@ -264,6 +306,10 @@ export const query = graphql`
       }
       description {
         text
+        html
+      }
+      website_url {
+        url
       }
       featured_image {
         alt

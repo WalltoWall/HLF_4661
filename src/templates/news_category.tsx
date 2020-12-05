@@ -14,9 +14,8 @@ import { useNavigation } from '../hooks/useNavigation'
 
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
-import { NewsPostCard } from '../components/NewsPostCard'
-import { PaginationNavigation } from '../components/PaginationNavigation'
-import { NewsPostCardsList } from '../components/NewsPostCardsList'
+import { ContentCard } from '../components/ContentCard'
+import { ContentCardsList } from '../components/ContentCardsList'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { Text } from '../components/Text'
 
@@ -110,7 +109,6 @@ export const NewsCategoryTemplate = ({
       : pageContext.currentPage === 2
       ? data.prismicNewsCategory?.url
       : undefined
-  const hasPaginationLinks = Boolean(nextPageHref || previousPageHref)
 
   const navigation = useNavigation()
   const newsNavigation = navigation.primary
@@ -186,8 +184,11 @@ export const NewsCategoryTemplate = ({
               </Text>
             </Box>
           </BoundedBox>
-          <BoundedBox variant="narrow" nextSharesBg={hasPaginationLinks}>
-            <NewsPostCardsList>
+          <BoundedBox variant="narrow">
+            <ContentCardsList
+              nextPageHref={nextPageHref}
+              previousPageHref={previousPageHref}
+            >
               {newsPosts.map((newsPost) => {
                 const newsCategories =
                   newsPost?.data?.news_categories?.map?.(
@@ -197,7 +198,7 @@ export const NewsCategoryTemplate = ({
 
                 return (
                   newsPost.url && (
-                    <NewsPostCard
+                    <ContentCard
                       key={newsPost.url}
                       href={newsPost.url}
                       topLabel={primaryNewsCategory?.data?.name?.text}
@@ -213,16 +214,8 @@ export const NewsCategoryTemplate = ({
                   )
                 )
               })}
-            </NewsPostCardsList>
+            </ContentCardsList>
           </BoundedBox>
-          {hasPaginationLinks && (
-            <BoundedBox>
-              <PaginationNavigation
-                nextHref={nextPageHref}
-                previousHref={previousPageHref}
-              />
-            </BoundedBox>
-          )}
         </Box>
       </Box>
       <MapSlicesToComponents
