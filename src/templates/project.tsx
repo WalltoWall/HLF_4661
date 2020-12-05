@@ -22,7 +22,10 @@ import { Anchor } from '../components/Anchor'
 import { Divider } from '../components/Divider'
 import { ContentCard } from '../components/ContentCard'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
-import ProjectBodyText from '../slices/ProjectBodyText'
+
+import { ProjectBodyText } from '../slices/ProjectBodyText'
+import { Inline } from '../components/Inline'
+import { Icon } from '../components/Icon'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -159,6 +162,18 @@ export const ProjectTemplate = ({
         />
         <Box styles={{ gridColumn: [null, null, 'span-2'] }}>
           <BoundedBox nextSharesBg={true}>
+            <Anchor href="/impact/projects/" styles={{ marginLeft: [-1, -5] }}>
+              <Inline space={[2, 3]} alignY="center">
+                <Icon
+                  name="triangleLeft"
+                  styles={{ width: '0.5rem' }}
+                  style={{ width: '0.4rem' }}
+                />
+                <Text variant="serif-14-16">View all projects</Text>
+              </Inline>
+            </Anchor>
+          </BoundedBox>
+          <BoundedBox variant="extraNarrow" nextSharesBg={true}>
             <Box styles={{ display: 'grid', gap: 6, justifyItems: 'start' }}>
               {primaryProjectCategory && primaryProjectCategory?.url && (
                 <Anchor

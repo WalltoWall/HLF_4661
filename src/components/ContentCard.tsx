@@ -55,7 +55,7 @@ export const ContentCard = <
       }}
     >
       <Box
-        styles={{ gridColumn: [null, 'span-1'], maxWidth: ['20rem', 'none'] }}
+        styles={{ gridColumn: [null, 'span-1'], maxWidth: ['15rem', 'none'] }}
       >
         <ConditionalWrap
           condition={Boolean(href)}
@@ -81,7 +81,7 @@ export const ContentCard = <
           paddingTop: 2,
         }}
       >
-        <Box styles={{ display: 'grid', gap: 5, justifyItems: 'start' }}>
+        <Box styles={{ display: 'grid', gap: [4, 5], justifyItems: 'start' }}>
           {topLabel && (
             <Text variant="sans-12-caps" styles={{ color: 'gray40' }}>
               {topLabel}

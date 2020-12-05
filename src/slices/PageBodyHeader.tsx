@@ -447,7 +447,7 @@ const PageBodyHeader = ({
                   />
                 </Link>
               </Box>
-              <Box styles={{ display: ['none', 'block'] }}>
+              <Box styles={{ display: ['none', null, 'block'] }}>
                 <Inline as="nav" variant="ul" space={[4, 4, 6]}>
                   {navigation.primary.map(
                     (item) =>
@@ -474,7 +474,12 @@ const PageBodyHeader = ({
                   )}
                 </Inline>
               </Box>
-              <Box styles={{ display: ['flex', 'none'], alignItems: 'center' }}>
+              <Box
+                styles={{
+                  display: ['flex', null, 'none'],
+                  alignItems: 'center',
+                }}
+              >
                 <DisclosureButton>
                   <VisuallyHidden>Navigation</VisuallyHidden>
                   <HamburgerIcon isActive={mobileNavIsOpen} />
@@ -483,7 +488,7 @@ const PageBodyHeader = ({
             </Box>
           </BoundedBox>
           <DisclosurePanel>
-            <Box styles={{ display: [null, 'none'] }}>
+            <Box styles={{ display: [null, null, 'none'] }}>
               <Box as="nav">
                 <Box as="ul">
                   {navigation.primary.map(
@@ -517,6 +522,7 @@ const PageBodyHeader = ({
                 method="get"
                 role="search"
                 onSubmit={onSearchSubmit}
+                styles={{ display: [null, 'none'] }}
               >
                 <VisuallyHidden>
                   <label htmlFor={mobileSearchQueryInputId}>Search</label>
