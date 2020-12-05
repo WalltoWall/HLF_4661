@@ -24,9 +24,13 @@ export const PageBodyLearningExcursionMap = ({
   textHTML,
   mapURL,
   children,
+  nextSharesBg,
+  id,
 }: PageBodyLearningExcursionMapProps) => (
   <BoundedBox
     as="section"
+    nextSharesBg={nextSharesBg}
+    id={id}
     styles={{
       backgroundColor: 'white',
       maxWidth: 'xlarge',

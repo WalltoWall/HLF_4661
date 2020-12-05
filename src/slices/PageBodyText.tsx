@@ -13,8 +13,47 @@ export type PageBodyTextProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
 
 const PageBodyText = ({ textHTML, nextSharesBg }: PageBodyTextProps) => (
-  <BoundedBox as="section" nextSharesBg={nextSharesBg}>
-    {textHTML && <HTMLContent html={textHTML} />}
+  <BoundedBox
+    as="section"
+    nextSharesBg={nextSharesBg}
+    styles={{
+      backgroundColor: 'white',
+      maxWidth: 'xlarge',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }}
+  >
+    {textHTML && (
+      <HTMLContent
+        html={textHTML}
+        componentOverrides={{
+          h1: (Comp) => (props) => (
+            <Comp
+              variant="serif-40-48"
+              {...props}
+              styles={{ color: 'gray10', maxWidth: 'large', ...props.styles }}
+            />
+          ),
+          h2: (Comp) => (props) => (
+            <Comp
+              variant="sans-18-bold-caps"
+              {...props}
+              styles={{ color: 'gray20', maxWidth: 'medium', ...props.styles }}
+            />
+          ),
+          p: (Comp) => (props) => (
+            <Comp {...props} styles={{ maxWidth: 'medium', ...props.styles }} />
+          ),
+          ul: (Comp) => (props) => (
+            <Comp {...props} styles={{ maxWidth: 'medium', ...props.styles }} />
+          ),
+          ol: (Comp) => (props) => (
+            <Comp {...props} styles={{ maxWidth: 'medium', ...props.styles }} />
+          ),
+        }}
+        styles={{ color: 'gray40' }}
+      />
+    )}
   </BoundedBox>
 )
 
@@ -25,7 +64,7 @@ export const mapDataToProps = ({
 })
 
 export const mapDataToContext = () => ({
-  bg: 'transparent',
+  bg: 'white',
 })
 
 export const fragment = graphql`

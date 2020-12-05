@@ -67,7 +67,8 @@
           "hero_image": [],
           "quote_slideshow": [],
           "learning_excursion_map": [],
-          "fellows_grid": []
+          "fellows_grid": [],
+          "image_carousel": []
         },
         "choices": {
           "text": {
@@ -80,7 +81,7 @@
               "text": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, heading1, strong, em, hyperlink, embed, list-item, o-list-item, o-list-item",
+                  "multi": "paragraph, heading1, heading2, strong, em, hyperlink, embed, list-item, o-list-item",
                   "allowTargetBlank": true,
                   "label": "Text",
                   "placeholder": "Text with formatting and rich content"
@@ -274,6 +275,32 @@
             "display": "list",
             "non-repeat": {},
             "repeat": {}
+          },
+          "image_carousel": {
+            "type": "Slice",
+            "fieldset": "Image Carousel",
+            "description": "Interactive carousel of images",
+            "icon": "photo_library",
+            "display": "grid",
+            "non-repeat": {},
+            "repeat": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Image"
+                }
+              },
+              "caption": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Caption",
+                  "placeholder": "Optional - Caption below image"
+                }
+              }
+            }
           }
         }
       }

@@ -1,0 +1,94 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
+import faker from 'faker'
+import { buildImgixFluid } from 'gatsby-plugin-imgix'
+
+import * as Storybook from '../components/Storybook'
+
+import PageBodyImageCarousel from './PageBodyImageCarousel'
+
+export const images = [
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1551806406-553417833005',
+    sourceWidth: 4 / 3,
+    sourceHeight: 1,
+  }),
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1598644612563-82fbfa1bf2dd',
+    sourceWidth: 3 / 4,
+    sourceHeight: 1,
+  }),
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1604011854873-76e939ef5a5e',
+    sourceWidth: 4 / 3,
+    sourceHeight: 1,
+  }),
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7',
+    sourceWidth: 1,
+    sourceHeight: 1,
+  }),
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115',
+    sourceWidth: 4 / 3,
+    sourceHeight: 1,
+  }),
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1606820049560-cfaa8cba5859',
+    sourceWidth: 3 / 4,
+    sourceHeight: 1,
+  }),
+]
+
+<Meta title="Pages/Image Carousel" component={PageBodyImageCarousel} />
+
+##### Page
+
+# Image Carousel
+
+Set of images or photos displayed in an interactive carousel with optional
+captions.
+
+#### Repeatable fields
+
+Each item represents an image and optional caption.
+
+<Storybook.SliceFieldsTable
+  customTypeId="page"
+  sliceZoneId="body"
+  sliceId="image_carousel"
+  fieldset="repeat"
+  overrides={{ image: { description: 'Image to display' } }}
+/>
+
+### With many images
+
+Images are shown one at a time in a carousel.
+
+<Canvas withSource="none">
+  <Story name="With many images">
+    <PageBodyImageCarousel nextSharesBg={false}>
+      {images.map((image, i) => (
+        <PageBodyImageCarousel.Image
+          key={i}
+          imageFluid={image}
+          captionHTML={`<p>${faker.lorem.sentences(2)}</p>`}
+        />
+      ))}
+    </PageBodyImageCarousel>
+  </Story>
+</Canvas>
+
+### With one image
+
+This slice can support one or more images.
+
+<Canvas withSource="none">
+  <Story name="With one image">
+    <PageBodyImageCarousel nextSharesBg={false}>
+      <PageBodyImageCarousel.Image
+        imageFluid={images[0]}
+        captionHTML={`<p>${faker.lorem.sentences(2)}</p>`}
+      />
+    </PageBodyImageCarousel>
+  </Story>
+</Canvas>
