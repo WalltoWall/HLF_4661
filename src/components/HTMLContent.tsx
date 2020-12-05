@@ -11,12 +11,12 @@ import { useUtilStyles } from '../hooks/useUtilStyles'
 const defaultElement = 'div'
 
 const baseHeadingStyles = {
-  marginTop: [10, 12, 13],
-  marginBottom: [6, 7, 8],
+  marginTop: [11, 13, 15],
+  marginBottom: [8, 9, 10],
 } as const
 
 const baseTextStyles = {
-  marginBottom: [6, 7, 8],
+  marginBottom: [8, 9, 10],
 } as const
 
 /**
