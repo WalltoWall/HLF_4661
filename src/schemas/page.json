@@ -70,7 +70,7 @@
           "fellows_grid": [],
           "image_carousel": [],
           "link_collection": [],
-          "meet_pierre": []
+          "headshot_quote": []
         },
         "choices": {
           "text": {
@@ -321,11 +321,11 @@
               }
             }
           },
-          "meet_pierre": {
+          "headshot_quote": {
             "type": "Slice",
-            "fieldset": "Meet Pierre",
-            "description": "Short quote and a link to more info",
-            "icon": "face",
+            "fieldset": "Headshot Quote",
+            "description": "Short quote with headshot and an optional link",
+            "icon": "format_quote",
             "display": "list",
             "non-repeat": {
               "quote": {

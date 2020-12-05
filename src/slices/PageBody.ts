@@ -20,7 +20,7 @@ import * as PageBodyLearningExcursionMap from './PageBodyLearningExcursionMap'
 import * as PageBodyFellowsGrid from './PageBodyFellowsGrid'
 import * as PageBodyImageCarousel from './PageBodyImageCarousel'
 import * as PageBodyLinkCollection from './PageBodyLinkCollection'
-import * as PageBodyMeetPierre from './PageBodyMeetPierre'
+import * as PageBodyHeadshotQuote from './PageBodyHeadshotQuote'
 
 // 2. Add your slice
 const slices = {
@@ -34,7 +34,7 @@ const slices = {
   PageBodyFellowsGrid,
   PageBodyImageCarousel,
   PageBodyLinkCollection,
-  PageBodyMeetPierre,
+  PageBodyHeadshotQuote,
 }
 
 // 3. Add your slice fragment
@@ -47,7 +47,7 @@ export const fragment = graphql`
     ...PageBodyLearningExcursionMap
     ...PageBodyImageCarousel
     ...PageBodyLinkCollection
-    ...PageBodyMeetPierre
+    ...PageBodyHeadshotQuote
 
     # The following slices do not have fragments:
     #...PageBodyFooter

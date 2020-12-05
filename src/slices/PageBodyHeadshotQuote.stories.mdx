@@ -5,7 +5,7 @@ import { buildImgixFluid } from 'gatsby-plugin-imgix'
 import * as Storybook from '../components/Storybook'
 import { titleize } from '../lib/titleize'
 
-import { PageBodyMeetPierre } from './PageBodyMeetPierre'
+import { PageBodyHeadshotQuote } from './PageBodyHeadshotQuote'
 
 export const quote = faker.lorem.sentences(3)
 
@@ -17,14 +17,14 @@ export const photo = buildImgixFluid({
   sourceHeight: 250,
 })
 
-<Meta title="Pages/Meet Pierre" component={PageBodyMeetPierre} />
+<Meta title="Pages/Headshot Quote" component={PageBodyHeadshotQuote} />
 
 ##### Page
 
-# Meet Pierre
+# Headshot Quote
 
-Banner with a short quote from and a photo of Pierre. The banner can optionally
-be linked to a page with more information.
+Banner with a short quote and a headshot of the quotee. The banner can
+optionally be linked to a page with more information.
 
 #### Slice fields
 
@@ -46,7 +46,7 @@ A button can be included that links to a page with more information.
 
 <Canvas withSource="none">
   <Story name="With a button">
-    <PageBodyMeetPierre
+    <PageBodyHeadshotQuote
       nextSharesBg={false}
       quote={quote}
       credit={credit}
@@ -62,7 +62,7 @@ If a button link is not provided, a button is not displayed.
 
 <Canvas withSource="none">
   <Story name="Without a button">
-    <PageBodyMeetPierre
+    <PageBodyHeadshotQuote
       nextSharesBg={false}
       quote={quote}
       credit={credit}

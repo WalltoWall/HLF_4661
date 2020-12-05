@@ -4,7 +4,7 @@ import GatsbyImage from 'gatsby-image'
 import { Box } from '@walltowall/calico'
 import { undefIfEmpty } from '@walltowall/helpers'
 
-import { PageBodyMeetPierreFragment } from '../types.generated'
+import { PageBodyHeadshotQuoteFragment } from '../types.generated'
 import { PageTemplateEnhancerProps } from '../templates/page'
 import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 import { useCommonStyles } from '../hooks/useCommonStyles'
@@ -13,10 +13,10 @@ import { BoundedBox } from '../components/BoundedBox'
 import { ButtonLink } from '../components/ButtonLink'
 import { Text } from '../components/Text'
 
-export type PageBodyMeetPierreProps = ReturnType<typeof mapDataToProps> &
+export type PageBodyHeadshotQuoteProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
 
-export const PageBodyMeetPierre = ({
+export const PageBodyHeadshotQuote = ({
   quote,
   credit,
   buttonText = 'Learn More',
@@ -24,7 +24,7 @@ export const PageBodyMeetPierre = ({
   photoFluid,
   photoAlt,
   nextSharesBg,
-}: PageBodyMeetPierreProps) => {
+}: PageBodyHeadshotQuoteProps) => {
   const commonStyles = useCommonStyles()
 
   return (
@@ -102,7 +102,7 @@ export const PageBodyMeetPierre = ({
 export const mapDataToProps = ({
   data,
 }: MapDataToPropsArgs<
-  PageBodyMeetPierreFragment,
+  PageBodyHeadshotQuoteFragment,
   typeof mapDataToContext
 >) => ({
   quote: data.primary?.quote?.text,
@@ -118,7 +118,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyMeetPierre on PrismicPageBodyMeetPierre {
+  fragment PageBodyHeadshotQuote on PrismicPageBodyHeadshotQuote {
     primary {
       quote {
         text
@@ -142,4 +142,4 @@ export const fragment = graphql`
   }
 `
 
-export default PageBodyMeetPierre
+export default PageBodyHeadshotQuote
