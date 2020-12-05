@@ -1,5 +1,6 @@
 const path = require('path')
 
+// TODO: Change to 6 before launching site
 /**
  * Number of news posts to display on each paginated news posts listing page.
  */

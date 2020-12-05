@@ -20,6 +20,7 @@ import { Anchor } from '../components/Anchor'
 import { Divider } from '../components/Divider'
 import { ContentCard } from '../components/ContentCard'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
+import { BackButton } from '../components/BackButton'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -151,6 +152,11 @@ export const NewsPostTemplate = ({
         />
         <Box styles={{ gridColumn: [null, null, 'span-2'] }}>
           <BoundedBox nextSharesBg={true}>
+            <BackButton href="/news/" styles={{ marginLeft: [-1, -5] }}>
+              See all news posts
+            </BackButton>
+          </BoundedBox>
+          <BoundedBox variant="extraNarrow" nextSharesBg={true}>
             <Box styles={{ display: 'grid', gap: 6, justifyItems: 'start' }}>
               {primaryNewsCategory && primaryNewsCategory?.url && (
                 <Anchor
