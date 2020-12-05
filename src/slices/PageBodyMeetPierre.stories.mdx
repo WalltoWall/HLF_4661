@@ -1,0 +1,72 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
+import faker from 'faker'
+import { buildImgixFluid } from 'gatsby-plugin-imgix'
+
+import * as Storybook from '../components/Storybook'
+import { titleize } from '../lib/titleize'
+
+import { PageBodyMeetPierre } from './PageBodyMeetPierre'
+
+export const quote = faker.lorem.sentences(3)
+
+export const credit = titleize(faker.lorem.words(4))
+
+export const photo = buildImgixFluid({
+  url: 'https://images.prismic.io/omidyarfellows/93572ee4-8d81-4f87-b2bc-0ed5e084a859_Pierre.png',
+  sourceWidth: 236,
+  sourceHeight: 250,
+})
+
+<Meta title="Pages/Meet Pierre" component={PageBodyMeetPierre} />
+
+##### Page
+
+# Meet Pierre
+
+Banner with a short quote from and a photo of Pierre. The banner can optionally
+be linked to a page with more information.
+
+#### Slice fields
+
+<Storybook.SliceFieldsTable
+  customTypeId="page"
+  sliceZoneId="body"
+  sliceId="meet_pierre"
+  fieldset="non-repeat"
+  overrides={{
+    photo: {
+      description: 'Photo of Pierre',
+    }
+  }}
+/>
+
+### With a button
+
+A button can be included that links to a page with more information.
+
+<Canvas withSource="none">
+  <Story name="With a button">
+    <PageBodyMeetPierre
+      nextSharesBg={false}
+      quote={quote}
+      credit={credit}
+      buttonHref="#"
+      photoFluid={photo}
+    />
+  </Story>
+</Canvas>
+
+### Without a button
+
+If a button link is not provided, a button is not displayed.
+
+<Canvas withSource="none">
+  <Story name="Without a button">
+    <PageBodyMeetPierre
+      nextSharesBg={false}
+      quote={quote}
+      credit={credit}
+      photoFluid={photo}
+    />
+  </Story>
+</Canvas>

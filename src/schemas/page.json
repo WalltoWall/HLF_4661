@@ -68,7 +68,9 @@
           "quote_slideshow": [],
           "learning_excursion_map": [],
           "fellows_grid": [],
-          "image_carousel": []
+          "image_carousel": [],
+          "link_collection": [],
+          "meet_pierre": []
         },
         "choices": {
           "text": {
@@ -225,14 +227,6 @@
             "icon": "map",
             "display": "grid",
             "non-repeat": {
-              "text": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, heading1, strong, em, hyperlink",
-                  "label": "Text",
-                  "placeholder": "Introductory text explaining the learning excursions and the map"
-                }
-              },
               "map_url": {
                 "type": "Text",
                 "config": {
@@ -241,31 +235,7 @@
                 }
               }
             },
-            "repeat": {
-              "fellow_photo": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Fellow Photo"
-                }
-              },
-              "fellow_name": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "heading3",
-                  "label": "Fellow Name",
-                  "placeholder": "Name of the fellow"
-                }
-              },
-              "video_link": {
-                "type": "Link",
-                "config": {
-                  "label": "Video Link",
-                  "placeholder": "Link to the fellow's video"
-                }
-              }
-            }
+            "repeat": {}
           },
           "fellows_grid": {
             "type": "Slice",
@@ -301,6 +271,104 @@
                 }
               }
             }
+          },
+          "link_collection": {
+            "type": "Slice",
+            "fieldset": "Link Collection",
+            "description": "Group of links with optional descriptions and images",
+            "icon": "dns",
+            "display": "grid",
+            "non-repeat": {},
+            "repeat": {
+              "thumbnail": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Thumbnail"
+                }
+              },
+              "name": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Name",
+                  "placeholder": "Name of the link"
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Description",
+                  "placeholder": "Optional - Short description of the link"
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "Link to display"
+                }
+              },
+              "button_text": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Button Text",
+                  "placeholder": "Optional - Text for the button link"
+                }
+              }
+            }
+          },
+          "meet_pierre": {
+            "type": "Slice",
+            "fieldset": "Meet Pierre",
+            "description": "Short quote and a link to more info",
+            "icon": "face",
+            "display": "list",
+            "non-repeat": {
+              "quote": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Quote",
+                  "placeholder": "Short quote from Pierre"
+                }
+              },
+              "credit": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Credit",
+                  "placeholder": "Credit for the quote"
+                }
+              },
+              "button_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Button Link",
+                  "placeholder": "Optional - Link to a page with more information"
+                }
+              },
+              "button_text": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Button Text",
+                  "placeholder": "Optional - Text for the button link"
+                }
+              },
+              "photo": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Photo"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }

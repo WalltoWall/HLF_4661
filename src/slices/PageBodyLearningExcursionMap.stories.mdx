@@ -7,33 +7,7 @@ import { titleize } from '../lib/titleize'
 
 import { PageBodyLearningExcursionMap } from './PageBodyLearningExcursionMap'
 
-export const textHTML = `
-  <h1>${titleize(faker.lorem.words(3))}</h1>
-  <p>${faker.lorem.sentences(5)}</p>
-`
-
 export const mapURL = 'https://learningexcursions.omidyarfellows.org/'
-
-export const photos = [
-  buildImgixFluid({
-    url:
-      'https://images.prismic.io/omidyarfellows/c0a217f3-6d74-435a-9cb7-289f58a85ebe_thumb_maxine-burkett.jpg',
-    sourceWidth: 204,
-    sourceHeight: 128,
-  }),
-  buildImgixFluid({
-    url:
-      'https://images.prismic.io/omidyarfellows/83aef7b0-f481-4a73-b951-8409f7ae3de2_thumb_aj-halagao.jpg',
-    sourceWidth: 204,
-    sourceHeight: 128,
-  }),
-  buildImgixFluid({
-    url:
-      'https://images.prismic.io/omidyarfellows/70060fb6-85bb-46bc-8934-2789c40cdbcc_thumb_rachel-wong.jpg',
-    sourceWidth: 204,
-    sourceHeight: 128,
-  }),
-]
 
 <Meta
   title="Pages/Learning Excursion Map"
@@ -45,8 +19,6 @@ export const photos = [
 # Learning Excursion Map
 
 An interactive map showing fellows' past learning excursion around the world.
-Below the map, fellows can be listed with an optional link to a video about
-their excursion.
 
 #### Slice fields
 
@@ -57,60 +29,14 @@ their excursion.
   fieldset="non-repeat"
 />
 
-#### Repeatable fields
+### Typical usage
 
-Each item represents a fellow who has gone on a learning excursion. Fellows can
-be linked to a video about their excursion.
-
-<Storybook.SliceFieldsTable
-  customTypeId="page"
-  sliceZoneId="body"
-  sliceId="learning_excursion_map"
-  fieldset="repeat"
-  overrides={{
-    fellow_photo: {
-      description: 'Photo of the fellow',
-    },
-  }}
-/>
-
-### With intro text
-
-Introductory text can be placed before the map.
+This slice only displays the map. Any surrounding content, such as introductory
+text and links to videos, can be added using other slices before or after this
+slice.
 
 <Canvas withSource="none">
-  <Story name="With intro text">
-    <PageBodyLearningExcursionMap
-      nextSharesBg={false}
-      mapURL={mapURL}
-      textHTML={textHTML}
-    >
-      <PageBodyLearningExcursionMap.Fellow
-        name={faker.name.findName()}
-        videoURL="#"
-        imageFluid={photos[0]}
-      />
-      <PageBodyLearningExcursionMap.Fellow
-        name={faker.name.findName()}
-        videoURL="#"
-        imageFluid={photos[1]}
-      />
-      <PageBodyLearningExcursionMap.Fellow
-        name={faker.name.findName()}
-        videoURL="#"
-        imageFluid={photos[2]}
-      />
-    </PageBodyLearningExcursionMap>
-  </Story>
-</Canvas>
-
-### Only map
-
-If no introductory text or fellows are provided, this slice will only display
-the map.
-
-<Canvas withSource="none">
-  <Story name="Only map">
+  <Story name="Typical usage">
     <PageBodyLearningExcursionMap nextSharesBg={false} mapURL={mapURL} />
   </Story>
 </Canvas>

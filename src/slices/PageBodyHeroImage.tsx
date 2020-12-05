@@ -62,11 +62,10 @@ export const PageBodyHeroImage = ({
       )}
       <Box
         styles={{
-          height: 'full',
           display: 'grid',
           alignContent: 'center',
           justifyContent: 'center',
-          minHeight: ['10rem', '16rem'],
+          minHeight: ['10rem', '18rem'],
           gap: 8,
           position: 'relative',
         }}
