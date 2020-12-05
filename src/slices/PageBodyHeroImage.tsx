@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import GatsbyImage from 'gatsby-image'
-import { useStyles } from 'react-treat'
 import { Box } from '@walltowall/calico'
 import { GatsbyImageContainer } from '@walltowall/siamese'
 import { getRichText } from '@walltowall/helpers'
@@ -12,12 +11,11 @@ import {
   MapDataToContextArgs,
   MapDataToPropsArgs,
 } from '../lib/mapSlicesToComponents'
+import { useCommonStyles } from '../hooks/useCommonStyles'
 
 import { BoundedBox } from '../components/BoundedBox'
 import { HTMLContent } from '../components/HTMLContent'
 import { ButtonLink } from '../components/ButtonLink'
-
-import * as styleRefs from './PageBodyHeroImage.treat'
 
 export type PageBodyHeroImageProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
@@ -30,7 +28,7 @@ export const PageBodyHeroImage = ({
   backgroundImageAlt,
   nextSharesBg,
 }: PageBodyHeroImageProps) => {
-  const styles = useStyles(styleRefs)
+  const commonStyles = useCommonStyles()
 
   return (
     <BoundedBox
@@ -78,7 +76,7 @@ export const PageBodyHeroImage = ({
                 <Comp as="h1" variant="sans-32-60-caps" {...props} />
               ),
             }}
-            className={styles.textShadow}
+            className={commonStyles.textShadow}
             styles={{
               textAlign: 'center',
               maxWidth: '70ch',

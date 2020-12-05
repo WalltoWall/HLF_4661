@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useStyles } from 'react-treat'
 import { graphql } from 'gatsby'
 import GatsbyImage from 'gatsby-image'
 import { Box } from '@walltowall/calico'
@@ -11,11 +10,10 @@ import {
   MapDataToContextArgs,
   MapDataToPropsArgs,
 } from '../lib/mapSlicesToComponents'
+import { useCommonStyles } from '../hooks/useCommonStyles'
 
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
-
-import * as styleRefs from './InteriorPageHeaderHeroImage.treat'
 
 export type InteriorPageHeaderHeroImageProps = ReturnType<
   typeof mapDataToProps
@@ -27,7 +25,7 @@ export const InteriorPageHeaderHeroImage = ({
   backgroundImageFluid,
   nextSharesBg,
 }: InteriorPageHeaderHeroImageProps) => {
-  const styles = useStyles(styleRefs)
+  const commonStyles = useCommonStyles()
 
   return (
     <BoundedBox
@@ -70,7 +68,7 @@ export const InteriorPageHeaderHeroImage = ({
           <Text
             as="p"
             variant="sans-32-60-caps"
-            className={styles.textShadow}
+            className={commonStyles.textShadow}
             styles={{ position: 'relative', textAlign: 'center' }}
           >
             {heading}
