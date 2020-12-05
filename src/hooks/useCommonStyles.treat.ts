@@ -8,3 +8,28 @@ export const lightGrayGradientBackground = style((theme) =>
     ],
   }),
 )
+
+export const darkGrayGradientBackground = style((theme) =>
+  theme.mq({
+    backgroundImage: [
+      `linear-gradient(to bottom, ${theme.rules.color.gray10}, ${theme.rules.color.gray20})`,
+      `linear-gradient(to right, ${theme.rules.color.gray10}, ${theme.rules.color.gray20})`,
+    ],
+  }),
+)
+
+export const dquotSurround = style({
+  position: 'relative',
+  '::before': {
+    display: 'inline-block',
+    content: '"\\201C"',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    transform: 'translateX(-115%)',
+  },
+  '::after': {
+    display: 'inline-block',
+    content: '"\\201D"',
+  },
+})

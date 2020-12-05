@@ -30,8 +30,8 @@ const fontsets = {
   },
   'sans-32-60': {
     fontMetrics: fontMetrics.sans,
-    fontSizes: [2, 2.75, 3.75],
-    lineGap: 1.2,
+    fontSizes: [2.5, 3.5],
+    lineGap: 1.1,
   },
   'serif-14-16': {
     fontMetrics: fontMetrics.serif,

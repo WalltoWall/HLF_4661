@@ -87,7 +87,7 @@ export const theme = createCalicoTheme(
       minHeight: {
         '7rem': '7rem',
         '10rem': '10rem',
-        '16rem': '16rem',
+        '18rem': '18rem',
       },
 
       transitionDuration: {

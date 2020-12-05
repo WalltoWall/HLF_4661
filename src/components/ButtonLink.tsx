@@ -10,7 +10,21 @@ import clsx from 'clsx'
 import { Link, LinkProps } from './Link'
 import { Text } from './Text'
 
+const variants = {
+  blue: {
+    backgroundColor: 'blue10',
+    focusBackgroundColor: 'orange50',
+    color: 'white',
+  },
+  orange: {
+    backgroundColor: 'orange55',
+    focusBackgroundColor: 'orange50',
+    color: 'white',
+  },
+} as const
+
 type ButtonLinkProps = LinkProps & {
+  variant?: keyof typeof variants
   styles?: UseBoxStylesProps
   focusStyles?: UsePseudoBoxStylesProps<':focus'>
   hoverStyles?: UsePseudoBoxStylesProps<':hover'>
@@ -18,16 +32,19 @@ type ButtonLinkProps = LinkProps & {
 
 export const ButtonLink = ({
   children,
+  variant: variantName = 'blue',
   styles,
   focusStyles,
   hoverStyles,
   className,
   ...props
 }: ButtonLinkProps) => {
+  const variant = variants[variantName]
+
   const cx = clsx(
     useBoxStyles({
-      color: 'white',
-      backgroundColor: 'blue10',
+      color: variant.color,
+      backgroundColor: variant.backgroundColor,
       paddingLeft: 8,
       paddingRight: 8,
       paddingBottom: 2.5,
@@ -38,11 +55,11 @@ export const ButtonLink = ({
       ...styles,
     }),
     usePseudoBoxStyles(
-      { backgroundColor: 'orange50', ...focusStyles },
+      { backgroundColor: variant.focusBackgroundColor, ...focusStyles },
       ':focus',
     ),
     usePseudoBoxStyles(
-      { backgroundColor: 'orange50', ...hoverStyles },
+      { backgroundColor: variant.focusBackgroundColor, ...hoverStyles },
       ':hover',
     ),
     className,
