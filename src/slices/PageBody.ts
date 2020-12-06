@@ -15,6 +15,7 @@ import * as PageBodyHeader from './PageBodyHeader'
 import * as PageBodyText from './PageBodyText'
 import * as PageBodyImages from './PageBodyImages'
 import * as PageBodyHeroImage from './PageBodyHeroImage'
+import * as PageBodyHeroImageCarousel from './PageBodyHeroImageCarousel'
 import * as PageBodyQuoteSlideshow from './PageBodyQuoteSlideshow'
 import * as PageBodyLearningExcursionMap from './PageBodyLearningExcursionMap'
 import * as PageBodyFellowsGrid from './PageBodyFellowsGrid'
@@ -30,6 +31,7 @@ const slices = {
   PageBodyText,
   PageBodyImages,
   PageBodyHeroImage,
+  PageBodyHeroImageCarousel,
   PageBodyQuoteSlideshow,
   PageBodyLearningExcursionMap,
   PageBodyFellowsGrid,
@@ -45,6 +47,7 @@ export const fragment = graphql`
     ...PageBodyImages
     ...PageBodyText
     ...PageBodyHeroImage
+    ...PageBodyHeroImageCarousel
     ...PageBodyQuoteSlideshow
     ...PageBodyLearningExcursionMap
     ...PageBodyImageCarousel

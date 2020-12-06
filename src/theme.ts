@@ -118,6 +118,7 @@ export const theme = createCalicoTheme(
       height: {
         '0.125rem': '0.125rem',
         '0.375rem': '0.375rem',
+        '0.5rem': '0.5rem',
         '1rem': '1rem',
         '1.25rem': '1.25rem',
       },
@@ -181,12 +182,16 @@ export const theme = createCalicoTheme(
         none: 'none',
         underline: 'underline',
       },
+
+      borderRadius: {
+        '50%': '50%',
+      },
     },
 
     pseudos: {
       color: [':hover', ':focus'],
       backgroundColor: [':hover', ':focus'],
-      opacity: [':hover'],
+      opacity: [':hover', ':focus'],
     },
   } as const),
 )

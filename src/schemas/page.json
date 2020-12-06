@@ -70,7 +70,8 @@
           "fellows_grid": [],
           "image_carousel": [],
           "link_collection": [],
-          "headshot_quote": []
+          "headshot_quote": [],
+          "hero_image_carousel": []
         },
         "choices": {
           "text": {
@@ -177,6 +178,47 @@
               }
             },
             "repeat": {}
+          },
+          "hero_image_carousel": {
+            "type": "Slice",
+            "fieldset": "Hero Image Carousel",
+            "description": "Carousel of Hero Image Slices",
+            "icon": "burst_mode",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "background_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background Image"
+                }
+              },
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading1",
+                  "label": "Text",
+                  "placeholder": "Text displayed over the background image"
+                }
+              },
+              "button_text": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Button Text",
+                  "placeholder": "Optional - Text for the button link"
+                }
+              },
+              "button_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Button Link",
+                  "placeholder": "Optional - Link for the button"
+                }
+              }
+            }
           },
           "quote_slideshow": {
             "type": "Slice",
