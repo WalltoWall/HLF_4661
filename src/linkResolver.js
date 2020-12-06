@@ -13,6 +13,7 @@ exports.linkResolver = () => (doc) => {
       return `/impact/projects/${doc.uid}/`
 
     case 'fellow':
+    case 'cohort':
       return `/fellows/`
 
     case 'page':
