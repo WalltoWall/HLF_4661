@@ -1,4 +1,7 @@
 const path = require('path')
+const fs = require('fs')
+const truncate = require('truncate')
+const { valuesDeep } = require('@walltowall/helpers')
 
 require('dotenv').config()
 
@@ -57,6 +60,63 @@ module.exports = {
         linkResolver: require('./src/linkResolver').linkResolver,
         fetchLinks: ['page.parent', 'interior_page.parent'],
         prismicToolbar: 'legacy',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-local-search',
+      options: {
+        name: 'allContent',
+        engine: 'lunr',
+        query: fs.readFileSync(
+          path.resolve(__dirname, 'src/localSearchQuery.graphql'),
+          'utf-8',
+        ),
+        ref: 'url',
+        store: ['type', 'url', 'title', 'description'],
+        index: ['title', 'description', 'content'],
+        normalizer: ({ data }) => [
+          ...data.allPrismicInteriorPage.nodes.map((node) => {
+            const content = valuesDeep([
+              ...node.data?.header,
+              ...node.data?.body,
+            ]).join(' ')
+
+            return {
+              type: 'interior_page',
+              url: node.url,
+              title: node.data?.meta_title ?? node.data?.title?.text,
+              description:
+                node.data?.meta_description ?? truncate(content, 200),
+              content,
+            }
+          }),
+          ...data.allPrismicProject.nodes.map((node) => ({
+            type: 'project',
+            url: node.url,
+            title: node.data?.title?.text,
+            description: truncate(node.data?.description?.text, 200),
+            content: valuesDeep(node.data?.body).join(' '),
+          })),
+          ...data.allPrismicNewsPost.nodes.map((node) => ({
+            type: 'news_post',
+            url: node.url,
+            title: node.data?.title?.text,
+            description: truncate(node.data?.excerpt?.text, 200),
+            content: valuesDeep(node.data?.body).join(' '),
+          })),
+          ...data.allPrismicPage.nodes.map((node) => {
+            const content = valuesDeep(node.data?.body).join(' ')
+
+            return {
+              type: 'page',
+              url: node.url,
+              title: node.data?.meta_title ?? node.data?.title?.text,
+              description:
+                node.data?.meta_description ?? truncate(content, 200),
+              content,
+            }
+          }),
+        ],
       },
     },
     {

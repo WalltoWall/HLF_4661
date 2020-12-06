@@ -39,48 +39,52 @@ type BoundedBoxProps<E extends React.ElementType> = {
   nextSharesBg?: ResponsiveProp<boolean>
 } & BoxProps<E>
 
-export const BoundedBox = <
-  E extends React.ElementType = typeof defaultElement
->({
-  children,
-  variant = 'base',
-  innerMaxWidth,
-  nextSharesBg = false,
-  ...props
-}: BoundedBoxProps<E>) => {
-  const variantStyles = variants[variant]
+export const BoundedBox = React.forwardRef(
+  <E extends React.ElementType = typeof defaultElement>(
+    {
+      children,
+      variant = 'base',
+      innerMaxWidth,
+      nextSharesBg = false,
+      ...props
+    }: BoundedBoxProps<E>,
+    ref: typeof props.ref,
+  ) => {
+    const variantStyles = variants[variant]
 
-  const resolvedPaddingBottom = RA.zipWith(
-    normalizeResponsiveProp(nextSharesBg),
-    normalizeResponsiveProp(variantStyles.paddingBottom),
-    (a, b) => (a ? 0 : b),
-  ) as NonNullable<BoxProps['styles']>['paddingBottom']
+    const resolvedPaddingBottom = RA.zipWith(
+      normalizeResponsiveProp(nextSharesBg),
+      normalizeResponsiveProp(variantStyles.paddingBottom),
+      (a, b) => (a ? 0 : b),
+    ) as NonNullable<BoxProps['styles']>['paddingBottom']
 
-  return (
-    <Box
-      as={defaultElement}
-      {...props}
-      styles={{
-        paddingLeft: variantStyles.paddingLeft,
-        paddingRight: variantStyles.paddingRight,
-        paddingTop: variantStyles.paddingTop,
-        paddingBottom: resolvedPaddingBottom,
-        ...props.styles,
-      }}
-    >
+    return (
       <Box
+        as={defaultElement}
+        ref={ref}
+        {...props}
         styles={{
-          maxWidth: innerMaxWidth,
-          width: 'full',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          height: 'full',
-          display: 'flex',
-          flexDirection: 'column',
+          paddingLeft: variantStyles.paddingLeft,
+          paddingRight: variantStyles.paddingRight,
+          paddingTop: variantStyles.paddingTop,
+          paddingBottom: resolvedPaddingBottom,
+          ...props.styles,
         }}
       >
-        {children}
+        <Box
+          styles={{
+            maxWidth: innerMaxWidth,
+            width: 'full',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            height: 'full',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          {children}
+        </Box>
       </Box>
-    </Box>
-  )
-}
+    )
+  },
+)
