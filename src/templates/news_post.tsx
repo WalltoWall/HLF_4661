@@ -202,6 +202,7 @@ export const NewsPostTemplate = ({
                   }
                   featuredImageFluid={nextNewsPost.data?.featured_image?.fluid}
                   featuredImageAlt={nextNewsPost.data?.featured_image?.alt}
+                  buttonText="Read Article"
                 />
               </>
             )}

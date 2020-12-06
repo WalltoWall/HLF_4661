@@ -74,6 +74,14 @@
         excerpt {
           text
         }
+        featured_image {
+          alt
+          url(imgixParams: { width: 400 })
+          dimensions {
+            width
+            height
+          }
+        }
         body {
           ... on PrismicNewsPostBodyTextIntro {
             primary {
@@ -117,6 +125,14 @@
         }
         description {
           text
+        }
+        featured_image {
+          alt
+          url(imgixParams: { width: 400 })
+          dimensions {
+            width
+            height
+          }
         }
         body {
           ... on PrismicProjectBodyTextIntro {

@@ -210,6 +210,7 @@ export const NewsCategoryTemplate = ({
                       }
                       featuredImageFluid={newsPost.data?.featured_image?.fluid}
                       featuredImageAlt={newsPost.data?.featured_image?.alt}
+                      buttonText="Read Article"
                     />
                   )
                 )
