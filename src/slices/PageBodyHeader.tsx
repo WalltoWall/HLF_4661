@@ -536,7 +536,7 @@ export const PageBodyHeader = ({
                     placeholder="Search&hellip;"
                     value={searchQuery}
                     onChange={onSearchQueryChange}
-                    className={styles.placeholderColor}
+                    className={commonStyles.placeholderColor}
                     styles={{
                       backgroundColor: 'white',
                       fontFamily: 'sans',
@@ -552,7 +552,7 @@ export const PageBodyHeader = ({
                   />
                   <Icon
                     name="search"
-                    className={styles.verticallyCenter}
+                    className={commonStyles.verticallyCenter}
                     styles={{
                       width: '1.25rem',
                       color: 'gray80',
