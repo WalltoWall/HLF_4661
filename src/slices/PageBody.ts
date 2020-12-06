@@ -21,6 +21,7 @@ import * as PageBodyFellowsGrid from './PageBodyFellowsGrid'
 import * as PageBodyImageCarousel from './PageBodyImageCarousel'
 import * as PageBodyLinkCollection from './PageBodyLinkCollection'
 import * as PageBodyHeadshotQuote from './PageBodyHeadshotQuote'
+import * as PageBodySearch from './PageBodySearch'
 
 // 2. Add your slice
 const slices = {
@@ -35,6 +36,7 @@ const slices = {
   PageBodyImageCarousel,
   PageBodyLinkCollection,
   PageBodyHeadshotQuote,
+  PageBodySearch,
 }
 
 // 3. Add your slice fragment
@@ -53,6 +55,7 @@ export const fragment = graphql`
     #...PageBodyFooter
     #...PageBodyHeader
     #...PageBodyFellowsGrid
+    #...PageBodySearch
   }
 `
 

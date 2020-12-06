@@ -6,8 +6,10 @@ import { PaginationNavigation } from './PaginationNavigation'
 const defaultElement = 'div'
 
 type ContentCardsListProps<E extends React.ElementType> = {
+  nextPageOnClick?: () => void
   nextPageHref?: string
   nextPageLabel?: string
+  previousPageOnClick?: () => void
   previousPageHref?: string
   previousPageLabel?: string
 } & BoxProps<E>
@@ -15,8 +17,10 @@ type ContentCardsListProps<E extends React.ElementType> = {
 export const ContentCardsList = <
   E extends React.ElementType = typeof defaultElement
 >({
+  nextPageOnClick,
   nextPageHref,
   nextPageLabel,
+  previousPageOnClick,
   previousPageHref,
   previousPageLabel,
   children,
@@ -34,10 +38,15 @@ export const ContentCardsList = <
           (child) => React.isValidElement(child) && <Box as="li">{child}</Box>,
         )}
       </Box>
-      {(nextPageHref || previousPageHref) && (
+      {(nextPageHref ||
+        nextPageOnClick ||
+        previousPageHref ||
+        previousPageOnClick) && (
         <PaginationNavigation
+          nextOnClick={nextPageOnClick}
           nextHref={nextPageHref}
           nextLabel={nextPageLabel}
+          previousOnClick={previousPageOnClick}
           previousHref={previousPageHref}
           previousLabel={previousPageLabel}
         />

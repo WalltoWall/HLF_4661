@@ -62,6 +62,7 @@ export const theme = createCalicoTheme(
       fontSize: {
         '0.875rem': '0.875rem',
         '1rem': '1rem',
+        '1.125rem': '1.125rem',
       },
 
       lineHeight: {

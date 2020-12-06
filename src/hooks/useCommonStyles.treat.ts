@@ -40,3 +40,15 @@ export const textShadow = style({
     0 1px 1px rgba(0, 0, 0, 0.1)
   `,
 })
+
+export const verticallyCenter = style({
+  top: '50%',
+  transform: 'translateY(-55%)',
+})
+
+export const placeholderColor = style((theme) => ({
+  '::placeholder': {
+    color: theme.rules.color.gray40,
+    opacity: '50%',
+  },
+}))

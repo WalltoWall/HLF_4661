@@ -18,6 +18,8 @@ import { PageTemplateEnhancerProps } from '../templates/page'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 import { useNavigation } from '../hooks/useNavigation'
 import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
+import { SEARCH_URL } from '../constants'
+import { useCommonStyles } from '../hooks/useCommonStyles'
 
 import { Anchor, AnchorProps } from '../components/Anchor'
 import { BoundedBox } from '../components/BoundedBox'
@@ -29,8 +31,6 @@ import { Logo } from '../components/Logo'
 import { Text } from '../components/Text'
 
 import * as styleRefs from './PageBodyHeader.treat'
-
-const SEARCH_URL = withPrefix('/search/')
 
 type MobileNavItemProps = {
   href: AnchorProps['href']
@@ -304,6 +304,7 @@ export const PageBodyHeader = ({
   const [searchQuery, setSearchQuery] = React.useState('')
 
   const styles = useStyles(styleRefs)
+  const commonStyles = useCommonStyles()
   const siteSettings = useSiteSettings()
   const navigation = useNavigation()
 
@@ -387,7 +388,7 @@ export const PageBodyHeader = ({
                 placeholder="Search&hellip;"
                 value={searchQuery}
                 onChange={onSearchQueryChange}
-                className={styles.placeholderColor}
+                className={commonStyles.placeholderColor}
                 styles={{
                   backgroundColor: 'gray85',
                   fontFamily: 'sans',
@@ -403,7 +404,7 @@ export const PageBodyHeader = ({
               />
               <Icon
                 name="search"
-                className={styles.verticallyCenter}
+                className={commonStyles.verticallyCenter}
                 styles={{
                   width: '1rem',
                   color: 'gray40',
