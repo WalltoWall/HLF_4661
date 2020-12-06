@@ -30,6 +30,12 @@ const variants = {
     paddingTop: [6, 7, 8],
     paddingBottom: [6, 7, 8],
   },
+  wide: {
+    paddingLeft: [5, 8, 11, 14],
+    paddingRight: [5, 8, 11, 14],
+    paddingTop: [14, 17, 20],
+    paddingBottom: [14, 17, 20],
+  },
 } as const
 
 type BoundedBoxProps<E extends React.ElementType> = {

@@ -134,7 +134,7 @@ export const PageLayoutSearchResults = ({
     >
       <InteriorPageSidebar
         title="Search"
-        description="Use the search field to find information or news articles on this site."
+        description="Use the search field to find information and news articles on this site."
       />
       <Box styles={{ gridColumn: [null, null, 'span-2'] }}>
         <BoundedBox ref={paginatedResults.containerRef} nextSharesBg={true}>

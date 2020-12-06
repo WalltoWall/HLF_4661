@@ -9,6 +9,7 @@ import { ButtonLink } from './ButtonLink'
 import { Link } from './Link'
 import { Anchor } from './Anchor'
 import { HTMLContent } from './HTMLContent'
+import { Icon } from './Icon'
 
 const defaultElement = 'div'
 
@@ -66,10 +67,23 @@ export const ContentCard = <
           ) : (
             <Box
               as={AspectRatio}
-              x={4}
-              y={3}
+              x={8}
+              y={5}
               styles={{ backgroundColor: 'gray95' }}
-            />
+            >
+              <Box
+                styles={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Icon
+                  name="page"
+                  styles={{ width: '3/12', color: 'gray80', opacity: 50 }}
+                />
+              </Box>
+            </Box>
           )}
         </ConditionalWrap>
       </Box>

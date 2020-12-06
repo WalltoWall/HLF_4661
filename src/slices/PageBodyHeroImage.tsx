@@ -1,9 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import GatsbyImage from 'gatsby-image'
 import { Box } from '@walltowall/calico'
-import { GatsbyImageContainer } from '@walltowall/siamese'
-import { getRichText } from '@walltowall/helpers'
+import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
 import { PageBodyHeroImageFragment } from '../types.generated'
 import { PageTemplateEnhancerProps } from '../templates/page'
@@ -11,11 +9,8 @@ import {
   MapDataToContextArgs,
   MapDataToPropsArgs,
 } from '../lib/mapSlicesToComponents'
-import { useCommonStyles } from '../hooks/useCommonStyles'
 
-import { BoundedBox } from '../components/BoundedBox'
-import { HTMLContent } from '../components/HTMLContent'
-import { ButtonLink } from '../components/ButtonLink'
+import { ImageWithTextOverlay } from '../components/ImageWithTextOverlay'
 
 export type PageBodyHeroImageProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
@@ -26,78 +21,32 @@ export const PageBodyHeroImage = ({
   buttonHref,
   backgroundImageFluid,
   backgroundImageAlt,
-  nextSharesBg,
-}: PageBodyHeroImageProps) => {
-  const commonStyles = useCommonStyles()
-
-  return (
-    <BoundedBox
-      as="section"
-      nextSharesBg={nextSharesBg}
-      styles={{
-        backgroundColor: 'gray20',
-        color: 'white',
-        maxWidth: 'xlarge',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        position: 'relative',
-      }}
-    >
-      {backgroundImageFluid && (
-        <Box
-          as={GatsbyImageContainer}
-          styles={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            pointerEvents: 'none',
-          }}
-        >
-          <GatsbyImage fluid={backgroundImageFluid} alt={backgroundImageAlt} />
-        </Box>
-      )}
-      <Box
-        styles={{
-          display: 'grid',
-          alignContent: 'center',
-          justifyContent: 'center',
-          minHeight: ['10rem', '18rem'],
-          gap: 8,
-          position: 'relative',
-        }}
-      >
-        {textHTML && (
-          <HTMLContent
-            html={textHTML}
-            componentOverrides={{
-              h1: (Comp) => (props) => (
-                <Comp as="h1" variant="sans-32-60-caps" {...props} />
-              ),
-            }}
-            className={commonStyles.textShadow}
-            styles={{
-              textAlign: 'center',
-              maxWidth: '70ch',
-            }}
-          />
-        )}
-        {buttonHref && (
-          <ButtonLink href={buttonHref} styles={{ justifySelf: 'center' }}>
-            {buttonText}
-          </ButtonLink>
-        )}
-      </Box>
-    </BoundedBox>
-  )
-}
+  id,
+}: PageBodyHeroImageProps) => (
+  <Box
+    as="section"
+    id={id}
+    styles={{
+      maxWidth: 'xlarge',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }}
+  >
+    <ImageWithTextOverlay
+      textHTML={textHTML}
+      buttonHref={buttonHref}
+      buttonText={buttonText}
+      imageFluid={backgroundImageFluid}
+      imageAlt={backgroundImageAlt}
+    />
+  </Box>
+)
 
 export const mapDataToProps = ({
   data,
 }: MapDataToPropsArgs<PageBodyHeroImageFragment, typeof mapDataToContext>) => ({
   textHTML: getRichText(data.primary?.text),
-  buttonText: data.primary?.button_text?.text,
+  buttonText: undefIfEmpty(data.primary?.button_text?.text),
   buttonHref: data.primary?.button_link?.url,
   backgroundImageFluid: data.primary?.background_image?.fluid,
   backgroundImageAlt: data.primary?.background_image?.alt,
