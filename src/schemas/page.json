@@ -71,7 +71,8 @@
           "image_carousel": [],
           "link_collection": [],
           "headshot_quote": [],
-          "hero_image_carousel": []
+          "hero_image_carousel": [],
+          "calls_to_action": []
         },
         "choices": {
           "text": {
@@ -411,6 +412,47 @@
               }
             },
             "repeat": {}
+          },
+          "calls_to_action": {
+            "type": "Slice",
+            "fieldset": "Calls to Action",
+            "description": "Group of calls to action with text and links",
+            "icon": "feedback",
+            "display": "grid",
+            "non-repeat": {},
+            "repeat": {
+              "background_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background Image"
+                }
+              },
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading1",
+                  "label": "Text",
+                  "placeholder": "Text displayed over the background image"
+                }
+              },
+              "button_text": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Button Text",
+                  "placeholder": "Optional - Text for the button link"
+                }
+              },
+              "button_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Button Link",
+                  "placeholder": "Optional - Link for the button"
+                }
+              }
+            }
           }
         }
       }

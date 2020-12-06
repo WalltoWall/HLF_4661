@@ -11,7 +11,25 @@ import { ButtonLink } from './ButtonLink'
 
 const defaultElement = 'div'
 
+const variants = {
+  base: {
+    boundedBoxVariant: 'wide',
+    h1Variant: 'sans-32-60-caps',
+    pVariant: 'serif-16-18',
+    headingMarginBottom: [8, 9, 10],
+    minHeight: ['10rem', '18rem'],
+  },
+  small: {
+    boundedBoxVariant: undefined,
+    h1Variant: 'sans-18-bold-caps',
+    pVariant: 'serif-14-16',
+    headingMarginBottom: [4, 5],
+    minHeight: '10rem',
+  },
+} as const
+
 type ImageWithTextOverlayProps<E extends React.ElementType> = {
+  variant?: keyof typeof variants
   textHTML?: string
   buttonHref?: string
   buttonText?: string
@@ -22,6 +40,7 @@ type ImageWithTextOverlayProps<E extends React.ElementType> = {
 export const ImageWithTextOverlay = <
   E extends React.ElementType = typeof defaultElement
 >({
+  variant: variantName = 'base',
   textHTML,
   buttonHref,
   buttonText = 'Learn More',
@@ -29,15 +48,17 @@ export const ImageWithTextOverlay = <
   imageAlt,
   ...props
 }: ImageWithTextOverlayProps<E>) => {
+  const variant = variants[variantName]
+
   const commonStyles = useCommonStyles()
 
   return (
     <BoundedBox
       as={defaultElement}
-      variant="wide"
+      variant={variant.boundedBoxVariant}
+      className={commonStyles.darkGrayGradientBackground}
       {...props}
       styles={{
-        backgroundColor: 'gray20',
         color: 'white',
         position: 'relative',
         ...props.styles,
@@ -63,7 +84,7 @@ export const ImageWithTextOverlay = <
           display: 'grid',
           alignContent: 'center',
           justifyContent: 'center',
-          minHeight: ['10rem', '18rem'],
+          minHeight: variant.minHeight,
           gap: 8,
           position: 'relative',
         }}
@@ -73,7 +94,18 @@ export const ImageWithTextOverlay = <
             html={textHTML}
             componentOverrides={{
               h1: (Comp) => (props) => (
-                <Comp as="h1" variant="sans-32-60-caps" {...props} />
+                <Comp
+                  as="h1"
+                  variant={variant.h1Variant}
+                  {...props}
+                  styles={{
+                    marginBottom: variant.headingMarginBottom,
+                    ...props.styles,
+                  }}
+                />
+              ),
+              p: (Comp) => (props) => (
+                <Comp variant={variant.pVariant} {...props} />
               ),
             }}
             className={commonStyles.textShadow}
@@ -84,7 +116,11 @@ export const ImageWithTextOverlay = <
           />
         )}
         {buttonHref && (
-          <ButtonLink href={buttonHref} styles={{ justifySelf: 'center' }}>
+          <ButtonLink
+            variant={imageFluid ? 'blue' : 'orange'}
+            href={buttonHref}
+            styles={{ justifySelf: 'center' }}
+          >
             {buttonText}
           </ButtonLink>
         )}

@@ -1,0 +1,101 @@
+import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
+import faker from 'faker'
+import { buildImgixFluid } from 'gatsby-plugin-imgix'
+
+import * as Storybook from '../components/Storybook'
+import { titleize } from '../lib/titleize'
+
+import { PageBodyCallsToAction } from './PageBodyCallsToAction'
+
+export const textHTML = `
+  <h1>${titleize(faker.lorem.words(4))}</h1>
+  <p>${faker.lorem.sentences(2)}</p>
+`
+
+export const images = [
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1518776139882-8534d0198d62',
+    sourceWidth: 3,
+    sourceHeight: 4,
+  }),
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1512737717560-1fe5bcd648ca',
+    sourceWidth: 4,
+    sourceHeight: 3,
+  }),
+  buildImgixFluid({
+    url: 'https://images.unsplash.com/photo-1496796287614-718d5ecf0229',
+    sourceWidth: 3,
+    sourceHeight: 4,
+  }),
+]
+
+<Meta title="Pages/Calls to Action" component={PageBodyCallsToAction} />
+
+##### Page
+
+# Calls to Action
+
+Large images with text placed over the images and optional links. Multiple
+calls to action can be displayed which are evenly displayed in a row on
+desktop, or in a column on mobile.
+
+For the best appearance, configure this slice with 2-3 calls to action.
+
+#### Repeatable fields
+
+Each item represents a call to action with a background image, text, and optional button.
+
+<Storybook.SliceFieldsTable
+  customTypeId="page"
+  sliceZoneId="body"
+  sliceId="calls_to_action"
+  fieldset="repeat"
+  overrides={{
+    background_image: {
+      description: 'Background image behind the text',
+      isRequired: false,
+    }
+  }}
+/>
+
+### With three CTAs
+
+All calls to actions are displayed equally in a row.
+
+<Canvas withSource="none">
+  <Story name="With three CTAs">
+    <PageBodyCallsToAction nextSharesBg={false}>
+      {images.map((image, i) => (
+        <PageBodyCallsToAction.CTA
+          key={i}
+          textHTML={textHTML}
+          buttonHref="#"
+          backgroundImageFluid={image}
+        />
+      ))}
+    </PageBodyCallsToAction>
+  </Story>
+</Canvas>
+
+### With two CTAs
+
+Two calls to action are displayed side-by-side, each taking up half of the
+slice's width. If a background image is not provided to a call to action, a
+dark gray gradient is used.
+
+<Canvas withSource="none">
+  <Story name="With two CTAs">
+    <PageBodyCallsToAction nextSharesBg={false}>
+      <PageBodyCallsToAction.CTA
+        textHTML={textHTML}
+        buttonHref="#"
+        backgroundImageFluid={images[0]}
+      />
+      <PageBodyCallsToAction.CTA
+        textHTML={textHTML}
+        buttonHref="#"
+      />
+    </PageBodyCallsToAction>
+  </Story>
+</Canvas>

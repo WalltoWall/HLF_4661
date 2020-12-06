@@ -23,6 +23,7 @@ import * as PageBodyImageCarousel from './PageBodyImageCarousel'
 import * as PageBodyLinkCollection from './PageBodyLinkCollection'
 import * as PageBodyHeadshotQuote from './PageBodyHeadshotQuote'
 import * as PageBodySearch from './PageBodySearch'
+import * as PageBodyCallsToAction from './PageBodyCallsToAction'
 
 // 2. Add your slice
 const slices = {
@@ -39,6 +40,7 @@ const slices = {
   PageBodyLinkCollection,
   PageBodyHeadshotQuote,
   PageBodySearch,
+  PageBodyCallsToAction,
 }
 
 // 3. Add your slice fragment
@@ -53,6 +55,7 @@ export const fragment = graphql`
     ...PageBodyImageCarousel
     ...PageBodyLinkCollection
     ...PageBodyHeadshotQuote
+    ...PageBodyCallsToAction
 
     # The following slices do not have fragments:
     #...PageBodyFooter
