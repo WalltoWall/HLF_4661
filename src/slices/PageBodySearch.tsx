@@ -13,6 +13,7 @@ import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 import { SEARCH_URL } from '../constants'
 import { useCommonStyles } from '../hooks/useCommonStyles'
 import { usePaginatedCollection } from '../hooks/usePaginatedCollection'
+import { mockGatsbyImageFluid } from '../lib/mockGatsbyImage'
 
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
@@ -262,6 +263,15 @@ export const PageLayoutSearchResults = ({
                 title={result.title}
                 excerpt={result.description}
                 href={result.url}
+                featuredImageFluid={
+                  result.featuredImageURL && result.featuredImageAspectRatio
+                    ? mockGatsbyImageFluid(
+                        result.featuredImageURL,
+                        result.featuredImageAspectRatio,
+                      )
+                    : undefined
+                }
+                featuredImageAlt={result.featuredImageAlt}
                 buttonText={resultTypeToButtonText[result.type]}
               />
             ))}

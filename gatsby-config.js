@@ -72,7 +72,15 @@ module.exports = {
           'utf-8',
         ),
         ref: 'url',
-        store: ['type', 'url', 'title', 'description'],
+        store: [
+          'type',
+          'url',
+          'title',
+          'description',
+          'featuredImageURL',
+          'featuredImageAspectRatio',
+          'featuredImageAlt',
+        ],
         index: ['title', 'description', 'content'],
         normalizer: ({ data }) => [
           ...data.allPrismicInteriorPage.nodes.map((node) => {
@@ -94,6 +102,12 @@ module.exports = {
             type: 'project',
             url: node.url,
             title: node.data?.title?.text,
+            featuredImageURL: node.data?.featured_image?.url,
+            featuredImageAspectRatio: node.data?.featured_image?.dimensions
+              ? node.data?.featured_image?.dimensions?.width /
+                node.data?.featured_image?.dimensions?.height
+              : 8 / 5,
+            featuredImageAlt: node.data?.featured_image?.alt,
             description: truncate(node.data?.description?.text, 200),
             content: valuesDeep(node.data?.body).join(' '),
           })),
@@ -101,6 +115,12 @@ module.exports = {
             type: 'news_post',
             url: node.url,
             title: node.data?.title?.text,
+            featuredImageURL: node.data?.featured_image?.url,
+            featuredImageAspectRatio: node.data?.featured_image?.dimensions
+              ? node.data?.featured_image?.dimensions?.width /
+                node.data?.featured_image?.dimensions?.height
+              : 8 / 5,
+            featuredImageAlt: node.data?.featured_image?.alt,
             description: truncate(node.data?.excerpt?.text, 200),
             content: valuesDeep(node.data?.body).join(' '),
           })),

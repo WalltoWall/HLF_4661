@@ -10,6 +10,9 @@ export type PickPartial<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>> &
 export interface PagesSearchResult {
   type: 'page' | 'interior_page' | 'project' | 'news_post'
   url: string
-  title: string
-  description: string
+  title?: string
+  description?: string
+  featuredImageURL?: string
+  featuredImageAspectRatio?: number
+  featuredImageAlt?: string
 }
