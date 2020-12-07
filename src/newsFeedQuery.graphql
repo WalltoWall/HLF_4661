@@ -1,0 +1,34 @@
+{
+  allPrismicNewsPost {
+    nodes {
+      id
+      url
+      first_publication_date
+      data {
+        title {
+          text
+        }
+        published_at
+        excerpt {
+          text
+        }
+        news_categories {
+          news_category {
+            document {
+              ... on PrismicNewsCategory {
+                data {
+                  name {
+                    text
+                  }
+                }
+              }
+            }
+          }
+        }
+        featured_image {
+          url(imgixParams: { width: 400 })
+        }
+      }
+    }
+  }
+}
