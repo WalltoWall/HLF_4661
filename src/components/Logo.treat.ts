@@ -11,7 +11,7 @@ export const trimNegativeSpace = style({
   '::after': {
     content: "''",
     display: 'block',
-    marginBottom: `${(-5 / 383) * 100}%`,
+    marginBottom: `${(-3 / 383) * 100}%`,
     height: 0,
   },
 })
