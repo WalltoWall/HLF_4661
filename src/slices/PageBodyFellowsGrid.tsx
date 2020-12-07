@@ -14,8 +14,10 @@ import {
 import { Dialog } from '@reach/dialog'
 import * as R from 'fp-ts/Record'
 import * as A from 'fp-ts/Array'
+import querystring from 'querystring'
 
 import { PageTemplateEnhancerProps } from '../templates/page'
+import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 import { useFellows } from '../hooks/useFellows'
 import { useCohorts } from '../hooks/useCohorts'
 
@@ -38,22 +40,16 @@ const groupByCohort = <A extends { cohortUID?: string }>(as: A[]) =>
 type FellowProps = {
   name?: string
   cohortTitle?: string
-  biographyHTML?: string
   portraitFluid?: FluidObject
   portraitAlt?: string
-  photoFluid?: FluidObject
-  photoAlt?: string
   openFellowModal: () => void
 }
 
 const Fellow = ({
   name,
   cohortTitle,
-  biographyHTML,
   portraitFluid,
   portraitAlt,
-  photoFluid,
-  photoAlt,
   openFellowModal,
 }: FellowProps) => (
   <Box as="li">
@@ -159,9 +155,13 @@ const FellowsGridTab = ({ index, children }: FellowsGridTabProps) => {
   )
 }
 
-export type PageBodyFellowsGridProps = PageTemplateEnhancerProps
+export type PageBodyFellowsGridProps = Partial<
+  ReturnType<typeof mapDataToProps>
+> &
+  PageTemplateEnhancerProps
 
 export const PageBodyFellowsGrid = ({
+  defaultModalFellowUID,
   nextSharesBg,
 }: PageBodyFellowsGridProps) => {
   const cohorts = useCohorts()
@@ -173,7 +173,9 @@ export const PageBodyFellowsGrid = ({
     ? fellowsByCohort[latestCohort.uid] ?? []
     : []
 
-  const [modalFellowUID, setModalFellowUID] = React.useState<string>()
+  const [modalFellowUID, setModalFellowUID] = React.useState(
+    defaultModalFellowUID,
+  )
   const modalFellow = React.useMemo(
     () => fellows.find((fellow) => fellow.uid === modalFellowUID),
     [fellows, modalFellowUID],
@@ -334,11 +336,8 @@ export const PageBodyFellowsGrid = ({
                   key={fellow.uid}
                   name={fellow.name}
                   cohortTitle={fellow.cohortTitle}
-                  biographyHTML={fellow.biographyHTML}
                   portraitFluid={fellow.portraitFluid}
                   portraitAlt={fellow.portraitAlt}
-                  photoFluid={fellow.photoFluid}
-                  photoAlt={fellow.photoAlt}
                   openFellowModal={() =>
                     fellow.uid && openFellowModal(fellow.uid)
                   }
@@ -353,11 +352,8 @@ export const PageBodyFellowsGrid = ({
                   key={fellow.uid}
                   name={fellow.name}
                   cohortTitle={fellow.cohortTitle}
-                  biographyHTML={fellow.biographyHTML}
                   portraitFluid={fellow.portraitFluid}
                   portraitAlt={fellow.portraitAlt}
-                  photoFluid={fellow.photoFluid}
-                  photoAlt={fellow.photoAlt}
                   openFellowModal={() =>
                     fellow.uid && openFellowModal(fellow.uid)
                   }
@@ -370,6 +366,17 @@ export const PageBodyFellowsGrid = ({
     </BoundedBox>
   )
 }
+
+export const mapDataToProps = ({
+  meta,
+}: MapDataToPropsArgs<undefined, typeof mapDataToContext>) => ({
+  defaultModalFellowUID: meta?.location
+    ? String(
+        querystring.decode(meta?.location.search.replace(/^\?/, '')).fellow ??
+          '',
+      ) || undefined
+    : undefined,
+})
 
 export const mapDataToContext = () => ({
   bg: 'gray85',
