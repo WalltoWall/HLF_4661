@@ -10,7 +10,7 @@ import {
   DisclosurePanel,
 } from '@reach/disclosure'
 import { useId } from '@reach/auto-id'
-import { isBrowser, isPathActive } from '@walltowall/helpers'
+import { isBrowser, isPathActive, isPathActiveExact } from '@walltowall/helpers'
 import querystring from 'querystring'
 import clsx from 'clsx'
 
@@ -135,7 +135,7 @@ const MobileNavItemChild = ({
   name,
   location,
 }: MobileNavItemChildProps) => {
-  const isActive = location ? isPathActive(href, location) : false
+  const isActive = location ? isPathActiveExact(href, location) : false
 
   return (
     <Box
@@ -264,7 +264,7 @@ type NavItemChildProps = {
 }
 
 const NavItemChild = ({ href, name, location }: NavItemChildProps) => {
-  const isActive = location ? isPathActive(href, location) : false
+  const isActive = location ? isPathActiveExact(href, location) : false
 
   return (
     <Box as="li">
@@ -303,7 +303,6 @@ export const PageBodyHeader = ({
   )
   const [searchQuery, setSearchQuery] = React.useState('')
 
-  const styles = useStyles(styleRefs)
   const commonStyles = useCommonStyles()
   const siteSettings = useSiteSettings()
   const navigation = useNavigation()
