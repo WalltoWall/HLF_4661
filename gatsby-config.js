@@ -140,6 +140,34 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-feed',
+      options: {
+        feeds: [
+          {
+            title: `${siteMetadata.title} News`,
+            output: '/news.xml',
+            query: fs.readFileSync(
+              path.resolve(__dirname, 'src/newsFeedQuery.graphql'),
+              'utf-8',
+            ),
+            serialize: ({ query }) =>
+              query.allPrismicNewsPost.nodes.map((node) => ({
+                title: node.data?.title?.text,
+                description: node.data?.excerpt?.text,
+                date: node.data?.published_at
+                  ? Date.parse(node.data?.published_at)
+                  : Date.parse(node.first_publication_date),
+                url: siteMetadata.siteUrl + node.url,
+                guid: node.id,
+                categories: node.data?.news_categories?.map?.(
+                  (item) => item?.news_category?.document?.data?.name?.text,
+                ),
+              })),
+          },
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-netlify',
       options: {
         headers: {
