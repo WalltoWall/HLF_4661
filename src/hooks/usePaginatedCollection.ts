@@ -38,7 +38,7 @@ export const usePaginatedCollection = <Container extends Element, T>({
     return initialPage
   })
 
-  const setPage = React.useCallback(
+  const setPageInternal = React.useCallback(
     (idx) => {
       const searchParams = new URLSearchParams(location.search)
       searchParams.set(paramKey, idx)
@@ -54,14 +54,19 @@ export const usePaginatedCollection = <Container extends Element, T>({
     [paramKey],
   )
 
-  const incPage = React.useCallback(
-    () => setPage(Math.min(page + 1, totalPages)),
-    [page, setPage, totalPages],
+  const setPage = React.useCallback(
+    (page: number) => setPageInternal(Math.max(1, Math.min(page, totalPages))),
+    [setPageInternal, totalPages],
   )
 
-  const decPage = React.useCallback(() => setPage(Math.max(page - 1, 1)), [
+  const incPage = React.useCallback(() => setPageInternal(page + 1), [
     page,
-    setPage,
+    setPageInternal,
+  ])
+
+  const decPage = React.useCallback(() => setPageInternal(page - 1), [
+    page,
+    setPageInternal,
   ])
 
   React.useLayoutEffect(() => {
@@ -92,9 +97,9 @@ export const usePaginatedCollection = <Container extends Element, T>({
       perPage,
       hasNextPage: page + 1 <= totalPages,
       hasPreviousPage: page > 1,
+      setPage,
       incPage,
       decPage,
-      setPage,
       containerRef,
     }),
     [
@@ -102,9 +107,9 @@ export const usePaginatedCollection = <Container extends Element, T>({
       page,
       totalPages,
       perPage,
+      setPage,
       incPage,
       decPage,
-      setPage,
       containerRef,
     ],
   )

@@ -98,7 +98,7 @@ export const PageLayoutSearchResults = ({
   const resultsTotalCount = results.length
 
   // The query input value is managed separately from the query provided to
-  // `useLunr`. This is because we need to manage the input value's state as
+  // `useLunr`. This is because we need to manage the input's value state as
   // the user is typing, but we don't want search results to update as the
   // input changes.
   const [queryInputValue, setQueryInputValue] = React.useState(query)
@@ -113,6 +113,8 @@ export const PageLayoutSearchResults = ({
     const path = queryInputValue.trim()
       ? `${SEARCH_URL}?${querystring.encode({ query: queryInputValue.trim() })}`
       : SEARCH_URL
+
+    paginatedResults.setPage(1)
 
     navigate(path)
   }
