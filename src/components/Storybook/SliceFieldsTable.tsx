@@ -33,7 +33,7 @@ type SliceFieldsTableProps = {
   sliceZoneId: string
   sliceId: string
   fieldset: 'repeat' | 'non-repeat'
-  overrides?: Record<string, Partial<FieldsTableRowProps>>
+  overrides?: Record<string, Partial<FieldsTableRowProps> & { hide?: boolean }>
 }
 
 export const SliceFieldsTable = ({
@@ -53,16 +53,20 @@ export const SliceFieldsTable = ({
           const fieldOverrides = overrides?.[apiId]
 
           return (
-            <FieldsTable.Row
-              key={apiId}
-              name={fieldOverrides?.name ?? field.config.label}
-              type={fieldOverrides?.type ?? normalizeFieldType(field.type)}
-              description={
-                fieldOverrides?.description ??
-                normalizeFieldDescription(field.config.placeholder)
-              }
-              isRequired={fieldOverrides?.isRequired ?? isFieldRequired(field)}
-            />
+            !fieldOverrides?.hide && (
+              <FieldsTable.Row
+                key={apiId}
+                name={fieldOverrides?.name ?? field.config.label}
+                type={fieldOverrides?.type ?? normalizeFieldType(field.type)}
+                description={
+                  fieldOverrides?.description ??
+                  normalizeFieldDescription(field.config.placeholder)
+                }
+                isRequired={
+                  fieldOverrides?.isRequired ?? isFieldRequired(field)
+                }
+              />
+            )
           )
         })}
       </FieldsTable>

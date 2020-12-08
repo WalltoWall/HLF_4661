@@ -47,7 +47,7 @@ the video. Providing an image allows you to use a higher quality image that the
 default.
 
 <Canvas withSource="none">
-  <Story name="With a long introduction">
+  <Story name="With poster override">
     <NewsPostBodyVideo nextSharesBg={false} videoURL={videoURL} posterFluid={posterFluid} />
   </Story>
 </Canvas>
@@ -58,7 +58,7 @@ The default poster image from the third-party service will be used, but will
 generally be of low quality.
 
 <Canvas withSource="none">
-  <Story name="With a short introduction">
+  <Story name="Without poster override">
     <NewsPostBodyVideo nextSharesBg={false}  videoURL={videoURL} videoThumbnailURL={videoThumbnailURL} videoThumbnailAspectRatio={videoThumbnailAspectRatio} />
   </Story>
 </Canvas>

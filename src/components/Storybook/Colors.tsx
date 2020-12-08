@@ -92,7 +92,14 @@ type ColorsProps = {
   colors: Record<string | number | symbol, string>
 }
 
-export const Colors = ({ colors }: ColorsProps) => {
+export const Colors = ({ colors: rawColors }: ColorsProps) => {
+  // Remove non-colors
+  const {
+    transparent: _transparent,
+    currentColor: _currentColor,
+    ...colors
+  } = rawColors
+
   const colorBuckets = Object.entries(colors).reduce((acc, [name, value]) => {
     const [colorName, ...lightnessParts] = name.split(COLOR_REGEX)
     if (colorName === 'current') return acc

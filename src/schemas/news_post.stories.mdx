@@ -2,16 +2,14 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 import * as Storybook from '../components/Storybook'
 
-<Meta title="Interior Pages/About Interior Pages" />
+<Meta title="News Posts/About News Posts" />
 
-# Interior Page
+# News Post
 
-The Interior Page custom type represents a page on the site with a templated
-design including a sidebar. Interior Pages are managed in Prismic using three
-tabs: Main, Header, and Body.
+The News Post custom type represents a news article. News Posts are managed in
+Prismic using two tabs: Main and Body.
 
 - **Main**: Information about the page such as its title and URL.
-- **Header**: Heading page content such as heroes.
 - **Body**: Page content such as images and text.
 
 All pages within the website start with the main header and end with the main
@@ -19,11 +17,18 @@ footer. All content on the page is designed to be responsive to work on both
 mobile and desktop devices.
 
 <Storybook.CustomTypeFieldsTable
-  customTypeId="interior_page"
+  customTypeId="news_post"
   tab="Main"
   overrides={{
-    redirect_is_permanent: {
-      description: "Make the redirect permanent (this cannot be undone!)",
+    published_at: {
+      isRequired: false
+    },
+    news_categories: {
+      description: "List of categories to which the news post belongs",
+      isRequired: false
+    },
+    featured_image: {
+      description: "Image or photo that represents the project",
       isRequired: false
     }
   }}

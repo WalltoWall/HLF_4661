@@ -25,9 +25,9 @@ export const parameters = {
         'Interior Pages',
         ['About Interior Pages', 'All slices', 'Header'],
         'Projects',
-        ['About Project Document Type', 'All slices'],
+        ['About Projects', 'All slices'],
         'News Posts',
-        ['About News Post Document Type', 'All slices'],
+        ['About News Posts', 'All slices'],
         'Document Types',
         // ---
         'Style Guide',
