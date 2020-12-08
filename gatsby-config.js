@@ -59,7 +59,7 @@ module.exports = {
         schemas: require('./src/schemas'),
         linkResolver: require('./src/linkResolver').linkResolver,
         fetchLinks: ['page.parent', 'interior_page.parent'],
-        prismicToolbar: 'legacy',
+        prismicToolbar: true,
       },
     },
     {
