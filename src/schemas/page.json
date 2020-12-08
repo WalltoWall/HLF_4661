@@ -50,8 +50,7 @@
         "placeholder_false": "No",
         "placeholder_true": "Yes, redirect forever",
         "default_value": false,
-        "label": "Redirect Is Permanent",
-        "placeholder": "Test"
+        "label": "Redirect Is Permanent"
       }
     }
   },

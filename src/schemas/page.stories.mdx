@@ -2,7 +2,7 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 import * as Storybook from '../components/Storybook'
 
-<Meta title="Pages/About Page Document Type" />
+<Meta title="Pages/About Pages" />
 
 # Page
 
@@ -19,5 +19,10 @@ mobile and desktop devices.
 <Storybook.CustomTypeFieldsTable
   customTypeId="page"
   tab="Main"
-  overrides={{ redirect_is_permanent: { isRequired: false } }}
+  overrides={{
+    redirect_is_permanent: {
+      description: "Make the redirect permanent (this cannot be undone!)",
+      isRequired: false
+    }
+  }}
 />

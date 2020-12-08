@@ -21,9 +21,9 @@ export const parameters = {
         ['How to Use'],
         // ---
         'Pages',
-        ['About Page Document Type', 'All slices'],
+        ['About Pages', 'All slices'],
         'Interior Pages',
-        ['About Interior Page Document Type', 'Header', 'All slices'],
+        ['About Interior Pages', 'All slices', 'Header'],
         'Projects',
         ['About Project Document Type', 'All slices'],
         'News Posts',
