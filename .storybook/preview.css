@@ -24,8 +24,12 @@ body {
   font-weight: bold;
 }
 
-.sbdocs-li {
+.sbdocs-ul .sbdocs-li {
   list-style: disc;
+}
+
+.sbdocs-ol .sbdocs-li {
+  list-style: decimal;
 }
 
 .sbdocs-preview {
