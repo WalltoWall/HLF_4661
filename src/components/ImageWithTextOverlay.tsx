@@ -8,6 +8,7 @@ import { useCommonStyles } from '../hooks/useCommonStyles'
 import { BoundedBox } from './BoundedBox'
 import { HTMLContent } from './HTMLContent'
 import { ButtonLink } from './ButtonLink'
+import { Text } from './Text'
 
 const defaultElement = 'div'
 
@@ -30,22 +31,26 @@ const variants = {
 
 type ImageWithTextOverlayProps<E extends React.ElementType> = {
   variant?: keyof typeof variants
+  label?: string
   textHTML?: string
   buttonHref?: string
   buttonText?: string
   imageFluid?: FluidObject
   imageAlt?: string
+  withImageGradientOverlay?: boolean
 } & BoxProps<E>
 
 export const ImageWithTextOverlay = <
   E extends React.ElementType = typeof defaultElement
 >({
   variant: variantName = 'base',
+  label,
   textHTML,
   buttonHref,
   buttonText = 'Learn More',
   imageFluid,
   imageAlt,
+  withImageGradientOverlay = false,
   ...props
 }: ImageWithTextOverlayProps<E>) => {
   const variant = variants[variantName]
@@ -77,6 +82,19 @@ export const ImageWithTextOverlay = <
           }}
         >
           <GatsbyImage fluid={imageFluid} alt={imageAlt} />
+          {withImageGradientOverlay && (
+            <Box
+              className={commonStyles.transparentBlackGradientBackground}
+              styles={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                pointerEvents: 'none',
+              }}
+            />
+          )}
         </Box>
       )}
       <Box
@@ -89,32 +107,43 @@ export const ImageWithTextOverlay = <
           position: 'relative',
         }}
       >
-        {textHTML && (
-          <HTMLContent
-            html={textHTML}
-            componentOverrides={{
-              h1: (Comp) => (props) => (
-                <Comp
-                  as="h1"
-                  variant={variant.h1Variant}
-                  {...props}
-                  styles={{
-                    marginBottom: variant.headingMarginBottom,
-                    ...props.styles,
-                  }}
-                />
-              ),
-              p: (Comp) => (props) => (
-                <Comp variant={variant.pVariant} {...props} />
-              ),
-            }}
-            className={commonStyles.textShadow}
-            styles={{
-              textAlign: 'center',
-              maxWidth: '70ch',
-            }}
-          />
-        )}
+        <Box styles={{ display: 'grid', gap: 5 }}>
+          {label && (
+            <Text
+              variant="sans-13-14-caps"
+              className={commonStyles.textShadow}
+              styles={{ textAlign: 'center', opacity: 75 }}
+            >
+              {label}
+            </Text>
+          )}
+          {textHTML && (
+            <HTMLContent
+              html={textHTML}
+              componentOverrides={{
+                h1: (Comp) => (props) => (
+                  <Comp
+                    as="h1"
+                    variant={variant.h1Variant}
+                    {...props}
+                    styles={{
+                      marginBottom: variant.headingMarginBottom,
+                      ...props.styles,
+                    }}
+                  />
+                ),
+                p: (Comp) => (props) => (
+                  <Comp variant={variant.pVariant} {...props} />
+                ),
+              }}
+              className={commonStyles.textShadow}
+              styles={{
+                textAlign: 'center',
+                maxWidth: '70ch',
+              }}
+            />
+          )}
+        </Box>
         {buttonHref && (
           <ButtonLink
             variant={imageFluid ? 'blue' : 'orange'}

@@ -34,6 +34,7 @@ export const PageBodyCallsToAction = ({
 )
 
 type CTAProps = {
+  label?: string
   textHTML?: string
   buttonHref?: string
   buttonText?: string
@@ -42,6 +43,7 @@ type CTAProps = {
 }
 
 const CTA = ({
+  label,
   textHTML,
   buttonHref,
   buttonText,
@@ -51,11 +53,13 @@ const CTA = ({
   <Box styles={{ flex: [null, 'equal0'] }}>
     <ImageWithTextOverlay
       variant="small"
+      label={label}
       textHTML={textHTML}
       buttonHref={buttonHref}
       buttonText={buttonText}
       imageFluid={backgroundImageFluid}
       imageAlt={backgroundImageAlt}
+      withImageGradientOverlay={true}
       styles={{ height: 'full' }}
     />
   </Box>
@@ -71,6 +75,7 @@ export const mapDataToProps = ({
   children: data?.items?.map?.((item) => (
     <PageBodyCallsToAction.CTA
       key={item?.text?.text}
+      label={item?.label?.text}
       textHTML={getRichText(item?.text)}
       buttonText={undefIfEmpty(item?.button_text?.text)}
       buttonHref={item?.button_link?.url}
@@ -87,6 +92,9 @@ export const mapDataToContext = () => ({
 export const fragment = graphql`
   fragment PageBodyCallsToAction on PrismicPageBodyCallsToAction {
     items {
+      label {
+        text
+      }
       text {
         text
         html

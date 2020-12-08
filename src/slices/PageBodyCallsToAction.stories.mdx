@@ -69,6 +69,7 @@ All calls to actions are displayed equally in a row.
       {images.map((image, i) => (
         <PageBodyCallsToAction.CTA
           key={i}
+          label={faker.lorem.words(2)}
           textHTML={textHTML}
           buttonHref="#"
           backgroundImageFluid={image}
@@ -88,11 +89,13 @@ dark gray gradient is used.
   <Story name="With two CTAs">
     <PageBodyCallsToAction nextSharesBg={false}>
       <PageBodyCallsToAction.CTA
+        label={faker.lorem.words(2)}
         textHTML={textHTML}
         buttonHref="#"
         backgroundImageFluid={images[0]}
       />
       <PageBodyCallsToAction.CTA
+        label={faker.lorem.words(1)}
         textHTML={textHTML}
         buttonHref="#"
       />
