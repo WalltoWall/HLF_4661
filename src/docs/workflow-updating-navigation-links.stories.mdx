@@ -6,25 +6,30 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 How to add, remove, or change header and footer navigation links.
 
-## Navigation Documents
+## Editing the header's navigation
 
-The navigation links in the header and footer are managed using a
-[Navigation Document](/admin/types/bf1497c7-6903-54c4-ad33-b00d1cbde1eb/) named
-"Primary".
+Links in the header are managed using two documents:
 
-Changing the names and URLs of these links will automatically update the header,
-footer, and mobile navigation menus.
+- **Primary**: Used as the main navigation displayed in the site's header and
+  footer.
+- **Secondary**: Used as the smaller, less prominent navigation displayed in
+  the site's header.
 
-Due to the specific design of these parts of the site, we recommend keeping the
-list to a **maximum of three links**.
+Changing the names and URLs of these links will automatically update the
+header, footer, and mobile navigation menus.
+
+## Editing the footer's navigation
+
+Links in the footer are managed using two documents:
+
+- **Primary**: Used as the main navigation displayed in the site's header and
+  footer.
+- **Footer**: Displayed in the footer next to the site's copyright.
+
+Changing the names and URLs of these links will automatically update the
+header, footer, and mobile navigation menus.
 
 ## Creating new navigation lists
 
-The site does not use navigation lists anywhere else on the site so Prismic does
-not allow creating new Navigation documents.
-
-If you need to link to additional pages, you can add links to the following
-Slices on pages:
-
-- [Section Header](/admin/slices/dc006611-69d4-5acb-ae4e-d459d191f535/)
-- [Content with Image](/admin/slices/7839bf96-e973-5842-9cb6-ff61fed98583/)
+Navigation is only managed through the three navigation documents listed above.
+Creating a new Navigation document will not have any effect on the site.

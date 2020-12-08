@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Documentation/Workflows/Adding Projects" />
+
+# Adding Projects
+
+How to add new projects.
+
+## Types of news articles
+
+At the time of writing, the Omidyar Fellows website classifies projects as one
+of the following types:
+
+- **Summaries**: Short summary of the project with a link to the project's
+  website, if available.
+- **Interviews**: Short summary of the project and an interview transcript.
+- **Case Studies**: Short summary of the project and a longer, more detailed
+  case study about the project.
+
+All three types are created the same way in Prismic and only differ in the set
+of Slices used.
+
+Projects can have any number of Project Categories, including none or more than
+one. Project Category pages will list projects that have been assigned the
+category.
+
+## Summaries
+
+Fill out all required fields per the **About Projects** document.
+
+**Recommended Slices**: None. The Project's `description` field will be
+displayed on the Project's dedicated page.
+
+## Interviews
+
+Fill out all required fields per the **About Projects** document.
+
+**Recommended Slices**:
+1. **Text Intro**: Short 1-2 sentence introduction to the project.
+2. **Text/Images/Video**: Any number of content slices for interview.
+3. **Link Card**: Link to any related websites (optional).
+
+## Case Studies
+
+Fill out all required fields per the **About Projects** document.
+
+**Recommended Slices**:
+1. **Text Intro**: Short 1-2 sentence introduction to the project.
+2. **Text/Images/Video**: Any number of content slices for the project.
+3. **Link Card**: Link to any related websites (optional).
