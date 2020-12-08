@@ -13,7 +13,7 @@ import {
 type CustomTypeFieldsTableProps = {
   customTypeId: keyof typeof schemas
   tab: string
-  overrides?: Record<string, Partial<FieldsTableRowProps>>
+  overrides?: Record<string, Partial<FieldsTableRowProps> & { hide?: boolean }>
 }
 
 export const CustomTypeFieldsTable = ({
@@ -34,18 +34,22 @@ export const CustomTypeFieldsTable = ({
           const fieldOverrides = overrides?.[apiId]
 
           return (
-            <FieldsTable.Row
-              key={apiId}
-              name={
-                fieldOverrides?.name ?? field.config.label ?? field.fieldset
-              }
-              type={fieldOverrides?.type ?? normalizeFieldType(field.type)}
-              description={
-                fieldOverrides?.description ??
-                normalizeFieldDescription(field.config.placeholder)
-              }
-              isRequired={fieldOverrides?.isRequired ?? isFieldRequired(field)}
-            />
+            !fieldOverrides?.hide && (
+              <FieldsTable.Row
+                key={apiId}
+                name={
+                  fieldOverrides?.name ?? field.config.label ?? field.fieldset
+                }
+                type={fieldOverrides?.type ?? normalizeFieldType(field.type)}
+                description={
+                  fieldOverrides?.description ??
+                  normalizeFieldDescription(field.config.placeholder)
+                }
+                isRequired={
+                  fieldOverrides?.isRequired ?? isFieldRequired(field)
+                }
+              />
+            )
           )
         })}
       </FieldsTable>

@@ -20,7 +20,11 @@ export const InteriorPageBodyCohortSchedule = ({
   children,
   nextSharesBg,
 }: InteriorPageBodyCohortScheduleProps) => (
-  <BoundedBox as="section" nextSharesBg={nextSharesBg}>
+  <BoundedBox
+    as="section"
+    nextSharesBg={nextSharesBg}
+    styles={{ backgroundColor: 'white' }}
+  >
     {children && (
       <Box as="table">
         <Box as="tbody">{children}</Box>

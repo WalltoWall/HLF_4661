@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+import * as Storybook from '../components/Storybook'
+
+<Meta title="Document Types/Cohort Schedule" />
+
+# Cohort Schedule
+
+The Cohort Schedule custom type represents a cohort's schedule. It is used to
+display the schedule as a table using the **Cohort Schedule** Slice on
+**Interior Page** documents.
+
+<Storybook.CustomTypeFieldsTable
+  customTypeId="cohort_schedule"
+  tab="Main"
+  overrides={{
+    body: { hide: true }
+  }}
+/>
+
+## Slices
+<br/>
+
+### Section
+
+A Section Slice represents a section of the schedule. Sections are surrounded
+by orange bars to visually show the grouping.
+
+#### Fields
+
+<Storybook.SliceFieldsTable
+  customTypeId="cohort_schedule"
+  sliceZoneId="body"
+  sliceId="section"
+  fieldset="non-repeat"
+/>
+
+#### Repeatable fields
+
+Each item represents an event in the schedule. Each event is displayed as a row.
+
+<Storybook.SliceFieldsTable
+  customTypeId="cohort_schedule"
+  sliceZoneId="body"
+  sliceId="section"
+  fieldset="repeat"
+/>

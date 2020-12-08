@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+import * as Storybook from '../components/Storybook'
+
+<Meta title="Document Types/Navigation" />
+
+# Navigation
+
+The Navigation custom type represents groups of pages used to navigate the site.
+This includes navigation lists displayed in the header and footer.
+
+The Omidyar Fellows site uses three navigation documents to manage links:
+
+- **Primary**: Used as the main navigation displayed in the site's header and footer.
+- **Secondary**: Used as the smaller, less prominent navigation displayed in the site's header.
+- **Footer**: Displayed in the footer next to the site's copyright.
+
+Do not delete these documents. Adding new Navigation documents will not affect the site and is not recommended. You can, however, edit those three documents as needed.
+
+<Storybook.CustomTypeFieldsTable
+  customTypeId="navigation"
+  tab="Main"
+  overrides={{
+    main: { hide: true }
+  }}
+/>
+
+## Slices
+<br/>
+
+### Nav Item
+
+A Nav Item Slice represents a link in the navigation list. It can have child
+links that are displayed in a dropdown.
+
+#### Fields
+
+<Storybook.SliceFieldsTable
+  customTypeId="navigation"
+  sliceZoneId="main"
+  sliceId="nav_item"
+  fieldset="non-repeat"
+/>
+
+#### Repeatable fields
+
+Each item represents an child link.
+
+<Storybook.SliceFieldsTable
+  customTypeId="navigation"
+  sliceZoneId="main"
+  sliceId="nav_item"
+  fieldset="repeat"
+/>

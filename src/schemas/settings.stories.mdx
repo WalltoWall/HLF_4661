@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+import * as Storybook from '../components/Storybook'
+
+<Meta title="Document Types/Settings" />
+
+# Settings
+
+The Settings custom type represents general settings for the site.
+
+Note: Only one Settings document can be created. The master document contains
+all content.
+
+<Storybook.CustomTypeFieldsTable customTypeId="settings" tab="Main" />
+
+#### Redirects
+
+Visitors can be redirected from one URL to another by adding it to this list.
+
+- **Setting Is Permanent to Yes**: Permanent redirects that should only be
+  created if you are 100% sure it will not need to be undone.
+- **Setting Is Permanent to No**: Temporary redirects that can be undone.
+
+<Storybook.CustomTypeFieldsTable
+  customTypeId="settings"
+  tab="Redirects"
+  overrides={{
+    redirects: { description: 'List of redirects', isRequired: false },
+  }}
+/>
+
+#### Developer Only fields
+
+`Developer use only - DO NOT USE`
+
+<Storybook.CustomTypeFieldsTable
+  customTypeId="settings"
+  tab="Developer Only"
+  overrides={{
+    preview_map: {
+      description:
+        'List of custom type API IDs to pages to display during previews',
+      isRequired: false,
+    },
+  }}
+/>
