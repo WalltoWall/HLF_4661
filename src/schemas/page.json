@@ -429,10 +429,18 @@
                   "label": "Background Image"
                 }
               },
+              "label": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Label",
+                  "placeholder": "Optional - Small label above text"
+                }
+              },
               "text": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, heading1",
+                  "multi": "paragraph, heading3",
                   "label": "Text",
                   "placeholder": "Text displayed over the background image"
                 }

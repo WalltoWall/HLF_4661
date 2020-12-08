@@ -7536,6 +7536,9 @@ export enum PrismicPageBodyCallsToActionFieldsEnum {
   ItemsBackgroundImageLocalFileId = 'items___background_image___localFile___id',
   ItemsBackgroundImageLocalFileChildren = 'items___background_image___localFile___children',
   ItemsBackgroundImageThumbnails = 'items___background_image___thumbnails',
+  ItemsLabelHtml = 'items___label___html',
+  ItemsLabelText = 'items___label___text',
+  ItemsLabelRaw = 'items___label___raw',
   ItemsTextHtml = 'items___text___html',
   ItemsTextText = 'items___text___text',
   ItemsTextRaw = 'items___text___raw',
@@ -7663,6 +7666,7 @@ export type PrismicPageBodyCallsToActionGroupConnection = {
 
 export type PrismicPageBodyCallsToActionItemType = {
   background_image?: Maybe<PrismicImageType>;
+  label?: Maybe<PrismicStructuredTextType>;
   text?: Maybe<PrismicStructuredTextType>;
   button_text?: Maybe<PrismicStructuredTextType>;
   button_link?: Maybe<PrismicLinkType>;
@@ -7670,6 +7674,7 @@ export type PrismicPageBodyCallsToActionItemType = {
 
 export type PrismicPageBodyCallsToActionItemTypeFilterInput = {
   background_image?: Maybe<PrismicImageTypeFilterInput>;
+  label?: Maybe<PrismicStructuredTextTypeFilterInput>;
   text?: Maybe<PrismicStructuredTextTypeFilterInput>;
   button_text?: Maybe<PrismicStructuredTextTypeFilterInput>;
   button_link?: Maybe<PrismicLinkTypeFilterInput>;
@@ -14151,6 +14156,10 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsRef = 'pluginCreator___pluginOptions___ref',
   PluginCreatorPluginOptionsStore = 'pluginCreator___pluginOptions___store',
   PluginCreatorPluginOptionsIndex = 'pluginCreator___pluginOptions___index',
+  PluginCreatorPluginOptionsFeeds = 'pluginCreator___pluginOptions___feeds',
+  PluginCreatorPluginOptionsFeedsTitle = 'pluginCreator___pluginOptions___feeds___title',
+  PluginCreatorPluginOptionsFeedsOutput = 'pluginCreator___pluginOptions___feeds___output',
+  PluginCreatorPluginOptionsFeedsQuery = 'pluginCreator___pluginOptions___feeds___query',
   PluginCreatorPluginOptionsHeadersX = 'pluginCreator___pluginOptions___headers____x',
   PluginCreatorPluginOptionsMergeSecurityHeaders = 'pluginCreator___pluginOptions___mergeSecurityHeaders',
   PluginCreatorPluginOptionsPath = 'pluginCreator___pluginOptions___path',
@@ -14371,6 +14380,10 @@ export enum SitePluginFieldsEnum {
   PluginOptionsRef = 'pluginOptions___ref',
   PluginOptionsStore = 'pluginOptions___store',
   PluginOptionsIndex = 'pluginOptions___index',
+  PluginOptionsFeeds = 'pluginOptions___feeds',
+  PluginOptionsFeedsTitle = 'pluginOptions___feeds___title',
+  PluginOptionsFeedsOutput = 'pluginOptions___feeds___output',
+  PluginOptionsFeedsQuery = 'pluginOptions___feeds___query',
   PluginOptionsHeadersX = 'pluginOptions___headers____x',
   PluginOptionsMergeSecurityHeaders = 'pluginOptions___mergeSecurityHeaders',
   PluginOptionsPath = 'pluginOptions___path',
@@ -14517,6 +14530,7 @@ export type SitePluginPluginOptions = {
   ref?: Maybe<Scalars['String']>;
   store?: Maybe<Array<Maybe<Scalars['String']>>>;
   index?: Maybe<Array<Maybe<Scalars['String']>>>;
+  feeds?: Maybe<Array<Maybe<SitePluginPluginOptionsFeeds>>>;
   headers?: Maybe<SitePluginPluginOptionsHeaders>;
   mergeSecurityHeaders?: Maybe<Scalars['Boolean']>;
   path?: Maybe<Scalars['String']>;
@@ -14528,7 +14542,23 @@ export type SitePluginPluginOptions = {
   accessToken?: Maybe<Scalars['String']>;
   schemas?: Maybe<SitePluginPluginOptionsSchemas>;
   fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
-  prismicToolbar?: Maybe<Scalars['String']>;
+  prismicToolbar?: Maybe<Scalars['Boolean']>;
+};
+
+export type SitePluginPluginOptionsFeeds = {
+  title?: Maybe<Scalars['String']>;
+  output?: Maybe<Scalars['String']>;
+  query?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsFeedsFilterInput = {
+  title?: Maybe<StringQueryOperatorInput>;
+  output?: Maybe<StringQueryOperatorInput>;
+  query?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsFeedsFilterListInput = {
+  elemMatch?: Maybe<SitePluginPluginOptionsFeedsFilterInput>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
@@ -14554,6 +14584,7 @@ export type SitePluginPluginOptionsFilterInput = {
   ref?: Maybe<StringQueryOperatorInput>;
   store?: Maybe<StringQueryOperatorInput>;
   index?: Maybe<StringQueryOperatorInput>;
+  feeds?: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
   headers?: Maybe<SitePluginPluginOptionsHeadersFilterInput>;
   mergeSecurityHeaders?: Maybe<BooleanQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
@@ -14565,7 +14596,7 @@ export type SitePluginPluginOptionsFilterInput = {
   accessToken?: Maybe<StringQueryOperatorInput>;
   schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
   fetchLinks?: Maybe<StringQueryOperatorInput>;
-  prismicToolbar?: Maybe<StringQueryOperatorInput>;
+  prismicToolbar?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsGoogle = {
@@ -16914,6 +16945,7 @@ export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_Acti
 
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeat = {
   background_image?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatBackground_Image>;
+  label?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatLabel>;
   text?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatText>;
   button_text?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatButton_Text>;
   button_link?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatButton_Link>;
@@ -16981,9 +17013,32 @@ export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_Acti
 
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatFilterInput = {
   background_image?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatBackground_ImageFilterInput>;
+  label?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatLabelFilterInput>;
   text?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatTextFilterInput>;
   button_text?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatButton_TextFilterInput>;
   button_link?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatButton_LinkFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatLabel = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatLabelConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatLabelConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatLabelConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatLabelFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatLabelConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesCalls_To_ActionRepeatText = {
@@ -19555,11 +19610,13 @@ type SlicesPageBody_PrismicPageBodyLinkCollection_Fragment = PageBodyLinkCollect
 
 type SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment = PageBodyHeadshotQuoteFragment;
 
-export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyImages_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment | SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment | SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment | SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment | SlicesPageBody_PrismicPageBodyImageCarousel_Fragment | SlicesPageBody_PrismicPageBodyLinkCollection_Fragment | SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment;
+type SlicesPageBody_PrismicPageBodyCallsToAction_Fragment = PageBodyCallsToActionFragment;
+
+export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyImages_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment | SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment | SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment | SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment | SlicesPageBody_PrismicPageBodyImageCarousel_Fragment | SlicesPageBody_PrismicPageBodyLinkCollection_Fragment | SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment | SlicesPageBody_PrismicPageBodyCallsToAction_Fragment;
 
 export type PageBodyAnchorFragment = { primary?: Maybe<Pick<PrismicPageBodyAnchorPrimaryType, 'id'>> };
 
-export type PageBodyCallsToActionFragment = { items?: Maybe<Array<Maybe<{ text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, button_text?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, button_link?: Maybe<Pick<PrismicLinkType, 'url'>>, background_image?: Maybe<(
+export type PageBodyCallsToActionFragment = { items?: Maybe<Array<Maybe<{ label?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, text?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, button_text?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, button_link?: Maybe<Pick<PrismicLinkType, 'url'>>, background_image?: Maybe<(
       Pick<PrismicImageType, 'alt'>
       & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
     )> }>>> };
