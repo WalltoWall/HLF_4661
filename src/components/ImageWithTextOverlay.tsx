@@ -61,14 +61,13 @@ export const ImageWithTextOverlay = <
     <BoundedBox
       as={defaultElement}
       variant={variant.boundedBoxVariant}
-      /* className={commonStyles.darkGrayGradientBackground} */
       {...props}
       styles={{
+        backgroundColor: 'aqua30',
         color: 'white',
         position: 'relative',
         ...props.styles,
       }}
-      style={{ backgroundColor: '#466260' }}
     >
       {imageFluid && (
         <Box

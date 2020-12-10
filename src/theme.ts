@@ -34,6 +34,7 @@ export const colors = {
   orange50: '#f5782e',
   orange55: '#ff9900',
   orange95: '#f5f0e8',
+  aqua30: '#466260',
   aqua80: '#c9e8e5',
   aqua90: '#e2f3f6',
   transparent: 'transparent',

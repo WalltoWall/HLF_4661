@@ -11,6 +11,7 @@ import {
 } from '../lib/mapSlicesToComponents'
 
 import { ImageWithTextOverlay } from '../components/ImageWithTextOverlay'
+import { useCommonStyles } from '../hooks/useCommonStyles'
 
 export type PageBodyHeroImageProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
@@ -22,25 +23,30 @@ export const PageBodyHeroImage = ({
   backgroundImageFluid,
   backgroundImageAlt,
   id,
-}: PageBodyHeroImageProps) => (
-  <Box
-    as="section"
-    id={id}
-    styles={{
-      maxWidth: 'xlarge',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    }}
-  >
-    <ImageWithTextOverlay
-      textHTML={textHTML}
-      buttonHref={buttonHref}
-      buttonText={buttonText}
-      imageFluid={backgroundImageFluid}
-      imageAlt={backgroundImageAlt}
-    />
-  </Box>
-)
+}: PageBodyHeroImageProps) => {
+  const commonStyles = useCommonStyles()
+
+  return (
+    <Box
+      as="section"
+      id={id}
+      styles={{
+        maxWidth: 'xlarge',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      }}
+    >
+      <ImageWithTextOverlay
+        textHTML={textHTML}
+        buttonHref={buttonHref}
+        buttonText={buttonText}
+        imageFluid={backgroundImageFluid}
+        imageAlt={backgroundImageAlt}
+        className={commonStyles.darkGrayGradientBackground}
+      />
+    </Box>
+  )
+}
 
 export const mapDataToProps = ({
   data,
