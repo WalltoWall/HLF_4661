@@ -30,7 +30,7 @@ export const dquotSurround = style({
     position: 'absolute',
     left: 0,
     top: 0,
-    transform: 'translateX(-115%)',
+    transform: 'translate(-110%, 10%)',
   },
   '::after': {
     display: 'inline-block',
