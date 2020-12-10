@@ -31,7 +31,6 @@ export const PageBodyHeadshotQuote = ({
     <BoundedBox
       as="section"
       variant="narrow"
-      innerMaxWidth="large"
       nextSharesBg={nextSharesBg}
       className={commonStyles.darkGrayGradientBackground}
       styles={{
@@ -45,17 +44,22 @@ export const PageBodyHeadshotQuote = ({
       <Box
         styles={{
           display: 'grid',
-          gridTemplateColumns: [6, 12],
-          gap: [6, 8, 10],
+          gridTemplateColumns: [6, null, 12],
+          gap: [null, null, 4],
           alignItems: ['start', 'center'],
+          gridAutoFlow: 'columnDense',
+          paddingLeft: [1, null, 7],
         }}
       >
         <Box
           styles={{
-            gridColumn: ['span-2', 'span-3'],
-            marginTop: [-2, null, -6],
-            marginBottom: [null, -10, -11],
-            alignSelf: ['start', null, 'end'],
+            marginRight: -2,
+            marginLeft: [-2, null, -8, -5],
+            marginTop: [0, null, -11],
+            marginBottom: [-8, -10, -11],
+            alignSelf: 'end',
+            gridColumnStart: [5, null, 1],
+            gridColumnEnd: [-1, null, 4],
           }}
         >
           {photoFluid && <GatsbyImage fluid={photoFluid} alt={photoAlt} />}
@@ -63,7 +67,7 @@ export const PageBodyHeadshotQuote = ({
         <Box
           as="figure"
           styles={{
-            gridColumn: ['span-4', 'span-9'],
+            gridColumn: ['span-4', null, 'span-8'],
             display: 'grid',
             gap: [6, 8],
             justifyItems: 'start',

@@ -187,6 +187,23 @@ export const theme = createCalicoTheme(
       borderRadius: {
         '50%': '50%',
       },
+
+      gridColumnStart: {
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4',
+        5: '5',
+      },
+
+      gridColumnEnd: {
+        [-1]: '-1',
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4',
+        5: '5',
+      },
     },
 
     pseudos: {
