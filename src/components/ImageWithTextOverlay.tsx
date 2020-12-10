@@ -61,13 +61,14 @@ export const ImageWithTextOverlay = <
     <BoundedBox
       as={defaultElement}
       variant={variant.boundedBoxVariant}
-      className={commonStyles.darkGrayGradientBackground}
+      /* className={commonStyles.darkGrayGradientBackground} */
       {...props}
       styles={{
         color: 'white',
         position: 'relative',
         ...props.styles,
       }}
+      style={{ backgroundColor: '#466260' }}
     >
       {imageFluid && (
         <Box
@@ -82,20 +83,20 @@ export const ImageWithTextOverlay = <
           }}
         >
           <GatsbyImage fluid={imageFluid} alt={imageAlt} />
-          {withImageGradientOverlay && (
-            <Box
-              className={commonStyles.transparentBlackGradientBackground}
-              styles={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                pointerEvents: 'none',
-              }}
-            />
-          )}
         </Box>
+      )}
+      {withImageGradientOverlay && (
+        <Box
+          className={commonStyles.transparentBlackGradientBackground}
+          styles={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            pointerEvents: 'none',
+          }}
+        />
       )}
       <Box
         styles={{
@@ -146,7 +147,7 @@ export const ImageWithTextOverlay = <
         </Box>
         {buttonHref && (
           <ButtonLink
-            variant={imageFluid ? 'blue' : 'orange'}
+            variant="blue"
             href={buttonHref}
             styles={{ justifySelf: 'center' }}
           >
