@@ -19,7 +19,7 @@ export const darkGrayGradientBackground = style((theme) =>
 )
 
 export const transparentBlackGradientBackground = style({
-  backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5))`,
+  backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4))`,
 })
 
 export const dquotSurround = style({

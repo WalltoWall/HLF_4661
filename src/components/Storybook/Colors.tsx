@@ -94,11 +94,7 @@ type ColorsProps = {
 
 export const Colors = ({ colors: rawColors }: ColorsProps) => {
   // Remove non-colors
-  const {
-    transparent: _transparent,
-    currentColor: _currentColor,
-    ...colors
-  } = rawColors
+  const { transparent: _transparent, current: _current, ...colors } = rawColors
 
   const colorBuckets = Object.entries(colors).reduce((acc, [name, value]) => {
     const [colorName, ...lightnessParts] = name.split(COLOR_REGEX)
