@@ -12,6 +12,7 @@ import { useSiteSettings } from '../hooks/useSiteSettings'
 import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
 import { slicesMap as newsPostBodySlicesMap } from '../slices/NewsPostBody'
 import { PickPartial } from '../types'
+import { useNavigation } from '../hooks/useNavigation'
 
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
@@ -87,21 +88,30 @@ export const NewsPostTemplate = ({
   location,
 }: PageProps<NewsPostTemplateQuery>) => {
   const siteSettings = useSiteSettings()
-  const newsPost = data?.prismicNewsPost
 
+  const page = data?.prismicPage
+  const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
+  const pageDescription = page?.data?.meta_description
+
+  const newsPost = data?.prismicNewsPost
   const newsPostTitle = newsPost?.data?.title?.text
   const newsPostPublishedAt =
     (newsPost?.data?.published_at as string) ??
     (newsPost?.first_publication_date as string)
   const newsPostExcerpt = newsPost?.data?.excerpt?.text
-  const newsPostFeaturedImageFluid = newsPost?.data?.featured_image?.fluid
-  const newsPostFeaturedImageAlt = newsPost?.data?.featured_image?.alt
-
-  const newsCategories =
+  const newsPostCategories =
     newsPost?.data?.news_categories?.map?.(
       (category) => category?.news_category?.document,
     ) ?? []
-  const primaryNewsCategory = newsCategories[0]
+  const primaryNewsCategory = newsPostCategories[0]
+
+  const navigation = useNavigation()
+  const newsNavigation = navigation.primary
+    .find((item) => item?.primary?.link?.uid === 'news')
+    ?.items?.map?.((item) => ({
+      url: item?.link?.url,
+      name: item?.name,
+    }))
 
   const nextNewsPost = data?.nextPrismicNewsPost
 
@@ -147,8 +157,9 @@ export const NewsPostTemplate = ({
         }}
       >
         <InteriorPageSidebar
-          imageFluid={newsPostFeaturedImageFluid}
-          imageAlt={newsPostFeaturedImageAlt}
+          title={pageTitle}
+          description={pageDescription}
+          navigationItems={newsNavigation}
         />
         <Box styles={{ gridColumn: [null, null, 'span-2'] }}>
           <BoundedBox nextSharesBg={true}>
@@ -250,12 +261,6 @@ export const query = graphql`
             }
           }
         }
-        featured_image {
-          alt
-          fluid(maxWidth: 400) {
-            ...GatsbyPrismicImageFluid
-          }
-        }
         body {
           __typename
           ... on Node {
@@ -272,6 +277,25 @@ export const query = graphql`
 
     prevPrismicNewsPost: prismicNewsPost(uid: { eq: $prevUID }) {
       ...NewsPostTemplatePaginatedNewsPost
+    }
+
+    prismicPage(uid: { eq: "news" }) {
+      _previewable
+      ...PrismicPageParentRecursive
+      data {
+        title {
+          text
+        }
+        meta_title
+        meta_description
+        body {
+          __typename
+          ... on Node {
+            id
+          }
+          ...SlicesPageBody
+        }
+      }
     }
   }
 

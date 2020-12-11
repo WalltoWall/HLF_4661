@@ -12242,8 +12242,6 @@ export type Query = {
   allSite: SiteConnection;
   sitePage?: Maybe<SitePage>;
   allSitePage: SitePageConnection;
-  localSearchAllContent?: Maybe<LocalSearchAllContent>;
-  allLocalSearchAllContent: LocalSearchAllContentConnection;
   prismicCohort?: Maybe<PrismicCohort>;
   allPrismicCohort: PrismicCohortConnection;
   prismicCohortScheduleBodySection?: Maybe<PrismicCohortScheduleBodySection>;
@@ -12342,6 +12340,8 @@ export type Query = {
   allPrismicProjectCategory: PrismicProjectCategoryConnection;
   prismicSettings?: Maybe<PrismicSettings>;
   allPrismicSettings: PrismicSettingsConnection;
+  localSearchAllContent?: Maybe<LocalSearchAllContent>;
+  allLocalSearchAllContent: LocalSearchAllContentConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin?: Maybe<SitePlugin>;
@@ -12486,28 +12486,6 @@ export type QuerySitePageArgs = {
 export type QueryAllSitePageArgs = {
   filter?: Maybe<SitePageFilterInput>;
   sort?: Maybe<SitePageSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryLocalSearchAllContentArgs = {
-  name?: Maybe<StringQueryOperatorInput>;
-  engine?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<StringQueryOperatorInput>;
-  store?: Maybe<JsonQueryOperatorInput>;
-  publicIndexURL?: Maybe<StringQueryOperatorInput>;
-  publicStoreURL?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-};
-
-
-export type QueryAllLocalSearchAllContentArgs = {
-  filter?: Maybe<LocalSearchAllContentFilterInput>;
-  sort?: Maybe<LocalSearchAllContentSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -13562,6 +13540,28 @@ export type QueryAllPrismicSettingsArgs = {
 };
 
 
+export type QueryLocalSearchAllContentArgs = {
+  name?: Maybe<StringQueryOperatorInput>;
+  engine?: Maybe<StringQueryOperatorInput>;
+  index?: Maybe<StringQueryOperatorInput>;
+  store?: Maybe<JsonQueryOperatorInput>;
+  publicIndexURL?: Maybe<StringQueryOperatorInput>;
+  publicStoreURL?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllLocalSearchAllContentArgs = {
+  filter?: Maybe<LocalSearchAllContentFilterInput>;
+  sort?: Maybe<LocalSearchAllContentSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QuerySiteBuildMetadataArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -14151,6 +14151,10 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsCacheDigest = 'pluginCreator___pluginOptions___cacheDigest',
   PluginCreatorPluginOptionsTypekitId = 'pluginCreator___pluginOptions___typekit___id',
   PluginCreatorPluginOptionsGoogleFamilies = 'pluginCreator___pluginOptions___google___families',
+  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
+  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
+  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
+  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorPluginOptionsEngine = 'pluginCreator___pluginOptions___engine',
   PluginCreatorPluginOptionsQuery = 'pluginCreator___pluginOptions___query',
   PluginCreatorPluginOptionsRef = 'pluginCreator___pluginOptions___ref',
@@ -14167,10 +14171,6 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsAllExtensions = 'pluginCreator___pluginOptions___allExtensions',
   PluginCreatorPluginOptionsIsTsx = 'pluginCreator___pluginOptions___isTSX',
   PluginCreatorPluginOptionsJsxPragma = 'pluginCreator___pluginOptions___jsxPragma',
-  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
-  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
-  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
-  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorNodeApIs = 'pluginCreator___nodeAPIs',
   PluginCreatorBrowserApIs = 'pluginCreator___browserAPIs',
   PluginCreatorSsrApIs = 'pluginCreator___ssrAPIs',
@@ -14375,6 +14375,10 @@ export enum SitePluginFieldsEnum {
   PluginOptionsCacheDigest = 'pluginOptions___cacheDigest',
   PluginOptionsTypekitId = 'pluginOptions___typekit___id',
   PluginOptionsGoogleFamilies = 'pluginOptions___google___families',
+  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
+  PluginOptionsAccessToken = 'pluginOptions___accessToken',
+  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
+  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   PluginOptionsEngine = 'pluginOptions___engine',
   PluginOptionsQuery = 'pluginOptions___query',
   PluginOptionsRef = 'pluginOptions___ref',
@@ -14391,10 +14395,6 @@ export enum SitePluginFieldsEnum {
   PluginOptionsAllExtensions = 'pluginOptions___allExtensions',
   PluginOptionsIsTsx = 'pluginOptions___isTSX',
   PluginOptionsJsxPragma = 'pluginOptions___jsxPragma',
-  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
-  PluginOptionsAccessToken = 'pluginOptions___accessToken',
-  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
-  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   NodeApIs = 'nodeAPIs',
   BrowserApIs = 'browserAPIs',
   SsrApIs = 'ssrAPIs',
@@ -14525,6 +14525,11 @@ export type SitePluginPluginOptions = {
   cacheDigest?: Maybe<Scalars['String']>;
   typekit?: Maybe<SitePluginPluginOptionsTypekit>;
   google?: Maybe<SitePluginPluginOptionsGoogle>;
+  repositoryName?: Maybe<Scalars['String']>;
+  accessToken?: Maybe<Scalars['String']>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
+  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
+  prismicToolbar?: Maybe<Scalars['Boolean']>;
   engine?: Maybe<Scalars['String']>;
   query?: Maybe<Scalars['String']>;
   ref?: Maybe<Scalars['String']>;
@@ -14538,11 +14543,6 @@ export type SitePluginPluginOptions = {
   allExtensions?: Maybe<Scalars['Boolean']>;
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
-  repositoryName?: Maybe<Scalars['String']>;
-  accessToken?: Maybe<Scalars['String']>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
-  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
-  prismicToolbar?: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsFeeds = {
@@ -14579,6 +14579,11 @@ export type SitePluginPluginOptionsFilterInput = {
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   typekit?: Maybe<SitePluginPluginOptionsTypekitFilterInput>;
   google?: Maybe<SitePluginPluginOptionsGoogleFilterInput>;
+  repositoryName?: Maybe<StringQueryOperatorInput>;
+  accessToken?: Maybe<StringQueryOperatorInput>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
+  fetchLinks?: Maybe<StringQueryOperatorInput>;
+  prismicToolbar?: Maybe<BooleanQueryOperatorInput>;
   engine?: Maybe<StringQueryOperatorInput>;
   query?: Maybe<StringQueryOperatorInput>;
   ref?: Maybe<StringQueryOperatorInput>;
@@ -14592,11 +14597,6 @@ export type SitePluginPluginOptionsFilterInput = {
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
-  repositoryName?: Maybe<StringQueryOperatorInput>;
-  accessToken?: Maybe<StringQueryOperatorInput>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
-  fetchLinks?: Maybe<StringQueryOperatorInput>;
-  prismicToolbar?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsGoogle = {
@@ -16147,11 +16147,13 @@ export type SitePluginPluginOptionsSchemasNavigationMainTitle = {
 export type SitePluginPluginOptionsSchemasNavigationMainTitleConfig = {
   single?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsSchemasNavigationMainTitleConfigFilterInput = {
   single?: Maybe<StringQueryOperatorInput>;
   label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsSchemasNavigationMainTitleFilterInput = {
@@ -18069,7 +18071,6 @@ export type SitePluginPluginOptionsSchemasPageMainRedirect_Is_PermanentConfig = 
   placeholder_true?: Maybe<Scalars['String']>;
   default_value?: Maybe<Scalars['Boolean']>;
   label?: Maybe<Scalars['String']>;
-  placeholder?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsSchemasPageMainRedirect_Is_PermanentConfigFilterInput = {
@@ -18077,7 +18078,6 @@ export type SitePluginPluginOptionsSchemasPageMainRedirect_Is_PermanentConfigFil
   placeholder_true?: Maybe<StringQueryOperatorInput>;
   default_value?: Maybe<BooleanQueryOperatorInput>;
   label?: Maybe<StringQueryOperatorInput>;
-  placeholder?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsSchemasPageMainRedirect_Is_PermanentFilterInput = {
@@ -19594,8 +19594,6 @@ export type NewsPostBodyVideoFragment = { primary?: Maybe<{ video?: Maybe<Pick<P
 
 type SlicesPageBody_PrismicPageBodyText_Fragment = PageBodyTextFragment;
 
-type SlicesPageBody_PrismicPageBodyImages_Fragment = PageBodyImagesFragment;
-
 type SlicesPageBody_PrismicPageBodyHeroImage_Fragment = PageBodyHeroImageFragment;
 
 type SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment = PageBodyHeroImageCarouselFragment;
@@ -19612,7 +19610,7 @@ type SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment = PageBodyHeadshotQuot
 
 type SlicesPageBody_PrismicPageBodyCallsToAction_Fragment = PageBodyCallsToActionFragment;
 
-export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyImages_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment | SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment | SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment | SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment | SlicesPageBody_PrismicPageBodyImageCarousel_Fragment | SlicesPageBody_PrismicPageBodyLinkCollection_Fragment | SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment | SlicesPageBody_PrismicPageBodyCallsToAction_Fragment;
+export type SlicesPageBodyFragment = SlicesPageBody_PrismicPageBodyText_Fragment | SlicesPageBody_PrismicPageBodyHeroImage_Fragment | SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment | SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment | SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment | SlicesPageBody_PrismicPageBodyImageCarousel_Fragment | SlicesPageBody_PrismicPageBodyLinkCollection_Fragment | SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment | SlicesPageBody_PrismicPageBodyCallsToAction_Fragment;
 
 export type PageBodyAnchorFragment = { primary?: Maybe<Pick<PrismicPageBodyAnchorPrimaryType, 'id'>> };
 
@@ -19637,11 +19635,6 @@ export type PageBodyHeroImageCarouselFragment = { items?: Maybe<Array<Maybe<{ te
     )> }>>> };
 
 export type PageBodyImageCarouselFragment = { items?: Maybe<Array<Maybe<{ image?: Maybe<(
-      Pick<PrismicImageType, 'alt' | 'url'>
-      & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
-    )>, caption?: Maybe<Pick<PrismicStructuredTextType, 'html' | 'text'>> }>>> };
-
-export type PageBodyImagesFragment = { items?: Maybe<Array<Maybe<{ image?: Maybe<(
       Pick<PrismicImageType, 'alt' | 'url'>
       & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
     )>, caption?: Maybe<Pick<PrismicStructuredTextType, 'html' | 'text'>> }>>> };
@@ -19919,10 +19912,7 @@ export type NewsPostTemplateQuery = { prismicNewsPost?: Maybe<(
       & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, excerpt?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, news_categories?: Maybe<Array<Maybe<{ news_category?: Maybe<{ document?: Maybe<(
             Pick<PrismicNewsCategory, 'uid' | 'url'>
             & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
-          )> }> }>>>, featured_image?: Maybe<(
-        Pick<PrismicImageType, 'alt'>
-        & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
-      )>, body?: Maybe<Array<Maybe<(
+          )> }> }>>>, body?: Maybe<Array<Maybe<(
         { __typename: 'PrismicNewsPostBodyTextIntro' }
         & Pick<PrismicNewsPostBodyTextIntro, 'id'>
         & SlicesNewsPostBody_PrismicNewsPostBodyTextIntro_Fragment
@@ -19952,7 +19942,62 @@ export type NewsPostTemplateQuery = { prismicNewsPost?: Maybe<(
         & SlicesNewsPostBody_PrismicNewsPostBodyAnchor_Fragment
       )>>> }
     )> }
-  )>, nextPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment>, prevPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment> };
+  )>, nextPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment>, prevPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment>, prismicPage?: Maybe<(
+    Pick<PrismicPage, '_previewable'>
+    & { data?: Maybe<(
+      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicPageBodyText' }
+        & Pick<PrismicPageBodyText, 'id'>
+        & SlicesPageBody_PrismicPageBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImages' }
+        & Pick<PrismicPageBodyImages, 'id'>
+        & SlicesPageBody_PrismicPageBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyAnchor' }
+        & Pick<PrismicPageBodyAnchor, 'id'>
+        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImage' }
+        & Pick<PrismicPageBodyHeroImage, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImageCarousel' }
+        & Pick<PrismicPageBodyHeroImageCarousel, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyQuoteSlideshow' }
+        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
+        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImageCarousel' }
+        & Pick<PrismicPageBodyImageCarousel, 'id'>
+        & SlicesPageBody_PrismicPageBodyImageCarousel_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLinkCollection' }
+        & Pick<PrismicPageBodyLinkCollection, 'id'>
+        & SlicesPageBody_PrismicPageBodyLinkCollection_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeadshotQuote' }
+        & Pick<PrismicPageBodyHeadshotQuote, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyCallsToAction' }
+        & Pick<PrismicPageBodyCallsToAction, 'id'>
+        & SlicesPageBody_PrismicPageBodyCallsToAction_Fragment
+      )>>> }
+    )> }
+    & PrismicPageParentRecursiveFragment
+  )> };
 
 export type NewsPostTemplatePaginatedNewsPostFragment = (
   Pick<PrismicNewsPost, 'url' | 'first_publication_date'>
