@@ -13,6 +13,7 @@ import { slicesMap as pageBodySlicesMap } from '../slices/PageBody'
 import { slicesMap as newsPostBodySlicesMap } from '../slices/NewsPostBody'
 import { PickPartial } from '../types'
 import { useNavigation } from '../hooks/useNavigation'
+import { useNewsPage } from '../hooks/useNewsPage'
 
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
@@ -89,9 +90,9 @@ export const NewsPostTemplate = ({
 }: PageProps<NewsPostTemplateQuery>) => {
   const siteSettings = useSiteSettings()
 
-  const page = data?.prismicPage
-  const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
-  const pageDescription = page?.data?.meta_description
+  const newsPage = useNewsPage()
+  const newsPageTitle = newsPage.meta_title ?? newsPage.title
+  const newsPageDescription = newsPage.meta_description
 
   const newsPost = data?.prismicNewsPost
   const newsPostTitle = newsPost?.data?.title?.text
@@ -157,8 +158,8 @@ export const NewsPostTemplate = ({
         }}
       >
         <InteriorPageSidebar
-          title={pageTitle}
-          description={pageDescription}
+          title={newsPageTitle}
+          description={newsPageDescription}
           navigationItems={newsNavigation}
         />
         <Box styles={{ gridColumn: [null, null, 'span-2'] }}>
@@ -277,25 +278,6 @@ export const query = graphql`
 
     prevPrismicNewsPost: prismicNewsPost(uid: { eq: $prevUID }) {
       ...NewsPostTemplatePaginatedNewsPost
-    }
-
-    prismicPage(uid: { eq: "news" }) {
-      _previewable
-      ...PrismicPageParentRecursive
-      data {
-        title {
-          text
-        }
-        meta_title
-        meta_description
-        body {
-          __typename
-          ... on Node {
-            id
-          }
-          ...SlicesPageBody
-        }
-      }
     }
   }
 

@@ -11,6 +11,7 @@ import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 import { slicesMap } from '../slices/PageBody'
 import { useNavigation } from '../hooks/useNavigation'
+import { useNewsPage } from '../hooks/useNewsPage'
 
 import { Layout } from '../components/Layout'
 import { BoundedBox } from '../components/BoundedBox'
@@ -87,9 +88,9 @@ export const NewsCategoryTemplate = ({
 }: PageProps<NewsCategoryTemplateQuery, NewsCategoryTemplateContext>) => {
   const siteSettings = useSiteSettings()
 
-  const page = data?.prismicPage
-  const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
-  const pageDescription = page?.data?.meta_description
+  const newsPage = useNewsPage()
+  const newsPageTitle = newsPage.meta_title ?? newsPage.title
+  const newsPageDescription = newsPage.meta_description
 
   const newsCategory = data?.prismicNewsCategory
   const newsCategoryName = newsCategory?.data?.name?.text
@@ -136,15 +137,14 @@ export const NewsCategoryTemplate = ({
     <Layout>
       <Helmet>
         <title>
-          {pageTitle ?? ''}
-          {page?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`}
+          {newsCategoryName} | {siteSettings.siteName}
         </title>
-        {pageDescription && (
-          <meta name="description" content={pageDescription} />
+        {newsPageDescription && (
+          <meta name="description" content={newsPageDescription} />
         )}
       </Helmet>
       <MapSlicesToComponents
-        list={page?.data?.body}
+        list={newsPage.body}
         map={slicesMap}
         meta={meta}
         listMiddleware={slicesMiddleware}
@@ -161,8 +161,8 @@ export const NewsCategoryTemplate = ({
         }}
       >
         <InteriorPageSidebar
-          title={pageTitle}
-          description={pageDescription}
+          title={newsPageTitle}
+          description={newsPageDescription}
           navigationItems={newsNavigation}
         />
         <Box
@@ -233,25 +233,6 @@ export default withPreview(NewsCategoryTemplate)
 
 export const query = graphql`
   query NewsCategoryTemplate($uid: String!, $limit: Int!, $skip: Int!) {
-    prismicPage(uid: { eq: "news" }) {
-      _previewable
-      ...PrismicPageParentRecursive
-      data {
-        title {
-          text
-        }
-        meta_title
-        meta_description
-        body {
-          __typename
-          ... on Node {
-            id
-          }
-          ...SlicesPageBody
-        }
-      }
-    }
-
     prismicNewsCategory(uid: { eq: $uid }) {
       _previewable
       uid
