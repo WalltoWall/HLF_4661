@@ -19386,6 +19386,65 @@ export type UseNewsCategoriesQuery = { allPrismicNewsCategory: { nodes: Array<(
       & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
     )> } };
 
+export type UseNewsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UseNewsPageQuery = { prismicPage?: Maybe<(
+    Pick<PrismicPage, '_previewable'>
+    & { data?: Maybe<(
+      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
+      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
+        { __typename: 'PrismicPageBodyText' }
+        & Pick<PrismicPageBodyText, 'id'>
+        & SlicesPageBody_PrismicPageBodyText_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImages' }
+        & Pick<PrismicPageBodyImages, 'id'>
+        & SlicesPageBody_PrismicPageBodyImages_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyAnchor' }
+        & Pick<PrismicPageBodyAnchor, 'id'>
+        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImage' }
+        & Pick<PrismicPageBodyHeroImage, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeroImageCarousel' }
+        & Pick<PrismicPageBodyHeroImageCarousel, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyQuoteSlideshow' }
+        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
+        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLearningExcursionMap' }
+        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
+        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyFellowsGrid' }
+        & Pick<PrismicPageBodyFellowsGrid, 'id'>
+        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyImageCarousel' }
+        & Pick<PrismicPageBodyImageCarousel, 'id'>
+        & SlicesPageBody_PrismicPageBodyImageCarousel_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyLinkCollection' }
+        & Pick<PrismicPageBodyLinkCollection, 'id'>
+        & SlicesPageBody_PrismicPageBodyLinkCollection_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyHeadshotQuote' }
+        & Pick<PrismicPageBodyHeadshotQuote, 'id'>
+        & SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment
+      ) | (
+        { __typename: 'PrismicPageBodyCallsToAction' }
+        & Pick<PrismicPageBodyCallsToAction, 'id'>
+        & SlicesPageBody_PrismicPageBodyCallsToAction_Fragment
+      )>>> }
+    )> }
+  )> };
+
 export type UseSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -19826,62 +19885,7 @@ export type NewsCategoryTemplateQueryVariables = Exact<{
 }>;
 
 
-export type NewsCategoryTemplateQuery = { prismicPage?: Maybe<(
-    Pick<PrismicPage, '_previewable'>
-    & { data?: Maybe<(
-      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
-      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
-        { __typename: 'PrismicPageBodyText' }
-        & Pick<PrismicPageBodyText, 'id'>
-        & SlicesPageBody_PrismicPageBodyText_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyImages' }
-        & Pick<PrismicPageBodyImages, 'id'>
-        & SlicesPageBody_PrismicPageBodyImages_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyAnchor' }
-        & Pick<PrismicPageBodyAnchor, 'id'>
-        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyHeroImage' }
-        & Pick<PrismicPageBodyHeroImage, 'id'>
-        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyHeroImageCarousel' }
-        & Pick<PrismicPageBodyHeroImageCarousel, 'id'>
-        & SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyQuoteSlideshow' }
-        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
-        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyLearningExcursionMap' }
-        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
-        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyFellowsGrid' }
-        & Pick<PrismicPageBodyFellowsGrid, 'id'>
-        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyImageCarousel' }
-        & Pick<PrismicPageBodyImageCarousel, 'id'>
-        & SlicesPageBody_PrismicPageBodyImageCarousel_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyLinkCollection' }
-        & Pick<PrismicPageBodyLinkCollection, 'id'>
-        & SlicesPageBody_PrismicPageBodyLinkCollection_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyHeadshotQuote' }
-        & Pick<PrismicPageBodyHeadshotQuote, 'id'>
-        & SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyCallsToAction' }
-        & Pick<PrismicPageBodyCallsToAction, 'id'>
-        & SlicesPageBody_PrismicPageBodyCallsToAction_Fragment
-      )>>> }
-    )> }
-    & PrismicPageParentRecursiveFragment
-  )>, prismicNewsCategory?: Maybe<(
+export type NewsCategoryTemplateQuery = { prismicNewsCategory?: Maybe<(
     Pick<PrismicNewsCategory, '_previewable' | 'uid' | 'url'>
     & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
   )>, allPrismicNewsPost: { nodes: Array<(
@@ -19942,62 +19946,7 @@ export type NewsPostTemplateQuery = { prismicNewsPost?: Maybe<(
         & SlicesNewsPostBody_PrismicNewsPostBodyAnchor_Fragment
       )>>> }
     )> }
-  )>, nextPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment>, prevPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment>, prismicPage?: Maybe<(
-    Pick<PrismicPage, '_previewable'>
-    & { data?: Maybe<(
-      Pick<PrismicPageDataType, 'meta_title' | 'meta_description'>
-      & { title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, body?: Maybe<Array<Maybe<(
-        { __typename: 'PrismicPageBodyText' }
-        & Pick<PrismicPageBodyText, 'id'>
-        & SlicesPageBody_PrismicPageBodyText_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyImages' }
-        & Pick<PrismicPageBodyImages, 'id'>
-        & SlicesPageBody_PrismicPageBodyImages_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyAnchor' }
-        & Pick<PrismicPageBodyAnchor, 'id'>
-        & SlicesPageBody_PrismicPageBodyAnchor_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyHeroImage' }
-        & Pick<PrismicPageBodyHeroImage, 'id'>
-        & SlicesPageBody_PrismicPageBodyHeroImage_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyHeroImageCarousel' }
-        & Pick<PrismicPageBodyHeroImageCarousel, 'id'>
-        & SlicesPageBody_PrismicPageBodyHeroImageCarousel_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyQuoteSlideshow' }
-        & Pick<PrismicPageBodyQuoteSlideshow, 'id'>
-        & SlicesPageBody_PrismicPageBodyQuoteSlideshow_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyLearningExcursionMap' }
-        & Pick<PrismicPageBodyLearningExcursionMap, 'id'>
-        & SlicesPageBody_PrismicPageBodyLearningExcursionMap_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyFellowsGrid' }
-        & Pick<PrismicPageBodyFellowsGrid, 'id'>
-        & SlicesPageBody_PrismicPageBodyFellowsGrid_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyImageCarousel' }
-        & Pick<PrismicPageBodyImageCarousel, 'id'>
-        & SlicesPageBody_PrismicPageBodyImageCarousel_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyLinkCollection' }
-        & Pick<PrismicPageBodyLinkCollection, 'id'>
-        & SlicesPageBody_PrismicPageBodyLinkCollection_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyHeadshotQuote' }
-        & Pick<PrismicPageBodyHeadshotQuote, 'id'>
-        & SlicesPageBody_PrismicPageBodyHeadshotQuote_Fragment
-      ) | (
-        { __typename: 'PrismicPageBodyCallsToAction' }
-        & Pick<PrismicPageBodyCallsToAction, 'id'>
-        & SlicesPageBody_PrismicPageBodyCallsToAction_Fragment
-      )>>> }
-    )> }
-    & PrismicPageParentRecursiveFragment
-  )> };
+  )>, nextPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment>, prevPrismicNewsPost?: Maybe<NewsPostTemplatePaginatedNewsPostFragment> };
 
 export type NewsPostTemplatePaginatedNewsPostFragment = (
   Pick<PrismicNewsPost, 'url' | 'first_publication_date'>
