@@ -67,7 +67,9 @@ export const ButtonLink = ({
 
   return (
     <Link {...props} className={cx}>
-      <Text variant="sans-13-14-bold-caps">{children}</Text>
+      <Text variant="sans-13-14-bold-caps" styles={{ textAlign: 'center' }}>
+        {children}
+      </Text>
     </Link>
   )
 }

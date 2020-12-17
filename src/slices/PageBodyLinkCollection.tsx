@@ -1,9 +1,5 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
-import { Box } from '@walltowall/calico'
-import ConditionalWrap from 'conditional-wrap'
-import { AspectRatio } from '@walltowall/siamese'
 import { undefIfEmpty } from '@walltowall/helpers'
 
 import { PageBodyLinkCollectionFragment } from '../types.generated'
@@ -11,10 +7,7 @@ import { PageTemplateEnhancerProps } from '../templates/page'
 import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 
 import { BoundedBox } from '../components/BoundedBox'
-import { Link } from '../components/Link'
-import { Anchor } from '../components/Anchor'
-import { Text } from '../components/Text'
-import { ButtonLink } from '../components/ButtonLink'
+import { LinkCollection } from '../components/LinkCollection'
 
 export type PageBodyLinkCollectionProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
@@ -35,99 +28,11 @@ export const PageBodyLinkCollection = ({
       marginRight: 'auto',
     }}
   >
-    <Box
-      as="ul"
-      styles={{
-        backgroundColor: 'orange95',
-        display: 'grid',
-        gridTemplateColumns: [null, 2],
-        gap: 8,
-        padding: [5, 8, 11],
-        alignItems: 'start',
-      }}
-    >
-      {children}
-    </Box>
+    <LinkCollection>{children}</LinkCollection>
   </BoundedBox>
 )
 
-type LinkProps = {
-  name?: string
-  description?: string
-  href?: string
-  buttonText?: string
-  thumbnailFluid?: FluidObject
-  thumbnailAlt?: string
-}
-
-const LinkCollectionLink = ({
-  name,
-  description,
-  href,
-  buttonText = 'Learn More',
-  thumbnailFluid,
-  thumbnailAlt,
-}: LinkProps) => (
-  <Box
-    as="li"
-    styles={{
-      display: 'grid',
-      gap: [4, 6],
-      gridTemplateColumns: [null, null, 2],
-      alignItems: 'start',
-    }}
-  >
-    <Box styles={{ maxWidth: ['15rem', 'none'] }}>
-      <ConditionalWrap
-        condition={Boolean(href)}
-        wrap={(children) => <Link href={href!}>{children}</Link>}
-      >
-        {thumbnailFluid ? (
-          <Box as={GatsbyImage} fluid={thumbnailFluid} alt={thumbnailAlt} />
-        ) : (
-          <Box
-            as={AspectRatio}
-            x={8}
-            y={5}
-            styles={{ backgroundColor: 'gray40' }}
-          />
-        )}
-      </ConditionalWrap>
-    </Box>
-    <Box styles={{ display: 'grid', gap: 5, paddingTop: 2 }}>
-      <Box styles={{ display: 'grid', gap: 3.5, justifyItems: 'start' }}>
-        {name && (
-          <ConditionalWrap
-            condition={Boolean(href)}
-            wrap={(children) => (
-              <Anchor href={href!} styles={{ color: 'gray10' }}>
-                {children}
-              </Anchor>
-            )}
-          >
-            <Text variant="serif-20-24">{name}</Text>
-          </ConditionalWrap>
-        )}
-        {description && (
-          <Text
-            as="p"
-            variant="sans-13-14"
-            styles={{ color: 'gray40', letterSpacing: 'xs' }}
-          >
-            {description}
-          </Text>
-        )}
-      </Box>
-      {href && (
-        <ButtonLink href={href} styles={{ justifySelf: 'start' }}>
-          {buttonText}
-        </ButtonLink>
-      )}
-    </Box>
-  </Box>
-)
-
-PageBodyLinkCollection.Link = LinkCollectionLink
+PageBodyLinkCollection.Link = LinkCollection.Link
 
 export const mapDataToProps = ({
   data,

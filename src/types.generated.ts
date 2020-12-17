@@ -20030,7 +20030,13 @@ export type ProjectTemplateQueryVariables = Exact<{
 
 export type ProjectTemplateQuery = { prismicProject?: Maybe<(
     Pick<PrismicProject, '_previewable' | 'uid'>
-    & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, website_url?: Maybe<Pick<PrismicLinkType, 'url'>>, project_categories?: Maybe<Array<Maybe<{ project_category?: Maybe<{ document?: Maybe<(
+    & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, website_url?: Maybe<Pick<PrismicLinkType, 'url'>>, involved_fellows?: Maybe<Array<Maybe<{ involved_fellow?: Maybe<{ document?: Maybe<(
+            Pick<PrismicFellow, 'uid' | 'url'>
+            & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, cohort?: Maybe<{ document?: Maybe<{ data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }> }>, portrait?: Maybe<(
+                Pick<PrismicImageType, 'alt'>
+                & { fluid?: Maybe<GatsbyPrismicImageFluidFragment> }
+              )> }> }
+          )> }> }>>>, project_categories?: Maybe<Array<Maybe<{ project_category?: Maybe<{ document?: Maybe<(
             Pick<PrismicProjectCategory, 'uid' | 'url'>
             & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }
           )> }> }>>>, body?: Maybe<Array<Maybe<(
