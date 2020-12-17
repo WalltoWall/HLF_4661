@@ -11,6 +11,8 @@ import { Anchor } from './Anchor'
 import { HTMLContent } from './HTMLContent'
 import { Icon } from './Icon'
 
+import { ReactComponent as AssetLogoBugGrayscaleSVG } from '../assets/logo-bug-grayscale.svg'
+
 const defaultElement = 'div'
 
 type ContentCardProps<E extends React.ElementType> = {
@@ -63,24 +65,40 @@ export const ContentCard = <
           wrap={(children) => <Link href={href!}>{children}</Link>}
         >
           {featuredImageFluid ? (
-            <GatsbyImage fluid={featuredImageFluid} alt={featuredImageAlt} />
+            <Box
+              as={GatsbyImage}
+              fluid={featuredImageFluid}
+              alt={featuredImageAlt}
+              styles={{
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'gray20',
+              }}
+            />
           ) : (
             <Box
               as={AspectRatio}
               x={8}
               y={5}
-              styles={{ backgroundColor: 'gray95' }}
+              styles={{
+                backgroundColor: 'gray95',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'gray85',
+              }}
             >
               <Box
                 styles={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  width: 'full',
+                  height: 'full',
                 }}
               >
-                <Icon
-                  name="page"
-                  styles={{ width: '3/12', color: 'gray80', opacity: 50 }}
+                <Box
+                  as={AssetLogoBugGrayscaleSVG}
+                  styles={{ width: '3/12', color: 'gray80', opacity: 25 }}
                 />
               </Box>
             </Box>
