@@ -40,10 +40,12 @@ export const LinkCollection = <
 
 const linkCollectionLinkVariants = {
   base: {
+    gap: [4, 3, 6],
     gridTemplateColumns: [null, null, 2],
     thumbnailMaxWidth: ['15rem', 'none'],
   },
   small: {
+    gap: [4, 5, 6],
     gridTemplateColumns: 3,
     thumbnailMaxWidth: ['7rem', null, 'none'],
   },
@@ -75,7 +77,7 @@ const LinkCollectionLink = ({
       as="li"
       styles={{
         display: 'grid',
-        gap: [4, 6],
+        gap: variant.gap,
         gridTemplateColumns: variant.gridTemplateColumns,
         alignItems: 'start',
       }}
