@@ -18,7 +18,7 @@
     "description": {
       "type": "StructuredText",
       "config": {
-        "multi": "paragraph",
+        "multi": "paragraph, strong, em, hyperlink",
         "label": "Description",
         "placeholder": "Short description about the project"
       }
@@ -58,6 +58,14 @@
               "customtypes": ["fellow"],
               "label": "Involved Fellow",
               "placeholder": "Fellow who was involved in the project"
+            }
+          },
+          "label": {
+            "type": "StructuredText",
+            "config": {
+              "single": "paragraph",
+              "label": "Label",
+              "placeholder": "Label for the fellow (e.g. \"Project Lead\")"
             }
           }
         },

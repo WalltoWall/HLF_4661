@@ -53,6 +53,7 @@ const linkCollectionLinkVariants = {
 
 type LinkCollectionLinkProps = {
   variant?: keyof typeof linkCollectionLinkVariants
+  label?: string
   name?: string
   description?: string
   href?: string
@@ -63,6 +64,7 @@ type LinkCollectionLinkProps = {
 
 const LinkCollectionLink = ({
   variant: variantName = 'base',
+  label,
   name,
   description,
   href,
@@ -109,6 +111,11 @@ const LinkCollectionLink = ({
         }}
       >
         <Box styles={{ display: 'grid', gap: 3.5, justifyItems: 'start' }}>
+          {label && (
+            <Text variant="sans-13-14-bold-caps" styles={{ color: 'blue10' }}>
+              {label}
+            </Text>
+          )}
           {name && (
             <ConditionalWrap
               condition={Boolean(href)}

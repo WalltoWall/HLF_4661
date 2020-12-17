@@ -108,9 +108,7 @@ export const ProjectTemplate = ({
   const project = data?.prismicProject
   const projectTitle = project?.data?.title?.text
   const projectWebsiteHref = project?.data?.website_url?.url
-  const projectInvolvedFellows = project?.data?.involved_fellows?.map?.(
-    (item) => item?.involved_fellow?.document,
-  )
+  const projectInvolvedFellows = project?.data?.involved_fellows
 
   const projectCategories =
     project?.data?.project_categories?.map?.(
@@ -218,17 +216,23 @@ export const ProjectTemplate = ({
                   Involved Fellows
                 </Text>
                 <LinkCollection styles={{ padding: [5, 8] }}>
-                  {projectInvolvedFellows.map((fellow) => (
+                  {projectInvolvedFellows.map((item) => (
                     <LinkCollection.Link
-                      key={fellow?.uid}
+                      key={item?.involved_fellow?.document?.uid}
                       variant="small"
-                      name={fellow?.data?.name?.text}
+                      label={item?.label?.text}
+                      name={item?.involved_fellow?.document?.data?.name?.text}
                       description={
-                        fellow?.data?.cohort?.document?.data?.title?.text
+                        item?.involved_fellow?.document?.data?.cohort?.document
+                          ?.data?.title?.text
                       }
-                      href={fellow?.url}
-                      thumbnailFluid={fellow?.data?.portrait?.fluid}
-                      thumbnailAlt={fellow?.data?.portrait?.alt}
+                      href={item?.involved_fellow?.document?.url}
+                      thumbnailFluid={
+                        item?.involved_fellow?.document?.data?.portrait?.fluid
+                      }
+                      thumbnailAlt={
+                        item?.involved_fellow?.document?.data?.portrait?.alt
+                      }
                     />
                   ))}
                 </LinkCollection>
@@ -283,6 +287,9 @@ export const query = graphql`
           url
         }
         involved_fellows {
+          label {
+            text
+          }
           involved_fellow {
             document {
               ... on PrismicFellow {

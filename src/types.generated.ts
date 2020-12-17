@@ -11672,6 +11672,9 @@ export enum PrismicProjectFieldsEnum {
   DataInvolvedFellowsInvolvedFellowSlug = 'data___involved_fellows___involved_fellow___slug',
   DataInvolvedFellowsInvolvedFellowUid = 'data___involved_fellows___involved_fellow___uid',
   DataInvolvedFellowsInvolvedFellowRaw = 'data___involved_fellows___involved_fellow___raw',
+  DataInvolvedFellowsLabelHtml = 'data___involved_fellows___label___html',
+  DataInvolvedFellowsLabelText = 'data___involved_fellows___label___text',
+  DataInvolvedFellowsLabelRaw = 'data___involved_fellows___label___raw',
   DataFeaturedImageAlt = 'data___featured_image___alt',
   DataFeaturedImageCopyright = 'data___featured_image___copyright',
   DataFeaturedImageDimensionsWidth = 'data___featured_image___dimensions___width',
@@ -11871,10 +11874,12 @@ export type PrismicProjectGroupConnection = {
 
 export type PrismicProjectInvolvedFellowsGroupType = {
   involved_fellow?: Maybe<PrismicLinkType>;
+  label?: Maybe<PrismicStructuredTextType>;
 };
 
 export type PrismicProjectInvolvedFellowsGroupTypeFilterInput = {
   involved_fellow?: Maybe<PrismicLinkTypeFilterInput>;
+  label?: Maybe<PrismicStructuredTextTypeFilterInput>;
 };
 
 export type PrismicProjectInvolvedFellowsGroupTypeFilterListInput = {
@@ -14151,10 +14156,6 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsCacheDigest = 'pluginCreator___pluginOptions___cacheDigest',
   PluginCreatorPluginOptionsTypekitId = 'pluginCreator___pluginOptions___typekit___id',
   PluginCreatorPluginOptionsGoogleFamilies = 'pluginCreator___pluginOptions___google___families',
-  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
-  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
-  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
-  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorPluginOptionsEngine = 'pluginCreator___pluginOptions___engine',
   PluginCreatorPluginOptionsQuery = 'pluginCreator___pluginOptions___query',
   PluginCreatorPluginOptionsRef = 'pluginCreator___pluginOptions___ref',
@@ -14171,6 +14172,10 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsAllExtensions = 'pluginCreator___pluginOptions___allExtensions',
   PluginCreatorPluginOptionsIsTsx = 'pluginCreator___pluginOptions___isTSX',
   PluginCreatorPluginOptionsJsxPragma = 'pluginCreator___pluginOptions___jsxPragma',
+  PluginCreatorPluginOptionsRepositoryName = 'pluginCreator___pluginOptions___repositoryName',
+  PluginCreatorPluginOptionsAccessToken = 'pluginCreator___pluginOptions___accessToken',
+  PluginCreatorPluginOptionsFetchLinks = 'pluginCreator___pluginOptions___fetchLinks',
+  PluginCreatorPluginOptionsPrismicToolbar = 'pluginCreator___pluginOptions___prismicToolbar',
   PluginCreatorNodeApIs = 'pluginCreator___nodeAPIs',
   PluginCreatorBrowserApIs = 'pluginCreator___browserAPIs',
   PluginCreatorSsrApIs = 'pluginCreator___ssrAPIs',
@@ -14375,10 +14380,6 @@ export enum SitePluginFieldsEnum {
   PluginOptionsCacheDigest = 'pluginOptions___cacheDigest',
   PluginOptionsTypekitId = 'pluginOptions___typekit___id',
   PluginOptionsGoogleFamilies = 'pluginOptions___google___families',
-  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
-  PluginOptionsAccessToken = 'pluginOptions___accessToken',
-  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
-  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   PluginOptionsEngine = 'pluginOptions___engine',
   PluginOptionsQuery = 'pluginOptions___query',
   PluginOptionsRef = 'pluginOptions___ref',
@@ -14395,6 +14396,10 @@ export enum SitePluginFieldsEnum {
   PluginOptionsAllExtensions = 'pluginOptions___allExtensions',
   PluginOptionsIsTsx = 'pluginOptions___isTSX',
   PluginOptionsJsxPragma = 'pluginOptions___jsxPragma',
+  PluginOptionsRepositoryName = 'pluginOptions___repositoryName',
+  PluginOptionsAccessToken = 'pluginOptions___accessToken',
+  PluginOptionsFetchLinks = 'pluginOptions___fetchLinks',
+  PluginOptionsPrismicToolbar = 'pluginOptions___prismicToolbar',
   NodeApIs = 'nodeAPIs',
   BrowserApIs = 'browserAPIs',
   SsrApIs = 'ssrAPIs',
@@ -14525,11 +14530,6 @@ export type SitePluginPluginOptions = {
   cacheDigest?: Maybe<Scalars['String']>;
   typekit?: Maybe<SitePluginPluginOptionsTypekit>;
   google?: Maybe<SitePluginPluginOptionsGoogle>;
-  repositoryName?: Maybe<Scalars['String']>;
-  accessToken?: Maybe<Scalars['String']>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
-  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
-  prismicToolbar?: Maybe<Scalars['Boolean']>;
   engine?: Maybe<Scalars['String']>;
   query?: Maybe<Scalars['String']>;
   ref?: Maybe<Scalars['String']>;
@@ -14543,6 +14543,11 @@ export type SitePluginPluginOptions = {
   allExtensions?: Maybe<Scalars['Boolean']>;
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
+  repositoryName?: Maybe<Scalars['String']>;
+  accessToken?: Maybe<Scalars['String']>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemas>;
+  fetchLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
+  prismicToolbar?: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsFeeds = {
@@ -14579,11 +14584,6 @@ export type SitePluginPluginOptionsFilterInput = {
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   typekit?: Maybe<SitePluginPluginOptionsTypekitFilterInput>;
   google?: Maybe<SitePluginPluginOptionsGoogleFilterInput>;
-  repositoryName?: Maybe<StringQueryOperatorInput>;
-  accessToken?: Maybe<StringQueryOperatorInput>;
-  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
-  fetchLinks?: Maybe<StringQueryOperatorInput>;
-  prismicToolbar?: Maybe<BooleanQueryOperatorInput>;
   engine?: Maybe<StringQueryOperatorInput>;
   query?: Maybe<StringQueryOperatorInput>;
   ref?: Maybe<StringQueryOperatorInput>;
@@ -14597,6 +14597,11 @@ export type SitePluginPluginOptionsFilterInput = {
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
+  repositoryName?: Maybe<StringQueryOperatorInput>;
+  accessToken?: Maybe<StringQueryOperatorInput>;
+  schemas?: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
+  fetchLinks?: Maybe<StringQueryOperatorInput>;
+  prismicToolbar?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsGoogle = {
@@ -18711,10 +18716,12 @@ export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfig = {
 
 export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFields = {
   involved_fellow?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_Fellow>;
+  label?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsLabel>;
 };
 
 export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsFilterInput = {
   involved_fellow?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowFilterInput>;
+  label?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsLabelFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_Fellow = {
@@ -18739,6 +18746,28 @@ export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigField
 export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowFilterInput = {
   type?: Maybe<StringQueryOperatorInput>;
   config?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsInvolved_FellowConfigFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsLabel = {
+  type?: Maybe<Scalars['String']>;
+  config?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsLabelConfig>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsLabelConfig = {
+  single?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  placeholder?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsLabelConfigFilterInput = {
+  single?: Maybe<StringQueryOperatorInput>;
+  label?: Maybe<StringQueryOperatorInput>;
+  placeholder?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsLabelFilterInput = {
+  type?: Maybe<StringQueryOperatorInput>;
+  config?: Maybe<SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFieldsLabelConfigFilterInput>;
 };
 
 export type SitePluginPluginOptionsSchemasProjectMainInvolved_FellowsConfigFilterInput = {
@@ -20030,7 +20059,7 @@ export type ProjectTemplateQueryVariables = Exact<{
 
 export type ProjectTemplateQuery = { prismicProject?: Maybe<(
     Pick<PrismicProject, '_previewable' | 'uid'>
-    & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, website_url?: Maybe<Pick<PrismicLinkType, 'url'>>, involved_fellows?: Maybe<Array<Maybe<{ involved_fellow?: Maybe<{ document?: Maybe<(
+    & { data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, description?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, website_url?: Maybe<Pick<PrismicLinkType, 'url'>>, involved_fellows?: Maybe<Array<Maybe<{ label?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, involved_fellow?: Maybe<{ document?: Maybe<(
             Pick<PrismicFellow, 'uid' | 'url'>
             & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, cohort?: Maybe<{ document?: Maybe<{ data?: Maybe<{ title?: Maybe<Pick<PrismicStructuredTextType, 'text'>> }> }> }>, portrait?: Maybe<(
                 Pick<PrismicImageType, 'alt'>
