@@ -75,6 +75,7 @@ export const theme = createCalicoTheme(
         medium: '48rem',
         large: '64rem',
         xlarge: '75rem',
+        '7rem': '7rem',
         '15rem': '15rem',
         '20rem': '20rem',
         '30rem': '30rem',

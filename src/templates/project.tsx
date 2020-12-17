@@ -25,6 +25,7 @@ import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { BackButton } from '../components/BackButton'
 
 import { ProjectBodyText } from '../slices/ProjectBodyText'
+import { LinkCollection } from '../components/LinkCollection'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -107,6 +108,9 @@ export const ProjectTemplate = ({
   const project = data?.prismicProject
   const projectTitle = project?.data?.title?.text
   const projectWebsiteHref = project?.data?.website_url?.url
+  const projectInvolvedFellows = project?.data?.involved_fellows?.map?.(
+    (item) => item?.involved_fellow?.document,
+  )
 
   const projectCategories =
     project?.data?.project_categories?.map?.(
@@ -204,8 +208,32 @@ export const ProjectTemplate = ({
           ) : (
             <ProjectBodyText
               textHTML={getRichText(project?.data?.description)}
-              nextSharesBg={false}
+              nextSharesBg={Boolean(undefIfEmpty(projectInvolvedFellows))}
             />
+          )}
+          {projectInvolvedFellows && undefIfEmpty(projectInvolvedFellows) && (
+            <BoundedBox>
+              <Box styles={{ display: 'grid', gap: [4, 6] }}>
+                <Text variant="sans-16-bold-caps" styles={{ color: 'gray20' }}>
+                  Involved Fellows
+                </Text>
+                <LinkCollection styles={{ padding: [5, 8] }}>
+                  {projectInvolvedFellows.map((fellow) => (
+                    <LinkCollection.Link
+                      key={fellow?.uid}
+                      variant="small"
+                      name={fellow?.data?.name?.text}
+                      description={
+                        fellow?.data?.cohort?.document?.data?.title?.text
+                      }
+                      href={fellow?.url}
+                      thumbnailFluid={fellow?.data?.portrait?.fluid}
+                      thumbnailAlt={fellow?.data?.portrait?.alt}
+                    />
+                  ))}
+                </LinkCollection>
+              </Box>
+            </BoundedBox>
           )}
           <BoundedBox styles={{ paddingTop: [6, 7, 8] }}>
             {nextProject && nextProject.url && (
@@ -253,6 +281,38 @@ export const query = graphql`
         }
         website_url {
           url
+        }
+        involved_fellows {
+          involved_fellow {
+            document {
+              ... on PrismicFellow {
+                uid
+                url
+                data {
+                  name {
+                    text
+                  }
+                  cohort {
+                    document {
+                      ... on PrismicCohort {
+                        data {
+                          title {
+                            text
+                          }
+                        }
+                      }
+                    }
+                  }
+                  portrait {
+                    alt
+                    fluid(maxWidth: 300) {
+                      ...GatsbyPrismicImageFluid
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
         project_categories {
           project_category {
