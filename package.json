@@ -12,7 +12,7 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
     "codegen": "graphql-codegen --config graphql-codegen.yml",
     "storybook": "NODE_ENV=test start-storybook --quiet -s public -p 6006",
-    "build-storybook": "NODE_ENV=test yarn prestorybook && yarn build-storybook -s public",
+    "build-storybook": "NODE_ENV=test yarn prestorybook && build-storybook -s public",
     "prestorybook": "yarn _copy-static-queries",
     "_copy-static-queries": "cp -r ./public/page-data/sq/d ./public/static"
   },
