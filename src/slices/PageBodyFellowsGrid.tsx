@@ -22,9 +22,10 @@ import { useFellows } from '../hooks/useFellows'
 import { useCohorts } from '../hooks/useCohorts'
 
 import { BoundedBox } from '../components/BoundedBox'
-import { Text } from '../components/Text'
 import { HTMLContent } from '../components/HTMLContent'
 import { Icon } from '../components/Icon'
+import { Inline } from '../components/Inline'
+import { Text } from '../components/Text'
 
 import * as styleRefs from './PageBodyFellowsGrid.treat'
 
@@ -130,7 +131,8 @@ const FellowsGridTab = ({ index, children }: FellowsGridTabProps) => {
   return (
     <Box
       styles={{
-        paddingBottom: 2.5,
+        paddingTop: 0.5,
+        paddingBottom: 2,
         borderWidth: 'none',
         borderBottomWidth: '3px',
         borderColor: isSelected ? 'orange55' : 'transparent',
@@ -155,12 +157,54 @@ const FellowsGridTab = ({ index, children }: FellowsGridTabProps) => {
   )
 }
 
+type FellowsGridSecondaryTabProps = {
+  index: number
+  children?: React.ReactNode
+}
+
+const FellowsGridSecondaryTab = ({
+  index,
+  children,
+}: FellowsGridSecondaryTabProps) => {
+  const { selectedIndex } = useTabsContext()
+  const isSelected = index === selectedIndex
+
+  return (
+    <Box
+      styles={{
+        paddingTop: 0.5,
+        paddingBottom: 2,
+        borderWidth: 'none',
+        borderBottomWidth: '3px',
+        borderColor: isSelected ? 'orange55' : 'transparent',
+        borderStyle: 'solid',
+        transitionProperty: 'colorAndBorderColor',
+        transitionDuration: 'normal',
+        transitionTimingFunction: 'easeOut',
+        color: isSelected ? 'gray10' : 'gray40',
+      }}
+      focusStyles={{ color: isSelected ? undefined : 'gray10' }}
+      hoverStyles={{ color: isSelected ? undefined : 'gray10' }}
+    >
+      <Text
+        variant="sans-12-caps"
+        styles={{
+          fontWeight: isSelected ? 'bold' : 'normal',
+        }}
+      >
+        {children}
+      </Text>
+    </Box>
+  )
+}
+
 export type PageBodyFellowsGridProps = Partial<
   ReturnType<typeof mapDataToProps>
 > &
   PageTemplateEnhancerProps
 
 export const PageBodyFellowsGrid = ({
+  defaultCohortNumber,
   defaultModalFellowUID,
   nextSharesBg,
 }: PageBodyFellowsGridProps) => {
@@ -172,6 +216,17 @@ export const PageBodyFellowsGrid = ({
   const fellowsOfLatestCohort = latestCohort.uid
     ? fellowsByCohort[latestCohort.uid] ?? []
     : []
+
+  const defaultCohortIndex = defaultCohortNumber
+    ? cohorts.findIndex(
+        (cohort) => cohort?.number?.toString() === defaultCohortNumber,
+      )
+    : -1
+  const defaultCohortTabIndex =
+    defaultCohortIndex === -1 ? 0 : defaultCohortIndex + 2
+  const [cohortTabIndex, setCohortTabIndex] = React.useState(
+    defaultCohortTabIndex,
+  )
 
   const [modalFellowUID, setModalFellowUID] = React.useState(
     defaultModalFellowUID,
@@ -309,24 +364,45 @@ export const PageBodyFellowsGrid = ({
           </Box>
         </Box>
       </Box>
-      <Tabs>
+      <Tabs
+        index={cohortTabIndex}
+        onChange={(index) => setCohortTabIndex(index)}
+      >
         <Box
           as={TabList}
           styles={{
             display: 'grid',
-            gap: [4, 6],
-            gridAutoFlow: ['row', 'column'],
+            gap: [2, 5],
             justifyItems: 'center',
             justifyContent: 'center',
-            marginBottom: [4, 6],
+            marginBottom: [4, 8],
           }}
         >
-          <Tab>
-            <FellowsGridTab index={0}>Current Cohort</FellowsGridTab>
-          </Tab>
-          <Tab>
-            <FellowsGridTab index={1}>Forum of Fellows</FellowsGridTab>
-          </Tab>
+          <Box
+            styles={{
+              display: 'grid',
+              gap: [3, 6],
+              gridAutoFlow: ['row', 'column'],
+              justifyItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Tab>
+              <FellowsGridTab index={0}>Current Cohort</FellowsGridTab>
+            </Tab>
+            <Tab>
+              <FellowsGridTab index={1}>Forum of Fellows</FellowsGridTab>
+            </Tab>
+          </Box>
+          <Inline space={[3.5, 4]} spaceY={0.5} align="center">
+            {cohorts.map((cohort, i) => (
+              <Tab key={cohort.uid}>
+                <FellowsGridSecondaryTab index={i + 2}>
+                  {cohort.title}
+                </FellowsGridSecondaryTab>
+              </Tab>
+            ))}
+          </Inline>
         </Box>
         <TabPanels>
           <TabPanel>
@@ -361,6 +437,27 @@ export const PageBodyFellowsGrid = ({
               ))}
             </FellowsGrid>
           </TabPanel>
+          {cohorts.map(
+            (cohort) =>
+              cohort.uid && (
+                <TabPanel key={cohort.uid}>
+                  <FellowsGrid>
+                    {fellowsByCohort[cohort.uid].map((fellow) => (
+                      <Fellow
+                        key={fellow.uid}
+                        name={fellow.name}
+                        cohortTitle={fellow.cohortTitle}
+                        portraitFluid={fellow.portraitFluid}
+                        portraitAlt={fellow.portraitAlt}
+                        openFellowModal={() =>
+                          fellow.uid && openFellowModal(fellow.uid)
+                        }
+                      />
+                    ))}
+                  </FellowsGrid>
+                </TabPanel>
+              ),
+          )}
         </TabPanels>
       </Tabs>
     </BoundedBox>
@@ -370,6 +467,12 @@ export const PageBodyFellowsGrid = ({
 export const mapDataToProps = ({
   meta,
 }: MapDataToPropsArgs<undefined, typeof mapDataToContext>) => ({
+  defaultCohortNumber: meta?.location
+    ? String(
+        querystring.decode(meta?.location.search.replace(/^\?/, '')).cohort ??
+          '',
+      ) || undefined
+    : undefined,
   defaultModalFellowUID: meta?.location
     ? String(
         querystring.decode(meta?.location.search.replace(/^\?/, '')).fellow ??
