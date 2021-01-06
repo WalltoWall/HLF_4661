@@ -185,13 +185,6 @@
               }
             }
           }
-          ... on PrismicPageBodyImages {
-            items {
-              caption {
-                text
-              }
-            }
-          }
           ... on PrismicPageBodyHeroImage {
             primary {
               text {
