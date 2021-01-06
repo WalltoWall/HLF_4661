@@ -217,16 +217,20 @@ export const PageBodyFellowsGrid = ({
     ? fellowsByCohort[latestCohort.uid] ?? []
     : []
 
-  const defaultCohortIndex = defaultCohortNumber
-    ? cohorts.findIndex(
-        (cohort) => cohort?.number?.toString() === defaultCohortNumber,
-      )
-    : -1
-  const defaultCohortTabIndex =
-    defaultCohortIndex === -1 ? 0 : defaultCohortIndex + 2
-  const [cohortTabIndex, setCohortTabIndex] = React.useState(
-    defaultCohortTabIndex,
-  )
+  const [cohortTabIndex, setCohortTabIndex] = React.useState(0)
+  // Need to set the default cohort tab index in a useEffect to fix a
+  // rehydration bug where the selected tab index remains at 0
+  React.useEffect(() => {
+    const defaultCohortIndex = defaultCohortNumber
+      ? cohorts.findIndex(
+          (cohort) => cohort?.number?.toString() === defaultCohortNumber,
+        )
+      : -1
+    const defaultCohortTabIndex =
+      defaultCohortIndex === -1 ? 0 : defaultCohortIndex + 2
+
+    if (defaultCohortTabIndex) setCohortTabIndex(defaultCohortTabIndex)
+  }, [cohorts, defaultCohortNumber])
 
   const [modalFellowUID, setModalFellowUID] = React.useState(
     defaultModalFellowUID,
