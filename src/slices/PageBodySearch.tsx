@@ -40,7 +40,7 @@ const resultTypeToButtonText = {
   page: 'View Page',
   interior_page: 'View Page',
   project: 'View Project',
-  news_post: 'Read Article',
+  news_post: 'Read More',
 }
 
 export type PageLayoutSearchResultsProps = Partial<
