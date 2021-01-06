@@ -1,6 +1,13 @@
 const path = require('path')
 
 /**
+ * Pages with these UIDs will not be created via `createPage` in the
+ * `createPages` Node API. These pages typically are handled manually in
+ * `src/pages`.
+ */
+const CREATE_PAGE_UID_SKIPS = [/^404$/, /^preview$/, /^search$/]
+
+/**
  * Number of news posts to display on each paginated news posts listing page.
  */
 const NEWS_POSTS_PER_PAGE = 6
@@ -37,11 +44,16 @@ exports.createPages = (gatsbyContext) => {
       continue
     }
 
-    createPage({
-      path: page.url,
-      component: path.resolve(__dirname, 'src/templates/page.tsx'),
-      context: { uid: page.uid },
-    })
+    const shouldSkip = CREATE_PAGE_UID_SKIPS.some((pattern) =>
+      pattern.test(page.uid),
+    )
+    if (!shouldSkip) {
+      createPage({
+        path: page.url,
+        component: path.resolve(__dirname, 'src/templates/page.tsx'),
+        context: { uid: page.uid },
+      })
+    }
   }
 
   /**
