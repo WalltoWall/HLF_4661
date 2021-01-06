@@ -32,7 +32,10 @@
       "type": "Link",
       "config": {
         "select": "document",
-        "customtypes": ["page", "interior_page"],
+        "customtypes": [
+          "page",
+          "interior_page"
+        ],
         "label": "Parent",
         "placeholder": "Optional - Parent of the page"
       }
@@ -92,34 +95,6 @@
               }
             },
             "repeat": {}
-          },
-          "images": {
-            "type": "Slice",
-            "fieldset": "Images",
-            "description": "One or more images with optional captions",
-            "icon": "burst_mode",
-            "display": "grid",
-            "non-repeat": {},
-            "repeat": {
-              "image": {
-                "type": "Image",
-                "config": {
-                  "constraint": {
-                    "width": 2000
-                  },
-                  "thumbnails": [],
-                  "label": "Image"
-                }
-              },
-              "caption": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Caption",
-                  "placeholder": "Optional - Caption below image"
-                }
-              }
-            }
           },
           "anchor": {
             "type": "Slice",
@@ -439,7 +414,7 @@
               "text": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, heading3",
+                  "multi": "paragraph, heading1",
                   "label": "Text",
                   "placeholder": "Text displayed over the background image"
                 }
