@@ -205,7 +205,7 @@ export const NewsTemplate = ({
                       }
                       featuredImageFluid={newsPost.data?.featured_image?.fluid}
                       featuredImageAlt={newsPost.data?.featured_image?.alt}
-                      buttonText="Read Article"
+                      buttonText="Read More"
                     />
                   )
                 )
