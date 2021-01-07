@@ -20,6 +20,13 @@ const variants = {
     headingMarginBottom: [8, 9, 10],
     minHeight: ['10rem', '18rem'],
   },
+  reducedHeight: {
+    boundedBoxVariant: 'wide',
+    h1Variant: 'sans-32-60-caps',
+    pVariant: 'serif-16-18',
+    headingMarginBottom: [8, 9, 10],
+    minHeight: ['7rem', '10rem'],
+  },
   small: {
     boundedBoxVariant: undefined,
     h1Variant: 'sans-18-bold-caps',
