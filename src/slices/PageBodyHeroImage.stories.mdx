@@ -12,6 +12,10 @@ export const textHTML = `
   <p>${faker.lorem.sentences(2)}</p>
 `
 
+export const shortTextHTML = `
+  <h1>${titleize(faker.lorem.words(3))}</h1>
+`
+
 export const backgroundImage = buildImgixFluid({
   url: 'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
   sourceWidth: 1024,
@@ -51,6 +55,27 @@ The background image is placed behind the text.
     <PageBodyHeroImage
       nextSharesBg={false}
       textHTML={textHTML}
+      buttonHref="#"
+      backgroundImageFluid={backgroundImage}
+    />
+  </Story>
+</Canvas>
+
+### With reduced height
+
+If the "Reduced height" variant is selected, the Slice's height is reduced. The
+reduced height matches Interior Page's Hero Image slice. All fields can still
+be used, including small descriptive text and an optional button.
+
+**Note**: The slice may increase in height if the text cannot fit within the
+reduced height.
+
+<Canvas withSource="none">
+  <Story name="With reduced height">
+    <PageBodyHeroImage
+      variant="Reduced height"
+      nextSharesBg={false}
+      textHTML={shortTextHTML}
       buttonHref="#"
       backgroundImageFluid={backgroundImage}
     />
