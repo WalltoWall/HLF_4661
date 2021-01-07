@@ -117,6 +117,15 @@
             "icon": "photo_size_select_actual",
             "display": "list",
             "non-repeat": {
+              "variant": {
+                "type": "Select",
+                "config": {
+                  "options": ["Normal", "Reduced height"],
+                  "default_value": "Normal",
+                  "label": "Variant",
+                  "placeholder": "Variation for the slice that may alter its appearance"
+                }
+              },
               "text": {
                 "type": "StructuredText",
                 "config": {

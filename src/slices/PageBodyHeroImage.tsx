@@ -16,7 +16,17 @@ import { useCommonStyles } from '../hooks/useCommonStyles'
 export type PageBodyHeroImageProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
 
+const variants = {
+  Normal: {
+    imageWithTextOverlayVariant: undefined,
+  },
+  'Reduced height': {
+    imageWithTextOverlayVariant: 'reducedHeight',
+  },
+} as const
+
 export const PageBodyHeroImage = ({
+  variant: variantName = 'Normal',
   textHTML,
   buttonText = 'Learn More',
   buttonHref,
@@ -25,6 +35,7 @@ export const PageBodyHeroImage = ({
   id,
 }: PageBodyHeroImageProps) => {
   const commonStyles = useCommonStyles()
+  const variant = variants[variantName]
 
   return (
     <Box
@@ -37,6 +48,7 @@ export const PageBodyHeroImage = ({
       }}
     >
       <ImageWithTextOverlay
+        variant={variant.imageWithTextOverlayVariant}
         textHTML={textHTML}
         buttonHref={buttonHref}
         buttonText={buttonText}
@@ -51,6 +63,9 @@ export const PageBodyHeroImage = ({
 export const mapDataToProps = ({
   data,
 }: MapDataToPropsArgs<PageBodyHeroImageFragment, typeof mapDataToContext>) => ({
+  variant: undefIfEmpty(data.primary?.variant) as
+    | keyof typeof variants
+    | undefined,
   textHTML: getRichText(data.primary?.text),
   buttonText: undefIfEmpty(data.primary?.button_text?.text),
   buttonHref: data.primary?.button_link?.url,
@@ -71,6 +86,7 @@ export const mapDataToContext = ({
 export const fragment = graphql`
   fragment PageBodyHeroImage on PrismicPageBodyHeroImage {
     primary {
+      variant
       text {
         text
         html

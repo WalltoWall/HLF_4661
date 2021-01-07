@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import GatsbyImage from 'gatsby-image'
 import { Box } from '@walltowall/calico'
-import { GatsbyImageContainer } from '@walltowall/siamese'
+import { getRichText } from '@walltowall/helpers'
 
 import { InteriorPageHeaderHeroImageFragment } from '../types.generated'
 import { PageTemplateEnhancerProps } from '../templates/page'
@@ -12,8 +11,7 @@ import {
 } from '../lib/mapSlicesToComponents'
 import { useCommonStyles } from '../hooks/useCommonStyles'
 
-import { BoundedBox } from '../components/BoundedBox'
-import { Text } from '../components/Text'
+import { ImageWithTextOverlay } from '../components/ImageWithTextOverlay'
 
 export type InteriorPageHeaderHeroImageProps = ReturnType<
   typeof mapDataToProps
@@ -21,61 +19,29 @@ export type InteriorPageHeaderHeroImageProps = ReturnType<
   PageTemplateEnhancerProps
 
 export const InteriorPageHeaderHeroImage = ({
-  heading,
+  headingHTML,
   backgroundImageFluid,
-  nextSharesBg,
+  id,
 }: InteriorPageHeaderHeroImageProps) => {
   const commonStyles = useCommonStyles()
 
   return (
-    <BoundedBox
+    <Box
       as="section"
-      nextSharesBg={nextSharesBg}
+      id={id}
       styles={{
-        backgroundColor: 'gray20',
-        color: 'white',
         maxWidth: 'xlarge',
         marginLeft: 'auto',
         marginRight: 'auto',
-        position: 'relative',
       }}
     >
-      {backgroundImageFluid && (
-        <Box
-          as={GatsbyImageContainer}
-          styles={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            pointerEvents: 'none',
-          }}
-        >
-          <GatsbyImage fluid={backgroundImageFluid} alt="" />
-        </Box>
-      )}
-      <Box
-        styles={{
-          height: 'full',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: ['7rem', '10rem'],
-        }}
-      >
-        {heading && (
-          <Text
-            as="p"
-            variant="sans-32-60-caps"
-            className={commonStyles.textShadow}
-            styles={{ position: 'relative', textAlign: 'center' }}
-          >
-            {heading}
-          </Text>
-        )}
-      </Box>
-    </BoundedBox>
+      <ImageWithTextOverlay
+        variant="reducedHeight"
+        textHTML={headingHTML}
+        imageFluid={backgroundImageFluid}
+        className={commonStyles.darkGrayGradientBackground}
+      />
+    </Box>
   )
 }
 
@@ -85,7 +51,7 @@ export const mapDataToProps = ({
   InteriorPageHeaderHeroImageFragment,
   typeof mapDataToContext
 >) => ({
-  heading: data.primary?.heading?.text,
+  headingHTML: getRichText(data.primary?.heading),
   backgroundImageFluid: data.primary?.background_image?.fluid,
 })
 
@@ -104,6 +70,7 @@ export const fragment = graphql`
     primary {
       heading {
         text
+        html
       }
       background_image {
         fluid(maxWidth: 1000) {
