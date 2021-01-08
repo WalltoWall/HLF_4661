@@ -17,6 +17,12 @@ const NEWS_POSTS_PER_PAGE = 6
  */
 const PROJECTS_PER_PAGE = 6
 
+/**
+ * Characters that represent ʻokinas. Used to remove ʻokina-like charaters to
+ * aid sorting.
+ */
+const OKINA_REGEX = /[ʻ‘]/
+
 exports.createPages = (gatsbyContext) => {
   const { actions, getNodesByType, reporter } = gatsbyContext
   const { createPage, createRedirect } = actions
@@ -332,4 +338,30 @@ exports.createPages = (gatsbyContext) => {
       })
     }
   }
+}
+
+exports.createSchemaCustomization = (gatsbyContext) => {
+  const { actions, schema } = gatsbyContext
+  const { createTypes } = actions
+
+  const PrismicProject = schema.buildObjectType({
+    name: 'PrismicProject',
+    fields: {
+      // "_ON_BUILD_ONLY_" prefix is used to emphasize that this field is only
+      // available when building the site via Node.js. Previewing draft content
+      // from Prismic using `gatsby-source-prismic` on the built site will not
+      // include these fields.
+      _ON_BUILD_ONLY_normalized_title: {
+        type: 'String',
+        description: 'Title field with accents and ʻokinas removed.',
+        resolve: async (source) =>
+          (source.data.title.text ?? '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(OKINA_REGEX, ''),
+      },
+    },
+  })
+
+  createTypes(PrismicProject)
 }
