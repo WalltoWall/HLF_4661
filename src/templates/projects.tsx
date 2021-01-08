@@ -246,7 +246,7 @@ export const query = graphql`
     }
 
     allPrismicProject(
-      sort: { fields: [data___title___text], order: ASC }
+      sort: { fields: [_ON_BUILD_ONLY_normalized_title], order: ASC }
       limit: $limit
       skip: $skip
     ) {
