@@ -22,10 +22,11 @@ module.exports = {
     'gatsby-plugin-svgr',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-treat',
-    process.env.GOOGLE_TAGMANAGER_ID && {
-      resolve: 'gatsby-plugin-google-tagmanager',
+    process.env.GOOGLE_ANALYTICS_TRACKING_ID && {
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
-        id: process.env.GOOGLE_TAGMANAGER_ID,
+        trackingIds: [process.env.GOOGLE_ANALYTICS_TRACKING_ID],
+        exclude: ['/preview/**', '/admin/**', '/docs/**'],
       },
     },
     {
