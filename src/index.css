@@ -73,3 +73,11 @@ button {
   left: 0;
   overflow: auto;
 }
+
+/**
+ * Fix issue where all slides are visible squished into the container before JS
+ * loads.
+ */
+.keen-slider__slide {
+  flex-shrink: 0;
+}
