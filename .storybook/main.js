@@ -13,6 +13,5 @@ module.exports = {
     path.resolve('./.storybook/preset-gatsby.js'),
     path.resolve('./.storybook/preset-svgr.js'),
     path.resolve('./.storybook/preset-treat.js'),
-    // path.resolve('./.storybook/preset-fp-ts.js'),
   ],
 }
