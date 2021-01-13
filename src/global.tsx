@@ -12,11 +12,6 @@
  * @see https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-import 'minireset.css'
-import '@reach/skip-nav/styles.css'
-import '@walltowall/siamese/dist/siamese.cjs.development.css'
-import 'keen-slider/keen-slider.min.css'
-
 import './index.css'
 
 import * as React from 'react'
