@@ -6,6 +6,11 @@
   * @see https://github.com/jgthms/minireset.css/
   */
 
+@import '~minireset.css';
+@import '~@reach/skip-nav/styles.css';
+@import '~@walltowall/siamese/dist/siamese.css';
+@import '~keen-slider/keen-slider.min.css';
+
 * {
   transition-duration: 200ms;
   transition-property: opacity;
@@ -51,23 +56,6 @@ select {
 
 button {
   cursor: pointer;
-}
-
-[data-system-aspect-ratio] {
-  position: relative;
-}
-[data-system-aspect-ratio-inner] {
-  display: flex;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-[data-system-gatsby-image-container] .gatsby-image-outer-wrapper,
-[data-system-gatsby-image-container] .gatsby-image-wrapper {
-  height: 100%;
 }
 
 /* Skip @reach styles */
