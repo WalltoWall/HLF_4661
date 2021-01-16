@@ -15,6 +15,7 @@ export const useFellows = () => {
       allPrismicFellow {
         nodes {
           uid
+          url
           data {
             name {
               text
@@ -57,6 +58,7 @@ export const useFellows = () => {
   return React.useMemo(() => {
     const fellows = queryData.allPrismicFellow.nodes.map((node) => ({
       uid: node.uid,
+      url: node.url,
       name: node.data?.name?.text,
       cohortUID: node.data?.cohort?.document?.uid,
       cohortTitle: node.data?.cohort?.document?.data?.title?.text,
