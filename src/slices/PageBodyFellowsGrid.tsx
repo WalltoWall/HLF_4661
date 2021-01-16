@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { navigate } from 'gatsby'
 import { useStyles } from 'react-treat'
 import GatsbyImage, { FluidObject } from 'gatsby-image'
 import { Box } from '@walltowall/calico'
@@ -28,6 +29,7 @@ import { Inline } from '../components/Inline'
 import { Text } from '../components/Text'
 
 import * as styleRefs from './PageBodyFellowsGrid.treat'
+import { Link } from '../components/Link'
 
 /**
  * Groups a list of records by their `cohortUID` field.
@@ -39,6 +41,7 @@ const groupByCohort = <A extends { cohortUID?: string }>(as: A[]) =>
   ])
 
 type FellowProps = {
+  href: string
   name?: string
   cohortTitle?: string
   portraitFluid?: FluidObject
@@ -47,6 +50,7 @@ type FellowProps = {
 }
 
 const Fellow = ({
+  href,
   name,
   cohortTitle,
   portraitFluid,
@@ -54,51 +58,51 @@ const Fellow = ({
   openFellowModal,
 }: FellowProps) => (
   <Box as="li">
-    <Box
-      as="button"
-      onClick={openFellowModal}
-      styles={{
-        display: 'block',
-        width: 'full',
-        backgroundColor: 'white',
-        padding: 3,
-        paddingBottom: 5,
-      }}
-    >
+    <Link href={href} onClick={openFellowModal}>
       <Box
-        as={AspectRatio}
-        x={190}
-        y={230}
-        styles={{ backgroundColor: 'gray95', marginBottom: 3.5 }}
+        styles={{
+          display: 'block',
+          width: 'full',
+          backgroundColor: 'white',
+          padding: 3,
+          paddingBottom: 5,
+        }}
       >
-        {portraitFluid && (
-          <Box
-            as={GatsbyImage}
-            fluid={portraitFluid}
-            alt={portraitAlt ?? name ? `Photo of ${name}` : undefined}
-            styles={{ height: 'full', width: 'full' }}
-          />
-        )}
+        <Box
+          as={AspectRatio}
+          x={190}
+          y={230}
+          styles={{ backgroundColor: 'gray95', marginBottom: 3.5 }}
+        >
+          {portraitFluid && (
+            <Box
+              as={GatsbyImage}
+              fluid={portraitFluid}
+              alt={portraitAlt ?? name ? `Photo of ${name}` : undefined}
+              styles={{ height: 'full', width: 'full' }}
+            />
+          )}
+        </Box>
+        <Box styles={{ display: 'grid', gap: 2 }}>
+          {name && (
+            <Text
+              variant="sans-12-caps"
+              styles={{ color: 'gray10', fontWeight: 'bold' }}
+            >
+              {name}
+            </Text>
+          )}
+          {cohortTitle && (
+            <Text
+              variant="sans-12"
+              styles={{ color: 'gray40', fontWeight: 'bold' }}
+            >
+              {cohortTitle}
+            </Text>
+          )}
+        </Box>
       </Box>
-      <Box styles={{ display: 'grid', gap: 2 }}>
-        {name && (
-          <Text
-            variant="sans-12-caps"
-            styles={{ color: 'gray10', fontWeight: 'bold' }}
-          >
-            {name}
-          </Text>
-        )}
-        {cohortTitle && (
-          <Text
-            variant="sans-12"
-            styles={{ color: 'gray40', fontWeight: 'bold' }}
-          >
-            {cohortTitle}
-          </Text>
-        )}
-      </Box>
-    </Box>
+    </Link>
   </Box>
 )
 
@@ -241,7 +245,10 @@ export const PageBodyFellowsGrid = ({
   )
   const isModalOpen = modalFellowUID !== undefined
   const openFellowModal = (fellowUID: string) => setModalFellowUID(fellowUID)
-  const closeFellowModal = () => setModalFellowUID(undefined)
+  const closeFellowModal = () => {
+    setModalFellowUID(undefined)
+    navigate('./')
+  }
 
   const styles = useStyles(styleRefs)
 
@@ -411,34 +418,42 @@ export const PageBodyFellowsGrid = ({
         <TabPanels>
           <TabPanel>
             <FellowsGrid>
-              {fellowsOfLatestCohort.map((fellow) => (
-                <Fellow
-                  key={fellow.uid}
-                  name={fellow.name}
-                  cohortTitle={fellow.cohortTitle}
-                  portraitFluid={fellow.portraitFluid}
-                  portraitAlt={fellow.portraitAlt}
-                  openFellowModal={() =>
-                    fellow.uid && openFellowModal(fellow.uid)
-                  }
-                />
-              ))}
+              {fellowsOfLatestCohort.map(
+                (fellow) =>
+                  fellow.url && (
+                    <Fellow
+                      key={fellow.uid}
+                      href={fellow.url}
+                      name={fellow.name}
+                      cohortTitle={fellow.cohortTitle}
+                      portraitFluid={fellow.portraitFluid}
+                      portraitAlt={fellow.portraitAlt}
+                      openFellowModal={() =>
+                        fellow.uid && openFellowModal(fellow.uid)
+                      }
+                    />
+                  ),
+              )}
             </FellowsGrid>
           </TabPanel>
           <TabPanel>
             <FellowsGrid>
-              {fellows.map((fellow) => (
-                <Fellow
-                  key={fellow.uid}
-                  name={fellow.name}
-                  cohortTitle={fellow.cohortTitle}
-                  portraitFluid={fellow.portraitFluid}
-                  portraitAlt={fellow.portraitAlt}
-                  openFellowModal={() =>
-                    fellow.uid && openFellowModal(fellow.uid)
-                  }
-                />
-              ))}
+              {fellows.map(
+                (fellow) =>
+                  fellow.url && (
+                    <Fellow
+                      key={fellow.uid}
+                      href={fellow.url}
+                      name={fellow.name}
+                      cohortTitle={fellow.cohortTitle}
+                      portraitFluid={fellow.portraitFluid}
+                      portraitAlt={fellow.portraitAlt}
+                      openFellowModal={() =>
+                        fellow.uid && openFellowModal(fellow.uid)
+                      }
+                    />
+                  ),
+              )}
             </FellowsGrid>
           </TabPanel>
           {cohorts.map(
@@ -446,18 +461,22 @@ export const PageBodyFellowsGrid = ({
               cohort.uid && (
                 <TabPanel key={cohort.uid}>
                   <FellowsGrid>
-                    {fellowsByCohort[cohort.uid].map((fellow) => (
-                      <Fellow
-                        key={fellow.uid}
-                        name={fellow.name}
-                        cohortTitle={fellow.cohortTitle}
-                        portraitFluid={fellow.portraitFluid}
-                        portraitAlt={fellow.portraitAlt}
-                        openFellowModal={() =>
-                          fellow.uid && openFellowModal(fellow.uid)
-                        }
-                      />
-                    ))}
+                    {fellowsByCohort[cohort.uid].map(
+                      (fellow) =>
+                        fellow.url && (
+                          <Fellow
+                            key={fellow.uid}
+                            href={fellow.url}
+                            name={fellow.name}
+                            cohortTitle={fellow.cohortTitle}
+                            portraitFluid={fellow.portraitFluid}
+                            portraitAlt={fellow.portraitAlt}
+                            openFellowModal={() =>
+                              fellow.uid && openFellowModal(fellow.uid)
+                            }
+                          />
+                        ),
+                    )}
                   </FellowsGrid>
                 </TabPanel>
               ),

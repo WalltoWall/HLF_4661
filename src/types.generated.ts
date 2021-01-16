@@ -9838,6 +9838,8 @@ export type PrismicProject = PrismicDocument & Node & {
   prismicId: Scalars['ID'];
   _previewable: Scalars['ID'];
   uid?: Maybe<Scalars['String']>;
+  /** Title field with accents and ʻokinas removed. */
+  _ON_BUILD_ONLY_normalized_title?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -11533,6 +11535,7 @@ export enum PrismicProjectFieldsEnum {
   PrismicId = 'prismicId',
   Previewable = '_previewable',
   Uid = 'uid',
+  OnBuildOnlyNormalizedTitle = '_ON_BUILD_ONLY_normalized_title',
   Id = 'id',
   ParentId = 'parent___id',
   ParentParentId = 'parent___parent___id',
@@ -11636,6 +11639,7 @@ export type PrismicProjectFilterInput = {
   prismicId?: Maybe<IdQueryOperatorInput>;
   _previewable?: Maybe<IdQueryOperatorInput>;
   uid?: Maybe<StringQueryOperatorInput>;
+  _ON_BUILD_ONLY_normalized_title?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -13229,6 +13233,7 @@ export type QueryPrismicProjectArgs = {
   prismicId?: Maybe<IdQueryOperatorInput>;
   _previewable?: Maybe<IdQueryOperatorInput>;
   uid?: Maybe<StringQueryOperatorInput>;
+  _ON_BUILD_ONLY_normalized_title?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -19079,7 +19084,7 @@ export type UseFellowsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type UseFellowsQuery = { allPrismicFellow: { nodes: Array<(
-      Pick<PrismicFellow, 'uid'>
+      Pick<PrismicFellow, 'uid' | 'url'>
       & { data?: Maybe<{ name?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, cohort?: Maybe<{ document?: Maybe<(
             Pick<PrismicCohort, 'uid'>
             & { data?: Maybe<(
@@ -19338,7 +19343,7 @@ export type InteriorPageBodyVideoFragment = { primary?: Maybe<{ video?: Maybe<Pi
 
 export type SlicesInteriorPageHeaderFragment = InteriorPageHeaderHeroImageFragment;
 
-export type InteriorPageHeaderHeroImageFragment = { primary?: Maybe<{ heading?: Maybe<Pick<PrismicStructuredTextType, 'text'>>, background_image?: Maybe<{ fluid?: Maybe<GatsbyPrismicImageFluidFragment> }> }> };
+export type InteriorPageHeaderHeroImageFragment = { primary?: Maybe<{ heading?: Maybe<Pick<PrismicStructuredTextType, 'text' | 'html'>>, background_image?: Maybe<{ fluid?: Maybe<GatsbyPrismicImageFluidFragment> }> }> };
 
 type SlicesNewsPostBody_PrismicNewsPostBodyTextIntro_Fragment = NewsPostBodyTextIntroFragment;
 
