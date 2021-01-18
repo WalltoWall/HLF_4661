@@ -227,9 +227,15 @@ export const PageBodyFellowsGrid = ({
     setCohortTabIndex(index)
 
     const cohort = cohorts[index - 2]
-    if (location && cohort && cohort.number) {
+    if (location) {
       const url = new URL(location.href)
-      url.searchParams.set('cohort', cohort.number.toString())
+
+      if (cohort && cohort.number) {
+        url.searchParams.set('cohort', cohort.number.toString())
+      } else {
+        url.searchParams.delete('cohort')
+      }
+
       navigate(url.pathname + url.search)
     }
   }
