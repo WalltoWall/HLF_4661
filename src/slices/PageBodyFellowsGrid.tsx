@@ -211,6 +211,7 @@ export const PageBodyFellowsGrid = ({
   defaultCohortNumber,
   defaultModalFellowUID,
   nextSharesBg,
+  location,
 }: PageBodyFellowsGridProps) => {
   const cohorts = useCohorts()
   const latestCohort = cohorts[cohorts.length - 1]
@@ -222,6 +223,16 @@ export const PageBodyFellowsGrid = ({
     : []
 
   const [cohortTabIndex, setCohortTabIndex] = React.useState(0)
+  const changeCohortTabIndex = (index: number) => {
+    setCohortTabIndex(index)
+
+    const cohort = cohorts[index - 2]
+    if (location && cohort && cohort.number) {
+      const url = new URL(location.href)
+      url.searchParams.set('cohort', cohort.number.toString())
+      navigate(url.pathname + url.search)
+    }
+  }
   // Need to set the default cohort tab index in a useEffect to fix a
   // rehydration bug where the selected tab index remains at 0
   React.useEffect(() => {
@@ -247,7 +258,12 @@ export const PageBodyFellowsGrid = ({
   const openFellowModal = (fellowUID: string) => setModalFellowUID(fellowUID)
   const closeFellowModal = () => {
     setModalFellowUID(undefined)
-    navigate('./')
+
+    if (location) {
+      const url = new URL(location.href)
+      url.searchParams.delete('fellow')
+      navigate(url.pathname + url.search)
+    }
   }
 
   const styles = useStyles(styleRefs)
@@ -377,7 +393,7 @@ export const PageBodyFellowsGrid = ({
       </Box>
       <Tabs
         index={cohortTabIndex}
-        onChange={(index) => setCohortTabIndex(index)}
+        onChange={(index) => changeCohortTabIndex(index)}
       >
         <Box
           as={TabList}
@@ -502,6 +518,7 @@ export const mapDataToProps = ({
           '',
       ) || undefined
     : undefined,
+  location: meta?.location,
 })
 
 export const mapDataToContext = () => ({
