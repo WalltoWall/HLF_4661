@@ -1,5 +1,7 @@
 {
-  allPrismicNewsPost {
+  allPrismicNewsPost(
+    sort: { fields: [data___published_at, first_publication_date], order: DESC }
+  ) {
     nodes {
       id
       url
