@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { getRichText } from '@walltowall/helpers'
 
 import { UseFellowsQuery } from '../types.generated'
-import { removeFirstWord } from '../lib/removeFirstWord'
+import { moveFirstWordToEnd } from '../lib/moveFirstWordToEnd'
 
 /**
  * Returns a list of all fellows and their information. Fellows are sorted by
@@ -70,11 +70,10 @@ export const useFellows = () => {
       photoAlt: node.data?.photo?.alt,
     }))
 
-    // Fellows are sorted using their full name with the first word removed and
-    // ʻokina removed.
+    // Fellows are sorted last-name first with ʻokina removed.
     return fellows.sort((a, b) => {
-      const aName = a.name ? removeFirstWord(a.name).replace('ʻ', '') : ''
-      const bName = b.name ? removeFirstWord(b.name).replace('ʻ', '') : ''
+      const aName = a.name ? moveFirstWordToEnd(a.name).replace('ʻ', '') : ''
+      const bName = b.name ? moveFirstWordToEnd(b.name).replace('ʻ', '') : ''
 
       return Intl.Collator('en').compare(aName, bName)
     })
