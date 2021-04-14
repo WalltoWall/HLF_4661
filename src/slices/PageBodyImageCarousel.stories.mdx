@@ -45,8 +45,16 @@ export const images = [
 
 # Image Carousel
 
-Set of images or photos displayed in an interactive carousel with optional
+A set of images or photos displayed in an interactive carousel with optional
 captions.
+
+Images will be resized/scaled as necessary to fit within the Slice's dimensions.
+Its size is optimized for 4:3 images sor images of other aspect ratios will be
+scaled to fit within 4:3. In most cases, you can select any image without any
+additional cropping or resizing.
+
+Images will **not** be cropped to fit the Slice since doing so could
+inadvertantly remove critical portions of an image.
 
 #### Repeatable fields
 
