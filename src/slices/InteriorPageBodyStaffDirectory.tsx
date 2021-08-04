@@ -150,7 +150,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyStaffDirectory on PrismicInteriorPageBodyStaffDirectory {
+  fragment InteriorPageBodyStaffDirectory on PrismicInteriorPageDataBodyStaffDirectory {
     items {
       name {
         text

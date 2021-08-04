@@ -17,7 +17,7 @@ export const NewsPostBodyTextIntro = (props: NewsPostBodyTextIntroProps) => (
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment NewsPostBodyTextIntro on PrismicNewsPostBodyTextIntro {
+  fragment NewsPostBodyTextIntro on PrismicNewsPostDataBodyTextIntro {
     primary {
       introductory_text {
         text

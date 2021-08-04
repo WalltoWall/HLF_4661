@@ -28,9 +28,8 @@ export const InteriorPageBodyText = ({
       <HTMLContent
         html={textHTML}
         componentOverrides={{
-          h1: (Comp) => (props) => (
-            <Comp {...props} styles={{ color: 'gray20' }} />
-          ),
+          h1: (Comp) => (props) =>
+            <Comp {...props} styles={{ color: 'gray20' }} />,
         }}
         styles={{ color: 'gray40' }}
       />
@@ -52,7 +51,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyText on PrismicInteriorPageBodyText {
+  fragment InteriorPageBodyText on PrismicInteriorPageDataBodyText {
     primary {
       text {
         text

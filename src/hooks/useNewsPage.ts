@@ -19,7 +19,7 @@ export const useNewsPage = () => {
           meta_description
           body {
             __typename
-            ... on Node {
+            ... on PrismicSliceType {
               id
             }
             ...SlicesPageBody

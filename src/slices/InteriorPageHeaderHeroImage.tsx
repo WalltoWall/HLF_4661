@@ -66,7 +66,7 @@ export const mapDataToContext = ({
 }
 
 export const fragment = graphql`
-  fragment InteriorPageHeaderHeroImage on PrismicInteriorPageHeaderHeroImage {
+  fragment InteriorPageHeaderHeroImage on PrismicInteriorPageDataHeaderHeroImage {
     primary {
       heading {
         text

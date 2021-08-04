@@ -17,7 +17,7 @@ export const ProjectBodyTextIntro = (props: ProjectBodyTextIntroProps) => (
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment ProjectBodyTextIntro on PrismicProjectBodyTextIntro {
+  fragment ProjectBodyTextIntro on PrismicProjectDataBodyTextIntro {
     primary {
       introductory_text {
         text

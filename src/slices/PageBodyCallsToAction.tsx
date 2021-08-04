@@ -90,7 +90,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyCallsToAction on PrismicPageBodyCallsToAction {
+  fragment PageBodyCallsToAction on PrismicPageDataBodyCallsToAction {
     items {
       label {
         text

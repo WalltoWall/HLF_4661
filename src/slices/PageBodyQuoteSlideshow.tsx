@@ -191,7 +191,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyQuoteSlideshow on PrismicPageBodyQuoteSlideshow {
+  fragment PageBodyQuoteSlideshow on PrismicPageDataBodyQuoteSlideshow {
     items {
       quote {
         text

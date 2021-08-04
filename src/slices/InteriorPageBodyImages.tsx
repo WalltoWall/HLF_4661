@@ -90,7 +90,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyImages on PrismicInteriorPageBodyImages {
+  fragment InteriorPageBodyImages on PrismicInteriorPageDataBodyImages {
     items {
       image {
         alt

@@ -122,7 +122,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyHeadshotQuote on PrismicPageBodyHeadshotQuote {
+  fragment PageBodyHeadshotQuote on PrismicPageDataBodyHeadshotQuote {
     primary {
       quote {
         text

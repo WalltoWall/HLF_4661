@@ -66,7 +66,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyVideo on PrismicInteriorPageBodyVideo {
+  fragment InteriorPageBodyVideo on PrismicInteriorPageDataBodyVideo {
     primary {
       video {
         embed_url

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 import { Box } from '@walltowall/calico'
@@ -17,6 +17,7 @@ import { PickPartial } from '../types'
 
 import { Layout } from '../components/Layout'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
+import { linkResolver } from '../linkResolver'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -177,7 +178,12 @@ export const InteriorPageTemplate = ({
   )
 }
 
-export default withPreview(InteriorPageTemplate)
+export default withPrismicPreviewResolver(InteriorPageTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query InteriorPageTemplate($uid: String!) {
@@ -192,14 +198,14 @@ export const query = graphql`
         meta_description
         header {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesInteriorPageHeader
         }
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesInteriorPageBody

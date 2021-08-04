@@ -94,13 +94,14 @@ const Event = ({ descriptionHTML, dateHTML, index }: EventProps) => (
       <HTMLContent
         html={descriptionHTML}
         componentOverrides={{
-          p: (Comp) => (props) => (
-            <Comp
-              variant="serif-14-16"
-              {...props}
-              styles={{ ...props.styles, marginBottom: [4, 5, 6] }}
-            />
-          ),
+          p: (Comp) => (props) =>
+            (
+              <Comp
+                variant="serif-14-16"
+                {...props}
+                styles={{ ...props.styles, marginBottom: [4, 5, 6] }}
+              />
+            ),
         }}
       />
     </Box>
@@ -108,13 +109,14 @@ const Event = ({ descriptionHTML, dateHTML, index }: EventProps) => (
       <HTMLContent
         html={dateHTML}
         componentOverrides={{
-          p: (Comp) => (props) => (
-            <Comp
-              variant="serif-14-16"
-              {...props}
-              styles={{ ...props.styles, marginBottom: [4, 5, 6] }}
-            />
-          ),
+          p: (Comp) => (props) =>
+            (
+              <Comp
+                variant="serif-14-16"
+                {...props}
+                styles={{ ...props.styles, marginBottom: [4, 5, 6] }}
+              />
+            ),
         }}
       />
     </Box>
@@ -156,14 +158,14 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyCohortSchedule on PrismicInteriorPageBodyCohortSchedule {
+  fragment InteriorPageBodyCohortSchedule on PrismicInteriorPageDataBodyCohortSchedule {
     primary {
       cohort_schedule {
         document {
           ... on PrismicCohortSchedule {
             data {
               body {
-                ... on PrismicCohortScheduleBodySection {
+                ... on PrismicCohortScheduleDataBodySection {
                   primary {
                     description_heading {
                       text

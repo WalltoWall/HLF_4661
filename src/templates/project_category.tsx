@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { getRichText, propPairsEq } from '@walltowall/helpers'
 import { Box } from '@walltowall/calico'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
@@ -19,6 +19,8 @@ import { ContentCard } from '../components/ContentCard'
 import { ContentCardsList } from '../components/ContentCardsList'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { Text } from '../components/Text'
+
+import { linkResolver } from '../linkResolver'
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -227,7 +229,12 @@ export const ProjectCategoryTemplate = ({
   )
 }
 
-export default withPreview(ProjectCategoryTemplate)
+export default withPrismicPreviewResolver(ProjectCategoryTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query ProjectCategoryTemplate($uid: String!, $limit: Int!, $skip: Int!) {
@@ -242,7 +249,7 @@ export const query = graphql`
         meta_description
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesPageBody

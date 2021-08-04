@@ -31,7 +31,7 @@ const slices = {
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesProjectBody on PrismicProjectBodySlicesType {
+  fragment SlicesProjectBody on PrismicProjectDataBodySlicesType {
     ...ProjectBodyText
     ...ProjectBodyTextIntro
     ...ProjectBodyVideo
