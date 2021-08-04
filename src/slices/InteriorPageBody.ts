@@ -33,7 +33,7 @@ const slices = {
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesInteriorPageBody on PrismicInteriorPageBodySlicesType {
+  fragment SlicesInteriorPageBody on PrismicInteriorPageDataBodySlicesType {
     ...InteriorPageBodyText
     ...InteriorPageBodyTextIntro
     ...InteriorPageBodyVideo

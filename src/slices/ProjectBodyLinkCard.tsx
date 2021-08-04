@@ -17,7 +17,7 @@ export const ProjectBodyLinkCard = (props: ProjectBodyLinkCardProps) => (
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment ProjectBodyLinkCard on PrismicProjectBodyLinkCard {
+  fragment ProjectBodyLinkCard on PrismicProjectDataBodyLinkCard {
     primary {
       link_title {
         text

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { Box } from '@walltowall/calico'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
@@ -23,6 +23,7 @@ import { Divider } from '../components/Divider'
 import { ContentCard } from '../components/ContentCard'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { BackButton } from '../components/BackButton'
+import { linkResolver } from '../linkResolver'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -231,7 +232,12 @@ export const NewsPostTemplate = ({
   )
 }
 
-export default withPreview(NewsPostTemplate)
+export default withPrismicPreviewResolver(NewsPostTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query NewsPostTemplate($uid: String!, $nextUID: String, $prevUID: String) {
@@ -264,7 +270,7 @@ export const query = graphql`
         }
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesNewsPostBody

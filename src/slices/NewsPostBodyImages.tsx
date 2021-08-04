@@ -19,7 +19,7 @@ NewsPostBodyImages.Image = InteriorPageBodyImages.Image
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment NewsPostBodyImages on PrismicNewsPostBodyImages {
+  fragment NewsPostBodyImages on PrismicNewsPostDataBodyImages {
     items {
       image {
         alt

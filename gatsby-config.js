@@ -21,7 +21,6 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-svgr',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-treat',
     process.env.GOOGLE_ANALYTICS_TRACKING_ID && {
       resolve: 'gatsby-plugin-google-gtag',
       options: {
@@ -60,7 +59,12 @@ module.exports = {
         schemas: require('./src/schemas'),
         linkResolver: require('./src/linkResolver').linkResolver,
         fetchLinks: ['page.parent', 'interior_page.parent'],
-        prismicToolbar: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-prismic-previews',
+      options: {
+        repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME,
       },
     },
     {

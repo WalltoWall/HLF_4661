@@ -84,7 +84,7 @@ export const mapDataToContext = ({
 }
 
 export const fragment = graphql`
-  fragment PageBodyHeroImage on PrismicPageBodyHeroImage {
+  fragment PageBodyHeroImage on PrismicPageDataBodyHeroImage {
     primary {
       variant
       text {

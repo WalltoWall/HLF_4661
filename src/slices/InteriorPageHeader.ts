@@ -19,7 +19,7 @@ const slices = {
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesInteriorPageHeader on PrismicInteriorPageHeaderSlicesType {
+  fragment SlicesInteriorPageHeader on PrismicInteriorPageDataHeaderSlicesType {
     ...InteriorPageHeaderHeroImage
   }
 `

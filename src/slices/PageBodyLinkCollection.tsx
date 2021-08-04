@@ -61,7 +61,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyLinkCollection on PrismicPageBodyLinkCollection {
+  fragment PageBodyLinkCollection on PrismicPageDataBodyLinkCollection {
     items {
       name {
         text

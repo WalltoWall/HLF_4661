@@ -1,16 +1,16 @@
 import * as React from 'react'
 import { PageProps } from 'gatsby'
 import {
-  withPreviewResolver,
-  WithPreviewResolverProps,
-} from 'gatsby-source-prismic'
+  withPrismicPreviewResolver,
+  WithPrismicPreviewResolverProps,
+} from 'gatsby-plugin-prismic-previews'
 
 import { linkResolver } from '../linkResolver'
 
-type PreviewPageProps = PageProps & WithPreviewResolverProps
+type PreviewPageProps = PageProps & WithPrismicPreviewResolverProps
 
-export const PreviewPage = ({ isPreview }: PreviewPageProps) => {
-  if (isPreview === false)
+export const PreviewPage = ({ isPrismicPreview }: PreviewPageProps) => {
+  if (isPrismicPreview === false)
     return (
       <p>
         You're on the preview page, but it looks like we don't have any data to
@@ -21,8 +21,9 @@ export const PreviewPage = ({ isPreview }: PreviewPageProps) => {
   return <p>Loading&hellip;</p>
 }
 
-export default withPreviewResolver(PreviewPage, {
-  repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
-  //@ts-ignore
-  linkResolver,
-})
+export default withPrismicPreviewResolver(PreviewPage, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])

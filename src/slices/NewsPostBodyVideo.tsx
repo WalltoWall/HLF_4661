@@ -17,7 +17,7 @@ export const NewsPostBodyVideo = (props: NewsPostBodyVideoProps) => (
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment NewsPostBodyVideo on PrismicNewsPostBodyVideo {
+  fragment NewsPostBodyVideo on PrismicNewsPostDataBodyVideo {
     primary {
       video {
         embed_url

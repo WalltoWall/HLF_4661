@@ -17,7 +17,7 @@ export const ProjectBodyVideo = (props: ProjectBodyVideoProps) => (
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment ProjectBodyVideo on PrismicProjectBodyVideo {
+  fragment ProjectBodyVideo on PrismicProjectDataBodyVideo {
     primary {
       video {
         embed_url

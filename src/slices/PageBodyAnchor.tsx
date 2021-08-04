@@ -13,7 +13,7 @@ export const mapDataToContext = ({
   NextComp?.mapDataToContext?.({ NextComp, ...rest })
 
 export const fragment = graphql`
-  fragment PageBodyAnchor on PrismicPageBodyAnchor {
+  fragment PageBodyAnchor on PrismicPageDataBodyAnchor {
     primary {
       id
     }

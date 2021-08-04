@@ -20,7 +20,7 @@ const cohortUIDMap = {
   'cohort-xv': 15,
 }
 
-exports.linkResolver = () => (doc) => {
+exports.linkResolver = (doc) => {
   switch (doc.type) {
     case 'news_post':
     case 'news_category':

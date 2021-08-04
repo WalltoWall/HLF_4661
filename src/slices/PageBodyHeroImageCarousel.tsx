@@ -151,7 +151,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyHeroImageCarousel on PrismicPageBodyHeroImageCarousel {
+  fragment PageBodyHeroImageCarousel on PrismicPageDataBodyHeroImageCarousel {
     items {
       text {
         text

@@ -19,7 +19,7 @@ ProjectBodyImages.Image = InteriorPageBodyImages.Image
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment ProjectBodyImages on PrismicProjectBodyImages {
+  fragment ProjectBodyImages on PrismicProjectDataBodyImages {
     items {
       image {
         alt

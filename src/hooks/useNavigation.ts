@@ -19,7 +19,7 @@ export const useNavigation = () => {
     fragment UseNavigationData on PrismicNavigation {
       data {
         main {
-          ... on PrismicNavigationMainNavItem {
+          ... on PrismicNavigationDataMainNavItem {
             id
             primary {
               name

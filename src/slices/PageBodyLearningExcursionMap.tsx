@@ -67,7 +67,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyLearningExcursionMap on PrismicPageBodyLearningExcursionMap {
+  fragment PageBodyLearningExcursionMap on PrismicPageDataBodyLearningExcursionMap {
     primary {
       map_url
     }
