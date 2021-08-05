@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { Box } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 import { useKeenSlider } from 'keen-slider/react'
@@ -101,13 +101,13 @@ export const PageBodyImageCarousel = ({
 
 export type PageBodyImageCarouselImageProps = {
   captionHTML?: string
-  imageFluid?: FluidObject
+  imageData?: IGatsbyImageData
   imageAlt?: string
 }
 
 const Image = ({
   captionHTML,
-  imageFluid,
+  imageData,
   imageAlt,
 }: PageBodyImageCarouselImageProps) => (
   <Box
@@ -116,11 +116,11 @@ const Image = ({
     styles={{ display: 'grid', gap: [4, 5, 7], cursor: 'grab' }}
   >
     <Box as={AspectRatio} x={860} y={570}>
-      {imageFluid && (
+      {imageData && (
         <Box
           as={GatsbyImage}
-          fluid={imageFluid}
-          alt={imageAlt}
+          image={imageData}
+          alt={imageAlt ?? ''}
           imgStyle={{ objectFit: 'contain' }}
           styles={{ width: 'full', height: 'full' }}
         />
@@ -155,7 +155,7 @@ export const mapDataToProps = ({
   children: data?.items?.map((item) => (
     <PageBodyImageCarousel.Image
       key={item?.image?.url}
-      imageFluid={item?.image?.fluid as FluidObject}
+      imageData={item?.image?.gatsbyImageData as IGatsbyImageData}
       imageAlt={undefIfEmpty(item?.image?.alt) as string | undefined}
       captionHTML={getRichText(item?.caption)}
     />
@@ -175,6 +175,11 @@ export const fragment = graphql`
         fluid(maxWidth: 800) {
           ...GatsbyPrismicImageFluid
         }
+        gatsbyImageData(
+          placeholder: BLURRED
+          width: 1080
+          breakpoints: [360, 720, 1080]
+        )
       }
       caption {
         html
