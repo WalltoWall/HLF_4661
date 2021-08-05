@@ -4,6 +4,7 @@ import { getRichText } from '@walltowall/helpers'
 
 import { UseFellowsQuery } from '../types.generated'
 import { moveFirstWordToEnd } from '../lib/moveFirstWordToEnd'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 /**
  * Returns a list of all fellows and their information. Fellows are sorted by
@@ -39,15 +40,19 @@ export const useFellows = () => {
             }
             portrait {
               alt
-              fluid(maxWidth: 300) {
-                ...GatsbyPrismicImageFluid
-              }
+              gatsbyImageData(
+                placeholder: BLURRED
+                width: 300
+                breakpoints: [300]
+              )
             }
             photo {
               alt
-              fluid(maxWidth: 600) {
-                ...GatsbyPrismicImageFluid
-              }
+              gatsbyImageData(
+                placeholder: BLURRED
+                width: 600
+                breakpoints: [600]
+              )
             }
           }
         }
@@ -64,9 +69,9 @@ export const useFellows = () => {
       cohortTitle: node.data?.cohort?.document?.data?.title?.text,
       cohortNumber: node.data?.cohort?.document?.data?.cohort_number,
       biographyHTML: getRichText(node.data?.biography),
-      portraitFluid: node.data?.portrait?.fluid,
+      portraitData: node.data?.portrait?.gatsbyImageData as IGatsbyImageData,
       portraitAlt: node.data?.portrait?.alt,
-      photoFluid: node.data?.photo?.fluid,
+      photoData: node.data?.photo?.gatsbyImageData as IGatsbyImageData,
       photoAlt: node.data?.photo?.alt,
     }))
 
