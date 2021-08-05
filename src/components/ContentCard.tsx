@@ -9,7 +9,6 @@ import { ButtonLink } from './ButtonLink'
 import { Link } from './Link'
 import { Anchor } from './Anchor'
 import { HTMLContent } from './HTMLContent'
-import { Icon } from './Icon'
 
 import { ReactComponent as AssetLogoBugGrayscaleSVG } from '../assets/logo-bug-grayscale.svg'
 
@@ -30,7 +29,7 @@ type ContentCardProps<E extends React.ElementType> = {
 } & BoxProps<E>
 
 export const ContentCard = <
-  E extends React.ElementType = typeof defaultElement
+  E extends React.ElementType = typeof defaultElement,
 >({
   topLabel,
   title,
@@ -131,7 +130,7 @@ export const ContentCard = <
               <Text variant="serif-20-24">{title}</Text>
             </ConditionalWrap>
           )}
-          {sublinkHref && (
+          {sublinkHref && sublinkText && (
             <Anchor href={sublinkHref}>
               <Text variant="serif-14-16">{sublinkText}</Text>
             </Anchor>
@@ -145,9 +144,8 @@ export const ContentCard = <
             <HTMLContent
               html={excerptHTML}
               componentOverrides={{
-                p: (Comp) => (props) => (
-                  <Comp variant="serif-14-16" {...props} />
-                ),
+                p: (Comp) => (props) =>
+                  <Comp variant="serif-14-16" {...props} />,
               }}
               styles={{ color: 'gray40' }}
             />

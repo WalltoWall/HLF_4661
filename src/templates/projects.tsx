@@ -20,6 +20,7 @@ import { ContentCardsList } from '../components/ContentCardsList'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { Text } from '../components/Text'
 import { linkResolver } from '../linkResolver'
+import { getType as getPageType } from './page'
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -148,6 +149,7 @@ export const ProjectsTemplate = ({
         meta={meta}
         listMiddleware={slicesMiddleware}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
       <Box
         styles={{
@@ -218,6 +220,7 @@ export const ProjectsTemplate = ({
         map={slicesMap}
         meta={meta}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
     </Layout>
   )
@@ -252,7 +255,7 @@ export const query = graphql`
     }
 
     allPrismicProject(
-      sort: { fields: [_ON_BUILD_ONLY_normalized_title], order: ASC }
+      sort: { fields: uid, order: ASC }
       limit: $limit
       skip: $skip
     ) {

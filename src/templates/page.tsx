@@ -60,6 +60,13 @@ export const mapDataToPropsEnhancer = (
 }
 
 /**
+ * The v4 changes to `gatsby-source-prismic` changed the way types were named.
+ * This function is used to accomodate those changes.
+ */
+export const getType = (data: { __typename?: string }) =>
+  data.__typename?.replace('PrismicPageDataBody', 'PageBody') ?? ''
+
+/**
  * Props added to all slices by `mapDataToPropsEnhancer` for `PageTemplate`.
  * Intersect this type with a slice's known props to get a complete list of
  * available props.
@@ -109,6 +116,7 @@ export const PageTemplate = ({
         meta={meta}
         listMiddleware={slicesMiddleware}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getType}
       />
     </Layout>
   )

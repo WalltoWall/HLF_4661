@@ -2,6 +2,7 @@
   "include": ["src", "types"],
   "exclude": ["src/linkResolver.js"],
   "compilerOptions": {
+    "target": "ESNext",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
@@ -9,6 +10,7 @@
     "sourceMap": true,
     "rootDir": "./src",
     "strict": true,
+    "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,

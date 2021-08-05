@@ -25,6 +25,8 @@ import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { BackButton } from '../components/BackButton'
 import { linkResolver } from '../linkResolver'
 
+import { getType as getPageType } from './page'
+
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
   ...pageBodySlicesMap,
@@ -72,6 +74,13 @@ export const mapDataToPropsEnhancer = (
     ...props,
   }
 }
+
+/**
+ * The v4 changes to `gatsby-source-prismic` changed the way types were named.
+ * This function is used to accomodate those changes.
+ */
+export const getType = (data: { __typename?: string }) =>
+  data.__typename?.replace('PrismicNewsPostDataBody', 'NewsPostBody') ?? ''
 
 /**
  * Props added to all slices by `mapDataToPropsEnhancer` for `NewsPostTemplate`.
@@ -147,6 +156,7 @@ export const NewsPostTemplate = ({
         map={slicesMap}
         meta={meta}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
       <Box
         styles={{
@@ -199,6 +209,7 @@ export const NewsPostTemplate = ({
             map={slicesMap}
             meta={meta}
             mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+            getType={getType}
           />
           <BoundedBox styles={{ paddingTop: [6, 7, 8] }}>
             {nextNewsPost && nextNewsPost.url && (
@@ -227,6 +238,7 @@ export const NewsPostTemplate = ({
         map={slicesMap}
         meta={meta}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
     </Layout>
   )
