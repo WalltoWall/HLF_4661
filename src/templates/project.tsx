@@ -77,6 +77,13 @@ export const mapDataToPropsEnhancer = (
 }
 
 /**
+ * The v4 changes to `gatsby-source-prismic` changed the way types were named.
+ * This function is used to accomodate those changes.
+ */
+export const getType = (data: { __typename?: string }) =>
+  data.__typename?.replace('PrismicProjectDataBody', 'ProjectBody') ?? ''
+
+/**
  * Props added to all slices by `mapDataToPropsEnhancer` for `ProjectTemplate`.
  * Intersect this type with a slice's known props to get a complete list of
  * available props.
@@ -203,6 +210,7 @@ export const ProjectTemplate = ({
               map={slicesMap}
               meta={meta}
               mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+              getType={getType}
             />
           ) : (
             <ProjectBodyText

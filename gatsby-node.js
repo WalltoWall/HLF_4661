@@ -131,258 +131,264 @@ exports.createPages = async (gatsbyContext) => {
    * Create all News-related pages, including paginated news post listings and
    * individual news post pages.
    */
-  // {
-  //   const newsPostsRes = await graphql(`
-  //     query {
-  //       allPrismicNewsPost {
-  //         nodes {
-  //           first_published_date
-  //           data {
-  //             published_at
-  //           }
-  //           news_categories {
-  //             uid
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `)
+  {
+    const newsPostsRes = await graphql(`
+      query {
+        allPrismicNewsPost {
+          nodes {
+            uid
+            url
+            first_publication_date
+            data {
+              published_at
+              news_categories {
+                news_category {
+                  uid
+                }
+              }
+            }
+          }
+        }
+      }
+    `)
 
-  //   console.log({ newsPostsRes })
+    const newsPosts = newsPostsRes.data.allPrismicNewsPost.nodes.sort(
+      (a, b) =>
+        Date.parse(b.data?.published_at ?? b.first_publication_date) -
+        Date.parse(a.data?.published_at ?? a.first_publication_date),
+    )
 
-  //   const newsPosts = newsPostsRes.data.allPrismicNewsPost.nodes.sort(
-  //     (a, b) =>
-  //       Date.parse(b.data?.published_at ?? b.first_published_date) -
-  //       Date.parse(a.data?.published_at ?? a.first_published_date),
-  //   )
+    /**
+     * Create paginated pages listing all news posts. Pagination is done by
+     * passing limit and skip values as context. This allows the template to
+     * query a set of news posts for the page's pagination parameters.
+     *
+     * @see https://www.gatsbyjs.com/docs/adding-pagination/
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    const numPages = Math.max(
+      Math.ceil(newsPosts.length / NEWS_POSTS_PER_PAGE),
+      1,
+    )
+    for (let i = 0; i < numPages; i++)
+      createPage({
+        path: i === 0 ? '/news/' : `/news/${i + 1}/`,
+        component: path.resolve(__dirname, 'src/templates/news.tsx'),
+        context: {
+          limit: NEWS_POSTS_PER_PAGE,
+          skip: i * NEWS_POSTS_PER_PAGE,
+          numPages,
+          currentPage: i + 1,
+          total: newsPosts.length,
+        },
+      })
 
-  //   /**
-  //    * Create paginated pages listing all news posts. Pagination is done by
-  //    * passing limit and skip values as context. This allows the template to
-  //    * query a set of news posts for the page's pagination parameters.
-  //    *
-  //    * @see https://www.gatsbyjs.com/docs/adding-pagination/
-  //    * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
-  //    */
-  //   const numPages = Math.max(
-  //     Math.ceil(newsPosts.length / NEWS_POSTS_PER_PAGE),
-  //     1,
-  //   )
-  //   for (let i = 0; i < numPages; i++)
-  //     createPage({
-  //       path: i === 0 ? '/news/' : `/news/${i + 1}/`,
-  //       component: path.resolve(__dirname, 'src/templates/news.tsx'),
-  //       context: {
-  //         limit: NEWS_POSTS_PER_PAGE,
-  //         skip: i * NEWS_POSTS_PER_PAGE,
-  //         numPages,
-  //         currentPage: i + 1,
-  //         total: newsPosts.length,
-  //       },
-  //     })
+    /**
+     * Create paginated pages listing all news posts for each news category.
+     * Pagination is done by passing limit and skip values as context. This
+     * allows the template to query a set of news posts for the page's
+     * pagination parameters.
+     *
+     * @see https://www.gatsbyjs.com/docs/adding-pagination/
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    const newsCategoriesRes = await graphql(`
+      query {
+        allPrismicNewsCategory {
+          nodes {
+            uid
+            url
+          }
+        }
+      }
+    `)
 
-  //   /**
-  //    * Create paginated pages listing all news posts for each news category.
-  //    * Pagination is done by passing limit and skip values as context. This
-  //    * allows the template to query a set of news posts for the page's
-  //    * pagination parameters.
-  //    *
-  //    * @see https://www.gatsbyjs.com/docs/adding-pagination/
-  //    * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
-  //    */
-  //   const newsCategoriesRes = await graphql(`
-  //     query {
-  //       allPrismicNewsCategory {
-  //         nodes {
-  //           uid
-  //           url
-  //         }
-  //       }
-  //     }
-  //   `)
+    for (const newsCategory of newsCategoriesRes.data.allPrismicNewsCategory
+      .nodes) {
+      const newsCategoryPosts = newsPosts.filter((newsPost) =>
+        newsPost.data?.news_categories?.find?.(
+          (item) => item?.news_category?.uid === newsCategory.uid,
+        ),
+      )
+      const numPages = Math.max(
+        Math.ceil(newsCategoryPosts.length / NEWS_POSTS_PER_PAGE),
+        1,
+      )
+      for (let i = 0; i < numPages; i++)
+        createPage({
+          path: i === 0 ? newsCategory.url : `${newsCategory.url}${i + 1}/`,
+          component: path.resolve(__dirname, 'src/templates/news_category.tsx'),
+          context: {
+            uid: newsCategory.uid,
+            limit: NEWS_POSTS_PER_PAGE,
+            skip: i * NEWS_POSTS_PER_PAGE,
+            numPages,
+            currentPage: i + 1,
+            total: newsCategoryPosts.length,
+          },
+        })
+    }
 
-  //   for (const newsCategory of newsCategoriesRes.data.allPrismicNewsCategory
-  //     .nodes) {
-  //     const newsCategoryPosts = newsPosts.filter((newsPost) =>
-  //       newsPost.data?.news_categories?.find?.(
-  //         (item) => item?.news_category?.uid === newsCategory.uid,
-  //       ),
-  //     )
-  //     const numPages = Math.max(
-  //       Math.ceil(newsCategoryPosts.length / NEWS_POSTS_PER_PAGE),
-  //       1,
-  //     )
-  //     for (let i = 0; i < numPages; i++)
-  //       createPage({
-  //         path: i === 0 ? newsCategory.url : `${newsCategory.url}${i + 1}/`,
-  //         component: path.resolve(__dirname, 'src/templates/news_category.tsx'),
-  //         context: {
-  //           uid: newsCategory.uid,
-  //           limit: NEWS_POSTS_PER_PAGE,
-  //           skip: i * NEWS_POSTS_PER_PAGE,
-  //           numPages,
-  //           currentPage: i + 1,
-  //           total: newsCategoryPosts.length,
-  //         },
-  //       })
-  //   }
+    /**
+     * Create pages for all News Post documents in Prismic. The document's UID
+     * is passed as context here to allow the template to query for the
+     * specific document.
+     *
+     * News post pages have links to the next and/or previous post. Here, we
+     * sort all news posts by published date and also pass the next/previous
+     * post UIDs as context.
+     *
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    for (let i = 0; i < newsPosts.length; i++) {
+      const newsPost = newsPosts[i]
+      const nextNewsPost = newsPosts[i + 1]
+      const prevNewsPost = newsPosts[i - 1]
 
-  //   /**
-  //    * Create pages for all News Post documents in Prismic. The document's UID
-  //    * is passed as context here to allow the template to query for the
-  //    * specific document.
-  //    *
-  //    * News post pages have links to the next and/or previous post. Here, we
-  //    * sort all news posts by published date and also pass the next/previous
-  //    * post UIDs as context.
-  //    *
-  //    * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
-  //    */
-  //   for (let i = 0; i < newsPosts.length; i++) {
-  //     const newsPost = newsPosts[i]
-  //     const nextNewsPost = newsPosts[i + 1]
-  //     const prevNewsPost = newsPosts[i - 1]
-
-  //     createPage({
-  //       path: newsPost.url,
-  //       component: path.resolve(__dirname, 'src/templates/news_post.tsx'),
-  //       context: {
-  //         uid: newsPost.uid,
-  //         nextUID: nextNewsPost?.uid,
-  //         prevUID: prevNewsPost?.uid,
-  //       },
-  //     })
-  //   }
-  // }
+      createPage({
+        path: newsPost.url,
+        component: path.resolve(__dirname, 'src/templates/news_post.tsx'),
+        context: {
+          uid: newsPost.uid,
+          nextUID: nextNewsPost?.uid,
+          prevUID: prevNewsPost?.uid,
+        },
+      })
+    }
+  }
 
   /**
    * Create all Project-related pages, including paginated project post
    * listings and individual project pages.
    */
-  // {
-  //   const projectsRes = await graphql(`
-  //     query {
-  //       allPrismicProject {
-  //         nodes {
-  //           uid
-  //           url
-  //           data {
-  //             title {
-  //               text
-  //             }
-  //             project_categories
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `)
+  {
+    const projectsRes = await graphql(`
+      query {
+        allPrismicProject {
+          nodes {
+            uid
+            url
+            data {
+              title {
+                text
+              }
+              project_categories {
+                project_category {
+                  uid
+                }
+              }
+            }
+          }
+        }
+      }
+    `)
 
-  //   const projects = projectsRes.data.allPrismicProject.nodes.sort((a, b) =>
-  //     Intl.Collator('en').compare(
-  //       a.data?.title?.text?.replace?.('ʻ', ''),
-  //       b.data?.title?.text?.replace?.('ʻ', ''),
-  //     ),
-  //   )
+    const projects = projectsRes.data.allPrismicProject.nodes.sort((a, b) =>
+      Intl.Collator('en').compare(
+        a.data?.title?.text?.replace?.('ʻ', ''),
+        b.data?.title?.text?.replace?.('ʻ', ''),
+      ),
+    )
 
-  //   /**
-  //    * Create paginated pages listing all projects. Pagination is done by
-  //    * passing limit and skip values as context. This allows the template to
-  //    * query a set of project posts for the page's pagination parameters.
-  //    *
-  //    * @see https://www.gatsbyjs.com/docs/adding-pagination/
-  //    * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
-  //    */
-  //   const numPages = Math.max(Math.ceil(projects.length / PROJECTS_PER_PAGE), 1)
-  //   for (let i = 0; i < numPages; i++)
-  //     createPage({
-  //       path: i === 0 ? '/impact/projects/' : `/impact/projects/${i + 1}/`,
-  //       component: path.resolve(__dirname, 'src/templates/projects.tsx'),
-  //       context: {
-  //         limit: PROJECTS_PER_PAGE,
-  //         skip: i * PROJECTS_PER_PAGE,
-  //         numPages,
-  //         currentPage: i + 1,
-  //         total: projects.length,
-  //       },
-  //     })
+    /**
+     * Create paginated pages listing all projects. Pagination is done by
+     * passing limit and skip values as context. This allows the template to
+     * query a set of project posts for the page's pagination parameters.
+     *
+     * @see https://www.gatsbyjs.com/docs/adding-pagination/
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    const numPages = Math.max(Math.ceil(projects.length / PROJECTS_PER_PAGE), 1)
+    for (let i = 0; i < numPages; i++)
+      createPage({
+        path: i === 0 ? '/impact/projects/' : `/impact/projects/${i + 1}/`,
+        component: path.resolve(__dirname, 'src/templates/projects.tsx'),
+        context: {
+          limit: PROJECTS_PER_PAGE,
+          skip: i * PROJECTS_PER_PAGE,
+          numPages,
+          currentPage: i + 1,
+          total: projects.length,
+        },
+      })
 
-  //   /**
-  //    * Create paginated pages listing all projects for each project category.
-  //    * Pagination is done by passing limit and skip values as context. This
-  //    * allows the template to query a set of project posts for the page's
-  //    * pagination parameters.
-  //    *
-  //    * @see https://www.gatsbyjs.com/docs/adding-pagination/
-  //    * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
-  //    */
-  //   const projectCategoriesRes = await graphql(`
-  //     query {
-  //       allPrismicProjectCategory {
-  //         nodes {
-  //           uid
-  //           url
-  //         }
-  //       }
-  //     }
-  //   `)
+    /**
+     * Create paginated pages listing all projects for each project category.
+     * Pagination is done by passing limit and skip values as context. This
+     * allows the template to query a set of project posts for the page's
+     * pagination parameters.
+     *
+     * @see https://www.gatsbyjs.com/docs/adding-pagination/
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    const projectCategoriesRes = await graphql(`
+      query {
+        allPrismicProjectCategory {
+          nodes {
+            uid
+            url
+          }
+        }
+      }
+    `)
 
-  //   for (const projectCategory of projectCategoriesRes.data
-  //     .allPrismicProjectCategory.nodes) {
-  //     const projectCategoryPosts = projects.filter((project) =>
-  //       project.data?.project_categories?.find?.(
-  //         (item) => item?.project_category?.uid === projectCategory.uid,
-  //       ),
-  //     )
-  //     const numPages = Math.max(
-  //       Math.ceil(projectCategoryPosts.length / PROJECTS_PER_PAGE),
-  //       1,
-  //     )
-  //     for (let i = 0; i < numPages; i++)
-  //       createPage({
-  //         path:
-  //           i === 0 ? projectCategory.url : `${projectCategory.url}${i + 1}/`,
-  //         component: path.resolve(
-  //           __dirname,
-  //           'src/templates/project_category.tsx',
-  //         ),
-  //         context: {
-  //           uid: projectCategory.uid,
-  //           limit: PROJECTS_PER_PAGE,
-  //           skip: i * PROJECTS_PER_PAGE,
-  //           numPages,
-  //           currentPage: i + 1,
-  //           total: projectCategoryPosts.length,
-  //         },
-  //       })
-  //   }
+    for (const projectCategory of projectCategoriesRes.data
+      .allPrismicProjectCategory.nodes) {
+      const projectCategoryPosts = projects.filter((project) =>
+        project.data?.project_categories?.find?.(
+          (item) => item?.project_category?.uid === projectCategory.uid,
+        ),
+      )
+      const numPages = Math.max(
+        Math.ceil(projectCategoryPosts.length / PROJECTS_PER_PAGE),
+        1,
+      )
+      for (let i = 0; i < numPages; i++)
+        createPage({
+          path:
+            i === 0 ? projectCategory.url : `${projectCategory.url}${i + 1}/`,
+          component: path.resolve(
+            __dirname,
+            'src/templates/project_category.tsx',
+          ),
+          context: {
+            uid: projectCategory.uid,
+            limit: PROJECTS_PER_PAGE,
+            skip: i * PROJECTS_PER_PAGE,
+            numPages,
+            currentPage: i + 1,
+            total: projectCategoryPosts.length,
+          },
+        })
+    }
 
-  //   /**
-  //    * Create pages for all Project Post documents in Prismic. The document's UID
-  //    * is passed as context here to allow the template to query for the
-  //    * specific document.
-  //    *
-  //    * Project post pages have links to the next and/or previous post. Here, we
-  //    * sort all project posts by published date and also pass the next/previous
-  //    * post UIDs as context.
-  //    *
-  //    * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
-  //    */
-  //   for (let i = 0; i < projects.length; i++) {
-  //     const project = projects[i]
-  //     const nextProject = projects[i + 1]
-  //     const prevProject = projects[i - 1]
+    /**
+     * Create pages for all Project Post documents in Prismic. The document's UID
+     * is passed as context here to allow the template to query for the
+     * specific document.
+     *
+     * Project post pages have links to the next and/or previous post. Here, we
+     * sort all project posts by published date and also pass the next/previous
+     * post UIDs as context.
+     *
+     * @see https://www.gatsbyjs.org/docs/node-apis/#createPages
+     */
+    for (let i = 0; i < projects.length; i++) {
+      const project = projects[i]
+      const nextProject = projects[i + 1]
+      const prevProject = projects[i - 1]
 
-  //     createPage({
-  //       path: project.url,
-  //       component: path.resolve(__dirname, 'src/templates/project.tsx'),
-  //       context: {
-  //         uid: project.uid,
-  //         nextUID: nextProject?.uid,
-  //         prevUID: prevProject?.uid,
-  //       },
-  //     })
-  //   }
-  // }
+      createPage({
+        path: project.url,
+        component: path.resolve(__dirname, 'src/templates/project.tsx'),
+        context: {
+          uid: project.uid,
+          nextUID: nextProject?.uid,
+          prevUID: prevProject?.uid,
+        },
+      })
+    }
+  }
 
   const settingsRes = await graphql(`
     query {
