@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { FluidObject } from 'gatsby-image'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { Box } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
@@ -38,7 +38,7 @@ type CTAProps = {
   textHTML?: string
   buttonHref?: string
   buttonText?: string
-  backgroundImageFluid?: FluidObject
+  backgroundImageData?: IGatsbyImageData
   backgroundImageAlt?: string
 }
 
@@ -47,7 +47,7 @@ const CTA = ({
   textHTML,
   buttonHref,
   buttonText,
-  backgroundImageFluid,
+  backgroundImageData,
   backgroundImageAlt,
 }: CTAProps) => (
   <Box styles={{ flex: [null, 'equal0'] }}>
@@ -57,7 +57,7 @@ const CTA = ({
       textHTML={textHTML}
       buttonHref={buttonHref}
       buttonText={buttonText}
-      imageFluid={backgroundImageFluid}
+      imageData={backgroundImageData}
       imageAlt={backgroundImageAlt}
       withImageGradientOverlay={true}
       styles={{ height: 'full' }}
@@ -79,7 +79,9 @@ export const mapDataToProps = ({
       textHTML={getRichText(item?.text)}
       buttonText={undefIfEmpty(item?.button_text?.text)}
       buttonHref={item?.button_link?.url}
-      backgroundImageFluid={item?.background_image?.fluid}
+      backgroundImageData={
+        item?.background_image?.gatsbyImageData as IGatsbyImageData
+      }
       backgroundImageAlt={item?.background_image?.alt}
     />
   )) as React.ReactNode,
@@ -107,9 +109,11 @@ export const fragment = graphql`
       }
       background_image {
         alt
-        fluid(maxWidth: 1000) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(
+          placeholder: BLURRED
+          width: 640
+          breakpoints: [640, 1280]
+        )
       }
     }
   }
