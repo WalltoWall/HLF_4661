@@ -1,6 +1,6 @@
 import * as React from 'react'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
 import { Box, BoxProps } from '@walltowall/calico'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import ConditionalWrap from 'conditional-wrap'
 import { AspectRatio } from '@walltowall/siamese'
 
@@ -11,12 +11,11 @@ import { ButtonLink } from '../components/ButtonLink'
 
 const defaultElement = 'ul'
 
-export type PageBodyLinkCollectionProps<
-  E extends React.ElementType
-> = BoxProps<E>
+export type PageBodyLinkCollectionProps<E extends React.ElementType> =
+  BoxProps<E>
 
 export const LinkCollection = <
-  E extends React.ElementType = typeof defaultElement
+  E extends React.ElementType = typeof defaultElement,
 >({
   children,
   ...props
@@ -58,7 +57,7 @@ type LinkCollectionLinkProps = {
   description?: string
   href?: string
   buttonText?: string
-  thumbnailFluid?: FluidObject
+  thumbnailData?: IGatsbyImageData
   thumbnailAlt?: string
 }
 
@@ -69,7 +68,7 @@ const LinkCollectionLink = ({
   description,
   href,
   buttonText = 'Learn More',
-  thumbnailFluid,
+  thumbnailData,
   thumbnailAlt,
 }: LinkCollectionLinkProps) => {
   const variant = linkCollectionLinkVariants[variantName]
@@ -89,8 +88,12 @@ const LinkCollectionLink = ({
           condition={Boolean(href)}
           wrap={(children) => <Link href={href!}>{children}</Link>}
         >
-          {thumbnailFluid ? (
-            <Box as={GatsbyImage} fluid={thumbnailFluid} alt={thumbnailAlt} />
+          {thumbnailData ? (
+            <Box
+              as={GatsbyImage}
+              image={thumbnailData}
+              alt={thumbnailAlt ?? ''}
+            />
           ) : (
             <Box
               as={AspectRatio}
