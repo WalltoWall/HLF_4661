@@ -12,6 +12,7 @@ import {
 import { useCommonStyles } from '../hooks/useCommonStyles'
 
 import { ImageWithTextOverlay } from '../components/ImageWithTextOverlay'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export type InteriorPageHeaderHeroImageProps = ReturnType<
   typeof mapDataToProps
@@ -20,7 +21,7 @@ export type InteriorPageHeaderHeroImageProps = ReturnType<
 
 export const InteriorPageHeaderHeroImage = ({
   headingHTML,
-  backgroundImageFluid,
+  backgroundImageData,
   id,
 }: InteriorPageHeaderHeroImageProps) => {
   const commonStyles = useCommonStyles()
@@ -38,7 +39,7 @@ export const InteriorPageHeaderHeroImage = ({
       <ImageWithTextOverlay
         variant="reducedHeight"
         textHTML={headingHTML}
-        imageFluid={backgroundImageFluid}
+        imageData={backgroundImageData}
         className={commonStyles.darkGrayGradientBackground}
       />
     </Box>
@@ -52,13 +53,16 @@ export const mapDataToProps = ({
   typeof mapDataToContext
 >) => ({
   headingHTML: getRichText(data.primary?.heading),
-  backgroundImageFluid: data.primary?.background_image?.fluid,
+  backgroundImageData: data.primary?.background_image
+    ?.gatsbyImageData as IGatsbyImageData,
 })
 
 export const mapDataToContext = ({
   data,
 }: MapDataToContextArgs<InteriorPageHeaderHeroImageFragment>) => {
-  const hasBackgroundImage = Boolean(data.primary?.background_image?.fluid)
+  const hasBackgroundImage = Boolean(
+    data.primary?.background_image?.gatsbyImageData,
+  )
 
   return {
     bg: hasBackgroundImage ? Symbol() : 'gray20',
@@ -73,9 +77,11 @@ export const fragment = graphql`
         html
       }
       background_image {
-        fluid(maxWidth: 1000) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(
+          placeholder: BLURRED
+          width: 1200
+          breakpoints: [360, 720, 1080]
+        )
       }
     }
   }

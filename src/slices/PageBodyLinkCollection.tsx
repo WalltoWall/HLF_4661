@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { undefIfEmpty } from '@walltowall/helpers'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 import { PageBodyLinkCollectionFragment } from '../types.generated'
 import { PageTemplateEnhancerProps } from '../templates/page'
@@ -49,7 +50,7 @@ export const mapDataToProps = ({
           name={item?.name?.text}
           description={item?.description?.text}
           buttonText={undefIfEmpty(item?.button_text?.text)}
-          thumbnailFluid={item?.thumbnail?.fluid}
+          thumbnailData={item?.thumbnail?.gatsbyImageData as IGatsbyImageData}
           thumbnailAlt={item?.thumbnail?.alt}
         />
       ),
@@ -77,9 +78,7 @@ export const fragment = graphql`
       }
       thumbnail {
         alt
-        fluid(maxWidth: 400) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
       }
     }
   }
