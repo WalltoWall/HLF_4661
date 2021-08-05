@@ -91,7 +91,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyLinkCard on PrismicInteriorPageBodyLinkCard {
+  fragment InteriorPageBodyLinkCard on PrismicInteriorPageDataBodyLinkCard {
     primary {
       link_title {
         text
