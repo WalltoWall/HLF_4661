@@ -15,4 +15,8 @@ export interface PagesSearchResult {
   featuredImageURL?: string
   featuredImageAspectRatio?: number
   featuredImageAlt?: string
+  featuredImageDimensions?: {
+    width: number
+    height: number
+  }
 }

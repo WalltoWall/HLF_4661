@@ -257,19 +257,21 @@ export const PageLayoutSearchResults = ({
                 : undefined
             }
           >
-            {paginatedResults.paginatedCollection.map((result) => (
-              <ContentCard
-                key={result.url}
-                topLabel={resultTypeToPublicLabel[result.type]}
-                title={result.title}
-                excerpt={result.description}
-                href={result.url}
-                // TODO: Insert runtime created gatsbyImageData
-                featuredImageData={undefined}
-                featuredImageAlt={result.featuredImageAlt}
-                buttonText={resultTypeToButtonText[result.type]}
-              />
-            ))}
+            {paginatedResults.paginatedCollection.map((result) => {
+              return (
+                <ContentCard
+                  key={result.url}
+                  topLabel={resultTypeToPublicLabel[result.type]}
+                  title={result.title}
+                  excerpt={result.description}
+                  href={result.url}
+                  featuredImageURL={result.featuredImageURL}
+                  featuredImageAlt={result.featuredImageAlt}
+                  featuredImageDimensions={result.featuredImageDimensions}
+                  buttonText={resultTypeToButtonText[result.type]}
+                />
+              )
+            })}
           </ContentCardsList>
         </BoundedBox>
       </Box>
