@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { Box } from '@walltowall/calico'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
 import { PageBodyHeroImageFragment } from '../types.generated'
@@ -30,7 +31,7 @@ export const PageBodyHeroImage = ({
   textHTML,
   buttonText = 'Learn More',
   buttonHref,
-  backgroundImageFluid,
+  backgroundImageData,
   backgroundImageAlt,
   id,
 }: PageBodyHeroImageProps) => {
@@ -52,7 +53,7 @@ export const PageBodyHeroImage = ({
         textHTML={textHTML}
         buttonHref={buttonHref}
         buttonText={buttonText}
-        imageFluid={backgroundImageFluid}
+        imageData={backgroundImageData}
         imageAlt={backgroundImageAlt}
         className={commonStyles.darkGrayGradientBackground}
       />
@@ -69,7 +70,8 @@ export const mapDataToProps = ({
   textHTML: getRichText(data.primary?.text),
   buttonText: undefIfEmpty(data.primary?.button_text?.text),
   buttonHref: data.primary?.button_link?.url,
-  backgroundImageFluid: data.primary?.background_image?.fluid,
+  backgroundImageData: data.primary?.background_image
+    ?.gatsbyImageData as IGatsbyImageData,
   backgroundImageAlt: data.primary?.background_image?.alt,
 })
 
@@ -84,7 +86,7 @@ export const mapDataToContext = ({
 }
 
 export const fragment = graphql`
-  fragment PageBodyHeroImage on PrismicPageBodyHeroImage {
+  fragment PageBodyHeroImage on PrismicPageDataBodyHeroImage {
     primary {
       variant
       text {
@@ -99,9 +101,11 @@ export const fragment = graphql`
       }
       background_image {
         alt
-        fluid(maxWidth: 1000) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(
+          placeholder: BLURRED
+          width: 1200
+          breakpoints: [360, 720, 1200]
+        )
       }
     }
   }

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 import querystring from 'querystring'
@@ -13,6 +13,7 @@ import { slicesMap } from '../slices/PageBody'
 import { PickPartial } from '../types'
 
 import { Layout } from '../components/Layout'
+import { linkResolver } from '../linkResolver'
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -120,7 +121,12 @@ export const SearchPage = ({ data, location }: PageProps<SearchPageQuery>) => {
   )
 }
 
-export default withPreview(SearchPage)
+export default withPrismicPreview(SearchPage, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query SearchPage {
@@ -135,7 +141,7 @@ export const query = graphql`
         meta_description
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesPageBody

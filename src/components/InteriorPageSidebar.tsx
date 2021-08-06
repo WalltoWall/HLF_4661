@@ -1,5 +1,5 @@
 import * as React from 'react'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { undefIfEmpty } from '@walltowall/helpers'
 import { AspectRatio } from '@walltowall/siamese'
 import { Box, BoxProps } from '@walltowall/calico'
@@ -21,17 +21,17 @@ type InteriorPageSidebarNavigationItem = {
 type InteriorPageSidebarProps<E extends React.ElementType> = {
   title?: string
   description?: string
-  imageFluid?: FluidObject
+  imageData?: IGatsbyImageData
   imageAlt?: string
   navigationItems?: InteriorPageSidebarNavigationItem[]
 } & BoxProps<E>
 
 export const InteriorPageSidebar = <
-  E extends React.ElementType = typeof defaultElement
+  E extends React.ElementType = typeof defaultElement,
 >({
   title,
   description,
-  imageFluid,
+  imageData,
   imageAlt,
   navigationItems = [],
   className,
@@ -45,7 +45,7 @@ export const InteriorPageSidebar = <
       className={clsx(commonStyles.lightGrayGradientBackground, className)}
       {...props}
     >
-      {imageFluid && (
+      {imageData && (
         <>
           <Box
             as={AspectRatio}
@@ -55,15 +55,15 @@ export const InteriorPageSidebar = <
           >
             <Box
               as={GatsbyImage}
-              fluid={imageFluid}
-              alt={imageAlt}
+              image={imageData}
+              alt={imageAlt ?? ''}
               styles={{ width: 'full', height: 'full' }}
             />
           </Box>
           <Box
             as={GatsbyImage}
-            fluid={imageFluid}
-            alt={imageAlt}
+            image={imageData}
+            alt={imageAlt ?? ''}
             styles={{
               display: ['none', null, 'block'],
             }}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
+import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
 import { Box } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
@@ -43,17 +43,17 @@ export const InteriorPageBodyImages = ({
 
 export type InteriorPageBodyImagesImageProps = {
   captionHTML?: string
-  imageFluid?: FluidObject
+  imageData?: IGatsbyImageData
   imageAlt?: string
 }
 
 const Image = ({
   captionHTML,
-  imageFluid,
+  imageData,
   imageAlt,
 }: InteriorPageBodyImagesImageProps) => (
   <Box as="figure" styles={{ display: 'grid', gap: [4, 5] }}>
-    {imageFluid && <GatsbyImage fluid={imageFluid} alt={imageAlt} />}
+    {imageData && <GatsbyImage image={imageData} alt={imageAlt ?? ''} />}
     {captionHTML && (
       <HTMLContent
         as="figcaption"
@@ -78,7 +78,7 @@ export const mapDataToProps = ({
   children: data?.items?.map((item) => (
     <InteriorPageBodyImages.Image
       key={item?.image?.url}
-      imageFluid={item?.image?.fluid as FluidObject}
+      imageData={item?.image?.gatsbyImageData as IGatsbyImageData}
       imageAlt={undefIfEmpty(item?.image?.alt) as string | undefined}
       captionHTML={getRichText(item?.caption)}
     />
@@ -90,14 +90,12 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyImages on PrismicInteriorPageBodyImages {
+  fragment InteriorPageBodyImages on PrismicInteriorPageDataBodyImages {
     items {
       image {
         alt
         url
-        fluid(maxWidth: 800) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 600, breakpoints: [600])
       }
       caption {
         html

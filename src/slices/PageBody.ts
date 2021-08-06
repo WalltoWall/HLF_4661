@@ -43,7 +43,7 @@ const slices = {
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesPageBody on PrismicPageBodySlicesType {
+  fragment SlicesPageBody on PrismicPageDataBodySlicesType {
     ...PageBodyCallsToAction
     ...PageBodyHeadshotQuote
     ...PageBodyHeroImage

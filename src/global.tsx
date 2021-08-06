@@ -12,11 +12,16 @@
  * @see https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
+// import '@walltowall/siamese/dist/siamese.css'
+import '@reach/skip-nav/styles.css'
+import 'minireset.css'
+import 'keen-slider/keen-slider.min.css'
+import 'gatsby-plugin-prismic-previews/dist/styles.css'
 import './index.css'
 
 import * as React from 'react'
-import { GatsbyBrowser } from 'gatsby'
-import { PreviewStoreProvider } from 'gatsby-source-prismic'
+import type { GatsbyBrowser } from 'gatsby'
+import { PrismicPreviewProvider } from 'gatsby-plugin-prismic-previews'
 import { TreatProvider } from 'react-treat'
 
 import { DebugProvider } from './hooks/useDebug'
@@ -26,8 +31,8 @@ export const wrapRootElement: NonNullable<GatsbyBrowser['wrapRootElement']> = ({
   element,
 }) => (
   <DebugProvider>
-    <PreviewStoreProvider>
+    <PrismicPreviewProvider>
       <TreatProvider theme={theme}>{element}</TreatProvider>
-    </PreviewStoreProvider>
+    </PrismicPreviewProvider>
   </DebugProvider>
 )

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { navigate } from 'gatsby'
+import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
 import { useStyles } from 'react-treat'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
 import { Box } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
 import {
@@ -44,7 +44,7 @@ type FellowProps = {
   href: string
   name?: string
   cohortTitle?: string
-  portraitFluid?: FluidObject
+  portraitData?: IGatsbyImageData
   portraitAlt?: string
   openFellowModal: () => void
 }
@@ -53,7 +53,7 @@ const Fellow = ({
   href,
   name,
   cohortTitle,
-  portraitFluid,
+  portraitData,
   portraitAlt,
   openFellowModal,
 }: FellowProps) => (
@@ -74,11 +74,11 @@ const Fellow = ({
           y={230}
           styles={{ backgroundColor: 'gray95', marginBottom: 3.5 }}
         >
-          {portraitFluid && (
+          {portraitData && (
             <Box
               as={GatsbyImage}
-              fluid={portraitFluid}
-              alt={portraitAlt ?? name ? `Photo of ${name}` : undefined}
+              image={portraitData}
+              alt={portraitAlt ?? name ? `Photo of ${name}` : ''}
               styles={{ height: 'full', width: 'full' }}
             />
           )}
@@ -347,13 +347,13 @@ export const PageBodyFellowsGrid = ({
               gridColumn: [null, 'span-5'],
             }}
           >
-            {modalFellow?.photoFluid && (
+            {modalFellow?.photoData && (
               <GatsbyImage
-                fluid={modalFellow.photoFluid}
+                image={modalFellow.photoData}
                 alt={
                   modalFellow.photoAlt ?? modalFellow.name
                     ? `Photo of ${modalFellow.name}`
-                    : undefined
+                    : ''
                 }
               />
             )}
@@ -448,7 +448,7 @@ export const PageBodyFellowsGrid = ({
                       href={fellow.url}
                       name={fellow.name}
                       cohortTitle={fellow.cohortTitle}
-                      portraitFluid={fellow.portraitFluid}
+                      portraitData={fellow.portraitData}
                       portraitAlt={fellow.portraitAlt}
                       openFellowModal={() =>
                         fellow.uid && openFellowModal(fellow.uid)
@@ -468,7 +468,7 @@ export const PageBodyFellowsGrid = ({
                       href={fellow.url}
                       name={fellow.name}
                       cohortTitle={fellow.cohortTitle}
-                      portraitFluid={fellow.portraitFluid}
+                      portraitData={fellow.portraitData}
                       portraitAlt={fellow.portraitAlt}
                       openFellowModal={() =>
                         fellow.uid && openFellowModal(fellow.uid)
@@ -491,7 +491,7 @@ export const PageBodyFellowsGrid = ({
                             href={fellow.url}
                             name={fellow.name}
                             cohortTitle={fellow.cohortTitle}
-                            portraitFluid={fellow.portraitFluid}
+                            portraitData={fellow.portraitData}
                             portraitAlt={fellow.portraitAlt}
                             openFellowModal={() =>
                               fellow.uid && openFellowModal(fellow.uid)

@@ -9,7 +9,7 @@
         meta_title
         meta_description
         header {
-          ... on PrismicInteriorPageHeaderHeroImage {
+          ... on PrismicInteriorPageDataHeaderHeroImage {
             primary {
               heading {
                 text
@@ -18,35 +18,35 @@
           }
         }
         body {
-          ... on PrismicInteriorPageBodyTextIntro {
+          ... on PrismicInteriorPageDataBodyTextIntro {
             primary {
               introductory_text {
                 text
               }
             }
           }
-          ... on PrismicInteriorPageBodyText {
+          ... on PrismicInteriorPageDataBodyText {
             primary {
               text {
                 text
               }
             }
           }
-          ... on PrismicInteriorPageBodyImages {
+          ... on PrismicInteriorPageDataBodyImages {
             items {
               caption {
                 text
               }
             }
           }
-          ... on PrismicInteriorPageBodyLinkCard {
+          ... on PrismicInteriorPageDataBodyLinkCard {
             primary {
               link_title {
                 text
               }
             }
           }
-          ... on PrismicInteriorPageBodyStaffDirectory {
+          ... on PrismicInteriorPageDataBodyStaffDirectory {
             items {
               name {
                 text
@@ -83,28 +83,28 @@
           }
         }
         body {
-          ... on PrismicNewsPostBodyTextIntro {
+          ... on PrismicNewsPostDataBodyTextIntro {
             primary {
               introductory_text {
                 text
               }
             }
           }
-          ... on PrismicNewsPostBodyText {
+          ... on PrismicNewsPostDataBodyText {
             primary {
               text {
                 text
               }
             }
           }
-          ... on PrismicNewsPostBodyImages {
+          ... on PrismicNewsPostDataBodyImages {
             items {
               caption {
                 text
               }
             }
           }
-          ... on PrismicNewsPostBodyLinkCard {
+          ... on PrismicNewsPostDataBodyLinkCard {
             primary {
               link_title {
                 text
@@ -135,28 +135,28 @@
           }
         }
         body {
-          ... on PrismicProjectBodyTextIntro {
+          ... on PrismicProjectDataBodyTextIntro {
             primary {
               introductory_text {
                 text
               }
             }
           }
-          ... on PrismicProjectBodyText {
+          ... on PrismicProjectDataBodyText {
             primary {
               text {
                 text
               }
             }
           }
-          ... on PrismicProjectBodyImages {
+          ... on PrismicProjectDataBodyImages {
             items {
               caption {
                 text
               }
             }
           }
-          ... on PrismicProjectBodyLinkCard {
+          ... on PrismicProjectDataBodyLinkCard {
             primary {
               link_title {
                 text
@@ -178,14 +178,14 @@
         meta_title
         meta_description
         body {
-          ... on PrismicPageBodyText {
+          ... on PrismicPageDataBodyText {
             primary {
               text {
                 text
               }
             }
           }
-          ... on PrismicPageBodyHeroImage {
+          ... on PrismicPageDataBodyHeroImage {
             primary {
               text {
                 text
@@ -195,7 +195,7 @@
               }
             }
           }
-          ... on PrismicPageBodyQuoteSlideshow {
+          ... on PrismicPageDataBodyQuoteSlideshow {
             items {
               quote {
                 text
@@ -208,14 +208,14 @@
               }
             }
           }
-          ... on PrismicPageBodyImageCarousel {
+          ... on PrismicPageDataBodyImageCarousel {
             items {
               caption {
                 text
               }
             }
           }
-          ... on PrismicPageBodyLinkCollection {
+          ... on PrismicPageDataBodyLinkCollection {
             items {
               name {
                 text
@@ -228,7 +228,7 @@
               }
             }
           }
-          ... on PrismicPageBodyHeadshotQuote {
+          ... on PrismicPageDataBodyHeadshotQuote {
             primary {
               quote {
                 text

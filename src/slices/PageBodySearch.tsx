@@ -13,7 +13,6 @@ import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 import { SEARCH_URL } from '../constants'
 import { useCommonStyles } from '../hooks/useCommonStyles'
 import { usePaginatedCollection } from '../hooks/usePaginatedCollection'
-import { mockGatsbyImageFluid } from '../lib/mockGatsbyImage'
 
 import { BoundedBox } from '../components/BoundedBox'
 import { Text } from '../components/Text'
@@ -258,25 +257,21 @@ export const PageLayoutSearchResults = ({
                 : undefined
             }
           >
-            {paginatedResults.paginatedCollection.map((result) => (
-              <ContentCard
-                key={result.url}
-                topLabel={resultTypeToPublicLabel[result.type]}
-                title={result.title}
-                excerpt={result.description}
-                href={result.url}
-                featuredImageFluid={
-                  result.featuredImageURL && result.featuredImageAspectRatio
-                    ? mockGatsbyImageFluid(
-                        result.featuredImageURL,
-                        result.featuredImageAspectRatio,
-                      )
-                    : undefined
-                }
-                featuredImageAlt={result.featuredImageAlt}
-                buttonText={resultTypeToButtonText[result.type]}
-              />
-            ))}
+            {paginatedResults.paginatedCollection.map((result) => {
+              return (
+                <ContentCard
+                  key={result.url}
+                  topLabel={resultTypeToPublicLabel[result.type]}
+                  title={result.title}
+                  excerpt={result.description}
+                  href={result.url}
+                  featuredImageURL={result.featuredImageURL}
+                  featuredImageAlt={result.featuredImageAlt}
+                  featuredImageDimensions={result.featuredImageDimensions}
+                  buttonText={resultTypeToButtonText[result.type]}
+                />
+              )
+            })}
           </ContentCardsList>
         </BoundedBox>
       </Box>

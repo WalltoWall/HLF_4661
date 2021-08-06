@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import GatsbyImage from 'gatsby-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { Box } from '@walltowall/calico'
 import { undefIfEmpty } from '@walltowall/helpers'
 
@@ -21,7 +21,7 @@ export const PageBodyHeadshotQuote = ({
   credit,
   buttonText = 'Learn More',
   buttonHref,
-  photoFluid,
+  photoData,
   photoAlt,
   nextSharesBg,
 }: PageBodyHeadshotQuoteProps) => {
@@ -62,7 +62,7 @@ export const PageBodyHeadshotQuote = ({
             gridColumnEnd: [-1, null, 4],
           }}
         >
-          {photoFluid && <GatsbyImage fluid={photoFluid} alt={photoAlt} />}
+          {photoData && <GatsbyImage image={photoData} alt={photoAlt ?? ''} />}
         </Box>
         <Box
           as="figure"
@@ -113,7 +113,7 @@ export const mapDataToProps = ({
   credit: data.primary?.credit?.text,
   buttonText: undefIfEmpty(data.primary?.button_text?.text),
   buttonHref: data.primary?.button_link?.url,
-  photoFluid: data.primary?.photo?.fluid,
+  photoData: data.primary?.photo?.gatsbyImageData as IGatsbyImageData,
   photoAlt: data.primary?.photo?.alt,
 })
 
@@ -122,7 +122,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyHeadshotQuote on PrismicPageBodyHeadshotQuote {
+  fragment PageBodyHeadshotQuote on PrismicPageDataBodyHeadshotQuote {
     primary {
       quote {
         text
@@ -138,9 +138,7 @@ export const fragment = graphql`
       }
       photo {
         alt
-        fluid(maxWidth: 500) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(width: 500, breakpoints: [250, 500])
       }
     }
   }

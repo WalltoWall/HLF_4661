@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
@@ -12,6 +12,7 @@ import { slicesMap } from '../slices/PageBody'
 
 import { Layout } from '../components/Layout'
 import { useSiteSettings } from '../hooks/useSiteSettings'
+import { linkResolver } from '../linkResolver'
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -57,6 +58,13 @@ export const mapDataToPropsEnhancer = (
     ...props,
   }
 }
+
+/**
+ * The v4 changes to `gatsby-source-prismic` changed the way types were named.
+ * This function is used to accomodate those changes.
+ */
+export const getType = (data: { __typename?: string }) =>
+  data.__typename?.replace('PrismicPageDataBody', 'PageBody') ?? ''
 
 /**
  * Props added to all slices by `mapDataToPropsEnhancer` for `PageTemplate`.
@@ -108,12 +116,18 @@ export const PageTemplate = ({
         meta={meta}
         listMiddleware={slicesMiddleware}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getType}
       />
     </Layout>
   )
 }
 
-export default withPreview(PageTemplate)
+export default withPrismicPreviewResolver(PageTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query PageTemplate($uid: String!) {
@@ -128,7 +142,7 @@ export const query = graphql`
         meta_description
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesPageBody

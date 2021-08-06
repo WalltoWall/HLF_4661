@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { useStyles } from 'react-treat'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { useKeenSlider } from 'keen-slider/react'
 import { Box } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
@@ -60,7 +60,7 @@ type SlideProps = {
   quote?: string
   quoteeName?: string
   quoteeTitle?: string
-  imageFluid?: FluidObject
+  imageData?: IGatsbyImageData
   imageAlt?: string
 }
 
@@ -68,7 +68,7 @@ const Slide = ({
   quote,
   quoteeName,
   quoteeTitle,
-  imageFluid,
+  imageData,
   imageAlt,
 }: SlideProps) => {
   const styles = useStyles(styleRefs)
@@ -82,7 +82,7 @@ const Slide = ({
         alignItems: 'center',
       }}
     >
-      {imageFluid && (
+      {imageData && (
         <Box
           as={AspectRatio}
           x={1}
@@ -98,8 +98,8 @@ const Slide = ({
         >
           <Box
             as={GatsbyImage}
-            fluid={imageFluid}
-            alt={imageAlt}
+            image={imageData}
+            alt={imageAlt ?? ''}
             styles={{ height: 'full', width: 'full' }}
           />
         </Box>
@@ -180,7 +180,7 @@ export const mapDataToProps = ({
       quote={item?.quote?.text}
       quoteeName={item?.quotee_name?.text}
       quoteeTitle={item?.quotee_title?.text}
-      imageFluid={item?.photo?.fluid}
+      imageData={item?.photo?.gatsbyImageData as IGatsbyImageData}
       imageAlt={item?.photo?.alt}
     />
   )),
@@ -191,7 +191,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment PageBodyQuoteSlideshow on PrismicPageBodyQuoteSlideshow {
+  fragment PageBodyQuoteSlideshow on PrismicPageDataBodyQuoteSlideshow {
     items {
       quote {
         text
@@ -204,9 +204,7 @@ export const fragment = graphql`
       }
       photo {
         alt
-        fluid(maxWidth: 1000) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
       }
     }
   }

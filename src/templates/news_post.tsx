@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { Box } from '@walltowall/calico'
 import { propPairsEq } from '@walltowall/helpers'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
 import { NewsPostTemplateQuery } from '../types.generated'
@@ -23,6 +24,9 @@ import { Divider } from '../components/Divider'
 import { ContentCard } from '../components/ContentCard'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { BackButton } from '../components/BackButton'
+import { linkResolver } from '../linkResolver'
+
+import { getType as getPageType } from './page'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -71,6 +75,13 @@ export const mapDataToPropsEnhancer = (
     ...props,
   }
 }
+
+/**
+ * The v4 changes to `gatsby-source-prismic` changed the way types were named.
+ * This function is used to accomodate those changes.
+ */
+export const getType = (data: { __typename?: string }) =>
+  data.__typename?.replace('PrismicNewsPostDataBody', 'NewsPostBody') ?? ''
 
 /**
  * Props added to all slices by `mapDataToPropsEnhancer` for `NewsPostTemplate`.
@@ -146,6 +157,7 @@ export const NewsPostTemplate = ({
         map={slicesMap}
         meta={meta}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
       <Box
         styles={{
@@ -198,6 +210,7 @@ export const NewsPostTemplate = ({
             map={slicesMap}
             meta={meta}
             mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+            getType={getType}
           />
           <BoundedBox styles={{ paddingTop: [6, 7, 8] }}>
             {nextNewsPost && nextNewsPost.url && (
@@ -212,7 +225,10 @@ export const NewsPostTemplate = ({
                     (nextNewsPost?.data?.published_at as string) ??
                     (nextNewsPost?.first_publication_date as string)
                   }
-                  featuredImageFluid={nextNewsPost.data?.featured_image?.fluid}
+                  featuredImageData={
+                    nextNewsPost.data?.featured_image
+                      ?.gatsbyImageData as IGatsbyImageData
+                  }
                   featuredImageAlt={nextNewsPost.data?.featured_image?.alt}
                   buttonText="Read More"
                 />
@@ -226,12 +242,18 @@ export const NewsPostTemplate = ({
         map={slicesMap}
         meta={meta}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
     </Layout>
   )
 }
 
-export default withPreview(NewsPostTemplate)
+export default withPrismicPreviewResolver(NewsPostTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query NewsPostTemplate($uid: String!, $nextUID: String, $prevUID: String) {
@@ -264,7 +286,7 @@ export const query = graphql`
         }
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesNewsPostBody
@@ -294,9 +316,7 @@ export const query = graphql`
       }
       featured_image {
         alt
-        fluid(maxWidth: 400) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
       }
     }
   }

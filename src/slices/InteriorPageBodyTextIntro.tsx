@@ -48,7 +48,7 @@ export const mapDataToContext = () => ({
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyTextIntro on PrismicInteriorPageBodyTextIntro {
+  fragment InteriorPageBodyTextIntro on PrismicInteriorPageDataBodyTextIntro {
     primary {
       introductory_text {
         text

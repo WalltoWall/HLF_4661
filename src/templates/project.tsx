@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { Box } from '@walltowall/calico'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { getRichText, propPairsEq, undefIfEmpty } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
@@ -26,6 +27,7 @@ import { BackButton } from '../components/BackButton'
 
 import { ProjectBodyText } from '../slices/ProjectBodyText'
 import { LinkCollection } from '../components/LinkCollection'
+import { linkResolver } from '../linkResolver'
 
 // Merged slices map including PageBodyHeader and PageBodyFooter.
 const slicesMap = {
@@ -74,6 +76,13 @@ export const mapDataToPropsEnhancer = (
     ...props,
   }
 }
+
+/**
+ * The v4 changes to `gatsby-source-prismic` changed the way types were named.
+ * This function is used to accomodate those changes.
+ */
+export const getType = (data: { __typename?: string }) =>
+  data.__typename?.replace('PrismicProjectDataBody', 'ProjectBody') ?? ''
 
 /**
  * Props added to all slices by `mapDataToPropsEnhancer` for `ProjectTemplate`.
@@ -202,6 +211,7 @@ export const ProjectTemplate = ({
               map={slicesMap}
               meta={meta}
               mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+              getType={getType}
             />
           ) : (
             <ProjectBodyText
@@ -227,8 +237,9 @@ export const ProjectTemplate = ({
                           ?.data?.title?.text
                       }
                       href={item?.involved_fellow?.document?.url}
-                      thumbnailFluid={
-                        item?.involved_fellow?.document?.data?.portrait?.fluid
+                      thumbnailData={
+                        item?.involved_fellow?.document?.data?.portrait
+                          ?.gatsbyImageData as IGatsbyImageData
                       }
                       thumbnailAlt={
                         item?.involved_fellow?.document?.data?.portrait?.alt
@@ -248,7 +259,10 @@ export const ProjectTemplate = ({
                   topLabel="Next Project"
                   title={nextProject.data?.title?.text}
                   excerptHTML={getRichText(nextProject.data?.description)}
-                  featuredImageFluid={nextProject.data?.featured_image?.fluid}
+                  featuredImageData={
+                    nextProject.data?.featured_image
+                      ?.gatsbyImageData as IGatsbyImageData
+                  }
                   featuredImageAlt={nextProject.data?.featured_image?.alt}
                   sublinkHref={nextProject.data?.website_url?.url}
                   sublinkText={prettyURL(nextProject.data?.website_url?.url)}
@@ -268,7 +282,12 @@ export const ProjectTemplate = ({
   )
 }
 
-export default withPreview(ProjectTemplate)
+export default withPrismicPreviewResolver(ProjectTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query ProjectTemplate($uid: String!, $nextUID: String, $prevUID: String) {
@@ -312,9 +331,11 @@ export const query = graphql`
                   }
                   portrait {
                     alt
-                    fluid(maxWidth: 300) {
-                      ...GatsbyPrismicImageFluid
-                    }
+                    gatsbyImageData(
+                      placeholder: BLURRED
+                      width: 300
+                      breakpoints: [300]
+                    )
                   }
                 }
               }
@@ -338,7 +359,7 @@ export const query = graphql`
         }
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesProjectBody
@@ -365,7 +386,7 @@ export const query = graphql`
         meta_description
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesPageBody
@@ -390,9 +411,7 @@ export const query = graphql`
       }
       featured_image {
         alt
-        fluid(maxWidth: 400) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
       }
     }
   }

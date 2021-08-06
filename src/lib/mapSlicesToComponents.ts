@@ -31,7 +31,7 @@ export type MapDataToPropsArgs<
     string,
     React.ComponentType<any>
   >,
-  T extends keyof TMap = any
+  T extends keyof TMap = any,
 > = Parameters<
   TMapDataToPropsFn<
     T,
@@ -54,7 +54,7 @@ export type MapDataToContextArgs<
     React.ComponentType<any>
   >,
   T extends keyof TMap = any,
-  TContext = any
+  TContext = any,
 > = Parameters<
   TMapDataToContextFn<T, TMap, TDataFragment, Meta<TRootQuery>, TContext>
 >[0]

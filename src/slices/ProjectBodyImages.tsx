@@ -19,14 +19,12 @@ ProjectBodyImages.Image = InteriorPageBodyImages.Image
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment ProjectBodyImages on PrismicProjectBodyImages {
+  fragment ProjectBodyImages on PrismicProjectDataBodyImages {
     items {
       image {
         alt
         url
-        fluid(maxWidth: 800) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 600, breakpoints: [600])
       }
       caption {
         html

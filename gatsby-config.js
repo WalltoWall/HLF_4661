@@ -17,11 +17,11 @@ module.exports = {
   siteMetadata,
   plugins: [
     process.env.ANALYZE && 'gatsby-plugin-webpack-bundle-analyser-v2',
+    'gatsby-plugin-image',
     'gatsby-plugin-react-helmet-async',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-svgr',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-treat',
     process.env.GOOGLE_ANALYTICS_TRACKING_ID && {
       resolve: 'gatsby-plugin-google-gtag',
       options: {
@@ -60,7 +60,12 @@ module.exports = {
         schemas: require('./src/schemas'),
         linkResolver: require('./src/linkResolver').linkResolver,
         fetchLinks: ['page.parent', 'interior_page.parent'],
-        prismicToolbar: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-prismic-previews',
+      options: {
+        repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME,
       },
     },
     {
@@ -80,6 +85,7 @@ module.exports = {
           'description',
           'featuredImageURL',
           'featuredImageAspectRatio',
+          'featuredImageDimensions',
           'featuredImageAlt',
         ],
         index: ['title', 'description', 'content'],
@@ -108,6 +114,7 @@ module.exports = {
               ? node.data?.featured_image?.dimensions?.width /
                 node.data?.featured_image?.dimensions?.height
               : 8 / 5,
+            featuredImageDimensions: node.data?.featured_image?.dimensions,
             featuredImageAlt: node.data?.featured_image?.alt,
             description: truncate(node.data?.description?.text, 200),
             content: valuesDeep(node.data?.body).join(' '),
@@ -121,6 +128,7 @@ module.exports = {
               ? node.data?.featured_image?.dimensions?.width /
                 node.data?.featured_image?.dimensions?.height
               : 8 / 5,
+            featuredImageDimensions: node.data?.featured_image?.dimensions,
             featuredImageAlt: node.data?.featured_image?.alt,
             description: truncate(node.data?.excerpt?.text, 200),
             content: valuesDeep(node.data?.body).join(' '),

@@ -17,7 +17,7 @@ export const ProjectBodyVideo = (props: ProjectBodyVideoProps) => (
 export { mapDataToProps, mapDataToContext }
 
 export const fragment = graphql`
-  fragment ProjectBodyVideo on PrismicProjectBodyVideo {
+  fragment ProjectBodyVideo on PrismicProjectDataBodyVideo {
     primary {
       video {
         embed_url
@@ -27,9 +27,11 @@ export const fragment = graphql`
       }
       poster {
         alt
-        fluid(maxWidth: 800) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(
+          placeholder: BLURRED
+          width: 800
+          breakpoints: [360, 720, 800]
+        )
       }
     }
   }

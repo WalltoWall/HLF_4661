@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { propPairsEq } from '@walltowall/helpers'
 import { Box } from '@walltowall/calico'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
@@ -18,6 +19,8 @@ import { ContentCard } from '../components/ContentCard'
 import { ContentCardsList } from '../components/ContentCardsList'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { Text } from '../components/Text'
+import { linkResolver } from '../linkResolver'
+import { getType as getPageType } from './page'
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -146,6 +149,7 @@ export const NewsTemplate = ({
         meta={meta}
         listMiddleware={slicesMiddleware}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
       <Box
         styles={{
@@ -203,7 +207,10 @@ export const NewsTemplate = ({
                         (newsPost?.data?.published_at as string) ??
                         (newsPost?.first_publication_date as string)
                       }
-                      featuredImageFluid={newsPost.data?.featured_image?.fluid}
+                      featuredImageData={
+                        newsPost.data?.featured_image
+                          ?.gatsbyImageData as IGatsbyImageData
+                      }
                       featuredImageAlt={newsPost.data?.featured_image?.alt}
                       buttonText="Read More"
                     />
@@ -219,12 +226,18 @@ export const NewsTemplate = ({
         map={slicesMap}
         meta={meta}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
     </Layout>
   )
 }
 
-export default withPreview(NewsTemplate)
+export default withPrismicPreviewResolver(NewsTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query NewsTemplate($limit: Int!, $skip: Int!) {
@@ -239,7 +252,7 @@ export const query = graphql`
         meta_description
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesPageBody
@@ -283,9 +296,11 @@ export const query = graphql`
           }
           featured_image {
             alt
-            fluid(maxWidth: 400) {
-              ...GatsbyPrismicImageFluid
-            }
+            gatsbyImageData(
+              placeholder: BLURRED
+              width: 400
+              breakpoints: [400]
+            )
           }
         }
       }

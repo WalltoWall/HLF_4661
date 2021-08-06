@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
-import { withPreview } from 'gatsby-source-prismic'
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { getRichText, propPairsEq } from '@walltowall/helpers'
 import { Box } from '@walltowall/calico'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
@@ -19,6 +19,8 @@ import { ContentCard } from '../components/ContentCard'
 import { ContentCardsList } from '../components/ContentCardsList'
 import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { Text } from '../components/Text'
+import { linkResolver } from '../linkResolver'
+import { getType as getPageType } from './page'
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -147,6 +149,7 @@ export const ProjectsTemplate = ({
         meta={meta}
         listMiddleware={slicesMiddleware}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
       <Box
         styles={{
@@ -200,7 +203,9 @@ export const ProjectsTemplate = ({
                       topLabel={primaryProjectCategory?.data?.name?.text}
                       title={project.data?.title?.text}
                       excerptHTML={getRichText(project.data?.description)}
-                      featuredImageFluid={project.data?.featured_image?.fluid}
+                      featuredImageData={
+                        project.data?.featured_image?.gatsbyImageData
+                      }
                       featuredImageAlt={project.data?.featured_image?.alt}
                       sublinkHref={project.data?.website_url?.url}
                       sublinkText={prettyURL(project.data?.website_url?.url)}
@@ -217,12 +222,18 @@ export const ProjectsTemplate = ({
         map={slicesMap}
         meta={meta}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
     </Layout>
   )
 }
 
-export default withPreview(ProjectsTemplate)
+export default withPrismicPreviewResolver(ProjectsTemplate, [
+  {
+    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+    linkResolver,
+  },
+])
 
 export const query = graphql`
   query ProjectsTemplate($limit: Int!, $skip: Int!) {
@@ -237,7 +248,7 @@ export const query = graphql`
         meta_description
         body {
           __typename
-          ... on Node {
+          ... on PrismicSliceType {
             id
           }
           ...SlicesPageBody
@@ -246,7 +257,7 @@ export const query = graphql`
     }
 
     allPrismicProject(
-      sort: { fields: [_ON_BUILD_ONLY_normalized_title], order: ASC }
+      sort: { fields: uid, order: ASC }
       limit: $limit
       skip: $skip
     ) {
@@ -280,9 +291,11 @@ export const query = graphql`
           }
           featured_image {
             alt
-            fluid(maxWidth: 400) {
-              ...GatsbyPrismicImageFluid
-            }
+            gatsbyImageData(
+              placeholder: BLURRED
+              width: 400
+              breakpoints: [400]
+            )
           }
         }
       }

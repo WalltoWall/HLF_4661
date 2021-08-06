@@ -1,5 +1,5 @@
 import * as React from 'react'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { Box, BoxProps } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
 import ConditionalWrap from 'conditional-wrap'
@@ -9,7 +9,6 @@ import { ButtonLink } from './ButtonLink'
 import { Link } from './Link'
 import { Anchor } from './Anchor'
 import { HTMLContent } from './HTMLContent'
-import { Icon } from './Icon'
 
 import { ReactComponent as AssetLogoBugGrayscaleSVG } from '../assets/logo-bug-grayscale.svg'
 
@@ -23,14 +22,19 @@ type ContentCardProps<E extends React.ElementType> = {
   excerptHTML?: string
   href?: string
   buttonText?: string
-  featuredImageFluid?: FluidObject
+  featuredImageData?: IGatsbyImageData
   featuredImageAlt?: string
+  featuredImageURL?: string
+  featuredImageDimensions?: {
+    width: number
+    height: number
+  }
   sublinkHref?: string
   sublinkText?: string
 } & BoxProps<E>
 
 export const ContentCard = <
-  E extends React.ElementType = typeof defaultElement
+  E extends React.ElementType = typeof defaultElement,
 >({
   topLabel,
   title,
@@ -39,8 +43,10 @@ export const ContentCard = <
   href,
   date,
   buttonText = 'Learn More',
-  featuredImageFluid,
+  featuredImageData,
   featuredImageAlt,
+  featuredImageURL,
+  featuredImageDimensions,
   sublinkHref,
   sublinkText,
   ...props
@@ -64,11 +70,27 @@ export const ContentCard = <
           condition={Boolean(href)}
           wrap={(children) => <Link href={href!}>{children}</Link>}
         >
-          {featuredImageFluid ? (
+          {featuredImageData ? (
             <Box
               as={GatsbyImage}
-              fluid={featuredImageFluid}
-              alt={featuredImageAlt}
+              image={featuredImageData}
+              alt={featuredImageAlt ?? ''}
+              styles={{
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'gray20',
+              }}
+            />
+          ) : featuredImageURL ? (
+            <Box
+              as="img"
+              loading="lazy"
+              decoding="async"
+              alt={featuredImageAlt ?? ''}
+              src={featuredImageURL}
+              width={featuredImageDimensions?.width}
+              height={featuredImageDimensions?.height}
+              style={{ objectFit: 'cover' }}
               styles={{
                 borderWidth: '1px',
                 borderStyle: 'solid',
@@ -131,7 +153,7 @@ export const ContentCard = <
               <Text variant="serif-20-24">{title}</Text>
             </ConditionalWrap>
           )}
-          {sublinkHref && (
+          {sublinkHref && sublinkText && (
             <Anchor href={sublinkHref}>
               <Text variant="serif-14-16">{sublinkText}</Text>
             </Anchor>
@@ -145,9 +167,8 @@ export const ContentCard = <
             <HTMLContent
               html={excerptHTML}
               componentOverrides={{
-                p: (Comp) => (props) => (
-                  <Comp variant="serif-14-16" {...props} />
-                ),
+                p: (Comp) => (props) =>
+                  <Comp variant="serif-14-16" {...props} />,
               }}
               styles={{ color: 'gray40' }}
             />
