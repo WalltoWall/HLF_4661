@@ -24,9 +24,7 @@ export const fragment = graphql`
       image {
         alt
         url
-        fluid(maxWidth: 800) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 600, breakpoints: [600])
       }
       caption {
         html

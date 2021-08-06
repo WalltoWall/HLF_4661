@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
 import { Box } from '@walltowall/calico'
+import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
 import { getRichText } from '@walltowall/helpers'
 import slugify from 'slugify'
 
@@ -75,7 +75,7 @@ export type InteriorPageBodyStaffDirectoryStaffMemberProps = {
   name?: string
   title?: string
   biographyHTML?: string
-  photoFluid?: FluidObject
+  photoData?: IGatsbyImageData
   photoAlt?: string
 }
 
@@ -83,7 +83,7 @@ const StaffMember = ({
   name,
   title,
   biographyHTML,
-  photoFluid,
+  photoData,
   photoAlt,
 }: InteriorPageBodyStaffDirectoryStaffMemberProps) => (
   <Box
@@ -96,11 +96,11 @@ const StaffMember = ({
       alignItems: 'start',
     }}
   >
-    {photoFluid && (
+    {photoData && (
       <Box
         as={GatsbyImage}
-        fluid={photoFluid}
-        alt={photoAlt}
+        image={photoData}
+        alt={photoAlt ?? ''}
         styles={{ gridColumn: ['span-4', 'span-3'] }}
       />
     )}
@@ -139,7 +139,7 @@ export const mapDataToProps = ({
       name={item?.name?.text}
       title={item?.staff_title?.text}
       biographyHTML={getRichText(item?.biography)}
-      photoFluid={item?.photo?.fluid as FluidObject}
+      photoData={item?.photo?.gatsbyImageData as IGatsbyImageData}
       photoAlt={item?.photo?.alt}
     />
   )) as React.ReactNode,
@@ -164,9 +164,7 @@ export const fragment = graphql`
       }
       photo {
         alt
-        fluid(maxWidth: 800) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 300, breakpoints: [300])
       }
     }
   }

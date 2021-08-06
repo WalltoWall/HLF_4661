@@ -3,6 +3,7 @@ import { graphql, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { Box } from '@walltowall/calico'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { getRichText, propPairsEq, undefIfEmpty } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
@@ -236,8 +237,9 @@ export const ProjectTemplate = ({
                           ?.data?.title?.text
                       }
                       href={item?.involved_fellow?.document?.url}
-                      thumbnailFluid={
-                        item?.involved_fellow?.document?.data?.portrait?.fluid
+                      thumbnailData={
+                        item?.involved_fellow?.document?.data?.portrait
+                          ?.gatsbyImageData as IGatsbyImageData
                       }
                       thumbnailAlt={
                         item?.involved_fellow?.document?.data?.portrait?.alt
@@ -257,7 +259,10 @@ export const ProjectTemplate = ({
                   topLabel="Next Project"
                   title={nextProject.data?.title?.text}
                   excerptHTML={getRichText(nextProject.data?.description)}
-                  featuredImageFluid={nextProject.data?.featured_image?.fluid}
+                  featuredImageData={
+                    nextProject.data?.featured_image
+                      ?.gatsbyImageData as IGatsbyImageData
+                  }
                   featuredImageAlt={nextProject.data?.featured_image?.alt}
                   sublinkHref={nextProject.data?.website_url?.url}
                   sublinkText={prettyURL(nextProject.data?.website_url?.url)}
@@ -326,9 +331,11 @@ export const query = graphql`
                   }
                   portrait {
                     alt
-                    fluid(maxWidth: 300) {
-                      ...GatsbyPrismicImageFluid
-                    }
+                    gatsbyImageData(
+                      placeholder: BLURRED
+                      width: 300
+                      breakpoints: [300]
+                    )
                   }
                 }
               }
@@ -404,9 +411,7 @@ export const query = graphql`
       }
       featured_image {
         alt
-        fluid(maxWidth: 400) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
       }
     }
   }

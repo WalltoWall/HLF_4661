@@ -1,5 +1,5 @@
 import * as React from 'react'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { Box, BoxProps } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
 import ConditionalWrap from 'conditional-wrap'
@@ -22,7 +22,7 @@ type ContentCardProps<E extends React.ElementType> = {
   excerptHTML?: string
   href?: string
   buttonText?: string
-  featuredImageFluid?: FluidObject
+  featuredImageData?: IGatsbyImageData
   featuredImageAlt?: string
   sublinkHref?: string
   sublinkText?: string
@@ -38,7 +38,7 @@ export const ContentCard = <
   href,
   date,
   buttonText = 'Learn More',
-  featuredImageFluid,
+  featuredImageData,
   featuredImageAlt,
   sublinkHref,
   sublinkText,
@@ -63,11 +63,11 @@ export const ContentCard = <
           condition={Boolean(href)}
           wrap={(children) => <Link href={href!}>{children}</Link>}
         >
-          {featuredImageFluid ? (
+          {featuredImageData ? (
             <Box
               as={GatsbyImage}
-              fluid={featuredImageFluid}
-              alt={featuredImageAlt}
+              image={featuredImageData}
+              alt={featuredImageAlt ?? ''}
               styles={{
                 borderWidth: '1px',
                 borderStyle: 'solid',

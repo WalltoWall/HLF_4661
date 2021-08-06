@@ -1,5 +1,5 @@
 import * as React from 'react'
-import GatsbyImage, { FluidObject } from 'gatsby-image'
+import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
 import { useStyles } from 'react-treat'
 import { Box, BoxProps } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
@@ -7,7 +7,6 @@ import VisuallyHidden from '@reach/visually-hidden'
 import ReactPlayer, { ReactPlayerProps } from 'react-player'
 
 import { Icon } from '../components/Icon'
-import { mockGatsbyImageFluid } from '../lib/mockGatsbyImage'
 
 import * as styleRefs from './VideoPlayer.treat'
 
@@ -20,14 +19,14 @@ type VideoPlayerProps<E extends React.ElementType> = {
   videoURL: string
   videoProps?: ReactPlayerProps
   loop?: boolean
-  posterFluid?: FluidObject
+  posterData?: IGatsbyImageData
   posterAlt?: string
   posterURL?: string
   posterAspectRatio?: number
 } & BoxProps<E>
 
 export const VideoPlayer = <
-  E extends React.ElementType = typeof defaultElement
+  E extends React.ElementType = typeof defaultElement,
 >({
   x,
   y,
@@ -35,18 +34,13 @@ export const VideoPlayer = <
   videoURL,
   videoProps,
   loop = false,
-  posterFluid: rawPosterFluid,
+  posterData,
   posterAlt,
   posterURL,
   posterAspectRatio,
   ...props
 }: VideoPlayerProps<E>) => {
   const styles = useStyles(styleRefs)
-  const posterFluid =
-    rawPosterFluid ??
-    (posterURL
-      ? mockGatsbyImageFluid(posterURL, posterAspectRatio ?? y / x)
-      : undefined)
 
   const [isPlaying, setPlaying] = React.useState(autoplay)
   const play = () => setPlaying(true)
@@ -93,11 +87,11 @@ export const VideoPlayer = <
             }}
           >
             <VisuallyHidden>Play video</VisuallyHidden>
-            {posterFluid && (
+            {posterData && (
               <Box
                 as={GatsbyImage}
-                fluid={posterFluid}
-                alt={posterAlt}
+                image={posterData}
+                alt={posterAlt ?? ''}
                 styles={{
                   height: 'full',
                   width: 'full',
