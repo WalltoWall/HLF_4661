@@ -209,7 +209,9 @@ export const ProjectCategoryTemplate = ({
                       topLabel={primaryProjectCategory?.data?.name?.text}
                       title={project.data?.title?.text}
                       excerptHTML={getRichText(project.data?.description)}
-                      featuredImageFluid={project.data?.featured_image?.fluid}
+                      featuredImageData={
+                        project.data?.featured_image?.gatsbyImageData
+                      }
                       featuredImageAlt={project.data?.featured_image?.alt}
                       sublinkHref={project.data?.website_url?.url}
                       sublinkText={prettyURL(project.data?.website_url?.url)}
@@ -313,9 +315,11 @@ export const query = graphql`
           }
           featured_image {
             alt
-            fluid(maxWidth: 400) {
-              ...GatsbyPrismicImageFluid
-            }
+            gatsbyImageData(
+              placeholder: BLURRED
+              width: 400
+              breakpoints: [400]
+            )
           }
         }
       }

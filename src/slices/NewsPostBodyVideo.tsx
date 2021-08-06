@@ -27,9 +27,11 @@ export const fragment = graphql`
       }
       poster {
         alt
-        fluid(maxWidth: 800) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(
+          placeholder: BLURRED
+          width: 800
+          breakpoints: [360, 720, 800]
+        )
       }
     }
   }

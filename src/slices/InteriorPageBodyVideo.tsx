@@ -7,6 +7,7 @@ import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 
 import { BoundedBox } from '../components/BoundedBox'
 import { VideoPlayer } from '../components/VideoPlayer'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export type InteriorPageBodyVideoProps = ReturnType<typeof mapDataToProps> &
   PageTemplateEnhancerProps
@@ -15,7 +16,7 @@ export const InteriorPageBodyVideo = ({
   videoURL,
   videoThumbnailURL,
   videoThumbnailAspectRatio,
-  posterFluid,
+  posterData,
   posterAlt,
   nextSharesBg,
 }: InteriorPageBodyVideoProps) => (
@@ -30,7 +31,7 @@ export const InteriorPageBodyVideo = ({
         x={16}
         y={9}
         videoURL={videoURL}
-        posterFluid={posterFluid}
+        posterData={posterData}
         posterAlt={posterAlt}
         posterURL={videoThumbnailURL}
         posterAspectRatio={videoThumbnailAspectRatio}
@@ -56,7 +57,7 @@ export const mapDataToProps = ({
     videoURL: data.primary?.video?.embed_url,
     videoThumbnailURL: data.primary?.video?.thumbnail_url,
     videoThumbnailAspectRatio,
-    posterFluid: data.primary?.poster?.fluid,
+    posterData: data.primary?.poster?.gatsbyImageData as IGatsbyImageData,
     posterAlt: data.primary?.poster?.alt,
   }
 }
@@ -76,9 +77,11 @@ export const fragment = graphql`
       }
       poster {
         alt
-        fluid(maxWidth: 800) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(
+          placeholder: BLURRED
+          width: 800
+          breakpoints: [360, 720, 800]
+        )
       }
     }
   }

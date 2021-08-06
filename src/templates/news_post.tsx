@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async'
 import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
 import { Box } from '@walltowall/calico'
 import { propPairsEq } from '@walltowall/helpers'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
 import { NewsPostTemplateQuery } from '../types.generated'
@@ -224,7 +225,10 @@ export const NewsPostTemplate = ({
                     (nextNewsPost?.data?.published_at as string) ??
                     (nextNewsPost?.first_publication_date as string)
                   }
-                  featuredImageFluid={nextNewsPost.data?.featured_image?.fluid}
+                  featuredImageData={
+                    nextNewsPost.data?.featured_image
+                      ?.gatsbyImageData as IGatsbyImageData
+                  }
                   featuredImageAlt={nextNewsPost.data?.featured_image?.alt}
                   buttonText="Read More"
                 />
@@ -312,9 +316,7 @@ export const query = graphql`
       }
       featured_image {
         alt
-        fluid(maxWidth: 400) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
       }
     }
   }
