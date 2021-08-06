@@ -24,6 +24,11 @@ type ContentCardProps<E extends React.ElementType> = {
   buttonText?: string
   featuredImageData?: IGatsbyImageData
   featuredImageAlt?: string
+  featuredImageURL?: string
+  featuredImageDimensions?: {
+    width: number
+    height: number
+  }
   sublinkHref?: string
   sublinkText?: string
 } & BoxProps<E>
@@ -40,6 +45,8 @@ export const ContentCard = <
   buttonText = 'Learn More',
   featuredImageData,
   featuredImageAlt,
+  featuredImageURL,
+  featuredImageDimensions,
   sublinkHref,
   sublinkText,
   ...props
@@ -68,6 +75,22 @@ export const ContentCard = <
               as={GatsbyImage}
               image={featuredImageData}
               alt={featuredImageAlt ?? ''}
+              styles={{
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'gray20',
+              }}
+            />
+          ) : featuredImageURL ? (
+            <Box
+              as="img"
+              loading="lazy"
+              decoding="async"
+              alt={featuredImageAlt ?? ''}
+              src={featuredImageURL}
+              width={featuredImageDimensions?.width}
+              height={featuredImageDimensions?.height}
+              style={{ objectFit: 'cover' }}
               styles={{
                 borderWidth: '1px',
                 borderStyle: 'solid',
