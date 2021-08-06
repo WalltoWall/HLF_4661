@@ -489,22 +489,21 @@ exports.onCreateBabelConfig = ({ actions }, pluginOptions) => {
 exports.onCreateWebpackConfig = ({ actions, stage, loaders }) => {
   if (stage === 'develop-html') return
 
-  const defaultPluginOptions =
-    stage === 'develop'
-      ? {
-          localIdentName: '[name]-[local]_[hash:base64:5]',
-          themeIdentName: '_[name]-[local]_[hash:base64:4]',
-        }
-      : {
-          localIdentName: '[hash:base64:5]',
-          themeIdentName: '[hash:base64:4]',
-        }
+  const defaultPluginOptions = stage.includes('develop')
+    ? {
+        localIdentName: '[name]-[local]_[hash:base64:5]',
+        themeIdentName: '_[name]-[local]_[hash:base64:4]',
+      }
+    : {
+        localIdentName: '[hash:base64:5]',
+        themeIdentName: '[hash:base64:4]',
+      }
 
   actions.setWebpackConfig({
     plugins: [
       new TreatPlugin({
         ...defaultPluginOptions,
-        outputCSS: stage !== 'html',
+        outputCSS: !stage.includes('html'),
         outputLoaders: [loaders.miniCssExtract()],
       }),
     ],
