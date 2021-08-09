@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
 import faker from 'faker'
-import { buildImgixFluid } from 'gatsby-plugin-imgix'
+import { getGatsbyImageData } from '@imgix/gatsby'
 
 import * as Storybook from '../components/Storybook'
 import { titleize } from '../lib/titleize'
@@ -11,10 +11,11 @@ export const quote = faker.lorem.sentences(3)
 
 export const credit = titleize(faker.lorem.words(4))
 
-export const photo = buildImgixFluid({
+export const photo = getGatsbyImageData({
   url: 'https://images.prismic.io/omidyarfellows/93572ee4-8d81-4f87-b2bc-0ed5e084a859_Pierre.png',
   sourceWidth: 236,
   sourceHeight: 250,
+  layout: 'fullWidth',
 })
 
 <Meta title="Pages/Headshot Quote" component={PageBodyHeadshotQuote} />
@@ -36,7 +37,7 @@ optionally be linked to a page with more information.
   overrides={{
     photo: {
       description: 'Photo of Pierre',
-    }
+    },
   }}
 />
 
@@ -51,7 +52,7 @@ A button can be included that links to a page with more information.
       quote={quote}
       credit={credit}
       buttonHref="#"
-      photoFluid={photo}
+      photoData={photo}
     />
   </Story>
 </Canvas>
@@ -66,7 +67,7 @@ If a button link is not provided, a button is not displayed.
       nextSharesBg={false}
       quote={quote}
       credit={credit}
-      photoFluid={photo}
+      photoData={photo}
     />
   </Story>
 </Canvas>

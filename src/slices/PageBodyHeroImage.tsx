@@ -78,7 +78,9 @@ export const mapDataToProps = ({
 export const mapDataToContext = ({
   data,
 }: MapDataToContextArgs<PageBodyHeroImageFragment>) => {
-  const hasBackgroundImage = Boolean(data.primary?.background_image?.fluid)
+  const hasBackgroundImage = Boolean(
+    data.primary?.background_image?.gatsbyImageData,
+  )
 
   return {
     bg: hasBackgroundImage ? Symbol() : 'gray20',

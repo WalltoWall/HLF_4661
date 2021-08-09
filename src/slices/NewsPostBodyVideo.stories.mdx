@@ -1,19 +1,21 @@
 import { Canvas, Story, Meta } from '@storybook/addon-docs/blocks'
 import faker from 'faker'
+import { getGatsbyImageData } from '@imgix/gatsby'
 
 import { titleize } from '../lib/titleize'
-import { mockGatsbyImageFluid } from '../lib/mockGatsbyImage'
 import * as Storybook from '../components/Storybook'
 
 import { NewsPostBodyVideo } from './NewsPostBodyVideo'
 
 export const videoURL = 'https://vimeo.com/304626830'
-export const videoThumbnailURL = 'https://i.vimeocdn.com/video/757950873_590x332.jpg'
+export const videoThumbnailURL =
+  'https://i.vimeocdn.com/video/757950873_590x332.jpg'
 export const videoThumbnailAspectRatio = 16 / 9
-export const posterFluid = mockGatsbyImageFluid(
-  'https://i.vimeocdn.com/video/757950873.jpg',
-  16/9
-)
+export const posterData = getGatsbyImageData({
+  url: 'https://i.vimeocdn.com/video/757950873.jpg',
+  aspectRatio: 16 / 9,
+  layout: 'fullWidth',
+})
 
 <Meta title="News Posts/Video" />
 
@@ -22,8 +24,8 @@ export const posterFluid = mockGatsbyImageFluid(
 # Video
 
 Displays a video from a third-party service such as YouTube or Vimeo. By
-default, the cover image (a.k.a. poster image) from the third-party service
-will be used. A higher-quality poster can be provided as an override.
+default, the cover image (a.k.a. poster image) from the third-party service will
+be used. A higher-quality poster can be provided as an override.
 
 #### Slice fields
 
@@ -35,8 +37,8 @@ will be used. A higher-quality poster can be provided as an override.
   overrides={{
     poster: {
       description: 'Cover image displayed before the video is played',
-      isRequired: false
-    }
+      isRequired: false,
+    },
   }}
 />
 
@@ -48,7 +50,11 @@ default.
 
 <Canvas withSource="none">
   <Story name="With poster override">
-    <NewsPostBodyVideo nextSharesBg={false} videoURL={videoURL} posterFluid={posterFluid} />
+    <NewsPostBodyVideo
+      nextSharesBg={false}
+      videoURL={videoURL}
+      posterData={posterData}
+    />
   </Story>
 </Canvas>
 
@@ -59,6 +65,11 @@ generally be of low quality.
 
 <Canvas withSource="none">
   <Story name="Without poster override">
-    <NewsPostBodyVideo nextSharesBg={false}  videoURL={videoURL} videoThumbnailURL={videoThumbnailURL} videoThumbnailAspectRatio={videoThumbnailAspectRatio} />
+    <NewsPostBodyVideo
+      nextSharesBg={false}
+      videoURL={videoURL}
+      videoThumbnailURL={videoThumbnailURL}
+      videoThumbnailAspectRatio={videoThumbnailAspectRatio}
+    />
   </Story>
 </Canvas>

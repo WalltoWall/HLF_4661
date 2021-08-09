@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
 import faker from 'faker'
-import { buildImgixFluid } from 'gatsby-plugin-imgix'
+import { getGatsbyImageData } from '@imgix/gatsby'
 
 import * as Storybook from '../components/Storybook'
 import { titleize } from '../lib/titleize'
@@ -13,20 +13,20 @@ export const textHTML = `
 `
 
 export const images = [
-  buildImgixFluid({
+  getGatsbyImageData({
     url: 'https://images.unsplash.com/photo-1518776139882-8534d0198d62',
-    sourceWidth: 3,
-    sourceHeight: 4,
+    aspectRatio: 3 / 4,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
+  getGatsbyImageData({
     url: 'https://images.unsplash.com/photo-1512737717560-1fe5bcd648ca',
-    sourceWidth: 4,
-    sourceHeight: 3,
+    aspectRatio: 4 / 3,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
+  getGatsbyImageData({
     url: 'https://images.unsplash.com/photo-1496796287614-718d5ecf0229',
-    sourceWidth: 3,
-    sourceHeight: 4,
+    aspectRatio: 3 / 4,
+    layout: 'fullWidth',
   }),
 ]
 
@@ -53,7 +53,7 @@ Each item represents a slide with a background image, text, and optional button.
     background_image: {
       description: 'Background image behind the text',
       isRequired: false,
-    }
+    },
   }}
 />
 
@@ -70,7 +70,7 @@ if desired.
           key={i}
           textHTML={textHTML}
           buttonHref="#"
-          backgroundImageFluid={image}
+          backgroundImageData={image}
         />
       ))}
     </PageBodyHeroImageCarousel>

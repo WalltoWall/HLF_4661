@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
-import { buildImgixFluid } from 'gatsby-plugin-imgix'
+import { getGatsbyImageData } from '@imgix/gatsby'
 import faker from 'faker'
 
 import * as Storybook from '../components/Storybook'
@@ -8,42 +8,34 @@ import { titleize } from '../lib/titleize'
 import { PageBodyLinkCollection } from './PageBodyLinkCollection'
 
 export const thumbnails = [
-  buildImgixFluid({
-    url:
-      'https://images.unsplash.com/photo-1607166303098-19ed940446bd',
-    sourceWidth: 3,
-    sourceHeight: 4,
+  getGatsbyImageData({
+    url: 'https://images.unsplash.com/photo-1607166303098-19ed940446bd',
+    aspectRatio: 3 / 4,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
-    url:
-      'https://images.unsplash.com/photo-1555116505-38ab61800975',
-    sourceWidth: 3,
-    sourceHeight: 4,
+  getGatsbyImageData({
+    url: 'https://images.unsplash.com/photo-1555116505-38ab61800975',
+    aspectRatio: 3 / 4,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
-    url:
-      'https://images.unsplash.com/photo-1604851880472-376ce53d3244',
-    sourceWidth: 3,
-    sourceHeight: 4,
+  getGatsbyImageData({
+    url: 'https://images.unsplash.com/photo-1604851880472-376ce53d3244',
+    aspectRatio: 3 / 4,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
-    url:
-      'https://images.unsplash.com/photo-1542626991-cbc4e32524cc',
-    sourceWidth: 4,
-    sourceHeight: 3,
+  getGatsbyImageData({
+    url: 'https://images.unsplash.com/photo-1542626991-cbc4e32524cc',
+    aspectRatio: 4 / 3,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
-    url:
-      'https://images.unsplash.com/photo-1592149798279-eeb1b9dd8045',
-    sourceWidth: 3,
-    sourceHeight: 4,
+  getGatsbyImageData({
+    url: 'https://images.unsplash.com/photo-1592149798279-eeb1b9dd8045',
+    aspectRatio: 3 / 4,
+    layout: 'fullWidth',
   }),
 ]
 
-<Meta
-  title="Pages/Link Collection"
-  component={PageBodyLinkCollection}
-/>
+<Meta title="Pages/Link Collection" component={PageBodyLinkCollection} />
 
 ##### Page
 
@@ -83,7 +75,7 @@ this slice looks like with several links.
           name={titleize(faker.lorem.words(3))}
           description={faker.lorem.sentence()}
           href="#"
-          thumbnailFluid={thumbnail}
+          thumbnailData={thumbnail}
         />
       ))}
     </PageBodyLinkCollection>
@@ -102,7 +94,7 @@ include more than one.
         name={titleize(faker.lorem.words(3))}
         description={faker.lorem.sentence()}
         href="#"
-        thumbnailFluid={thumbnails[0]}
+        thumbnailData={thumbnails[0]}
       />
     </PageBodyLinkCollection>
   </Story>

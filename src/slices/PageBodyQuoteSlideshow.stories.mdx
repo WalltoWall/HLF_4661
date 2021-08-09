@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
-import { buildImgixFluid } from 'gatsby-plugin-imgix'
+import { getGatsbyImageData } from '@imgix/gatsby'
 import faker from 'faker'
 
 import * as Storybook from '../components/Storybook'
@@ -10,23 +10,23 @@ import { PageBodyQuoteSlideshow } from './PageBodyQuoteSlideshow'
 export const quote = faker.lorem.sentences(5)
 
 export const photos = [
-  buildImgixFluid({
-    url:
-      'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
+  getGatsbyImageData({
+    url: 'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
     sourceWidth: 1024,
     sourceHeight: 368,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
-    url:
-      'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
+  getGatsbyImageData({
+    url: 'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
     sourceWidth: 1024,
     sourceHeight: 368,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
-    url:
-      'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
+  getGatsbyImageData({
+    url: 'https://images.prismic.io/omidyarfellows/a0e8ae76-e0d6-4950-8a11-31ecd0dcef7e_PADDLEBLOCK2.jpg',
     sourceWidth: 1024,
     sourceHeight: 368,
+    layout: 'fullWidth',
   }),
 ]
 
@@ -69,19 +69,19 @@ One slide is shown at a time and automatically cycles through each slide.
         quote={quote}
         quoteeName={faker.name.findName()}
         quoteeTitle="Cohort VI"
-        imageFluid={photos[0]}
+        imageData={photos[0]}
       />
       <PageBodyQuoteSlideshow.Slide
         quote={quote}
         quoteeName={faker.name.findName()}
         quoteeTitle="Cohort III"
-        imageFluid={photos[1]}
+        imageData={photos[1]}
       />
       <PageBodyQuoteSlideshow.Slide
         quote={quote}
         quoteeName={faker.name.findName()}
         quoteeTitle="Cohort IV"
-        imageFluid={photos[2]}
+        imageData={photos[2]}
       />
     </PageBodyQuoteSlideshow>
   </Story>
@@ -98,7 +98,7 @@ If only one slide is configured, the slideshow functionality is omitted.
         quote={quote}
         quoteeName={faker.name.findName()}
         quoteeTitle="Cohort VI"
-        imageFluid={photos[0]}
+        imageData={photos[0]}
       />
     </PageBodyQuoteSlideshow>
   </Story>

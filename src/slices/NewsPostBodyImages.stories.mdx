@@ -1,22 +1,22 @@
 import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
 import faker from 'faker'
-import { buildImgixFluid } from 'gatsby-plugin-imgix'
+import { getGatsbyImageData } from '@imgix/gatsby'
 
 import * as Storybook from '../components/Storybook'
 
 import NewsPostBodyImages from './NewsPostBodyImages'
 
 export const images = [
-  buildImgixFluid({
+  getGatsbyImageData({
     url: 'https://images.unsplash.com/photo-1500961585473-b554ed1bcff5',
-    sourceWidth: 4 / 3,
-    sourceHeight: 1,
+    aspectRatio: 4 / 3,
+    layout: 'fullWidth',
   }),
-  buildImgixFluid({
+  getGatsbyImageData({
     url: 'https://images.unsplash.com/photo-1519662978799-2f05096d3636',
-    sourceWidth: 4 / 3,
-    sourceHeight: 1,
-  })
+    aspectRatio: 4 / 3,
+    layout: 'fullWidth',
+  }),
 ]
 
 <Meta title="News Posts/Images" component={NewsPostBodyImages} />
@@ -49,7 +49,7 @@ This slice can support one or more images.
   <Story name="With one image">
     <NewsPostBodyImages nextSharesBg={false}>
       <NewsPostBodyImages.Image
-        imageFluid={images[0]}
+        imageData={images[0]}
         captionHTML={`<p>${faker.lorem.sentences(2)}</p>`}
       />
     </NewsPostBodyImages>
@@ -64,11 +64,11 @@ Images are spaced evenly as shown below.
   <Story name="With two images">
     <NewsPostBodyImages nextSharesBg={false}>
       <NewsPostBodyImages.Image
-        imageFluid={images[0]}
+        imageData={images[0]}
         captionHTML={`<p>${faker.lorem.sentences(2)}</p>`}
       />
       <NewsPostBodyImages.Image
-        imageFluid={images[1]}
+        imageData={images[1]}
         captionHTML={`<p>${faker.lorem.sentences(2)}</p>`}
       />
     </NewsPostBodyImages>

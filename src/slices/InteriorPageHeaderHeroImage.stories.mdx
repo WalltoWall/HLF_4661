@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, Props } from '@storybook/addon-docs/blocks'
 import faker from 'faker'
-import { buildImgixFluid } from 'gatsby-plugin-imgix'
+import { getGatsbyImageData } from '@imgix/gatsby'
 
 import * as Storybook from '../components/Storybook'
 import { titleize } from '../lib/titleize'
@@ -9,13 +9,16 @@ import { InteriorPageHeaderHeroImage } from './InteriorPageHeaderHeroImage'
 
 export const heading = titleize(faker.lorem.words(4))
 
-export const backgroundImage = buildImgixFluid({
+export const backgroundImage = getGatsbyImageData({
   url: 'https://images.prismic.io/omidyarfellows/013446b9-15de-48ac-9ecd-c8c7164db4f4_Banner-LeadershipLearning.jpg',
-  sourceWidth: 3 / 4,
-  sourceHeight: 1,
+  aspectRatio: 3 / 4,
+  layout: 'fullWidth',
 })
 
-<Meta title="Interior Pages/Header/Hero Image" component={InteriorPageHeaderHeroImage} />
+<Meta
+  title="Interior Pages/Header/Hero Image"
+  component={InteriorPageHeaderHeroImage}
+/>
 
 ##### Interior Page
 
@@ -34,8 +37,8 @@ used as the main heading for a page above its body content.
   overrides={{
     background_image: {
       description: 'Background image behind the heading',
-      isRequired: false
-    }
+      isRequired: false,
+    },
   }}
 />
 
@@ -48,7 +51,7 @@ The background image is placed behind the heading text.
     <InteriorPageHeaderHeroImage
       nextSharesBg={false}
       heading={heading}
-      backgroundImageFluid={backgroundImage}
+      backgroundImageData={backgroundImage}
     />
   </Story>
 </Canvas>
@@ -59,9 +62,6 @@ If no background image is provided, a default background color is used instead.
 
 <Canvas withSource="none">
   <Story name="Without background image">
-    <InteriorPageHeaderHeroImage
-      nextSharesBg={false}
-      heading={heading}
-    />
+    <InteriorPageHeaderHeroImage nextSharesBg={false} heading={heading} />
   </Story>
 </Canvas>
