@@ -7,6 +7,11 @@ If you feel anything is missing, please contribute to the
 `WalltoWall/gatsby-starter-ww` repository to ensure future projects benefit from
 the additions.
 
+## Project Specific Notes
+
+- TypeScript should stay at v4.2.2 for compatibility with some Storybook
+  dependencies.
+
 ## Basics
 
 #### [Quick Start](basic-quick-start.md)
