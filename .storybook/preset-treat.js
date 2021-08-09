@@ -1,4 +1,4 @@
-const TreatPlugin = require('treat/webpack-plugin')
+const { TreatPlugin } = require('treat/webpack-plugin')
 
 module.exports = {
   webpack: async (config, options) => {
