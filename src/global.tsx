@@ -12,7 +12,6 @@
  * @see https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-// import '@walltowall/siamese/dist/siamese.css'
 import '@reach/skip-nav/styles.css'
 import 'minireset.css'
 import 'keen-slider/keen-slider.min.css'

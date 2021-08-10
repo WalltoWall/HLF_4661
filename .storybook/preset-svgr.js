@@ -1,5 +1,5 @@
 module.exports = {
-  webpack: async (config, options) => {
+  webpackFinal: async (config) => {
     const assetRule = config.module.rules.find(({ test }) => test.test('.svg'))
 
     const assetLoader = assetRule
