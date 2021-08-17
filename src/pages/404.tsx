@@ -18,6 +18,7 @@ import { useSiteSettings } from '../hooks/useSiteSettings'
 import { NewsPostTemplate } from '../templates/news_post'
 import { ProjectTemplate } from '../templates/project'
 import { InteriorPageTemplate } from '../templates/interior_page'
+import { getType as getPageType } from '../templates/page'
 
 import { Layout } from '../components/Layout'
 import { linkResolver } from '../linkResolver'
@@ -62,6 +63,7 @@ export const NotFoundPage = ({
         meta={meta}
         listMiddleware={slicesMiddleware}
         mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+        getType={getPageType}
       />
     </Layout>
   )
