@@ -53,7 +53,9 @@ const Image = ({
   imageAlt,
 }: InteriorPageBodyImagesImageProps) => (
   <Box as="figure" styles={{ display: 'grid', gap: [4, 5] }}>
-    {imageData && <GatsbyImage image={imageData} alt={imageAlt ?? ''} />}
+    {imageData && (
+      <GatsbyImage image={imageData} alt={imageAlt ?? ''} objectFit="contain" />
+    )}
     {captionHTML && (
       <HTMLContent
         as="figcaption"
