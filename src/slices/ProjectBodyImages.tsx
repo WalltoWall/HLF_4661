@@ -24,7 +24,7 @@ export const fragment = graphql`
       image {
         alt
         url
-        gatsbyImageData(placeholder: BLURRED, width: 600, breakpoints: [600])
+        gatsbyImageData(placeholder: BLURRED, width: 700, breakpoints: [700])
       }
       caption {
         html

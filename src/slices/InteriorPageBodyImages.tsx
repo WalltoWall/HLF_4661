@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
-import { Box } from '@walltowall/calico'
+import { Box, useBoxStyles } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
 import { InteriorPageBodyImagesFragment } from '../types.generated'
@@ -53,9 +53,7 @@ const Image = ({
   imageAlt,
 }: InteriorPageBodyImagesImageProps) => (
   <Box as="figure" styles={{ display: 'grid', gap: [4, 5] }}>
-    {imageData && (
-      <GatsbyImage image={imageData} alt={imageAlt ?? ''} objectFit="contain" />
-    )}
+    {imageData && <GatsbyImage image={imageData} alt={imageAlt ?? ''} />}
     {captionHTML && (
       <HTMLContent
         as="figcaption"
@@ -97,7 +95,7 @@ export const fragment = graphql`
       image {
         alt
         url
-        gatsbyImageData(placeholder: BLURRED, width: 600, breakpoints: [600])
+        gatsbyImageData(placeholder: BLURRED, width: 700, breakpoints: [700])
       }
       caption {
         html
