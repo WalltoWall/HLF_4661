@@ -9,3 +9,4 @@ lambda/
 storybook-static/
 .vscode
 shell.nix
+.env
