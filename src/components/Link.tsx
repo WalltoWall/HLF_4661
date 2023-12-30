@@ -1,16 +1,31 @@
 import React from 'react'
-import GatsbyLink from 'gatsby-link'
-import {
-  Link as SiameseLink,
-  LinkProps as SiameseLinkProps,
-} from '@walltowall/siamese'
+import GatsbyLink, { GatsbyLinkProps } from 'gatsby-link'
+import { isInternal, isAnchorOnly, extractAnchor } from '@walltowall/helpers'
 
-const GatsbyLinkShim = ({ href, ...props }: { href: string }) => (
-  <GatsbyLink to={href} {...props} />
-)
+export interface LinkProps extends Omit<GatsbyLinkProps<any>, 'to'> {
+	href?: string | null
+}
 
-export type LinkProps = Omit<SiameseLinkProps<'a'>, 'as'>
+export const Link = ({ href, ...props }: LinkProps) => {
+	if (!href) {
+		return <a {...props} />
+	}
 
-export const Link = (props: LinkProps) => (
-  <SiameseLink routerLinkComponent={GatsbyLinkShim} {...props} />
-)
+	if (isAnchorOnly(href)) {
+		return <a href={extractAnchor(href)} {...props} />
+	}
+
+	if (!isInternal(href)) {
+		return (
+			<a
+				href={href}
+				target="_blank"
+				rel="noopener noreferrer nofollow"
+				{...props}
+			/>
+		)
+	}
+
+	//@ts-ignore
+	return <GatsbyLink to={href} {...props} />
+}
