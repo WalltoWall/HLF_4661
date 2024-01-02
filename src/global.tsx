@@ -15,23 +15,44 @@
 import '@reach/skip-nav/styles.css'
 import 'minireset.css'
 import 'keen-slider/keen-slider.min.css'
-import 'gatsby-plugin-prismic-previews/dist/styles.css'
 import './index.css'
 
 import * as React from 'react'
 import type { GatsbyBrowser } from 'gatsby'
-import { PrismicPreviewProvider } from 'gatsby-plugin-prismic-previews'
+import {
+	PrismicPreviewProvider,
+	PrismicProviderProps,
+	componentResolverFromMap,
+} from 'gatsby-plugin-prismic-previews'
 import { TreatProvider } from 'react-treat'
 
 import { DebugProvider } from './hooks/useDebug'
 import { theme } from './theme.treat'
+import { linkResolver } from './linkResolver'
+import { PageTemplate } from 'templates/page'
+import { InteriorPageTemplate } from 'templates/interior_page'
+import { NewsPostTemplate } from 'templates/news_post'
+import { ProjectTemplate } from 'templates/project'
+
+const repositoryConfigs: PrismicProviderProps['repositoryConfigs'] = [
+	{
+		repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+		linkResolver,
+		componentResolver: componentResolverFromMap({
+			page: PageTemplate,
+			interior_page: InteriorPageTemplate,
+			news_post: NewsPostTemplate,
+			project: ProjectTemplate,
+		}),
+	},
+]
 
 export const wrapRootElement: NonNullable<GatsbyBrowser['wrapRootElement']> = ({
-  element,
+	element,
 }) => (
-  <DebugProvider>
-    <PrismicPreviewProvider>
-      <TreatProvider theme={theme}>{element}</TreatProvider>
-    </PrismicPreviewProvider>
-  </DebugProvider>
+	<DebugProvider>
+		<PrismicPreviewProvider repositoryConfigs={repositoryConfigs}>
+			<TreatProvider theme={theme}>{element}</TreatProvider>
+		</PrismicPreviewProvider>
+	</DebugProvider>
 )

@@ -1,10 +1,8 @@
 import * as React from 'react'
-import { graphql, PageProps } from 'gatsby'
-import { Helmet } from 'react-helmet-async'
+import { graphql, HeadProps, PageProps } from 'gatsby'
 import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
-import querystring from 'querystring'
 
 import { SearchPageQuery } from '../types.generated'
 import { MapDataToPropsEnhancerArgs } from '../lib/mapSlicesToComponents'
@@ -36,29 +34,29 @@ export const slicesMiddleware = <T,>(list: T[]) => [
  * @see https://github.com/WalltoWall/react-map-slices-to-components#providing-global-enhancers
  */
 export const mapDataToPropsEnhancer = (
-  props: object | undefined,
-  {
-    context,
-    nextContext,
-    previousType,
-    previousData,
-  }: MapDataToPropsEnhancerArgs,
+	props: object | undefined,
+	{
+		context,
+		nextContext,
+		previousType,
+		previousData,
+	}: MapDataToPropsEnhancerArgs,
 ) => {
-  let nextSharesBg
+	let nextSharesBg
 
-  // TODO: Clean up into a nicer helper function
-  const _nsbg = propPairsEq('bg', context, nextContext)
-  if (_nsbg.length === 1) nextSharesBg = _nsbg[0]
-  else nextSharesBg = _nsbg.slice(0, 4) as [boolean, boolean, boolean, boolean]
+	// TODO: Clean up into a nicer helper function
+	const _nsbg = propPairsEq('bg', context, nextContext)
+	if (_nsbg.length === 1) nextSharesBg = _nsbg[0]
+	else nextSharesBg = _nsbg.slice(0, 4) as [boolean, boolean, boolean, boolean]
 
-  return {
-    nextSharesBg,
-    id:
-      previousType === 'PageBodyAnchor'
-        ? (previousData?.primary?.id as string)
-        : undefined,
-    ...props,
-  }
+	return {
+		nextSharesBg,
+		id:
+			previousType === 'PageBodyAnchor'
+				? (previousData?.primary?.id as string)
+				: undefined,
+		...props,
+	}
 }
 
 /**
@@ -69,84 +67,84 @@ export const mapDataToPropsEnhancer = (
  * @see https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types
  */
 export type SearchPageEnhancerProps = PickPartial<
-  ReturnType<typeof mapDataToPropsEnhancer>,
-  'id'
+	ReturnType<typeof mapDataToPropsEnhancer>,
+	'id'
 >
 
 export const SearchPage = ({ data, location }: PageProps<SearchPageQuery>) => {
-  const siteSettings = useSiteSettings()
-  const page = data?.prismicPage
+	const page = data?.prismicPage
 
-  const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
-  const pageDescription = page?.data?.meta_description
+	/**
+	 * Metadata made available in a slice's `mapDataToProps` and
+	 * `mapDataToContext` functions.
+	 *
+	 * @see https://github.com/angeloashmore/react-map-to-components#maptocomponents
+	 */
+	const meta = React.useMemo(
+		() => ({
+			rootData: data,
+			location,
+		}),
+		[data, location],
+	)
 
-  const params = location
-    ? querystring.decode(location.search.replace(/^\?/, ''))
-    : {}
-  const query = params.query && String(params.query ?? '').trim()
+	return (
+		<Layout>
+			<MapSlicesToComponents
+				//@ts-ignore
+				list={page?.data?.body}
+				map={slicesMap}
+				meta={meta}
+				listMiddleware={slicesMiddleware}
+				mapDataToPropsEnhancer={mapDataToPropsEnhancer}
+			/>
+		</Layout>
+	)
+}
 
-  /**
-   * Metadata made available in a slice's `mapDataToProps` and
-   * `mapDataToContext` functions.
-   *
-   * @see https://github.com/angeloashmore/react-map-to-components#maptocomponents
-   */
-  const meta = React.useMemo(
-    () => ({
-      rootData: data,
-      location,
-    }),
-    [data, location],
-  )
+export const Head = ({ data }: HeadProps<SearchPageQuery>) => {
+	const siteSettings = useSiteSettings()
+	const page = data?.prismicPage
 
-  return (
-    <Layout>
-      <Helmet>
-        <title>
-          {query ? `Search results for ${query}` : pageTitle ?? ''} |{' '}
-          {siteSettings.siteName}
-        </title>
-        {pageDescription && (
-          <meta name="description" content={pageDescription} />
-        )}
-      </Helmet>
-      <MapSlicesToComponents
-        list={page?.data?.body}
-        map={slicesMap}
-        meta={meta}
-        listMiddleware={slicesMiddleware}
-        mapDataToPropsEnhancer={mapDataToPropsEnhancer}
-      />
-    </Layout>
-  )
+	const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
+	const pageDescription = page?.data?.meta_description
+
+	return (
+		<>
+			<title>
+				{pageTitle ?? ''} | {siteSettings.siteName}
+			</title>
+			{pageDescription && <meta name="description" content={pageDescription} />}
+		</>
+	)
 }
 
 export default withPrismicPreview(SearchPage, [
-  {
-    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
-    linkResolver,
-  },
+	{
+		repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
+		linkResolver,
+	},
 ])
 
 export const query = graphql`
-  query SearchPage {
-    prismicPage(uid: { eq: "search" }) {
-      _previewable
-      ...PrismicPageParentRecursive
-      data {
-        title {
-          text
-        }
-        meta_title
-        meta_description
-        body {
-          __typename
-          ... on PrismicSliceType {
-            id
-          }
-          ...SlicesPageBody
-        }
-      }
-    }
-  }
+	query SearchPage {
+		prismicPage(uid: { eq: "search" }) {
+			_previewable
+			...PrismicPageParentRecursive
+			data {
+				title {
+					text
+				}
+				meta_title
+				meta_description
+				body {
+					__typename
+					... on PrismicSliceType {
+						id
+					}
+					...SlicesPageBody
+				}
+			}
+		}
+	}
 `
