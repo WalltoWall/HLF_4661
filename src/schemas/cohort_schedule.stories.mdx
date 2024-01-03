@@ -11,28 +11,29 @@ display the schedule as a table using the **Cohort Schedule** Slice on
 **Interior Page** documents.
 
 <Storybook.CustomTypeFieldsTable
-  customTypeId="cohort_schedule"
-  tab="Main"
-  overrides={{
-    body: { hide: true }
-  }}
+	customTypeId="cohort_schedule"
+	tab="Main"
+	overrides={{
+		body: { hide: true },
+	}}
 />
 
 ## Slices
-<br/>
+
+<br />
 
 ### Section
 
-A Section Slice represents a section of the schedule. Sections are surrounded
-by orange bars to visually show the grouping.
+A Section Slice represents a section of the schedule. Sections are surrounded by
+orange bars to visually show the grouping.
 
 #### Fields
 
 <Storybook.SliceFieldsTable
-  customTypeId="cohort_schedule"
-  sliceZoneId="body"
-  sliceId="section"
-  fieldset="non-repeat"
+	customTypeId="cohort_schedule"
+	sliceZoneId="body"
+	sliceId="section"
+	fieldset="non-repeat"
 />
 
 #### Repeatable fields
@@ -40,8 +41,8 @@ by orange bars to visually show the grouping.
 Each item represents an event in the schedule. Each event is displayed as a row.
 
 <Storybook.SliceFieldsTable
-  customTypeId="cohort_schedule"
-  sliceZoneId="body"
-  sliceId="section"
-  fieldset="repeat"
+	customTypeId="cohort_schedule"
+	sliceZoneId="body"
+	sliceId="section"
+	fieldset="repeat"
 />

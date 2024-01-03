@@ -17,7 +17,7 @@ module.exports = {
 	siteMetadata,
 	plugins: [
 		'gatsby-plugin-image',
-		'gatsby-plugin-catch-links',
+		// 'gatsby-plugin-catch-links',
 		'gatsby-plugin-svgr',
 		'gatsby-plugin-sitemap',
 		process.env.GOOGLE_ANALYTICS_TRACKING_ID && {

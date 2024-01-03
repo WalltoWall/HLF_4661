@@ -34,7 +34,5 @@ export const Anchor = ({
 		className,
 	)
 
-	if (props.children === 'Stuart Coleman') console.log(props.href)
-
 	return <Link {...props} className={cx} />
 }

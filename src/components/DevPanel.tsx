@@ -17,55 +17,55 @@ const openDocs = () => window.open('/docs')
 const openGraphiQL = () => window.open('/__graphql')
 
 const icons = {
-  refresh: AssetIconRefreshSVG,
-  debug: AssetIconDebugSVG,
-  edit: AssetIconEditSVG,
-  graphql: AssetIconGraphQLSVG,
-  help: AssetIconHelpSVG,
+	refresh: AssetIconRefreshSVG,
+	debug: AssetIconDebugSVG,
+	edit: AssetIconEditSVG,
+	graphql: AssetIconGraphQLSVG,
+	help: AssetIconHelpSVG,
 } as const
 
 type DevButtonProps = {
-  icon: keyof typeof icons
-  onClick: () => void
-  isActive?: boolean
-  title: string
+	icon: keyof typeof icons
+	onClick: () => void
+	isActive?: boolean
+	title: string
 }
 
 const DevButton = ({
-  icon: iconName,
-  onClick,
-  isActive = false,
-  title,
+	icon: iconName,
+	onClick,
+	isActive = false,
+	title,
 }: DevButtonProps) => {
-  const IconSVG = icons[iconName]
+	const IconSVG = icons[iconName]
 
-  return (
-    <button
-      tabIndex={-1}
-      onClick={onClick}
-      title={title}
-      className={clsx(styleRefs.button, isActive && styleRefs.activeColor)}
-    >
-      <IconSVG className={styleRefs.icon} />
-    </button>
-  )
+	return (
+		<button
+			tabIndex={-1}
+			onClick={onClick}
+			title={title}
+			className={clsx(styleRefs.button, isActive && styleRefs.activeColor)}
+		>
+			<IconSVG className={styleRefs.icon} />
+		</button>
+	)
 }
 
 export const DevPanel = () => {
-  const [debug, toggleDebug] = useDebugController()
+	const [debug, toggleDebug] = useDebugController()
 
-  return (
-    <div className={styleRefs.panel}>
-      <DevButton onClick={openAdmin} icon="edit" title="Open admin" />
-      <DevButton onClick={openGraphiQL} icon="graphql" title="Open GraphiQL" />
-      <DevButton onClick={openDocs} icon="help" title="Open docs" />
-      <DevButton onClick={refreshData} icon="refresh" title="Refresh data" />
-      <DevButton
-        onClick={toggleDebug}
-        icon="debug"
-        isActive={debug}
-        title={debug ? 'Disable debug mode' : 'Enable debug mode'}
-      />
-    </div>
-  )
+	return (
+		<div className={styleRefs.panel}>
+			<DevButton onClick={openAdmin} icon="edit" title="Open admin" />
+			<DevButton onClick={openGraphiQL} icon="graphql" title="Open GraphiQL" />
+			<DevButton onClick={openDocs} icon="help" title="Open docs" />
+			<DevButton onClick={refreshData} icon="refresh" title="Refresh data" />
+			<DevButton
+				onClick={toggleDebug}
+				icon="debug"
+				isActive={debug}
+				title={debug ? 'Disable debug mode' : 'Enable debug mode'}
+			/>
+		</div>
+	)
 }

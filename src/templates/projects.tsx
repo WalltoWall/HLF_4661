@@ -239,59 +239,65 @@ export const Head = ({ data }: HeadProps<ProjectsTemplateQuery>) => {
 
 export default withPrismicPreviewResolver(ProjectsTemplate)
 
-export const query = graphql`query ProjectsTemplate($limit: Int!, $skip: Int!) {
-  prismicPage(uid: {eq: "projects"}) {
-    _previewable
-    ...PrismicPageParentRecursive
-    data {
-      title {
-        text
-      }
-      meta_title
-      meta_description
-      body {
-        __typename
-        ... on PrismicSliceType {
-          id
-        }
-        ...SlicesPageBody
-      }
-    }
-  }
-  allPrismicProject(sort: {uid: ASC}, limit: $limit, skip: $skip) {
-    nodes {
-      url
-      data {
-        title {
-          text
-        }
-        description {
-          text
-          html
-        }
-        website_url {
-          url
-        }
-        project_categories {
-          project_category {
-            document {
-              ... on PrismicProjectCategory {
-                uid
-                url
-                data {
-                  name {
-                    text
-                  }
-                }
-              }
-            }
-          }
-        }
-        featured_image {
-          alt
-          gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
-        }
-      }
-    }
-  }
-}`
+export const query = graphql`
+	query ProjectsTemplate($limit: Int!, $skip: Int!) {
+		prismicPage(uid: { eq: "projects" }) {
+			_previewable
+			...PrismicPageParentRecursive
+			data {
+				title {
+					text
+				}
+				meta_title
+				meta_description
+				body {
+					__typename
+					... on PrismicSlice {
+						id
+					}
+					...SlicesPageBody
+				}
+			}
+		}
+		allPrismicProject(sort: { uid: ASC }, limit: $limit, skip: $skip) {
+			nodes {
+				url
+				data {
+					title {
+						text
+					}
+					description {
+						text
+						html
+					}
+					website_url {
+						url
+					}
+					project_categories {
+						project_category {
+							document {
+								... on PrismicProjectCategory {
+									uid
+									url
+									data {
+										name {
+											text
+										}
+									}
+								}
+							}
+						}
+					}
+					featured_image {
+						alt
+						gatsbyImageData(
+							placeholder: BLURRED
+							width: 400
+							breakpoints: [400]
+						)
+					}
+				}
+			}
+		}
+	}
+`

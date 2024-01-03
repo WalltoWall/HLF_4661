@@ -21,33 +21,28 @@ import * as React from 'react'
 import type { GatsbyBrowser } from 'gatsby'
 import {
 	PrismicPreviewProvider,
-	PrismicProviderProps,
-	componentResolverFromMap,
+	RepositoryConfig,
 } from 'gatsby-plugin-prismic-previews'
 import { TreatProvider } from 'react-treat'
 
 import { DebugProvider } from './hooks/useDebug'
 import { theme } from './theme.treat'
 import { linkResolver } from './linkResolver'
-import { PageTemplate } from 'templates/page'
-import { InteriorPageTemplate } from 'templates/interior_page'
-import { NewsPostTemplate } from 'templates/news_post'
-import { ProjectTemplate } from 'templates/project'
 
-const repositoryConfigs: PrismicProviderProps['repositoryConfigs'] = [
+const repositoryConfigs: RepositoryConfig[] = [
 	{
 		repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
 		linkResolver,
-		componentResolver: componentResolverFromMap({
-			page: PageTemplate,
-			interior_page: InteriorPageTemplate,
-			news_post: NewsPostTemplate,
-			project: ProjectTemplate,
-		}),
+		componentResolver: {
+			page: React.lazy(() => import('./templates/page')),
+			interior_page: React.lazy(() => import('./templates/interior_page')),
+			news_post: React.lazy(() => import('./templates/news_post')),
+			project: React.lazy(() => import('./templates/project')),
+		},
 	},
 ]
 
-export const wrapRootElement: NonNullable<GatsbyBrowser['wrapRootElement']> = ({
+export const wrapRootElement: GatsbyBrowser['wrapRootElement'] = ({
 	element,
 }) => (
 	<DebugProvider>

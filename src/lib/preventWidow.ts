@@ -11,10 +11,10 @@ const NBSP = '\u00A0'
  * @returns The string with built-in widow prevention.
  */
 export const preventWidow = (string: string = '', wordCount = 2): string => {
-  const words = string.split(' ')
+	const words = string.split(' ')
 
-  return [
-    ...words.slice(0, -wordCount),
-    words.slice(words.length - wordCount).join(NBSP),
-  ].join(' ')
+	return [
+		...words.slice(0, -wordCount),
+		words.slice(words.length - wordCount).join(NBSP),
+	].join(' ')
 }

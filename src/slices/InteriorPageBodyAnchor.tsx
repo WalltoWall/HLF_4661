@@ -6,18 +6,18 @@ import { MapDataToContextArgs } from '../lib/mapSlicesToComponents'
 export const InteriorPageBodyAnchor = () => null
 
 export const mapDataToContext = ({
-  NextComp,
-  ...rest
+	NextComp,
+	...rest
 }: MapDataToContextArgs<InteriorPageBodyAnchorFragment>) =>
-  // @ts-ignore mapDataToContext is assigned in InteriorPageBody.ts
-  NextComp?.mapDataToContext?.({ NextComp, ...rest })
+	// @ts-ignore mapDataToContext is assigned in InteriorPageBody.ts
+	NextComp?.mapDataToContext?.({ NextComp, ...rest })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyAnchor on PrismicInteriorPageDataBodyAnchor {
-    primary {
-      id
-    }
-  }
+	fragment InteriorPageBodyAnchor on PrismicInteriorPageDataBodyAnchor {
+		primary {
+			id
+		}
+	}
 `
 
 export default InteriorPageBodyAnchor

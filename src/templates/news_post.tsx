@@ -287,7 +287,7 @@ export const query = graphql`
 				}
 				body {
 					__typename
-					... on PrismicSliceType {
+					... on PrismicSlice {
 						id
 					}
 					...SlicesNewsPostBody

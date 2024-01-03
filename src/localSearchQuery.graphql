@@ -1,248 +1,248 @@
 {
-  allPrismicInteriorPage {
-    nodes {
-      url
-      data {
-        title {
-          text
-        }
-        meta_title
-        meta_description
-        header {
-          ... on PrismicInteriorPageDataHeaderHeroImage {
-            primary {
-              heading {
-                text
-              }
-            }
-          }
-        }
-        body {
-          ... on PrismicInteriorPageDataBodyTextIntro {
-            primary {
-              introductory_text {
-                text
-              }
-            }
-          }
-          ... on PrismicInteriorPageDataBodyText {
-            primary {
-              text {
-                text
-              }
-            }
-          }
-          ... on PrismicInteriorPageDataBodyImages {
-            items {
-              caption {
-                text
-              }
-            }
-          }
-          ... on PrismicInteriorPageDataBodyLinkCard {
-            primary {
-              link_title {
-                text
-              }
-            }
-          }
-          ... on PrismicInteriorPageDataBodyStaffDirectory {
-            items {
-              name {
-                text
-              }
-              staff_title {
-                text
-              }
-              biography {
-                text
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	allPrismicInteriorPage {
+		nodes {
+			url
+			data {
+				title {
+					text
+				}
+				meta_title
+				meta_description
+				header {
+					... on PrismicInteriorPageDataHeaderHeroImage {
+						primary {
+							heading {
+								text
+							}
+						}
+					}
+				}
+				body {
+					... on PrismicInteriorPageDataBodyTextIntro {
+						primary {
+							introductory_text {
+								text
+							}
+						}
+					}
+					... on PrismicInteriorPageDataBodyText {
+						primary {
+							text {
+								text
+							}
+						}
+					}
+					... on PrismicInteriorPageDataBodyImages {
+						items {
+							caption {
+								text
+							}
+						}
+					}
+					... on PrismicInteriorPageDataBodyLinkCard {
+						primary {
+							link_title {
+								text
+							}
+						}
+					}
+					... on PrismicInteriorPageDataBodyStaffDirectory {
+						items {
+							name {
+								text
+							}
+							staff_title {
+								text
+							}
+							biography {
+								text
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-  allPrismicNewsPost {
-    nodes {
-      url
-      data {
-        title {
-          text
-        }
-        excerpt {
-          text
-        }
-        featured_image {
-          alt
-          url(imgixParams: { width: 400 })
-          dimensions {
-            width
-            height
-          }
-        }
-        body {
-          ... on PrismicNewsPostDataBodyTextIntro {
-            primary {
-              introductory_text {
-                text
-              }
-            }
-          }
-          ... on PrismicNewsPostDataBodyText {
-            primary {
-              text {
-                text
-              }
-            }
-          }
-          ... on PrismicNewsPostDataBodyImages {
-            items {
-              caption {
-                text
-              }
-            }
-          }
-          ... on PrismicNewsPostDataBodyLinkCard {
-            primary {
-              link_title {
-                text
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	allPrismicNewsPost {
+		nodes {
+			url
+			data {
+				title {
+					text
+				}
+				excerpt {
+					text
+				}
+				featured_image {
+					alt
+					url(imgixParams: { width: 400 })
+					dimensions {
+						width
+						height
+					}
+				}
+				body {
+					... on PrismicNewsPostDataBodyTextIntro {
+						primary {
+							introductory_text {
+								text
+							}
+						}
+					}
+					... on PrismicNewsPostDataBodyText {
+						primary {
+							text {
+								text
+							}
+						}
+					}
+					... on PrismicNewsPostDataBodyImages {
+						items {
+							caption {
+								text
+							}
+						}
+					}
+					... on PrismicNewsPostDataBodyLinkCard {
+						primary {
+							link_title {
+								text
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-  allPrismicProject {
-    nodes {
-      url
-      data {
-        title {
-          text
-        }
-        description {
-          text
-        }
-        featured_image {
-          alt
-          url(imgixParams: { width: 400 })
-          dimensions {
-            width
-            height
-          }
-        }
-        body {
-          ... on PrismicProjectDataBodyTextIntro {
-            primary {
-              introductory_text {
-                text
-              }
-            }
-          }
-          ... on PrismicProjectDataBodyText {
-            primary {
-              text {
-                text
-              }
-            }
-          }
-          ... on PrismicProjectDataBodyImages {
-            items {
-              caption {
-                text
-              }
-            }
-          }
-          ... on PrismicProjectDataBodyLinkCard {
-            primary {
-              link_title {
-                text
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	allPrismicProject {
+		nodes {
+			url
+			data {
+				title {
+					text
+				}
+				description {
+					text
+				}
+				featured_image {
+					alt
+					url(imgixParams: { width: 400 })
+					dimensions {
+						width
+						height
+					}
+				}
+				body {
+					... on PrismicProjectDataBodyTextIntro {
+						primary {
+							introductory_text {
+								text
+							}
+						}
+					}
+					... on PrismicProjectDataBodyText {
+						primary {
+							text {
+								text
+							}
+						}
+					}
+					... on PrismicProjectDataBodyImages {
+						items {
+							caption {
+								text
+							}
+						}
+					}
+					... on PrismicProjectDataBodyLinkCard {
+						primary {
+							link_title {
+								text
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-  allPrismicPage(filter: { uid: { ne: "home" } }) {
-    nodes {
-      url
-      data {
-        title {
-          text
-        }
-        meta_title
-        meta_description
-        body {
-          ... on PrismicPageDataBodyText {
-            primary {
-              text {
-                text
-              }
-            }
-          }
-          ... on PrismicPageDataBodyHeroImage {
-            primary {
-              text {
-                text
-              }
-              button_text {
-                text
-              }
-            }
-          }
-          ... on PrismicPageDataBodyQuoteSlideshow {
-            items {
-              quote {
-                text
-              }
-              quotee_name {
-                text
-              }
-              quotee_title {
-                text
-              }
-            }
-          }
-          ... on PrismicPageDataBodyImageCarousel {
-            items {
-              caption {
-                text
-              }
-            }
-          }
-          ... on PrismicPageDataBodyLinkCollection {
-            items {
-              name {
-                text
-              }
-              description {
-                text
-              }
-              button_text {
-                text
-              }
-            }
-          }
-          ... on PrismicPageDataBodyHeadshotQuote {
-            primary {
-              quote {
-                text
-              }
-              credit {
-                text
-              }
-              button_text {
-                text
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	allPrismicPage(filter: { uid: { ne: "home" } }) {
+		nodes {
+			url
+			data {
+				title {
+					text
+				}
+				meta_title
+				meta_description
+				body {
+					... on PrismicPageDataBodyText {
+						primary {
+							text {
+								text
+							}
+						}
+					}
+					... on PrismicPageDataBodyHeroImage {
+						primary {
+							text {
+								text
+							}
+							button_text {
+								text
+							}
+						}
+					}
+					... on PrismicPageDataBodyQuoteSlideshow {
+						items {
+							quote {
+								text
+							}
+							quotee_name {
+								text
+							}
+							quotee_title {
+								text
+							}
+						}
+					}
+					... on PrismicPageDataBodyImageCarousel {
+						items {
+							caption {
+								text
+							}
+						}
+					}
+					... on PrismicPageDataBodyLinkCollection {
+						items {
+							name {
+								text
+							}
+							description {
+								text
+							}
+							button_text {
+								text
+							}
+						}
+					}
+					... on PrismicPageDataBodyHeadshotQuote {
+						primary {
+							quote {
+								text
+							}
+							credit {
+								text
+							}
+							button_text {
+								text
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

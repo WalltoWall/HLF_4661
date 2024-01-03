@@ -248,54 +248,66 @@ export const Head = ({ data }: HeadProps<NewsCategoryTemplateQuery>) => {
 
 export default withPrismicPreviewResolver(NewsCategoryTemplate)
 
-export const query = graphql`query NewsCategoryTemplate($uid: String!, $limit: Int!, $skip: Int!) {
-  prismicNewsCategory(uid: {eq: $uid}) {
-    _previewable
-    uid
-    url
-    data {
-      name {
-        text
-      }
-    }
-  }
-  allPrismicNewsPost(
-    sort: [{data: {published_at: DESC}}, {first_publication_date: ASC}]
-    limit: $limit
-    skip: $skip
-    filter: {data: {news_categories: {elemMatch: {news_category: {uid: {in: [$uid]}}}}}}
-  ) {
-    nodes {
-      url
-      first_publication_date(formatString: "MMMM D, YYYY")
-      data {
-        title {
-          text
-        }
-        published_at(formatString: "MMMM D, YYYY")
-        excerpt {
-          text
-        }
-        news_categories {
-          news_category {
-            document {
-              ... on PrismicNewsCategory {
-                uid
-                url
-                data {
-                  name {
-                    text
-                  }
-                }
-              }
-            }
-          }
-        }
-        featured_image {
-          alt
-          gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
-        }
-      }
-    }
-  }
-}`
+export const query = graphql`
+	query NewsCategoryTemplate($uid: String!, $limit: Int!, $skip: Int!) {
+		prismicNewsCategory(uid: { eq: $uid }) {
+			_previewable
+			uid
+			url
+			data {
+				name {
+					text
+				}
+			}
+		}
+		allPrismicNewsPost(
+			sort: [{ data: { published_at: DESC } }, { first_publication_date: ASC }]
+			limit: $limit
+			skip: $skip
+			filter: {
+				data: {
+					news_categories: {
+						elemMatch: { news_category: { uid: { in: [$uid] } } }
+					}
+				}
+			}
+		) {
+			nodes {
+				url
+				first_publication_date(formatString: "MMMM D, YYYY")
+				data {
+					title {
+						text
+					}
+					published_at(formatString: "MMMM D, YYYY")
+					excerpt {
+						text
+					}
+					news_categories {
+						news_category {
+							document {
+								... on PrismicNewsCategory {
+									uid
+									url
+									data {
+										name {
+											text
+										}
+									}
+								}
+							}
+						}
+					}
+					featured_image {
+						alt
+						gatsbyImageData(
+							placeholder: BLURRED
+							width: 400
+							breakpoints: [400]
+						)
+					}
+				}
+			}
+		}
+	}
+`

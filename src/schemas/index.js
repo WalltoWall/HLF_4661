@@ -7,15 +7,15 @@
  */
 
 module.exports = {
-  cohort: require('./cohort.json'),
-  cohort_schedule: require('./cohort_schedule.json'),
-  fellow: require('./fellow.json'),
-  interior_page: require('./interior_page.json'),
-  navigation: require('./navigation.json'),
-  news_category: require('./news_category.json'),
-  news_post: require('./news_post.json'),
-  page: require('./page.json'),
-  project: require('./project.json'),
-  project_category: require('./project_category.json'),
-  settings: require('./settings.json'),
+	cohort: require('./cohort.json'),
+	cohort_schedule: require('./cohort_schedule.json'),
+	fellow: require('./fellow.json'),
+	interior_page: require('./interior_page.json'),
+	navigation: require('./navigation.json'),
+	news_category: require('./news_category.json'),
+	news_post: require('./news_post.json'),
+	page: require('./page.json'),
+	project: require('./project.json'),
+	project_category: require('./project_category.json'),
+	settings: require('./settings.json'),
 }

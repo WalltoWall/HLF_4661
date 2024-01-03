@@ -8,14 +8,14 @@ import { Icon } from './Icon'
 type BackButtonProps = AnchorProps
 
 export const BackButton = ({ children, ...props }: BackButtonProps) => (
-  <Anchor {...props}>
-    <Inline space={[2, 3]} alignY="center">
-      <Icon
-        name="triangleLeft"
-        styles={{ width: '0.5rem' }}
-        style={{ width: '0.4rem' }}
-      />
-      <Text variant="serif-14-16">{children}</Text>
-    </Inline>
-  </Anchor>
+	<Anchor {...props}>
+		<Inline space={[2, 3]} alignY="center">
+			<Icon
+				name="triangleLeft"
+				styles={{ width: '0.5rem' }}
+				style={{ width: '0.4rem' }}
+			/>
+			<Text variant="serif-14-16">{children}</Text>
+		</Inline>
+	</Anchor>
 )

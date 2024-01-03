@@ -77,7 +77,7 @@ export const query = graphql`
 				meta_description
 				body {
 					__typename
-					... on PrismicSliceType {
+					... on PrismicSlice {
 						id
 					}
 					...SlicesPageBody

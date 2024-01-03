@@ -5,7 +5,7 @@
  * @returns The new capitalized string.
  */
 export const titleize = (str: string) =>
-  str.replace(
-    /\w+/g,
-    (a) => a.charAt(0).toUpperCase() + a.substr(1).toLowerCase(),
-  )
+	str.replace(
+		/\w+/g,
+		(a) => a.charAt(0).toUpperCase() + a.substr(1).toLowerCase(),
+	)

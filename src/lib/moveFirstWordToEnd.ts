@@ -7,7 +7,7 @@
  * @returns `string` with the first word moved.
  */
 export const moveFirstWordToEnd = (string: string): string => {
-  const parts = string.split(' ')
+	const parts = string.split(' ')
 
-  return parts.length > 1 ? [...parts.slice(1), parts[0]].join(' ') : string
+	return parts.length > 1 ? [...parts.slice(1), parts[0]].join(' ') : string
 }

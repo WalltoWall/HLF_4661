@@ -20,28 +20,28 @@ import * as ProjectBodyLinkCard from './ProjectBodyLinkCard'
 
 // 2. Add your slice
 const slices = {
-  ProjectBodyText,
-  ProjectBodyTextIntro,
-  ProjectBodyVideo,
-  ProjectBodyImages,
-  ProjectBodyAnchor,
-  ProjectBodyDivider,
-  ProjectBodyLinkCard,
+	ProjectBodyText,
+	ProjectBodyTextIntro,
+	ProjectBodyVideo,
+	ProjectBodyImages,
+	ProjectBodyAnchor,
+	ProjectBodyDivider,
+	ProjectBodyLinkCard,
 }
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesProjectBody on PrismicProjectDataBodySlicesType {
-    ...ProjectBodyText
-    ...ProjectBodyTextIntro
-    ...ProjectBodyVideo
-    ...ProjectBodyImages
-    ...ProjectBodyAnchor
-    ...ProjectBodyLinkCard
+	fragment SlicesProjectBody on PrismicProjectDataBody {
+		...ProjectBodyText
+		...ProjectBodyTextIntro
+		...ProjectBodyVideo
+		...ProjectBodyImages
+		...ProjectBodyAnchor
+		...ProjectBodyLinkCard
 
-    # The following slices do not have fragments:
-    #...ProjectBodyDivider
-  }
+		# The following slices do not have fragments:
+		#...ProjectBodyDivider
+	}
 `
 
 export const slicesMap = reshapeSlicesMap(slices)

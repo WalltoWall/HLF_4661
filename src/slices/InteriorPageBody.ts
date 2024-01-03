@@ -21,30 +21,30 @@ import * as InteriorPageBodyStaffDirectory from './InteriorPageBodyStaffDirector
 
 // 2. Add your slice
 const slices = {
-  InteriorPageBodyText,
-  InteriorPageBodyTextIntro,
-  InteriorPageBodyVideo,
-  InteriorPageBodyCohortSchedule,
-  InteriorPageBodyImages,
-  InteriorPageBodyAnchor,
-  InteriorPageBodyDivider,
-  InteriorPageBodyStaffDirectory,
+	InteriorPageBodyText,
+	InteriorPageBodyTextIntro,
+	InteriorPageBodyVideo,
+	InteriorPageBodyCohortSchedule,
+	InteriorPageBodyImages,
+	InteriorPageBodyAnchor,
+	InteriorPageBodyDivider,
+	InteriorPageBodyStaffDirectory,
 }
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesInteriorPageBody on PrismicInteriorPageDataBodySlicesType {
-    ...InteriorPageBodyText
-    ...InteriorPageBodyTextIntro
-    ...InteriorPageBodyVideo
-    ...InteriorPageBodyCohortSchedule
-    ...InteriorPageBodyImages
-    ...InteriorPageBodyAnchor
-    ...InteriorPageBodyStaffDirectory
+	fragment SlicesInteriorPageBody on PrismicInteriorPageDataBody {
+		...InteriorPageBodyText
+		...InteriorPageBodyTextIntro
+		...InteriorPageBodyVideo
+		...InteriorPageBodyCohortSchedule
+		...InteriorPageBodyImages
+		...InteriorPageBodyAnchor
+		...InteriorPageBodyStaffDirectory
 
-    # The following slices do not have fragments:
-    #...InteriorPageBodyDivider
-  }
+		# The following slices do not have fragments:
+		#...InteriorPageBodyDivider
+	}
 `
 
 export const slicesMap = reshapeSlicesMap(slices)

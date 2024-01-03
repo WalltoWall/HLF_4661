@@ -7,4 +7,4 @@
  * @returns `url` without a protocol and/or trailing slash.
  */
 export const prettyURL = (url?: string): string =>
-  url?.replace(/^.*:\/\//, '').replace(/\/$/, '') ?? ''
+	url?.replace(/^.*:\/\//, '').replace(/\/$/, '') ?? ''

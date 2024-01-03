@@ -6,10 +6,10 @@
  * @returns Host of the URL if valid, `undefined` otherwise.
  */
 export const getURLHost = (url: string): string | undefined => {
-  try {
-    const instance = new URL(url)
-    return instance.host
-  } catch {
-    return undefined
-  }
+	try {
+		const instance = new URL(url)
+		return instance.host
+	} catch {
+		return undefined
+	}
 }

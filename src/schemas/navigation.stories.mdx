@@ -11,22 +11,27 @@ This includes navigation lists displayed in the header and footer.
 
 The Omidyar Fellows site uses three navigation documents to manage links:
 
-- **Primary**: Used as the main navigation displayed in the site's header and footer.
-- **Secondary**: Used as the smaller, less prominent navigation displayed in the site's header.
+- **Primary**: Used as the main navigation displayed in the site's header and
+  footer.
+- **Secondary**: Used as the smaller, less prominent navigation displayed in the
+  site's header.
 - **Footer**: Displayed in the footer next to the site's copyright.
 
-Do not delete these documents. Adding new Navigation documents will not affect the site and is not recommended. You can, however, edit those three documents as needed.
+Do not delete these documents. Adding new Navigation documents will not affect
+the site and is not recommended. You can, however, edit those three documents as
+needed.
 
 <Storybook.CustomTypeFieldsTable
-  customTypeId="navigation"
-  tab="Main"
-  overrides={{
-    main: { hide: true }
-  }}
+	customTypeId="navigation"
+	tab="Main"
+	overrides={{
+		main: { hide: true },
+	}}
 />
 
 ## Slices
-<br/>
+
+<br />
 
 ### Nav Item
 
@@ -36,10 +41,10 @@ links that are displayed in a dropdown.
 #### Fields
 
 <Storybook.SliceFieldsTable
-  customTypeId="navigation"
-  sliceZoneId="main"
-  sliceId="nav_item"
-  fieldset="non-repeat"
+	customTypeId="navigation"
+	sliceZoneId="main"
+	sliceId="nav_item"
+	fieldset="non-repeat"
 />
 
 #### Repeatable fields
@@ -47,8 +52,8 @@ links that are displayed in a dropdown.
 Each item represents an child link.
 
 <Storybook.SliceFieldsTable
-  customTypeId="navigation"
-  sliceZoneId="main"
-  sliceId="nav_item"
-  fieldset="repeat"
+	customTypeId="navigation"
+	sliceZoneId="main"
+	sliceId="nav_item"
+	fieldset="repeat"
 />

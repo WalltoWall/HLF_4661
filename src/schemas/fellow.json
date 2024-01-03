@@ -1,52 +1,52 @@
 {
-  "Main": {
-    "name": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading1",
-        "label": "Name",
-        "placeholder": "Full name of the fellow"
-      }
-    },
-    "uid": {
-      "type": "UID",
-      "config": {
-        "label": "UID",
-        "placeholder": "Unique identifier"
-      }
-    },
-    "cohort": {
-      "type": "Link",
-      "config": {
-        "select": "document",
-        "customtypes": ["cohort"],
-        "label": "Cohort",
-        "placeholder": "Cohort to which the fellow belongs"
-      }
-    },
-    "biography": {
-      "type": "StructuredText",
-      "config": {
-        "multi": "paragraph, strong, em, hyperlink, list-item, o-list-item",
-        "label": "Biography",
-        "placeholder": "Short biography about the fellow"
-      }
-    },
-    "portrait": {
-      "type": "Image",
-      "config": {
-        "constraint": {},
-        "thumbnails": [],
-        "label": "Portrait"
-      }
-    },
-    "photo": {
-      "type": "Image",
-      "config": {
-        "constraint": {},
-        "thumbnails": [],
-        "label": "Photo"
-      }
-    }
-  }
+	"Main": {
+		"name": {
+			"type": "StructuredText",
+			"config": {
+				"single": "heading1",
+				"label": "Name",
+				"placeholder": "Full name of the fellow"
+			}
+		},
+		"uid": {
+			"type": "UID",
+			"config": {
+				"label": "UID",
+				"placeholder": "Unique identifier"
+			}
+		},
+		"cohort": {
+			"type": "Link",
+			"config": {
+				"select": "document",
+				"customtypes": ["cohort"],
+				"label": "Cohort",
+				"placeholder": "Cohort to which the fellow belongs"
+			}
+		},
+		"biography": {
+			"type": "StructuredText",
+			"config": {
+				"multi": "paragraph, strong, em, hyperlink, list-item, o-list-item",
+				"label": "Biography",
+				"placeholder": "Short biography about the fellow"
+			}
+		},
+		"portrait": {
+			"type": "Image",
+			"config": {
+				"constraint": {},
+				"thumbnails": [],
+				"label": "Portrait"
+			}
+		},
+		"photo": {
+			"type": "Image",
+			"config": {
+				"constraint": {},
+				"thumbnails": [],
+				"label": "Photo"
+			}
+		}
+	}
 }

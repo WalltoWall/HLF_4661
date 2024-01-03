@@ -10,68 +10,68 @@ import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
 import { BoundedBox } from '../components/BoundedBox'
 
 export type PageBodyLearningExcursionMapProps = ReturnType<
-  typeof mapDataToProps
+	typeof mapDataToProps
 > &
-  PageTemplateEnhancerProps
+	PageTemplateEnhancerProps
 
 export const PageBodyLearningExcursionMap = ({
-  mapURL,
-  nextSharesBg,
-  id,
+	mapURL,
+	nextSharesBg,
+	id,
 }: PageBodyLearningExcursionMapProps) => (
-  <BoundedBox
-    as="section"
-    nextSharesBg={nextSharesBg}
-    id={id}
-    styles={{
-      backgroundColor: 'white',
-      maxWidth: 'xlarge',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    }}
-  >
-    {mapURL && (
-      <Box
-        as={AspectRatio}
-        x={8}
-        y={5}
-        styles={{
-          marginLeft: [-4, 0],
-          marginRight: [-4, 0],
-          borderStyle: 'solid',
-          borderWidth: ['none', '3px'],
-          borderColor: 'gray20',
-        }}
-      >
-        <Box
-          as="iframe"
-          src={mapURL}
-          styles={{ width: 'full', height: 'full' }}
-        />
-      </Box>
-    )}
-  </BoundedBox>
+	<BoundedBox
+		as="section"
+		nextSharesBg={nextSharesBg}
+		id={id}
+		styles={{
+			backgroundColor: 'white',
+			maxWidth: 'xlarge',
+			marginLeft: 'auto',
+			marginRight: 'auto',
+		}}
+	>
+		{mapURL && (
+			<Box
+				as={AspectRatio}
+				x={8}
+				y={5}
+				styles={{
+					marginLeft: [-4, 0],
+					marginRight: [-4, 0],
+					borderStyle: 'solid',
+					borderWidth: ['none', '3px'],
+					borderColor: 'gray20',
+				}}
+			>
+				<Box
+					as="iframe"
+					src={mapURL}
+					styles={{ width: 'full', height: 'full' }}
+				/>
+			</Box>
+		)}
+	</BoundedBox>
 )
 
 export const mapDataToProps = ({
-  data,
+	data,
 }: MapDataToPropsArgs<
-  PageBodyLearningExcursionMapFragment,
-  typeof mapDataToContext
+	PageBodyLearningExcursionMapFragment,
+	typeof mapDataToContext
 >) => ({
-  mapURL: data.primary?.map_url,
+	mapURL: data.primary?.map_url,
 })
 
 export const mapDataToContext = () => ({
-  bg: 'white',
+	bg: 'white',
 })
 
 export const fragment = graphql`
-  fragment PageBodyLearningExcursionMap on PrismicPageDataBodyLearningExcursionMap {
-    primary {
-      map_url
-    }
-  }
+	fragment PageBodyLearningExcursionMap on PrismicPageDataBodyLearningExcursionMap {
+		primary {
+			map_url
+		}
+	}
 `
 
 export default PageBodyLearningExcursionMap

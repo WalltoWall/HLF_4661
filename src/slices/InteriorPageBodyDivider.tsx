@@ -8,22 +8,22 @@ import { Divider } from '../components/Divider'
 export type InteriorPageBodyDividerProps = PageTemplateEnhancerProps
 
 export const InteriorPageBodyDivider = ({
-  nextSharesBg,
-  id,
+	nextSharesBg,
+	id,
 }: InteriorPageBodyDividerProps) => (
-  <BoundedBox
-    as="section"
-    variant="narrow"
-    nextSharesBg={nextSharesBg}
-    id={id}
-    styles={{ backgroundColor: 'white' }}
-  >
-    <Divider />
-  </BoundedBox>
+	<BoundedBox
+		as="section"
+		variant="narrow"
+		nextSharesBg={nextSharesBg}
+		id={id}
+		styles={{ backgroundColor: 'white' }}
+	>
+		<Divider />
+	</BoundedBox>
 )
 
 export const mapDataToContext = () => ({
-  bg: 'white',
+	bg: 'white',
 })
 
 export default InteriorPageBodyDivider

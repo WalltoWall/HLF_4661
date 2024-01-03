@@ -1,73 +1,73 @@
 {
-  "Main": {
-    "title": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading1",
-        "label": "Title",
-        "placeholder": "Title of the schedule"
-      }
-    },
-    "uid": {
-      "type": "UID",
-      "config": {
-        "label": "UID",
-        "placeholder": "Unique identifier"
-      }
-    },
-    "body": {
-      "type": "Slices",
-      "fieldset": "Slice zone",
-      "config": {
-        "labels": {
-          "section": []
-        },
-        "choices": {
-          "section": {
-            "type": "Slice",
-            "fieldset": "Section",
-            "description": "Group of events",
-            "icon": "featured_play_list",
-            "display": "list",
-            "non-repeat": {
-              "description_heading": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Description Heading",
-                  "placeholder": "Heading for the description column"
-                }
-              },
-              "dates_heading": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Dates Heading",
-                  "placeholder": "Heading for the dates column"
-                }
-              }
-            },
-            "repeat": {
-              "event_description": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, strong, em, hyperlink, list-item, o-list-item",
-                  "label": "Event Description",
-                  "placeholder": "Short description of the event"
-                }
-              },
-              "event_date": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Event Date",
-                  "placeholder": "Date of the event"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	"Main": {
+		"title": {
+			"type": "StructuredText",
+			"config": {
+				"single": "heading1",
+				"label": "Title",
+				"placeholder": "Title of the schedule"
+			}
+		},
+		"uid": {
+			"type": "UID",
+			"config": {
+				"label": "UID",
+				"placeholder": "Unique identifier"
+			}
+		},
+		"body": {
+			"type": "Slices",
+			"fieldset": "Slice zone",
+			"config": {
+				"labels": {
+					"section": []
+				},
+				"choices": {
+					"section": {
+						"type": "Slice",
+						"fieldset": "Section",
+						"description": "Group of events",
+						"icon": "featured_play_list",
+						"display": "list",
+						"non-repeat": {
+							"description_heading": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Description Heading",
+									"placeholder": "Heading for the description column"
+								}
+							},
+							"dates_heading": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Dates Heading",
+									"placeholder": "Heading for the dates column"
+								}
+							}
+						},
+						"repeat": {
+							"event_description": {
+								"type": "StructuredText",
+								"config": {
+									"multi": "paragraph, strong, em, hyperlink, list-item, o-list-item",
+									"label": "Event Description",
+									"placeholder": "Short description of the event"
+								}
+							},
+							"event_date": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Event Date",
+									"placeholder": "Date of the event"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

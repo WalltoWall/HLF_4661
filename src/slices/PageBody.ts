@@ -26,40 +26,40 @@ import * as PageBodyText from './PageBodyText'
 
 // 2. Add your slice
 const slices = {
-  PageBodyCallsToAction,
-  PageBodyFellowsGrid,
-  PageBodyFooter,
-  PageBodyHeader,
-  PageBodyHeadshotQuote,
-  PageBodyHeroImage,
-  PageBodyHeroImageCarousel,
-  PageBodyImageCarousel,
-  PageBodyLearningExcursionMap,
-  PageBodyLinkCollection,
-  PageBodyQuoteSlideshow,
-  PageBodySearch,
-  PageBodyText,
+	PageBodyCallsToAction,
+	PageBodyFellowsGrid,
+	PageBodyFooter,
+	PageBodyHeader,
+	PageBodyHeadshotQuote,
+	PageBodyHeroImage,
+	PageBodyHeroImageCarousel,
+	PageBodyImageCarousel,
+	PageBodyLearningExcursionMap,
+	PageBodyLinkCollection,
+	PageBodyQuoteSlideshow,
+	PageBodySearch,
+	PageBodyText,
 }
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesPageBody on PrismicPageDataBodySlicesType {
-    ...PageBodyCallsToAction
-    ...PageBodyHeadshotQuote
-    ...PageBodyHeroImage
-    ...PageBodyHeroImageCarousel
-    ...PageBodyImageCarousel
-    ...PageBodyLearningExcursionMap
-    ...PageBodyLinkCollection
-    ...PageBodyQuoteSlideshow
-    ...PageBodyText
+	fragment SlicesPageBody on PrismicPageDataBody {
+		...PageBodyCallsToAction
+		...PageBodyHeadshotQuote
+		...PageBodyHeroImage
+		...PageBodyHeroImageCarousel
+		...PageBodyImageCarousel
+		...PageBodyLearningExcursionMap
+		...PageBodyLinkCollection
+		...PageBodyQuoteSlideshow
+		...PageBodyText
 
-    # The following slices do not have fragments:
-    #...PageBodyFooter
-    #...PageBodyHeader
-    #...PageBodyFellowsGrid
-    #...PageBodySearch
-  }
+		# The following slices do not have fragments:
+		#...PageBodyFooter
+		#...PageBodyHeader
+		#...PageBodyFellowsGrid
+		#...PageBodySearch
+	}
 `
 
 export const slicesMap = reshapeSlicesMap(slices)

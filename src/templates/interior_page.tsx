@@ -219,14 +219,14 @@ export const query = graphql`
 				meta_description
 				header {
 					__typename
-					... on PrismicSliceType {
+					... on PrismicSlice {
 						id
 					}
 					...SlicesInteriorPageHeader
 				}
 				body {
 					__typename
-					... on PrismicSliceType {
+					... on PrismicSlice {
 						id
 					}
 					...SlicesInteriorPageBody

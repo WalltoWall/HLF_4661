@@ -1,15 +1,15 @@
 import * as React from 'react'
 
 import {
-  InteriorPageBodyDivider,
-  InteriorPageBodyDividerProps,
-  mapDataToContext,
+	InteriorPageBodyDivider,
+	InteriorPageBodyDividerProps,
+	mapDataToContext,
 } from './InteriorPageBodyDivider'
 
 export type ProjectBodyDividerProps = InteriorPageBodyDividerProps
 
 export const ProjectBodyDivider = (props: ProjectBodyDividerProps) => (
-  <InteriorPageBodyDivider {...props} />
+	<InteriorPageBodyDivider {...props} />
 )
 
 export { mapDataToContext }
