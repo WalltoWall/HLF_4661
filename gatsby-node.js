@@ -58,13 +58,13 @@ exports.createPages = async (gatsbyContext) => {
 
 	for (const page of pagesRes.data.allPrismicPage.nodes) {
 		if (page.data.redirect_to?.url) {
-			// createRedirect({
-			// 	fromPath: page.url,
-			// 	toPath: page.data.redirect_to.url,
-			// 	isPermanent: page.data.redirect_is_permanent,
-			// 	redirectInBrowser: true,
-			// 	force: true,
-			// })
+			createRedirect({
+				fromPath: page.url,
+				toPath: page.data.redirect_to.url,
+				isPermanent: page.data.redirect_is_permanent,
+				redirectInBrowser: true,
+				force: true,
+			})
 			continue
 		}
 
@@ -110,13 +110,13 @@ exports.createPages = async (gatsbyContext) => {
 	 */
 	for (const page of interiorPagesRes.data.allPrismicInteriorPage.nodes) {
 		if (page.data.redirect_to?.url) {
-			// createRedirect({
-			// 	fromPath: page.url,
-			// 	toPath: page.data.redirect_to.url,
-			// 	isPermanent: page.data.redirect_is_permanent,
-			// 	redirectInBrowser: true,
-			// 	force: true,
-			// })
+			createRedirect({
+				fromPath: page.url,
+				toPath: page.data.redirect_to.url,
+				isPermanent: page.data.redirect_is_permanent,
+				redirectInBrowser: true,
+				force: true,
+			})
 			continue
 		}
 
@@ -411,13 +411,13 @@ exports.createPages = async (gatsbyContext) => {
 	 */
 	for (const redirect of settingsRes.data.prismicSettings.data.redirects)
 		if (redirect.from_path && redirect.to_path)
-			// createRedirect({
-			// 	fromPath: redirect.from_path,
-			// 	toPath: redirect.to_path,
-			// 	isPermanent: redirect.is_permanent,
-			// 	redirectInBrowser: true,
-			// 	force: true,
-			// })
+			createRedirect({
+				fromPath: redirect.from_path,
+				toPath: redirect.to_path,
+				isPermanent: redirect.is_permanent,
+				redirectInBrowser: true,
+				force: true,
+			})
 
 	/**
 	 * Create a redirect from /admin to Prismic.
