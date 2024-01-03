@@ -17,14 +17,13 @@ module.exports = {
 	siteMetadata,
 	plugins: [
 		'gatsby-plugin-image',
-		// 'gatsby-plugin-catch-links',
 		'gatsby-plugin-svgr',
 		'gatsby-plugin-sitemap',
 		process.env.GOOGLE_ANALYTICS_TRACKING_ID && {
 			resolve: 'gatsby-plugin-google-gtag',
 			options: {
 				trackingIds: [process.env.GOOGLE_ANALYTICS_TRACKING_ID],
-				pluginOptions: {
+				pluginConfig: {
 					exclude: ['/preview/**', '/admin/**', '/docs/**'],
 				},
 			},
@@ -175,21 +174,6 @@ module.exports = {
 							})),
 					},
 				],
-			},
-		},
-		{
-			resolve: 'gatsby-plugin-netlify',
-			options: {
-				headers: {
-					'/*': [
-						'X-Frame-Options: SAMEORIGIN',
-						'X-XSS-Protection: 1; mode=block',
-						'X-Content-Type-Options: nosniff',
-						'Referrer-Policy: strict-origin',
-						'Access-Control-Allow-Origin: *',
-					],
-				},
-				mergeSecurityHeaders: false,
 			},
 		},
 	].filter(Boolean),

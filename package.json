@@ -35,7 +35,6 @@
 		"gatsby-plugin-image": "^3.13.0",
 		"gatsby-plugin-local-search": "^2.0.1",
 		"gatsby-plugin-manifest": "^5.13.0",
-		"gatsby-plugin-netlify": "^5.1.1",
 		"gatsby-plugin-prismic-previews": "^6.0.1",
 		"gatsby-plugin-sitemap": "^6.13.0",
 		"gatsby-plugin-svgr": "^3.0.0-beta.0",
