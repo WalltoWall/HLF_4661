@@ -17,6 +17,8 @@ export const NotFoundPage = ({
 }: PageProps<NotFoundPageQuery>) => {
 	const page = data?.prismicPage
 
+	console.log('404')
+
 	/**
 	 * Metadata made available in a slice's `mapDataToProps` and
 	 * `mapDataToContext` functions.
@@ -34,7 +36,6 @@ export const NotFoundPage = ({
 	return (
 		<Layout>
 			<MapSlicesToComponents
-				//@ts-expect-error
 				list={page?.data?.body}
 				map={slicesMap}
 				meta={meta}
