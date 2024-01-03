@@ -14,14 +14,14 @@ import * as InteriorPageHeaderHeroImage from './InteriorPageHeaderHeroImage'
 
 // 2. Add your slice
 const slices = {
-  InteriorPageHeaderHeroImage,
+	InteriorPageHeaderHeroImage,
 }
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesInteriorPageHeader on PrismicInteriorPageDataHeaderSlicesType {
-    ...InteriorPageHeaderHeroImage
-  }
+	fragment SlicesInteriorPageHeader on PrismicInteriorPageDataHeader {
+		...InteriorPageHeaderHeroImage
+	}
 `
 
 export const slicesMap = reshapeSlicesMap(slices)

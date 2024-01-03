@@ -7,110 +7,110 @@ import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 import { PageBodyHeroImageFragment } from '../types.generated'
 import { PageTemplateEnhancerProps } from '../templates/page'
 import {
-  MapDataToContextArgs,
-  MapDataToPropsArgs,
+	MapDataToContextArgs,
+	MapDataToPropsArgs,
 } from '../lib/mapSlicesToComponents'
 
 import { ImageWithTextOverlay } from '../components/ImageWithTextOverlay'
 import { useCommonStyles } from '../hooks/useCommonStyles'
 
 export type PageBodyHeroImageProps = ReturnType<typeof mapDataToProps> &
-  PageTemplateEnhancerProps
+	PageTemplateEnhancerProps
 
 const variants = {
-  Normal: {
-    imageWithTextOverlayVariant: undefined,
-  },
-  'Reduced height': {
-    imageWithTextOverlayVariant: 'reducedHeight',
-  },
+	Normal: {
+		imageWithTextOverlayVariant: undefined,
+	},
+	'Reduced height': {
+		imageWithTextOverlayVariant: 'reducedHeight',
+	},
 } as const
 
 export const PageBodyHeroImage = ({
-  variant: variantName = 'Normal',
-  textHTML,
-  buttonText = 'Learn More',
-  buttonHref,
-  backgroundImageData,
-  backgroundImageAlt,
-  id,
+	variant: variantName = 'Normal',
+	textHTML,
+	buttonText = 'Learn More',
+	buttonHref,
+	backgroundImageData,
+	backgroundImageAlt,
+	id,
 }: PageBodyHeroImageProps) => {
-  const commonStyles = useCommonStyles()
-  const variant = variants[variantName]
+	const commonStyles = useCommonStyles()
+	const variant = variants[variantName]
 
-  return (
-    <Box
-      as="section"
-      id={id}
-      styles={{
-        maxWidth: 'xlarge',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      }}
-    >
-      <ImageWithTextOverlay
-        variant={variant.imageWithTextOverlayVariant}
-        textHTML={textHTML}
-        buttonHref={buttonHref}
-        buttonText={buttonText}
-        imageData={backgroundImageData}
-        imageAlt={backgroundImageAlt}
-        className={commonStyles.darkGrayGradientBackground}
-      />
-    </Box>
-  )
+	return (
+		<Box
+			as="section"
+			id={id}
+			styles={{
+				maxWidth: 'xlarge',
+				marginLeft: 'auto',
+				marginRight: 'auto',
+			}}
+		>
+			<ImageWithTextOverlay
+				variant={variant.imageWithTextOverlayVariant}
+				textHTML={textHTML}
+				buttonHref={buttonHref}
+				buttonText={buttonText}
+				imageData={backgroundImageData}
+				imageAlt={backgroundImageAlt}
+				className={commonStyles.darkGrayGradientBackground}
+			/>
+		</Box>
+	)
 }
 
 export const mapDataToProps = ({
-  data,
+	data,
 }: MapDataToPropsArgs<PageBodyHeroImageFragment, typeof mapDataToContext>) => ({
-  variant: undefIfEmpty(data.primary?.variant) as
-    | keyof typeof variants
-    | undefined,
-  textHTML: getRichText(data.primary?.text),
-  buttonText: undefIfEmpty(data.primary?.button_text?.text),
-  buttonHref: data.primary?.button_link?.url,
-  backgroundImageData: data.primary?.background_image
-    ?.gatsbyImageData as IGatsbyImageData,
-  backgroundImageAlt: data.primary?.background_image?.alt,
+	variant: undefIfEmpty(data.primary?.variant) as
+		| keyof typeof variants
+		| undefined,
+	textHTML: getRichText(data.primary?.text),
+	buttonText: undefIfEmpty(data.primary?.button_text?.text),
+	buttonHref: data.primary?.button_link?.url,
+	backgroundImageData: data.primary?.background_image
+		?.gatsbyImageData as IGatsbyImageData,
+	backgroundImageAlt: data.primary?.background_image?.alt,
 })
 
 export const mapDataToContext = ({
-  data,
+	data,
 }: MapDataToContextArgs<PageBodyHeroImageFragment>) => {
-  const hasBackgroundImage = Boolean(
-    data.primary?.background_image?.gatsbyImageData,
-  )
+	const hasBackgroundImage = Boolean(
+		data.primary?.background_image?.gatsbyImageData,
+	)
 
-  return {
-    bg: hasBackgroundImage ? Symbol() : 'gray20',
-  }
+	return {
+		bg: hasBackgroundImage ? Symbol() : 'gray20',
+	}
 }
 
 export const fragment = graphql`
-  fragment PageBodyHeroImage on PrismicPageDataBodyHeroImage {
-    primary {
-      variant
-      text {
-        text
-        html
-      }
-      button_text {
-        text
-      }
-      button_link {
-        url
-      }
-      background_image {
-        alt
-        gatsbyImageData(
-          placeholder: BLURRED
-          width: 1200
-          breakpoints: [360, 720, 1200]
-        )
-      }
-    }
-  }
+	fragment PageBodyHeroImage on PrismicPageDataBodyHeroImage {
+		primary {
+			variant
+			text {
+				text
+				html
+			}
+			button_text {
+				text
+			}
+			button_link {
+				url
+			}
+			background_image {
+				alt
+				gatsbyImageData(
+					placeholder: BLURRED
+					width: 1200
+					breakpoints: [360, 720, 1200]
+				)
+			}
+		}
+	}
 `
 
 export default PageBodyHeroImage

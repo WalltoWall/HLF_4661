@@ -9,105 +9,105 @@
 import { graphql } from 'gatsby'
 
 export const PrismicPageParentRecursive = graphql`
-  fragment PrismicPageParentRecursive on PrismicPage {
-    ...PrismicPageParentFields
-    data {
-      parent {
-        document {
-          ... on PrismicPage {
-            ...PrismicPageParentFields
-            data {
-              parent {
-                document {
-                  ... on PrismicPage {
-                    ...PrismicPageParentFields
-                    data {
-                      parent {
-                        document {
-                          ... on PrismicPage {
-                            ...PrismicPageParentFields
-                            data {
-                              parent {
-                                document {
-                                  ... on PrismicPage {
-                                    ...PrismicPageParentFields
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	fragment PrismicPageParentRecursive on PrismicPage {
+		...PrismicPageParentFields
+		data {
+			parent {
+				document {
+					... on PrismicPage {
+						...PrismicPageParentFields
+						data {
+							parent {
+								document {
+									... on PrismicPage {
+										...PrismicPageParentFields
+										data {
+											parent {
+												document {
+													... on PrismicPage {
+														...PrismicPageParentFields
+														data {
+															parent {
+																document {
+																	... on PrismicPage {
+																		...PrismicPageParentFields
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-  fragment PrismicPageParentFields on PrismicPage {
-    uid
-    url
-    data {
-      title {
-        text
-      }
-    }
-  }
+	fragment PrismicPageParentFields on PrismicPage {
+		uid
+		url
+		data {
+			title {
+				text
+			}
+		}
+	}
 `
 
 export const PrismicInteriorPageParentRecursive = graphql`
-  fragment PrismicInteriorPageParentRecursive on PrismicInteriorPage {
-    ...PrismicInteriorPageParentFields
-    data {
-      parent {
-        document {
-          ... on PrismicInteriorPage {
-            ...PrismicInteriorPageParentFields
-            data {
-              parent {
-                document {
-                  ... on PrismicInteriorPage {
-                    ...PrismicInteriorPageParentFields
-                    data {
-                      parent {
-                        document {
-                          ... on PrismicInteriorPage {
-                            ...PrismicInteriorPageParentFields
-                            data {
-                              parent {
-                                document {
-                                  ... on PrismicInteriorPage {
-                                    ...PrismicInteriorPageParentFields
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	fragment PrismicInteriorPageParentRecursive on PrismicInteriorPage {
+		...PrismicInteriorPageParentFields
+		data {
+			parent {
+				document {
+					... on PrismicInteriorPage {
+						...PrismicInteriorPageParentFields
+						data {
+							parent {
+								document {
+									... on PrismicInteriorPage {
+										...PrismicInteriorPageParentFields
+										data {
+											parent {
+												document {
+													... on PrismicInteriorPage {
+														...PrismicInteriorPageParentFields
+														data {
+															parent {
+																document {
+																	... on PrismicInteriorPage {
+																		...PrismicInteriorPageParentFields
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-  fragment PrismicInteriorPageParentFields on PrismicInteriorPage {
-    uid
-    url
-    data {
-      title {
-        text
-      }
-    }
-  }
+	fragment PrismicInteriorPageParentFields on PrismicInteriorPage {
+		uid
+		url
+		data {
+			title {
+				text
+			}
+		}
+	}
 `

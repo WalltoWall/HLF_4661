@@ -1,6 +1,5 @@
-import * as React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-
+import { useMergePrismicPreviewData } from 'gatsby-plugin-prismic-previews'
 import { UseCohortsQuery } from '../types.generated'
 
 /**
@@ -8,31 +7,31 @@ import { UseCohortsQuery } from '../types.generated'
  * last name in ascending order.
  */
 export const useCohorts = () => {
-  const queryData = useStaticQuery<UseCohortsQuery>(graphql`
-    query UseCohorts {
-      allPrismicCohort {
-        nodes {
-          uid
-          data {
-            title {
-              text
-            }
-            cohort_number
-          }
-        }
-      }
-    }
-  `)
+	const staticData = useStaticQuery<UseCohortsQuery>(graphql`
+		query UseCohorts {
+			allPrismicCohort {
+				nodes {
+					uid
+					data {
+						title {
+							text
+						}
+						cohort_number
+					}
+				}
+			}
+		}
+	`)
 
-  return React.useMemo(
-    () =>
-      queryData.allPrismicCohort.nodes
-        .map((node) => ({
-          uid: node.uid,
-          title: node.data?.title?.text,
-          number: node.data?.cohort_number,
-        }))
-        .sort((a, b) => (a.number ?? Infinity) - (b.number ?? Infinity)),
-    [queryData],
-  )
+	const queryData = useMergePrismicPreviewData(staticData)
+
+	return (
+		queryData?.allPrismicCohort.nodes
+			.map((node) => ({
+				uid: node.uid,
+				title: node.data?.title?.text,
+				number: node.data?.cohort_number,
+			}))
+			.sort((a, b) => (a.number ?? Infinity) - (b.number ?? Infinity)) ?? []
+	)
 }

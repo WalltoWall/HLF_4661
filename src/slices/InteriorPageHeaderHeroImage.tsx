@@ -6,8 +6,8 @@ import { getRichText } from '@walltowall/helpers'
 import { InteriorPageHeaderHeroImageFragment } from '../types.generated'
 import { PageTemplateEnhancerProps } from '../templates/page'
 import {
-  MapDataToContextArgs,
-  MapDataToPropsArgs,
+	MapDataToContextArgs,
+	MapDataToPropsArgs,
 } from '../lib/mapSlicesToComponents'
 import { useCommonStyles } from '../hooks/useCommonStyles'
 
@@ -15,76 +15,76 @@ import { ImageWithTextOverlay } from '../components/ImageWithTextOverlay'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export type InteriorPageHeaderHeroImageProps = ReturnType<
-  typeof mapDataToProps
+	typeof mapDataToProps
 > &
-  PageTemplateEnhancerProps
+	PageTemplateEnhancerProps
 
 export const InteriorPageHeaderHeroImage = ({
-  headingHTML,
-  backgroundImageData,
-  id,
+	headingHTML,
+	backgroundImageData,
+	id,
 }: InteriorPageHeaderHeroImageProps) => {
-  const commonStyles = useCommonStyles()
+	const commonStyles = useCommonStyles()
 
-  return (
-    <Box
-      as="section"
-      id={id}
-      styles={{
-        maxWidth: 'xlarge',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      }}
-    >
-      <ImageWithTextOverlay
-        variant="reducedHeight"
-        textHTML={headingHTML}
-        imageData={backgroundImageData}
-        className={commonStyles.darkGrayGradientBackground}
-      />
-    </Box>
-  )
+	return (
+		<Box
+			as="section"
+			id={id}
+			styles={{
+				maxWidth: 'xlarge',
+				marginLeft: 'auto',
+				marginRight: 'auto',
+			}}
+		>
+			<ImageWithTextOverlay
+				variant="reducedHeight"
+				textHTML={headingHTML}
+				imageData={backgroundImageData}
+				className={commonStyles.darkGrayGradientBackground}
+			/>
+		</Box>
+	)
 }
 
 export const mapDataToProps = ({
-  data,
+	data,
 }: MapDataToPropsArgs<
-  InteriorPageHeaderHeroImageFragment,
-  typeof mapDataToContext
+	InteriorPageHeaderHeroImageFragment,
+	typeof mapDataToContext
 >) => ({
-  headingHTML: getRichText(data.primary?.heading),
-  backgroundImageData: data.primary?.background_image
-    ?.gatsbyImageData as IGatsbyImageData,
+	headingHTML: getRichText(data.primary?.heading),
+	backgroundImageData: data.primary?.background_image
+		?.gatsbyImageData as IGatsbyImageData,
 })
 
 export const mapDataToContext = ({
-  data,
+	data,
 }: MapDataToContextArgs<InteriorPageHeaderHeroImageFragment>) => {
-  const hasBackgroundImage = Boolean(
-    data.primary?.background_image?.gatsbyImageData,
-  )
+	const hasBackgroundImage = Boolean(
+		data.primary?.background_image?.gatsbyImageData,
+	)
 
-  return {
-    bg: hasBackgroundImage ? Symbol() : 'gray20',
-  }
+	return {
+		bg: hasBackgroundImage ? Symbol() : 'gray20',
+	}
 }
 
 export const fragment = graphql`
-  fragment InteriorPageHeaderHeroImage on PrismicInteriorPageDataHeaderHeroImage {
-    primary {
-      heading {
-        text
-        html
-      }
-      background_image {
-        gatsbyImageData(
-          placeholder: BLURRED
-          width: 1200
-          breakpoints: [360, 720, 1080]
-        )
-      }
-    }
-  }
+	fragment InteriorPageHeaderHeroImage on PrismicInteriorPageDataHeaderHeroImage {
+		primary {
+			heading {
+				text
+				html
+			}
+			background_image {
+				gatsbyImageData(
+					placeholder: BLURRED
+					width: 1200
+					breakpoints: [360, 720, 1080]
+				)
+			}
+		}
+	}
 `
 
 export default InteriorPageHeaderHeroImage

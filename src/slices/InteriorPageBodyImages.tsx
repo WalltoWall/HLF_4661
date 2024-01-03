@@ -12,97 +12,97 @@ import { BoundedBox } from '../components/BoundedBox'
 import { HTMLContent } from '../components/HTMLContent'
 
 export type InteriorPageBodyImagesProps = ReturnType<typeof mapDataToProps> &
-  PageTemplateEnhancerProps
+	PageTemplateEnhancerProps
 
 export const InteriorPageBodyImages = ({
-  children,
-  nextSharesBg,
+	children,
+	nextSharesBg,
 }: InteriorPageBodyImagesProps) => {
-  const imageCount = React.Children.count(children) as 1 | 2 | 3 | 4
+	const imageCount = React.Children.count(children) as 1 | 2 | 3 | 4
 
-  return (
-    <BoundedBox
-      as="section"
-      variant="narrow"
-      nextSharesBg={nextSharesBg}
-      styles={{ backgroundColor: 'white' }}
-    >
-      <Box
-        styles={{
-          display: 'grid',
-          gap: [6, 7, 8],
-          gridTemplateColumns: [1, imageCount],
-          alignItems: 'center',
-        }}
-      >
-        {children}
-      </Box>
-    </BoundedBox>
-  )
+	return (
+		<BoundedBox
+			as="section"
+			variant="narrow"
+			nextSharesBg={nextSharesBg}
+			styles={{ backgroundColor: 'white' }}
+		>
+			<Box
+				styles={{
+					display: 'grid',
+					gap: [6, 7, 8],
+					gridTemplateColumns: [1, imageCount],
+					alignItems: 'center',
+				}}
+			>
+				{children}
+			</Box>
+		</BoundedBox>
+	)
 }
 
 export type InteriorPageBodyImagesImageProps = {
-  captionHTML?: string
-  imageData?: IGatsbyImageData
-  imageAlt?: string
+	captionHTML?: string
+	imageData?: IGatsbyImageData
+	imageAlt?: string
 }
 
 const Image = ({
-  captionHTML,
-  imageData,
-  imageAlt,
+	captionHTML,
+	imageData,
+	imageAlt,
 }: InteriorPageBodyImagesImageProps) => (
-  <Box as="figure" styles={{ display: 'grid', gap: [4, 5] }}>
-    {imageData && <GatsbyImage image={imageData} alt={imageAlt ?? ''} />}
-    {captionHTML && (
-      <HTMLContent
-        as="figcaption"
-        html={captionHTML}
-        componentOverrides={{
-          p: (Comp) => (props) => <Comp variant="sans-13-14" {...props} />,
-        }}
-        styles={{ color: 'gray40' }}
-      />
-    )}
-  </Box>
+	<Box as="figure" styles={{ display: 'grid', gap: [4, 5] }}>
+		{imageData && <GatsbyImage image={imageData} alt={imageAlt ?? ''} />}
+		{captionHTML && (
+			<HTMLContent
+				as="figcaption"
+				html={captionHTML}
+				componentOverrides={{
+					p: (Comp) => (props) => <Comp variant="sans-13-14" {...props} />,
+				}}
+				styles={{ color: 'gray40' }}
+			/>
+		)}
+	</Box>
 )
 
 InteriorPageBodyImages.Image = Image
 
 export const mapDataToProps = ({
-  data,
+	data,
 }: MapDataToPropsArgs<
-  InteriorPageBodyImagesFragment,
-  typeof mapDataToContext
+	InteriorPageBodyImagesFragment,
+	typeof mapDataToContext
 >) => ({
-  children: data?.items?.map((item) => (
-    <InteriorPageBodyImages.Image
-      key={item?.image?.url}
-      imageData={item?.image?.gatsbyImageData as IGatsbyImageData}
-      imageAlt={undefIfEmpty(item?.image?.alt) as string | undefined}
-      captionHTML={getRichText(item?.caption)}
-    />
-  )) as React.ReactNode,
+	children: data?.items?.map((item) => (
+		<InteriorPageBodyImages.Image
+			key={item?.image?.url}
+			imageData={item?.image?.gatsbyImageData as IGatsbyImageData}
+			imageAlt={undefIfEmpty(item?.image?.alt) as string | undefined}
+			captionHTML={getRichText(item?.caption)}
+		/>
+	)) as React.ReactNode,
 })
 
 export const mapDataToContext = () => ({
-  bg: 'white',
+	bg: 'white',
 })
 
 export const fragment = graphql`
-  fragment InteriorPageBodyImages on PrismicInteriorPageDataBodyImages {
-    items {
-      image {
-        alt
-        url
-        gatsbyImageData(placeholder: BLURRED, width: 700, breakpoints: [700])
-      }
-      caption {
-        html
-        text
-      }
-    }
-  }
+	fragment InteriorPageBodyImages on PrismicInteriorPageDataBodyImages {
+		items {
+			image {
+				alt
+				url
+				gatsbyImageData(placeholder: BLURRED, width: 700, breakpoints: [700])
+			}
+			caption {
+				html
+				text
+			}
+		}
+	}
 `
 
 export default InteriorPageBodyImages

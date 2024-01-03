@@ -1,5 +1,5 @@
 import React from 'react'
-import GatsbyLink, { GatsbyLinkProps } from 'gatsby-link'
+import { Link as GatsbyLink, GatsbyLinkProps } from 'gatsby'
 import { isInternal, isAnchorOnly, extractAnchor } from '@walltowall/helpers'
 
 export interface LinkProps extends Omit<GatsbyLinkProps<any>, 'to'> {
@@ -11,7 +11,7 @@ export const Link = ({ href, ...props }: LinkProps) => {
 		return <a {...props} />
 	}
 
-	if (isAnchorOnly(href)) {
+	if (isAnchorOnly(href) || href.startsWith('#')) {
 		return <a href={extractAnchor(href)} {...props} />
 	}
 

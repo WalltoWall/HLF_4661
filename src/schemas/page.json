@@ -1,449 +1,449 @@
 {
-  "Main": {
-    "title": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading1",
-        "label": "Title"
-      }
-    },
-    "uid": {
-      "type": "UID",
-      "config": {
-        "label": "UID",
-        "placeholder": "Unique identifier"
-      }
-    },
-    "meta_title": {
-      "type": "Text",
-      "config": {
-        "label": "Meta Title",
-        "placeholder": "Optional - Override the publicly viewable page title"
-      }
-    },
-    "meta_description": {
-      "type": "Text",
-      "config": {
-        "label": "Meta Description",
-        "placeholder": "Optional - One sentence description of the page's content"
-      }
-    },
-    "parent": {
-      "type": "Link",
-      "config": {
-        "select": "document",
-        "customtypes": ["page", "interior_page"],
-        "label": "Parent",
-        "placeholder": "Optional - Parent of the page"
-      }
-    },
-    "redirect_to": {
-      "type": "Link",
-      "config": {
-        "label": "Redirect To",
-        "placeholder": "Optional - Redirect this page to another page or external URL"
-      }
-    },
-    "redirect_is_permanent": {
-      "type": "Boolean",
-      "config": {
-        "placeholder_false": "No",
-        "placeholder_true": "Yes, redirect forever",
-        "default_value": false,
-        "label": "Redirect Is Permanent"
-      }
-    }
-  },
-  "Body": {
-    "body": {
-      "type": "Slices",
-      "fieldset": "Slice zone",
-      "config": {
-        "labels": {
-          "images": [],
-          "text": [],
-          "embed": [],
-          "hero_image": [],
-          "quote_slideshow": [],
-          "learning_excursion_map": [],
-          "fellows_grid": [],
-          "image_carousel": [],
-          "link_collection": [],
-          "headshot_quote": [],
-          "hero_image_carousel": [],
-          "calls_to_action": []
-        },
-        "choices": {
-          "text": {
-            "type": "Slice",
-            "fieldset": "Text",
-            "description": "Rich text with headings and links",
-            "icon": "text_fields",
-            "display": "list",
-            "non-repeat": {
-              "text": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, heading1, heading2, strong, em, hyperlink, embed, list-item, o-list-item",
-                  "allowTargetBlank": true,
-                  "label": "Text",
-                  "placeholder": "Text with formatting and rich content"
-                }
-              }
-            },
-            "repeat": {}
-          },
-          "anchor": {
-            "type": "Slice",
-            "fieldset": "Anchor",
-            "description": "Page marker to jump a user down the page",
-            "icon": "adjust",
-            "display": "list",
-            "non-repeat": {
-              "id": {
-                "type": "Text",
-                "config": {
-                  "label": "ID",
-                  "placeholder": "Anchor ID used in links"
-                }
-              }
-            },
-            "repeat": {}
-          },
-          "hero_image": {
-            "type": "Slice",
-            "fieldset": "Hero Image",
-            "description": "Large image with overlayed text and optional button",
-            "icon": "photo_size_select_actual",
-            "display": "list",
-            "non-repeat": {
-              "variant": {
-                "type": "Select",
-                "config": {
-                  "options": ["Normal", "Reduced height"],
-                  "default_value": "Normal",
-                  "label": "Variant",
-                  "placeholder": "Variation for the slice that may alter its appearance"
-                }
-              },
-              "text": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, heading1",
-                  "label": "Text",
-                  "placeholder": "Text displayed over the background image"
-                }
-              },
-              "button_text": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Button Text",
-                  "placeholder": "Optional - Text for the button link"
-                }
-              },
-              "button_link": {
-                "type": "Link",
-                "config": {
-                  "label": "Button Link",
-                  "placeholder": "Optional - Link for the button"
-                }
-              },
-              "background_image": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Background Image"
-                }
-              }
-            },
-            "repeat": {}
-          },
-          "hero_image_carousel": {
-            "type": "Slice",
-            "fieldset": "Hero Image Carousel",
-            "description": "Carousel of Hero Image Slices",
-            "icon": "burst_mode",
-            "display": "list",
-            "non-repeat": {},
-            "repeat": {
-              "background_image": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Background Image"
-                }
-              },
-              "text": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, heading1",
-                  "label": "Text",
-                  "placeholder": "Text displayed over the background image"
-                }
-              },
-              "button_text": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Button Text",
-                  "placeholder": "Optional - Text for the button link"
-                }
-              },
-              "button_link": {
-                "type": "Link",
-                "config": {
-                  "label": "Button Link",
-                  "placeholder": "Optional - Link for the button"
-                }
-              }
-            }
-          },
-          "quote_slideshow": {
-            "type": "Slice",
-            "fieldset": "Quote Slideshow",
-            "description": "Slideshow of quotes with optional photo",
-            "icon": "format_quote",
-            "display": "list",
-            "non-repeat": {},
-            "repeat": {
-              "photo": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Photo"
-                }
-              },
-              "quote": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Quote",
-                  "placeholder": "Quote to display (without quotation marks)"
-                }
-              },
-              "quotee_name": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Quotee Name",
-                  "placeholder": "Name of the quotee"
-                }
-              },
-              "quotee_title": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Quotee Title",
-                  "placeholder": "Title of the quotee (or Cohort #)"
-                }
-              }
-            }
-          },
-          "learning_excursion_map": {
-            "type": "Slice",
-            "fieldset": "Learning Excursion Map",
-            "description": "Map of learning excursions with text and videos",
-            "icon": "map",
-            "display": "grid",
-            "non-repeat": {
-              "map_url": {
-                "type": "Text",
-                "config": {
-                  "label": "Map URL",
-                  "placeholder": "URL to the map embed"
-                }
-              }
-            },
-            "repeat": {}
-          },
-          "fellows_grid": {
-            "type": "Slice",
-            "fieldset": "Fellows Grid",
-            "description": "Grid of Fellows with toggle to see current or all cohorts",
-            "icon": "supervisor_account",
-            "display": "list",
-            "non-repeat": {},
-            "repeat": {}
-          },
-          "image_carousel": {
-            "type": "Slice",
-            "fieldset": "Image Carousel",
-            "description": "Interactive carousel of images",
-            "icon": "photo_library",
-            "display": "grid",
-            "non-repeat": {},
-            "repeat": {
-              "image": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Image"
-                }
-              },
-              "caption": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Caption",
-                  "placeholder": "Optional - Caption below image"
-                }
-              }
-            }
-          },
-          "link_collection": {
-            "type": "Slice",
-            "fieldset": "Link Collection",
-            "description": "Group of links with optional descriptions and images",
-            "icon": "dns",
-            "display": "grid",
-            "non-repeat": {},
-            "repeat": {
-              "thumbnail": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Thumbnail"
-                }
-              },
-              "name": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "heading3",
-                  "label": "Name",
-                  "placeholder": "Name of the link"
-                }
-              },
-              "description": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Description",
-                  "placeholder": "Optional - Short description of the link"
-                }
-              },
-              "link": {
-                "type": "Link",
-                "config": {
-                  "label": "Link",
-                  "placeholder": "Link to display"
-                }
-              },
-              "button_text": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Button Text",
-                  "placeholder": "Optional - Text for the button link"
-                }
-              }
-            }
-          },
-          "headshot_quote": {
-            "type": "Slice",
-            "fieldset": "Headshot Quote",
-            "description": "Short quote with headshot and an optional link",
-            "icon": "format_quote",
-            "display": "list",
-            "non-repeat": {
-              "quote": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Quote",
-                  "placeholder": "Short quote from Pierre"
-                }
-              },
-              "credit": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Credit",
-                  "placeholder": "Credit for the quote"
-                }
-              },
-              "button_link": {
-                "type": "Link",
-                "config": {
-                  "label": "Button Link",
-                  "placeholder": "Optional - Link to a page with more information"
-                }
-              },
-              "button_text": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Button Text",
-                  "placeholder": "Optional - Text for the button link"
-                }
-              },
-              "photo": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Photo"
-                }
-              }
-            },
-            "repeat": {}
-          },
-          "calls_to_action": {
-            "type": "Slice",
-            "fieldset": "Calls to Action",
-            "description": "Group of calls to action with text and links",
-            "icon": "feedback",
-            "display": "grid",
-            "non-repeat": {},
-            "repeat": {
-              "background_image": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Background Image"
-                }
-              },
-              "label": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Label",
-                  "placeholder": "Optional - Small label above text"
-                }
-              },
-              "text": {
-                "type": "StructuredText",
-                "config": {
-                  "multi": "paragraph, heading1",
-                  "label": "Text",
-                  "placeholder": "Text displayed over the background image"
-                }
-              },
-              "button_text": {
-                "type": "StructuredText",
-                "config": {
-                  "single": "paragraph",
-                  "label": "Button Text",
-                  "placeholder": "Optional - Text for the button link"
-                }
-              },
-              "button_link": {
-                "type": "Link",
-                "config": {
-                  "label": "Button Link",
-                  "placeholder": "Optional - Link for the button"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+	"Main": {
+		"title": {
+			"type": "StructuredText",
+			"config": {
+				"single": "heading1",
+				"label": "Title"
+			}
+		},
+		"uid": {
+			"type": "UID",
+			"config": {
+				"label": "UID",
+				"placeholder": "Unique identifier"
+			}
+		},
+		"meta_title": {
+			"type": "Text",
+			"config": {
+				"label": "Meta Title",
+				"placeholder": "Optional - Override the publicly viewable page title"
+			}
+		},
+		"meta_description": {
+			"type": "Text",
+			"config": {
+				"label": "Meta Description",
+				"placeholder": "Optional - One sentence description of the page's content"
+			}
+		},
+		"parent": {
+			"type": "Link",
+			"config": {
+				"select": "document",
+				"customtypes": ["page", "interior_page"],
+				"label": "Parent",
+				"placeholder": "Optional - Parent of the page"
+			}
+		},
+		"redirect_to": {
+			"type": "Link",
+			"config": {
+				"label": "Redirect To",
+				"placeholder": "Optional - Redirect this page to another page or external URL"
+			}
+		},
+		"redirect_is_permanent": {
+			"type": "Boolean",
+			"config": {
+				"placeholder_false": "No",
+				"placeholder_true": "Yes, redirect forever",
+				"default_value": false,
+				"label": "Redirect Is Permanent"
+			}
+		}
+	},
+	"Body": {
+		"body": {
+			"type": "Slices",
+			"fieldset": "Slice zone",
+			"config": {
+				"labels": {
+					"images": [],
+					"text": [],
+					"embed": [],
+					"hero_image": [],
+					"quote_slideshow": [],
+					"learning_excursion_map": [],
+					"fellows_grid": [],
+					"image_carousel": [],
+					"link_collection": [],
+					"headshot_quote": [],
+					"hero_image_carousel": [],
+					"calls_to_action": []
+				},
+				"choices": {
+					"text": {
+						"type": "Slice",
+						"fieldset": "Text",
+						"description": "Rich text with headings and links",
+						"icon": "text_fields",
+						"display": "list",
+						"non-repeat": {
+							"text": {
+								"type": "StructuredText",
+								"config": {
+									"multi": "paragraph, heading1, heading2, strong, em, hyperlink, embed, list-item, o-list-item",
+									"allowTargetBlank": true,
+									"label": "Text",
+									"placeholder": "Text with formatting and rich content"
+								}
+							}
+						},
+						"repeat": {}
+					},
+					"anchor": {
+						"type": "Slice",
+						"fieldset": "Anchor",
+						"description": "Page marker to jump a user down the page",
+						"icon": "adjust",
+						"display": "list",
+						"non-repeat": {
+							"id": {
+								"type": "Text",
+								"config": {
+									"label": "ID",
+									"placeholder": "Anchor ID used in links"
+								}
+							}
+						},
+						"repeat": {}
+					},
+					"hero_image": {
+						"type": "Slice",
+						"fieldset": "Hero Image",
+						"description": "Large image with overlayed text and optional button",
+						"icon": "photo_size_select_actual",
+						"display": "list",
+						"non-repeat": {
+							"variant": {
+								"type": "Select",
+								"config": {
+									"options": ["Normal", "Reduced height"],
+									"default_value": "Normal",
+									"label": "Variant",
+									"placeholder": "Variation for the slice that may alter its appearance"
+								}
+							},
+							"text": {
+								"type": "StructuredText",
+								"config": {
+									"multi": "paragraph, heading1",
+									"label": "Text",
+									"placeholder": "Text displayed over the background image"
+								}
+							},
+							"button_text": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Button Text",
+									"placeholder": "Optional - Text for the button link"
+								}
+							},
+							"button_link": {
+								"type": "Link",
+								"config": {
+									"label": "Button Link",
+									"placeholder": "Optional - Link for the button"
+								}
+							},
+							"background_image": {
+								"type": "Image",
+								"config": {
+									"constraint": {},
+									"thumbnails": [],
+									"label": "Background Image"
+								}
+							}
+						},
+						"repeat": {}
+					},
+					"hero_image_carousel": {
+						"type": "Slice",
+						"fieldset": "Hero Image Carousel",
+						"description": "Carousel of Hero Image Slices",
+						"icon": "burst_mode",
+						"display": "list",
+						"non-repeat": {},
+						"repeat": {
+							"background_image": {
+								"type": "Image",
+								"config": {
+									"constraint": {},
+									"thumbnails": [],
+									"label": "Background Image"
+								}
+							},
+							"text": {
+								"type": "StructuredText",
+								"config": {
+									"multi": "paragraph, heading1",
+									"label": "Text",
+									"placeholder": "Text displayed over the background image"
+								}
+							},
+							"button_text": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Button Text",
+									"placeholder": "Optional - Text for the button link"
+								}
+							},
+							"button_link": {
+								"type": "Link",
+								"config": {
+									"label": "Button Link",
+									"placeholder": "Optional - Link for the button"
+								}
+							}
+						}
+					},
+					"quote_slideshow": {
+						"type": "Slice",
+						"fieldset": "Quote Slideshow",
+						"description": "Slideshow of quotes with optional photo",
+						"icon": "format_quote",
+						"display": "list",
+						"non-repeat": {},
+						"repeat": {
+							"photo": {
+								"type": "Image",
+								"config": {
+									"constraint": {},
+									"thumbnails": [],
+									"label": "Photo"
+								}
+							},
+							"quote": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Quote",
+									"placeholder": "Quote to display (without quotation marks)"
+								}
+							},
+							"quotee_name": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Quotee Name",
+									"placeholder": "Name of the quotee"
+								}
+							},
+							"quotee_title": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Quotee Title",
+									"placeholder": "Title of the quotee (or Cohort #)"
+								}
+							}
+						}
+					},
+					"learning_excursion_map": {
+						"type": "Slice",
+						"fieldset": "Learning Excursion Map",
+						"description": "Map of learning excursions with text and videos",
+						"icon": "map",
+						"display": "grid",
+						"non-repeat": {
+							"map_url": {
+								"type": "Text",
+								"config": {
+									"label": "Map URL",
+									"placeholder": "URL to the map embed"
+								}
+							}
+						},
+						"repeat": {}
+					},
+					"fellows_grid": {
+						"type": "Slice",
+						"fieldset": "Fellows Grid",
+						"description": "Grid of Fellows with toggle to see current or all cohorts",
+						"icon": "supervisor_account",
+						"display": "list",
+						"non-repeat": {},
+						"repeat": {}
+					},
+					"image_carousel": {
+						"type": "Slice",
+						"fieldset": "Image Carousel",
+						"description": "Interactive carousel of images",
+						"icon": "photo_library",
+						"display": "grid",
+						"non-repeat": {},
+						"repeat": {
+							"image": {
+								"type": "Image",
+								"config": {
+									"constraint": {},
+									"thumbnails": [],
+									"label": "Image"
+								}
+							},
+							"caption": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Caption",
+									"placeholder": "Optional - Caption below image"
+								}
+							}
+						}
+					},
+					"link_collection": {
+						"type": "Slice",
+						"fieldset": "Link Collection",
+						"description": "Group of links with optional descriptions and images",
+						"icon": "dns",
+						"display": "grid",
+						"non-repeat": {},
+						"repeat": {
+							"thumbnail": {
+								"type": "Image",
+								"config": {
+									"constraint": {},
+									"thumbnails": [],
+									"label": "Thumbnail"
+								}
+							},
+							"name": {
+								"type": "StructuredText",
+								"config": {
+									"single": "heading3",
+									"label": "Name",
+									"placeholder": "Name of the link"
+								}
+							},
+							"description": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Description",
+									"placeholder": "Optional - Short description of the link"
+								}
+							},
+							"link": {
+								"type": "Link",
+								"config": {
+									"label": "Link",
+									"placeholder": "Link to display"
+								}
+							},
+							"button_text": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Button Text",
+									"placeholder": "Optional - Text for the button link"
+								}
+							}
+						}
+					},
+					"headshot_quote": {
+						"type": "Slice",
+						"fieldset": "Headshot Quote",
+						"description": "Short quote with headshot and an optional link",
+						"icon": "format_quote",
+						"display": "list",
+						"non-repeat": {
+							"quote": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Quote",
+									"placeholder": "Short quote from Pierre"
+								}
+							},
+							"credit": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Credit",
+									"placeholder": "Credit for the quote"
+								}
+							},
+							"button_link": {
+								"type": "Link",
+								"config": {
+									"label": "Button Link",
+									"placeholder": "Optional - Link to a page with more information"
+								}
+							},
+							"button_text": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Button Text",
+									"placeholder": "Optional - Text for the button link"
+								}
+							},
+							"photo": {
+								"type": "Image",
+								"config": {
+									"constraint": {},
+									"thumbnails": [],
+									"label": "Photo"
+								}
+							}
+						},
+						"repeat": {}
+					},
+					"calls_to_action": {
+						"type": "Slice",
+						"fieldset": "Calls to Action",
+						"description": "Group of calls to action with text and links",
+						"icon": "feedback",
+						"display": "grid",
+						"non-repeat": {},
+						"repeat": {
+							"background_image": {
+								"type": "Image",
+								"config": {
+									"constraint": {},
+									"thumbnails": [],
+									"label": "Background Image"
+								}
+							},
+							"label": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Label",
+									"placeholder": "Optional - Small label above text"
+								}
+							},
+							"text": {
+								"type": "StructuredText",
+								"config": {
+									"multi": "paragraph, heading1",
+									"label": "Text",
+									"placeholder": "Text displayed over the background image"
+								}
+							},
+							"button_text": {
+								"type": "StructuredText",
+								"config": {
+									"single": "paragraph",
+									"label": "Button Text",
+									"placeholder": "Optional - Text for the button link"
+								}
+							},
+							"button_link": {
+								"type": "Link",
+								"config": {
+									"label": "Button Link",
+									"placeholder": "Optional - Link for the button"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

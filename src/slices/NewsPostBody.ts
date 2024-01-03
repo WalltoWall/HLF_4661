@@ -20,28 +20,28 @@ import * as NewsPostBodyLinkCard from './NewsPostBodyLinkCard'
 
 // 2. Add your slice
 const slices = {
-  NewsPostBodyText,
-  NewsPostBodyTextIntro,
-  NewsPostBodyVideo,
-  NewsPostBodyImages,
-  NewsPostBodyAnchor,
-  NewsPostBodyDivider,
-  NewsPostBodyLinkCard,
+	NewsPostBodyText,
+	NewsPostBodyTextIntro,
+	NewsPostBodyVideo,
+	NewsPostBodyImages,
+	NewsPostBodyAnchor,
+	NewsPostBodyDivider,
+	NewsPostBodyLinkCard,
 }
 
 // 3. Add your slice fragment
 export const fragment = graphql`
-  fragment SlicesNewsPostBody on PrismicNewsPostDataBodySlicesType {
-    ...NewsPostBodyText
-    ...NewsPostBodyTextIntro
-    ...NewsPostBodyVideo
-    ...NewsPostBodyImages
-    ...NewsPostBodyAnchor
-    ...NewsPostBodyLinkCard
+	fragment SlicesNewsPostBody on PrismicNewsPostDataBody {
+		...NewsPostBodyText
+		...NewsPostBodyTextIntro
+		...NewsPostBodyVideo
+		...NewsPostBodyImages
+		...NewsPostBodyAnchor
+		...NewsPostBodyLinkCard
 
-    # The following slices do not have fragments:
-    #...NewsPostBodyDivider
-  }
+		# The following slices do not have fragments:
+		#...NewsPostBodyDivider
+	}
 `
 
 export const slicesMap = reshapeSlicesMap(slices)

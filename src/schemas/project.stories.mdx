@@ -6,8 +6,8 @@ import * as Storybook from '../components/Storybook'
 
 # Project
 
-The Project custom type represents an Omidyar Fellows project. Projects
-are managed in Prismic using two tabs: Main and Body.
+The Project custom type represents an Omidyar Fellows project. Projects are
+managed in Prismic using two tabs: Main and Body.
 
 - **Main**: Information about the page such as its title and URL.
 - **Body**: Page content such as images and text.
@@ -18,24 +18,24 @@ mobile and desktop devices.
 
 **Sidebar**: Content from the **Projects** page (a Page that has the UID
 `projects`) is used for all project pages' sidebar. The heading and description
-that appear in the sidebar for project pages can be edited from the
-**Projects** page.
+that appear in the sidebar for project pages can be edited from the **Projects**
+page.
 
 <Storybook.CustomTypeFieldsTable
-  customTypeId="project"
-  tab="Main"
-  overrides={{
-    project_categories: {
-      description: "List of categories to which the project belongs",
-      isRequired: false
-    },
-    involved_fellows: {
-      description: "List of fellows involved with the project",
-      isRequired: false
-    },
-    featured_image: {
-      description: "Image or photo that represents the project",
-      isRequired: false
-    }
-  }}
+	customTypeId="project"
+	tab="Main"
+	overrides={{
+		project_categories: {
+			description: 'List of categories to which the project belongs',
+			isRequired: false,
+		},
+		involved_fellows: {
+			description: 'List of fellows involved with the project',
+			isRequired: false,
+		},
+		featured_image: {
+			description: 'Image or photo that represents the project',
+			isRequired: false,
+		},
+	}}
 />

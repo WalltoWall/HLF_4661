@@ -8,15 +8,15 @@ import { pipe } from 'fp-ts/function'
  * `mapDataToPropsEnhancer` function.
  */
 export type MapDataToPropsEnhancerArgs = Parameters<
-  NonNullable<MapSlicesToComponentsProps['mapDataToPropsEnhancer']>
+	NonNullable<MapSlicesToComponentsProps['mapDataToPropsEnhancer']>
 >[1]
 
 /**
  * Meta information provided to @walltowall/react-map-to-components' items.
  */
 export interface Meta<RootDataQuery = any> {
-  rootData: RootDataQuery
-  location: Location
+	rootData: RootDataQuery
+	location: Location
 }
 
 /**
@@ -24,22 +24,22 @@ export interface Meta<RootDataQuery = any> {
  * `mapDataToProps` function.
  */
 export type MapDataToPropsArgs<
-  TDataFragment = any,
-  TContextFn extends (...args: any) => any = (...args: any) => any,
-  TRootQuery = any,
-  TMap extends Record<string, React.ComponentType<any>> = Record<
-    string,
-    React.ComponentType<any>
-  >,
-  T extends keyof TMap = any,
+	TDataFragment = any,
+	TContextFn extends (...args: any) => any = (...args: any) => any,
+	TRootQuery = any,
+	TMap extends Record<string, React.ComponentType<any>> = Record<
+		string,
+		React.ComponentType<any>
+	>,
+	T extends keyof TMap = any,
 > = Parameters<
-  TMapDataToPropsFn<
-    T,
-    TMap,
-    TDataFragment,
-    Meta<TRootQuery>,
-    ReturnType<TContextFn>
-  >
+	TMapDataToPropsFn<
+		T,
+		TMap,
+		TDataFragment,
+		Meta<TRootQuery>,
+		ReturnType<TContextFn>
+	>
 >[0]
 
 /**
@@ -47,16 +47,16 @@ export type MapDataToPropsArgs<
  * `mapDataToContext` function.
  */
 export type MapDataToContextArgs<
-  TDataFragment = any,
-  TRootQuery = any,
-  TMap extends Record<string, React.ComponentType<any>> = Record<
-    string,
-    React.ComponentType<any>
-  >,
-  T extends keyof TMap = any,
-  TContext = any,
+	TDataFragment = any,
+	TRootQuery = any,
+	TMap extends Record<string, React.ComponentType<any>> = Record<
+		string,
+		React.ComponentType<any>
+	>,
+	T extends keyof TMap = any,
+	TContext = any,
 > = Parameters<
-  TMapDataToContextFn<T, TMap, TDataFragment, Meta<TRootQuery>, TContext>
+	TMapDataToContextFn<T, TMap, TDataFragment, Meta<TRootQuery>, TContext>
 >[0]
 
 /**
@@ -64,9 +64,9 @@ export type MapDataToContextArgs<
  * @walltowall/react-map-slices-to-components specific properties.
  */
 type SliceModule<TProps = any> = {
-  default: React.ComponentType<TProps>
-  mapDataToProps?: (props: MapDataToPropsArgs) => Record<string, unknown>
-  mapDataToContext?: (props: MapDataToContextArgs) => Record<string, unknown>
+	default: React.ComponentType<TProps>
+	mapDataToProps?: (props: MapDataToPropsArgs) => Record<string, unknown>
+	mapDataToContext?: (props: MapDataToContextArgs) => Record<string, unknown>
 }
 
 /**
@@ -74,8 +74,8 @@ type SliceModule<TProps = any> = {
  * properties.
  */
 type SliceForMap<TProps = any> = React.ComponentType<TProps> & {
-  mapDataToProps?: (props: MapDataToPropsArgs) => Record<string, unknown>
-  mapDataToContext?: (props: MapDataToContextArgs) => Record<string, unknown>
+	mapDataToProps?: (props: MapDataToPropsArgs) => Record<string, unknown>
+	mapDataToContext?: (props: MapDataToContextArgs) => Record<string, unknown>
 }
 
 /**
@@ -87,17 +87,17 @@ type SliceForMap<TProps = any> = React.ComponentType<TProps> & {
  * @returns Record of fully qualified slice names to a `@walltowall/react-map-slices-to-components` slice map.
  */
 export const reshapeSlicesMap = <K extends string>(
-  slices: Record<K, SliceModule>,
+	slices: Record<K, SliceModule>,
 ): Record<K, SliceForMap> =>
-  pipe(
-    slices,
-    R.map((mod) => {
-      const component: SliceForMap = mod.default
+	pipe(
+		slices,
+		R.map((mod) => {
+			const component: SliceForMap = mod.default
 
-      if ('mapDataToProps' in mod) component.mapDataToProps = mod.mapDataToProps
-      if ('mapDataToContext' in mod)
-        component.mapDataToContext = mod.mapDataToContext
+			if ('mapDataToProps' in mod) component.mapDataToProps = mod.mapDataToProps
+			if ('mapDataToContext' in mod)
+				component.mapDataToContext = mod.mapDataToContext
 
-      return component
-    }),
-  )
+			return component
+		}),
+	)

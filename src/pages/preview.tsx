@@ -1,29 +1,22 @@
 import * as React from 'react'
 import { PageProps } from 'gatsby'
 import {
-  withPrismicPreviewResolver,
-  WithPrismicPreviewResolverProps,
+	withPrismicPreviewResolver,
+	WithPrismicPreviewResolverProps,
 } from 'gatsby-plugin-prismic-previews'
-
-import { linkResolver } from '../linkResolver'
 
 type PreviewPageProps = PageProps & WithPrismicPreviewResolverProps
 
 export const PreviewPage = ({ isPrismicPreview }: PreviewPageProps) => {
-  if (isPrismicPreview === false)
-    return (
-      <p>
-        You're on the preview page, but it looks like we don't have any data to
-        preview!
-      </p>
-    )
+	if (isPrismicPreview === false)
+		return (
+			<p>
+				You're on the preview page, but it looks like we don't have any data to
+				preview!
+			</p>
+		)
 
-  return <p>Loading&hellip;</p>
+	return <p>Loading&hellip;</p>
 }
 
-export default withPrismicPreviewResolver(PreviewPage, [
-  {
-    repositoryName: process.env.GATSBY_PRISMIC_REPOSITORY_NAME!,
-    linkResolver,
-  },
-])
+export default withPrismicPreviewResolver(PreviewPage)

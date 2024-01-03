@@ -10,23 +10,23 @@ import { ReactComponent as AssetLogoSVG } from '../assets/logo.svg'
 const defaultElement = 'div'
 
 type LogoProps<E extends React.ElementType> = {
-  trimNegativeSpace?: boolean
+	trimNegativeSpace?: boolean
 } & BoxProps<E>
 
 export const Logo = <E extends React.ElementType = typeof defaultElement>({
-  trimNegativeSpace = false,
-  className,
-  ...props
+	trimNegativeSpace = false,
+	className,
+	...props
 }: LogoProps<E>) => {
-  const styles = useStyles(styleRefs)
-  const classNames = clsx(
-    trimNegativeSpace && styles.trimNegativeSpace,
-    className,
-  )
+	const styles = useStyles(styleRefs)
+	const classNames = clsx(
+		trimNegativeSpace && styles.trimNegativeSpace,
+		className,
+	)
 
-  return (
-    <Box as={defaultElement} {...props} className={classNames}>
-      <Box as={AssetLogoSVG} styles={{ display: 'block' }} />
-    </Box>
-  )
+	return (
+		<Box as={defaultElement} {...props} className={classNames}>
+			<Box as={AssetLogoSVG} styles={{ display: 'block' }} />
+		</Box>
+	)
 }

@@ -6,18 +6,18 @@ import { MapDataToContextArgs } from '../lib/mapSlicesToComponents'
 export const NewsPostBodyAnchor = () => null
 
 export const mapDataToContext = ({
-  NextComp,
-  ...rest
+	NextComp,
+	...rest
 }: MapDataToContextArgs<NewsPostBodyAnchorFragment>) =>
-  // @ts-ignore mapDataToContext is assigned in NewsPostBody.ts
-  NextComp?.mapDataToContext?.({ NextComp, ...rest })
+	// @ts-ignore mapDataToContext is assigned in NewsPostBody.ts
+	NextComp?.mapDataToContext?.({ NextComp, ...rest })
 
 export const fragment = graphql`
-  fragment NewsPostBodyAnchor on PrismicNewsPostDataBodyAnchor {
-    primary {
-      id
-    }
-  }
+	fragment NewsPostBodyAnchor on PrismicNewsPostDataBodyAnchor {
+		primary {
+			id
+		}
+	}
 `
 
 export default NewsPostBodyAnchor

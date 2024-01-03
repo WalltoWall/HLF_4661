@@ -16,29 +16,29 @@ import { ReactComponent as AssetIconDoubleQuoteRight } from '../assets/icon-dquo
 import { ReactComponent as AssetIconPage } from '../assets/icon-page.svg'
 
 const icons = {
-  chevronDown: AssetIconChevronDown,
-  chevronUp: AssetIconChevronUp,
-  search: AssetIconSearch,
-  play: AssetIconPlay,
-  close: AssetIconClose,
-  external: AssetIconExternal,
-  triangleRight: AssetIconTriangleRight,
-  triangleLeft: AssetIconTriangleLeft,
-  facebookColored: AssetIconFacebookColored,
-  linkedinColored: AssetIconLinkedinColored,
-  doubleQuoteLeft: AssetIconDoubleQuoteLeft,
-  doubleQuoteRight: AssetIconDoubleQuoteRight,
-  page: AssetIconPage,
+	chevronDown: AssetIconChevronDown,
+	chevronUp: AssetIconChevronUp,
+	search: AssetIconSearch,
+	play: AssetIconPlay,
+	close: AssetIconClose,
+	external: AssetIconExternal,
+	triangleRight: AssetIconTriangleRight,
+	triangleLeft: AssetIconTriangleLeft,
+	facebookColored: AssetIconFacebookColored,
+	linkedinColored: AssetIconLinkedinColored,
+	doubleQuoteLeft: AssetIconDoubleQuoteLeft,
+	doubleQuoteRight: AssetIconDoubleQuoteRight,
+	page: AssetIconPage,
 }
 
 export type IconProps = {
-  name: keyof typeof icons
+	name: keyof typeof icons
 } & BoxProps<'svg'>
 
 export const Icon = ({ name, ...props }: IconProps) => {
-  const icon = icons[name]
+	const icon = icons[name]
 
-  return (
-    <Box as={icon} {...props} styles={{ display: 'block', ...props.styles }} />
-  )
+	return (
+		<Box as={icon} {...props} styles={{ display: 'block', ...props.styles }} />
+	)
 }
