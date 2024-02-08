@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, HeadProps, PageProps } from 'gatsby'
-import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
+import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
 import { propPairsEq } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
@@ -127,7 +127,7 @@ export const Head = ({ data }: HeadProps<PageTemplateQuery>) => {
 	)
 }
 
-export default withPrismicPreviewResolver(PageTemplate)
+export default withPrismicPreview(PageTemplate)
 
 export const query = graphql`
 	query PageTemplate($uid: String!) {

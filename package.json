@@ -7,7 +7,7 @@
 		"clean": "gatsby clean",
 		"develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
 		"start": "yarn develop",
-		"build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build",
+		"build": "gatsby build",
 		"serve": "gatsby serve",
 		"test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
 		"codegen": "graphql-codegen --config graphql-codegen.yml"

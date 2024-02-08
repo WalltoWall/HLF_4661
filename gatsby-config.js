@@ -23,14 +23,13 @@ module.exports = {
 	}),
 	plugins: [
 		'gatsby-plugin-image',
-		// 'gatsby-plugin-catch-links',
 		'gatsby-plugin-svgr',
 		'gatsby-plugin-sitemap',
 		process.env.GOOGLE_ANALYTICS_TRACKING_ID && {
 			resolve: 'gatsby-plugin-google-gtag',
 			options: {
 				trackingIds: [process.env.GOOGLE_ANALYTICS_TRACKING_ID],
-				pluginOptions: {
+				pluginConfig: {
 					exclude: ['/preview/**', '/admin/**', '/docs/**'],
 				},
 			},

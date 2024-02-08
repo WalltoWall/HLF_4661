@@ -40,8 +40,6 @@ exports.linkResolver = (doc) => {
 		case 'page':
 		case 'interior_page':
 		default:
-			const re = linkResolverPathFor(doc)
-
-			return re
+			return linkResolverPathFor(doc)
 	}
 }

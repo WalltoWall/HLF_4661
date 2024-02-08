@@ -42,7 +42,7 @@ const repositoryConfigs: RepositoryConfig[] = [
 	},
 ]
 
-export const wrapRootElement: GatsbyBrowser['wrapRootElement'] = ({
+export const wrapRootElement: NonNullable<GatsbyBrowser['wrapRootElement']> = ({
 	element,
 }) => (
 	<DebugProvider>

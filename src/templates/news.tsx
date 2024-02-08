@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, HeadProps, PageProps } from 'gatsby'
-import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews'
+import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { propPairsEq } from '@walltowall/helpers'
 import { Box } from '@walltowall/calico'
@@ -240,7 +240,7 @@ export const Head = ({ data }: HeadProps<NewsTemplateQuery>) => {
 	)
 }
 
-export default withPrismicPreviewResolver(NewsTemplate)
+export default withPrismicPreview(NewsTemplate)
 
 export const query = graphql`
 	query NewsTemplate($limit: Int!, $skip: Int!) {
