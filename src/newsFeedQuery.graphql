@@ -1,6 +1,6 @@
 {
 	allPrismicNewsPost(
-		sort: { fields: [data___published_at, first_publication_date], order: DESC }
+		sort: [{ data: { published_at: DESC } }, { first_publication_date: ASC }]
 		limit: 20
 	) {
 		nodes {

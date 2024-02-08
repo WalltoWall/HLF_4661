@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const truncate = require('truncate')
 const { valuesDeep } = require('@walltowall/helpers')
+const netlify = require('gatsby-adapter-netlify')
 
 require('dotenv').config()
 
@@ -13,8 +14,13 @@ const siteMetadata = {
 	siteUrl: 'https://www.omidyarfellows.org',
 }
 
+/** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
 	siteMetadata,
+	adapter: netlify({
+		excludeDatastoreFromEngineFunction: false,
+		imageCDN: false,
+	}),
 	plugins: [
 		'gatsby-plugin-image',
 		// 'gatsby-plugin-catch-links',
@@ -113,7 +119,7 @@ module.exports = {
 						featuredImageURL: node.data?.featured_image?.url,
 						featuredImageAspectRatio: node.data?.featured_image?.dimensions
 							? node.data?.featured_image?.dimensions?.width /
-							  node.data?.featured_image?.dimensions?.height
+								node.data?.featured_image?.dimensions?.height
 							: 8 / 5,
 						featuredImageDimensions: node.data?.featured_image?.dimensions,
 						featuredImageAlt: node.data?.featured_image?.alt,
@@ -127,7 +133,7 @@ module.exports = {
 						featuredImageURL: node.data?.featured_image?.url,
 						featuredImageAspectRatio: node.data?.featured_image?.dimensions
 							? node.data?.featured_image?.dimensions?.width /
-							  node.data?.featured_image?.dimensions?.height
+								node.data?.featured_image?.dimensions?.height
 							: 8 / 5,
 						featuredImageDimensions: node.data?.featured_image?.dimensions,
 						featuredImageAlt: node.data?.featured_image?.alt,
@@ -175,21 +181,6 @@ module.exports = {
 							})),
 					},
 				],
-			},
-		},
-		{
-			resolve: 'gatsby-plugin-netlify',
-			options: {
-				headers: {
-					'/*': [
-						'X-Frame-Options: SAMEORIGIN',
-						'X-XSS-Protection: 1; mode=block',
-						'X-Content-Type-Options: nosniff',
-						'Referrer-Policy: strict-origin',
-						'Access-Control-Allow-Origin: *',
-					],
-				},
-				mergeSecurityHeaders: false,
 			},
 		},
 	].filter(Boolean),
