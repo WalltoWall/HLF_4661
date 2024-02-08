@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const truncate = require('truncate')
 const { valuesDeep } = require('@walltowall/helpers')
-const netlify = require('gatsby-adapter-netlify')
+const { default: netlify } = require('gatsby-adapter-netlify')
 
 require('dotenv').config()
 
