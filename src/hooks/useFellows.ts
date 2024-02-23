@@ -1,6 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { getRichText } from '@walltowall/helpers'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { useMergePrismicPreviewData } from 'gatsby-plugin-prismic-previews'
 import { UseFellowsQuery } from '../types.generated'
 import { moveFirstWordToEnd } from '../lib/moveFirstWordToEnd'
@@ -39,19 +38,11 @@ export const useFellows = () => {
 						}
 						portrait {
 							alt
-							gatsbyImageData(
-								placeholder: BLURRED
-								width: 300
-								breakpoints: [300]
-							)
+							url
 						}
 						photo {
 							alt
-							gatsbyImageData(
-								placeholder: BLURRED
-								width: 600
-								breakpoints: [600]
-							)
+							url
 						}
 					}
 				}
@@ -70,9 +61,9 @@ export const useFellows = () => {
 			cohortTitle: node.data?.cohort?.document?.data?.title?.text,
 			cohortNumber: node.data?.cohort?.document?.data?.cohort_number,
 			biographyHTML: getRichText(node.data?.biography),
-			portraitData: node.data?.portrait?.gatsbyImageData as IGatsbyImageData,
+			portraitSrc: node.data?.portrait?.url,
 			portraitAlt: node.data?.portrait?.alt,
-			photoData: node.data?.photo?.gatsbyImageData as IGatsbyImageData,
+			photoSrc: node.data?.photo?.url,
 			photoAlt: node.data?.photo?.alt,
 		})) ?? []
 

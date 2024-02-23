@@ -3,7 +3,6 @@ import { graphql, HeadProps, PageProps } from 'gatsby'
 import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
 import { Box } from '@walltowall/calico'
 import { propPairsEq } from '@walltowall/helpers'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
 import { NewsPostTemplateQuery } from '../types.generated'
@@ -211,10 +210,7 @@ export const NewsPostTemplate = ({
 										(nextNewsPost?.data?.published_at as string) ??
 										(nextNewsPost?.first_publication_date as string)
 									}
-									featuredImageData={
-										nextNewsPost.data?.featured_image
-											?.gatsbyImageData as IGatsbyImageData
-									}
+									featuredImageSrc={nextNewsPost.data?.featured_image?.url}
 									featuredImageAlt={nextNewsPost.data?.featured_image?.alt}
 									buttonText="Read More"
 								/>
@@ -317,7 +313,7 @@ export const query = graphql`
 			}
 			featured_image {
 				alt
-				gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
+				url
 			}
 		}
 	}

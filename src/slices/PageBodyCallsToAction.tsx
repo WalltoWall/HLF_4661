@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { Box } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
@@ -38,7 +37,7 @@ type CTAProps = {
 	textHTML?: string
 	buttonHref?: string
 	buttonText?: string
-	backgroundImageData?: IGatsbyImageData
+	backgroundImageSrc?: string
 	backgroundImageAlt?: string
 }
 
@@ -47,7 +46,7 @@ const CTA = ({
 	textHTML,
 	buttonHref,
 	buttonText,
-	backgroundImageData,
+	backgroundImageSrc,
 	backgroundImageAlt,
 }: CTAProps) => (
 	<Box styles={{ flex: [null, 'equal0'] }}>
@@ -57,7 +56,7 @@ const CTA = ({
 			textHTML={textHTML}
 			buttonHref={buttonHref}
 			buttonText={buttonText}
-			imageData={backgroundImageData}
+			imageSrc={backgroundImageSrc}
 			imageAlt={backgroundImageAlt}
 			withImageGradientOverlay={true}
 			styles={{ height: 'full' }}
@@ -79,9 +78,7 @@ export const mapDataToProps = ({
 			textHTML={getRichText(item?.text)}
 			buttonText={undefIfEmpty(item?.button_text?.text)}
 			buttonHref={item?.button_link?.url}
-			backgroundImageData={
-				item?.background_image?.gatsbyImageData as IGatsbyImageData
-			}
+			backgroundImageSrc={item?.background_image?.url}
 			backgroundImageAlt={item?.background_image?.alt}
 		/>
 	)) as React.ReactNode,
@@ -109,11 +106,7 @@ export const fragment = graphql`
 			}
 			background_image {
 				alt
-				gatsbyImageData(
-					placeholder: BLURRED
-					width: 640
-					breakpoints: [640, 1280]
-				)
+				url
 			}
 		}
 	}

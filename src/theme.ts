@@ -60,6 +60,8 @@ export const theme = createCalicoTheme(
 				serif: '"PT Serif", Georgia, serif',
 			},
 
+			objectFit: { contain: 'contain' },
+
 			fontSize: {
 				'0.875rem': '0.875rem',
 				'1rem': '1rem',

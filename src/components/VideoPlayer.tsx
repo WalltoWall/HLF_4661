@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
 import { useStyles } from 'react-treat'
-import { Box, BoxProps } from '@walltowall/calico'
+import { Box, BoxProps, useBoxStyles } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
 import VisuallyHidden from '@reach/visually-hidden'
 import ReactPlayer, { ReactPlayerProps } from 'react-player'
@@ -9,6 +8,7 @@ import ReactPlayer, { ReactPlayerProps } from 'react-player'
 import { Icon } from '../components/Icon'
 
 import * as styleRefs from './VideoPlayer.treat'
+import { Image } from '@unpic/react'
 
 const defaultElement = 'div'
 
@@ -19,7 +19,7 @@ type VideoPlayerProps<E extends React.ElementType> = {
 	videoURL: string
 	videoProps?: ReactPlayerProps
 	loop?: boolean
-	posterData?: IGatsbyImageData
+	posterSrc?: string
 	posterAlt?: string
 	posterURL?: string
 	posterAspectRatio?: number
@@ -34,7 +34,7 @@ export const VideoPlayer = <
 	videoURL,
 	videoProps,
 	loop = false,
-	posterData,
+	posterSrc,
 	posterAlt,
 	posterURL,
 	posterAspectRatio,
@@ -59,7 +59,17 @@ export const VideoPlayer = <
 		}
 	}
 
+	const imgStyles = useBoxStyles({
+		height: 'full',
+		width: 'full',
+		opacity: isPlaying ? 0 : 100,
+		transitionDuration: 'normal',
+		transitionProperty: 'opacity',
+		transitionTimingFunction: 'easeOut',
+	})
+
 	return (
+		//@ts-ignore
 		<Box as={defaultElement} {...props}>
 			<Box as={AspectRatio} x={x} y={y} styles={{ position: 'relative' }}>
 				<Box
@@ -87,19 +97,13 @@ export const VideoPlayer = <
 						}}
 					>
 						<VisuallyHidden>Play video</VisuallyHidden>
-						{posterData && (
-							<Box
-								as={GatsbyImage}
-								image={posterData}
+						{posterSrc && (
+							<Image
+								src={posterSrc}
 								alt={posterAlt ?? ''}
-								styles={{
-									height: 'full',
-									width: 'full',
-									opacity: isPlaying ? 0 : 100,
-									transitionDuration: 'normal',
-									transitionProperty: 'opacity',
-									transitionTimingFunction: 'easeOut',
-								}}
+								className={imgStyles}
+								layout="fullWidth"
+								sizes="(min-width: 800px) 800px, 100vw"
 							/>
 						)}
 						<Box

@@ -134,7 +134,6 @@ export const InteriorPageTemplate = ({
 	return (
 		<Layout>
 			<MapSlicesToComponents
-				//@ts-ignore
 				list={page?.data?.header}
 				map={slicesMap}
 				meta={meta}
@@ -165,7 +164,6 @@ export const InteriorPageTemplate = ({
 					}}
 				>
 					<MapSlicesToComponents
-						//@ts-expect-error
 						list={page?.data?.body}
 						map={slicesMap}
 						meta={meta}

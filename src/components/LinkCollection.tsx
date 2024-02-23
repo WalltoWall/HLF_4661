@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Box, BoxProps } from '@walltowall/calico'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import { Box, BoxProps, useBoxStyles } from '@walltowall/calico'
 import ConditionalWrap from 'conditional-wrap'
 import { AspectRatio } from '@walltowall/siamese'
+import { Image } from '@unpic/react'
 
 import { Link } from '../components/Link'
 import { Anchor } from '../components/Anchor'
@@ -20,6 +20,7 @@ export const LinkCollection = <
 	children,
 	...props
 }: PageBodyLinkCollectionProps<E>) => (
+	//@ts-ignore
 	<Box
 		as={defaultElement}
 		{...props}
@@ -57,7 +58,7 @@ type LinkCollectionLinkProps = {
 	description?: string
 	href?: string
 	buttonText?: string
-	thumbnailData?: IGatsbyImageData
+	thumbnailSrc?: string
 	thumbnailAlt?: string
 }
 
@@ -68,10 +69,12 @@ const LinkCollectionLink = ({
 	description,
 	href,
 	buttonText = 'Learn More',
-	thumbnailData,
+	thumbnailSrc,
 	thumbnailAlt,
 }: LinkCollectionLinkProps) => {
 	const variant = linkCollectionLinkVariants[variantName]
+	const imgStyles = useBoxStyles({ height: 'full' })
+	const linkStyles = useBoxStyles({ height: 'full', display: 'flex' })
 
 	return (
 		<Box
@@ -86,13 +89,20 @@ const LinkCollectionLink = ({
 			<Box styles={{ maxWidth: variant.thumbnailMaxWidth }}>
 				<ConditionalWrap
 					condition={Boolean(href)}
-					wrap={(children) => <Link href={href!}>{children}</Link>}
+					wrap={(children) => (
+						<Link className={linkStyles} href={href!}>
+							{children}
+						</Link>
+					)}
 				>
-					{thumbnailData ? (
-						<Box
-							as={GatsbyImage}
-							image={thumbnailData}
+					{thumbnailSrc ? (
+						<Image
+							src={thumbnailSrc}
 							alt={thumbnailAlt ?? ''}
+							layout="fullWidth"
+							breakpoints={[400, 800]}
+							sizes="(min-width: 400px) 400px, 100vw"
+							className={imgStyles}
 						/>
 					) : (
 						<Box

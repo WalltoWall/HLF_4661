@@ -1,8 +1,7 @@
 import * as React from 'react'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { undefIfEmpty } from '@walltowall/helpers'
 import { AspectRatio } from '@walltowall/siamese'
-import { Box, BoxProps } from '@walltowall/calico'
+import { Box, BoxProps, useBoxStyles } from '@walltowall/calico'
 import clsx from 'clsx'
 
 import { useCommonStyles } from '../hooks/useCommonStyles'
@@ -10,6 +9,7 @@ import { useCommonStyles } from '../hooks/useCommonStyles'
 import { BoundedBox } from './BoundedBox'
 import { Text } from './Text'
 import { Anchor } from './Anchor'
+import { Image } from '@unpic/react'
 
 const defaultElement = 'aside'
 
@@ -21,7 +21,7 @@ type InteriorPageSidebarNavigationItem = {
 type InteriorPageSidebarProps<E extends React.ElementType> = {
 	title?: string
 	description?: string
-	imageData?: IGatsbyImageData
+	imageSrc?: string
 	imageAlt?: string
 	navigationItems?: InteriorPageSidebarNavigationItem[]
 } & BoxProps<E>
@@ -31,21 +31,24 @@ export const InteriorPageSidebar = <
 >({
 	title,
 	description,
-	imageData,
+	imageSrc,
 	imageAlt,
 	navigationItems = [],
 	className,
 	...props
 }: InteriorPageSidebarProps<E>) => {
 	const commonStyles = useCommonStyles()
+	const imgStyles1 = useBoxStyles({ width: 'full', height: 'full' })
+	const imgStyles2 = useBoxStyles({ display: ['none', null, 'block'] })
 
 	return (
+		//@ts-ignore
 		<Box
 			as={defaultElement}
 			className={clsx(commonStyles.lightGrayGradientBackground, className)}
 			{...props}
 		>
-			{imageData && (
+			{imageSrc && (
 				<>
 					<Box
 						as={AspectRatio}
@@ -53,20 +56,19 @@ export const InteriorPageSidebar = <
 						y={9}
 						styles={{ display: [null, null, 'none'] }}
 					>
-						<Box
-							as={GatsbyImage}
-							image={imageData}
+						<Image
+							src={imageSrc}
 							alt={imageAlt ?? ''}
-							styles={{ width: 'full', height: 'full' }}
+							className={imgStyles1}
+							layout="fullWidth"
 						/>
 					</Box>
-					<Box
-						as={GatsbyImage}
-						image={imageData}
+
+					<Image
+						src={imageSrc}
 						alt={imageAlt ?? ''}
-						styles={{
-							display: ['none', null, 'block'],
-						}}
+						className={imgStyles2}
+						layout="fullWidth"
 					/>
 				</>
 			)}

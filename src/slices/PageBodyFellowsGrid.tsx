@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { navigate } from 'gatsby'
-import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
 import { useStyles } from 'react-treat'
-import { Box } from '@walltowall/calico'
+import { Box, useBoxStyles } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
 import {
 	Tabs,
@@ -30,6 +29,7 @@ import { Text } from '../components/Text'
 
 import * as styleRefs from './PageBodyFellowsGrid.treat'
 import { Link } from '../components/Link'
+import { Image } from '@unpic/react'
 
 /**
  * Groups a list of records by their `cohortUID` field.
@@ -44,7 +44,7 @@ type FellowProps = {
 	href: string
 	name?: string
 	cohortTitle?: string
-	portraitData?: IGatsbyImageData
+	portraitSrc?: string
 	portraitAlt?: string
 	openFellowModal: () => void
 }
@@ -53,58 +53,64 @@ const Fellow = ({
 	href,
 	name,
 	cohortTitle,
-	portraitData,
+	portraitSrc,
 	portraitAlt,
 	openFellowModal,
-}: FellowProps) => (
-	<Box as="li">
-		<Link href={href} onClick={openFellowModal}>
-			<Box
-				styles={{
-					display: 'block',
-					width: 'full',
-					backgroundColor: 'white',
-					padding: 3,
-					paddingBottom: 5,
-				}}
-			>
+}: FellowProps) => {
+	const imgStyles = useBoxStyles({ height: 'full', width: 'full' })
+
+	return (
+		<Box as="li">
+			<Link href={href} onClick={openFellowModal}>
 				<Box
-					as={AspectRatio}
-					x={190}
-					y={230}
-					styles={{ backgroundColor: 'gray95', marginBottom: 3.5 }}
+					styles={{
+						display: 'block',
+						width: 'full',
+						backgroundColor: 'white',
+						padding: 3,
+						paddingBottom: 5,
+					}}
 				>
-					{portraitData && (
-						<Box
-							as={GatsbyImage}
-							image={portraitData}
-							alt={portraitAlt ?? name ? `Photo of ${name}` : ''}
-							styles={{ height: 'full', width: 'full' }}
-						/>
-					)}
+					<Box
+						as={AspectRatio}
+						x={190}
+						y={230}
+						styles={{ backgroundColor: 'gray95', marginBottom: 3.5 }}
+					>
+						{portraitSrc && (
+							<Image
+								src={portraitSrc}
+								alt={portraitAlt ?? name ? `Photo of ${name}` : ''}
+								className={imgStyles}
+								layout="fullWidth"
+								sizes="(min-width: 300px) 300px, 100vw"
+								breakpoints={[300, 600]}
+							/>
+						)}
+					</Box>
+					<Box styles={{ display: 'grid', gap: 2 }}>
+						{name && (
+							<Text
+								variant="sans-12-caps"
+								styles={{ color: 'gray10', fontWeight: 'bold' }}
+							>
+								{name}
+							</Text>
+						)}
+						{cohortTitle && (
+							<Text
+								variant="sans-12"
+								styles={{ color: 'gray40', fontWeight: 'bold' }}
+							>
+								{cohortTitle}
+							</Text>
+						)}
+					</Box>
 				</Box>
-				<Box styles={{ display: 'grid', gap: 2 }}>
-					{name && (
-						<Text
-							variant="sans-12-caps"
-							styles={{ color: 'gray10', fontWeight: 'bold' }}
-						>
-							{name}
-						</Text>
-					)}
-					{cohortTitle && (
-						<Text
-							variant="sans-12"
-							styles={{ color: 'gray40', fontWeight: 'bold' }}
-						>
-							{cohortTitle}
-						</Text>
-					)}
-				</Box>
-			</Box>
-		</Link>
-	</Box>
-)
+			</Link>
+		</Box>
+	)
+}
 
 type FellowsGridProps = {
 	children?: React.ReactNode
@@ -250,7 +256,7 @@ export const PageBodyFellowsGrid = ({
 		const defaultCohortIndex = defaultCohortNumber
 			? cohorts.findIndex(
 					(cohort) => cohort?.number?.toString() === defaultCohortNumber,
-			  )
+				)
 			: -1
 		const defaultCohortTabIndex =
 			defaultCohortIndex === -1 ? 0 : defaultCohortIndex + STATIC_TABS_COUNT
@@ -352,14 +358,17 @@ export const PageBodyFellowsGrid = ({
 							gridColumn: [null, 'span-5'],
 						}}
 					>
-						{modalFellow?.photoData && (
-							<GatsbyImage
-								image={modalFellow.photoData}
+						{modalFellow?.photoSrc && (
+							<Image
+								src={modalFellow.photoSrc}
 								alt={
 									modalFellow.photoAlt ?? modalFellow.name
 										? `Photo of ${modalFellow.name}`
 										: ''
 								}
+								layout="fullWidth"
+								breakpoints={[600, 900, 1200]}
+								sizes="(min-width: 600px) 600px, 100vw"
 							/>
 						)}
 					</Box>
@@ -478,7 +487,7 @@ export const PageBodyFellowsGrid = ({
 											href={fellow.url}
 											name={fellow.name}
 											cohortTitle={fellow.cohortTitle}
-											portraitData={fellow.portraitData}
+											portraitSrc={fellow.portraitSrc}
 											portraitAlt={fellow.portraitAlt}
 											openFellowModal={() =>
 												fellow.uid && openFellowModal(fellow.uid)
@@ -502,7 +511,7 @@ export const PageBodyFellowsGrid = ({
 														href={fellow.url}
 														name={fellow.name}
 														cohortTitle={fellow.cohortTitle}
-														portraitData={fellow.portraitData}
+														portraitSrc={fellow.portraitSrc}
 														portraitAlt={fellow.portraitAlt}
 														openFellowModal={() =>
 															fellow.uid && openFellowModal(fellow.uid)
@@ -527,13 +536,13 @@ export const mapDataToProps = ({
 		? String(
 				querystring.decode(meta?.location.search.replace(/^\?/, '')).cohort ??
 					'',
-		  ) || undefined
+			) || undefined
 		: undefined,
 	defaultModalFellowUID: meta?.location
 		? String(
 				querystring.decode(meta?.location.search.replace(/^\?/, '')).fellow ??
 					'',
-		  ) || undefined
+			) || undefined
 		: undefined,
 	location: meta?.location,
 })

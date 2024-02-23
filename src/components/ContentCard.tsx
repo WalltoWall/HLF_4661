@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
-import { Box, BoxProps } from '@walltowall/calico'
+import { Box, BoxProps, useBoxStyles } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
 import ConditionalWrap from 'conditional-wrap'
 
@@ -11,6 +10,7 @@ import { Anchor } from './Anchor'
 import { HTMLContent } from './HTMLContent'
 
 import { ReactComponent as AssetLogoBugGrayscaleSVG } from '../assets/logo-bug-grayscale.svg'
+import { Image } from '@unpic/react'
 
 const defaultElement = 'div'
 
@@ -22,7 +22,7 @@ type ContentCardProps<E extends React.ElementType> = {
 	excerptHTML?: string
 	href?: string
 	buttonText?: string
-	featuredImageData?: IGatsbyImageData
+	featuredImageSrc?: string
 	featuredImageAlt?: string
 	featuredImageURL?: string
 	featuredImageDimensions?: {
@@ -43,7 +43,7 @@ export const ContentCard = <
 	href,
 	date,
 	buttonText = 'Learn More',
-	featuredImageData,
+	featuredImageSrc,
 	featuredImageAlt,
 	featuredImageURL,
 	featuredImageDimensions,
@@ -51,6 +51,12 @@ export const ContentCard = <
 	sublinkText,
 	...props
 }: ContentCardProps<E>) => {
+	const imgStyles = useBoxStyles({
+		borderWidth: '1px',
+		borderStyle: 'solid',
+		borderColor: 'gray20',
+	})
+
 	return (
 		<Box
 			as={defaultElement}
@@ -70,16 +76,14 @@ export const ContentCard = <
 					condition={Boolean(href)}
 					wrap={(children) => <Link href={href!}>{children}</Link>}
 				>
-					{featuredImageData ? (
-						<Box
-							as={GatsbyImage}
-							image={featuredImageData}
+					{featuredImageSrc ? (
+						<Image
+							src={featuredImageSrc}
 							alt={featuredImageAlt ?? ''}
-							styles={{
-								borderWidth: '1px',
-								borderStyle: 'solid',
-								borderColor: 'gray20',
-							}}
+							className={imgStyles}
+							breakpoints={[400, 800]}
+							sizes="(min-width: 400px) 400px, 100vw"
+							layout="fullWidth"
 						/>
 					) : featuredImageURL ? (
 						<Box
@@ -167,8 +171,9 @@ export const ContentCard = <
 						<HTMLContent
 							html={excerptHTML}
 							componentOverrides={{
-								p: (Comp) => (props) =>
-									<Comp variant="serif-14-16" {...props} />,
+								p: (Comp) => (props) => (
+									<Comp variant="serif-14-16" {...props} />
+								),
 							}}
 							styles={{ color: 'gray40' }}
 						/>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
-import { Box } from '@walltowall/calico'
+import { Box, useBoxStyles } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 import { useKeenSlider } from 'keen-slider/react'
+import { Image as UnpicImage } from '@unpic/react'
 
 import { PageBodyImageCarouselFragment } from '../types.generated'
 import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
@@ -101,48 +101,56 @@ export const PageBodyImageCarousel = ({
 
 export type PageBodyImageCarouselImageProps = {
 	captionHTML?: string
-	imageData?: IGatsbyImageData
+	imageSrc?: string
 	imageAlt?: string
 }
 
 const Image = ({
 	captionHTML,
-	imageData,
+	imageSrc,
 	imageAlt,
-}: PageBodyImageCarouselImageProps) => (
-	<Box
-		as="figure"
-		className="keen-slider__slide"
-		styles={{ display: 'grid', gap: [4, 5, 7], cursor: 'grab' }}
-	>
-		<Box as={AspectRatio} x={860} y={570}>
-			{imageData && (
-				<Box
-					as={GatsbyImage}
-					image={imageData}
-					alt={imageAlt ?? ''}
-					imgStyle={{ objectFit: 'contain' }}
-					styles={{ width: 'full', height: 'full' }}
+}: PageBodyImageCarouselImageProps) => {
+	const imgStyles = useBoxStyles({
+		width: 'full',
+		height: 'full',
+		objectFit: 'contain',
+	})
+
+	return (
+		<Box
+			as="figure"
+			className="keen-slider__slide"
+			styles={{ display: 'grid', gap: [4, 5, 7], cursor: 'grab' }}
+		>
+			<Box as={AspectRatio} x={860} y={570}>
+				{imageSrc && (
+					<UnpicImage
+						src={imageSrc}
+						alt={imageAlt ?? ''}
+						className={imgStyles}
+						layout="fullWidth"
+						sizes="(min-width: 1080px) 1080px, 100vw"
+					/>
+				)}
+			</Box>
+			{captionHTML && (
+				<HTMLContent
+					as="figcaption"
+					html={captionHTML}
+					componentOverrides={{
+						p: (Comp) => (props) => <Comp variant="serif-14-16" {...props} />,
+					}}
+					styles={{
+						color: 'gray40',
+						textAlign: 'center',
+						// Used to prevent text clipping due to `overflow: hidden`
+						paddingBottom: 1,
+					}}
 				/>
 			)}
 		</Box>
-		{captionHTML && (
-			<HTMLContent
-				as="figcaption"
-				html={captionHTML}
-				componentOverrides={{
-					p: (Comp) => (props) => <Comp variant="serif-14-16" {...props} />,
-				}}
-				styles={{
-					color: 'gray40',
-					textAlign: 'center',
-					// Used to prevent text clipping due to `overflow: hidden`
-					paddingBottom: 1,
-				}}
-			/>
-		)}
-	</Box>
-)
+	)
+}
 
 PageBodyImageCarousel.Image = Image
 
@@ -155,7 +163,7 @@ export const mapDataToProps = ({
 	children: data?.items?.map((item) => (
 		<PageBodyImageCarousel.Image
 			key={item?.image?.url}
-			imageData={item?.image?.gatsbyImageData as IGatsbyImageData}
+			imageSrc={item?.image?.url}
 			imageAlt={undefIfEmpty(item?.image?.alt) as string | undefined}
 			captionHTML={getRichText(item?.caption)}
 		/>
@@ -172,11 +180,6 @@ export const fragment = graphql`
 			image {
 				alt
 				url
-				gatsbyImageData(
-					placeholder: BLURRED
-					width: 1080
-					breakpoints: [360, 720, 1080]
-				)
 			}
 			caption {
 				html

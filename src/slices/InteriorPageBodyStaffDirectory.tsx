@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Box } from '@walltowall/calico'
-import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
+import { Box, useBoxStyles } from '@walltowall/calico'
 import { getRichText } from '@walltowall/helpers'
 import slugify from 'slugify'
 
@@ -13,6 +12,7 @@ import { BoundedBox } from '../components/BoundedBox'
 import { HTMLContent } from '../components/HTMLContent'
 import { Text } from '../components/Text'
 import { Anchor } from '../components/Anchor'
+import { Image } from '@unpic/react'
 
 export type InteriorPageBodyStaffDirectoryProps = ReturnType<
 	typeof mapDataToProps
@@ -30,7 +30,7 @@ const InteriorPageBodyStaffDirectory = ({
 					slug: child.props.name ? slugify(child.props.name) : undefined,
 					name: child.props.name as string | undefined,
 					title: child.props.title as string | undefined,
-			  }
+				}
 			: {},
 	)
 
@@ -75,7 +75,7 @@ export type InteriorPageBodyStaffDirectoryStaffMemberProps = {
 	name?: string
 	title?: string
 	biographyHTML?: string
-	photoData?: IGatsbyImageData
+	photoSrc?: string
 	photoAlt?: string
 }
 
@@ -83,47 +83,53 @@ const StaffMember = ({
 	name,
 	title,
 	biographyHTML,
-	photoData,
+	photoSrc,
 	photoAlt,
-}: InteriorPageBodyStaffDirectoryStaffMemberProps) => (
-	<Box
-		as="li"
-		id={name ? slugify(name) : undefined}
-		styles={{
-			display: 'grid',
-			gridTemplateColumns: 12,
-			gap: 6,
-			alignItems: 'start',
-		}}
-	>
-		{photoData && (
-			<Box
-				as={GatsbyImage}
-				image={photoData}
-				alt={photoAlt ?? ''}
-				styles={{ gridColumn: ['span-4', 'span-3'] }}
-			/>
-		)}
+}: InteriorPageBodyStaffDirectoryStaffMemberProps) => {
+	const imgStyles = useBoxStyles({ gridColumn: ['span-4', 'span-3'] })
+
+	return (
 		<Box
+			as="li"
+			id={name ? slugify(name) : undefined}
 			styles={{
 				display: 'grid',
-				gap: [6, 7, 8],
-				gridColumn: ['span-12', 'span-9'],
-				paddingTop: [null, 2],
+				gridTemplateColumns: 12,
+				gap: 6,
+				alignItems: 'start',
 			}}
 		>
-			{name && (
-				<Text variant="sans-18-bold-caps" styles={{ color: 'gray10' }}>
-					{name}
-					{title && `, ${title}`}
-				</Text>
+			{photoSrc && (
+				<Image
+					src={photoSrc}
+					alt={photoAlt ?? ''}
+					className={imgStyles}
+					layout="fullWidth"
+					breakpoints={[300, 600]}
+					sizes="(min-width: 300px) 300px, 100vw"
+				/>
 			)}
-			{biographyHTML && (
-				<HTMLContent html={biographyHTML} styles={{ color: 'gray40' }} />
-			)}
+			<Box
+				styles={{
+					display: 'grid',
+					gap: [6, 7, 8],
+					gridColumn: ['span-12', 'span-9'],
+					paddingTop: [null, 2],
+				}}
+			>
+				{name && (
+					<Text variant="sans-18-bold-caps" styles={{ color: 'gray10' }}>
+						{name}
+						{title && `, ${title}`}
+					</Text>
+				)}
+				{biographyHTML && (
+					<HTMLContent html={biographyHTML} styles={{ color: 'gray40' }} />
+				)}
+			</Box>
 		</Box>
-	</Box>
-)
+	)
+}
 
 InteriorPageBodyStaffDirectory.StaffMember = StaffMember
 
@@ -139,7 +145,7 @@ export const mapDataToProps = ({
 			name={item?.name?.text}
 			title={item?.staff_title?.text}
 			biographyHTML={getRichText(item?.biography)}
-			photoData={item?.photo?.gatsbyImageData as IGatsbyImageData}
+			photoSrc={item?.photo?.url}
 			photoAlt={item?.photo?.alt}
 		/>
 	)) as React.ReactNode,
@@ -164,7 +170,7 @@ export const fragment = graphql`
 			}
 			photo {
 				alt
-				gatsbyImageData(placeholder: BLURRED, width: 300, breakpoints: [300])
+				url
 			}
 		}
 	}

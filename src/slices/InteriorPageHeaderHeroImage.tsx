@@ -12,7 +12,6 @@ import {
 import { useCommonStyles } from '../hooks/useCommonStyles'
 
 import { ImageWithTextOverlay } from '../components/ImageWithTextOverlay'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export type InteriorPageHeaderHeroImageProps = ReturnType<
 	typeof mapDataToProps
@@ -21,7 +20,7 @@ export type InteriorPageHeaderHeroImageProps = ReturnType<
 
 export const InteriorPageHeaderHeroImage = ({
 	headingHTML,
-	backgroundImageData,
+	backgroundImageSrc,
 	id,
 }: InteriorPageHeaderHeroImageProps) => {
 	const commonStyles = useCommonStyles()
@@ -39,7 +38,7 @@ export const InteriorPageHeaderHeroImage = ({
 			<ImageWithTextOverlay
 				variant="reducedHeight"
 				textHTML={headingHTML}
-				imageData={backgroundImageData}
+				imageSrc={backgroundImageSrc}
 				className={commonStyles.darkGrayGradientBackground}
 			/>
 		</Box>
@@ -53,8 +52,7 @@ export const mapDataToProps = ({
 	typeof mapDataToContext
 >) => ({
 	headingHTML: getRichText(data.primary?.heading),
-	backgroundImageData: data.primary?.background_image
-		?.gatsbyImageData as IGatsbyImageData,
+	backgroundImageSrc: data.primary?.background_image?.url,
 })
 
 export const mapDataToContext = ({
@@ -77,11 +75,7 @@ export const fragment = graphql`
 				html
 			}
 			background_image {
-				gatsbyImageData(
-					placeholder: BLURRED
-					width: 1200
-					breakpoints: [360, 720, 1080]
-				)
+				url
 			}
 		}
 	}

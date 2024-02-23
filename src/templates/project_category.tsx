@@ -20,7 +20,6 @@ import { InteriorPageSidebar } from '../components/InteriorPageSidebar'
 import { Text } from '../components/Text'
 
 import { getType as getPageType } from './page'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 /**
  * `listMiddleware` for `react-map-slices-to-components`. Add or modify slices
@@ -108,8 +107,8 @@ export const ProjectCategoryTemplate = ({
 		pageContext.currentPage > 2
 			? `${data.prismicProjectCategory?.url}${pageContext.currentPage - 1}/`
 			: pageContext.currentPage === 2
-			? data.prismicProjectCategory?.url
-			: undefined
+				? data.prismicProjectCategory?.url
+				: undefined
 
 	const navigation = useNavigation()
 	const impactNavigation = navigation.primary
@@ -198,10 +197,7 @@ export const ProjectCategoryTemplate = ({
 											topLabel={primaryProjectCategory?.data?.name?.text}
 											title={project.data?.title?.text}
 											excerptHTML={getRichText(project.data?.description)}
-											featuredImageData={
-												project.data?.featured_image
-													?.gatsbyImageData as IGatsbyImageData
-											}
+											featuredImageSrc={project.data?.featured_image?.url}
 											featuredImageAlt={project.data?.featured_image?.alt}
 											sublinkHref={project.data?.website_url?.url}
 											sublinkText={prettyURL(project.data?.website_url?.url)}
@@ -317,11 +313,7 @@ export const query = graphql`
 					}
 					featured_image {
 						alt
-						gatsbyImageData(
-							placeholder: BLURRED
-							width: 400
-							breakpoints: [400]
-						)
+						url
 					}
 				}
 			}

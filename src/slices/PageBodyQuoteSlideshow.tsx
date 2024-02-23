@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { useStyles } from 'react-treat'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { useKeenSlider } from 'keen-slider/react'
-import { Box } from '@walltowall/calico'
+import { Box, useBoxStyles } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
+import { Image } from '@unpic/react'
 import clsx from 'clsx'
 
 import { PageBodyQuoteSlideshowFragment } from '../types.generated'
@@ -60,7 +60,7 @@ type SlideProps = {
 	quote?: string
 	quoteeName?: string
 	quoteeTitle?: string
-	imageData?: IGatsbyImageData
+	imageSrc?: string
 	imageAlt?: string
 }
 
@@ -68,10 +68,11 @@ const Slide = ({
 	quote,
 	quoteeName,
 	quoteeTitle,
-	imageData,
+	imageSrc,
 	imageAlt,
 }: SlideProps) => {
 	const styles = useStyles(styleRefs)
+	const imgStyles = useBoxStyles({ height: 'full', width: 'full' })
 
 	return (
 		<Box
@@ -82,7 +83,7 @@ const Slide = ({
 				alignItems: 'center',
 			}}
 		>
-			{imageData && (
+			{imageSrc && (
 				<Box
 					as={AspectRatio}
 					x={1}
@@ -96,11 +97,13 @@ const Slide = ({
 						marginRight: 'auto',
 					}}
 				>
-					<Box
-						as={GatsbyImage}
-						image={imageData}
+					<Image
+						src={imageSrc}
 						alt={imageAlt ?? ''}
-						styles={{ height: 'full', width: 'full' }}
+						className={imgStyles}
+						layout="fullWidth"
+						sizes="(min-width: 400px) 400px, 100vw"
+						breakpoints={[400, 800]}
 					/>
 				</Box>
 			)}
@@ -180,7 +183,7 @@ export const mapDataToProps = ({
 			quote={item?.quote?.text}
 			quoteeName={item?.quotee_name?.text}
 			quoteeTitle={item?.quotee_title?.text}
-			imageData={item?.photo?.gatsbyImageData as IGatsbyImageData}
+			imageSrc={item?.photo?.url}
 			imageAlt={item?.photo?.alt}
 		/>
 	)),
@@ -204,7 +207,7 @@ export const fragment = graphql`
 			}
 			photo {
 				alt
-				gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
+				url
 			}
 		}
 	}

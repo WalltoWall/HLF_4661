@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { graphql, HeadProps, PageProps } from 'gatsby'
 import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { propPairsEq } from '@walltowall/helpers'
 import { Box } from '@walltowall/calico'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
@@ -104,8 +103,8 @@ export const NewsTemplate = ({
 		pageContext.currentPage > 2
 			? `/news/${pageContext.currentPage - 1}/`
 			: pageContext.currentPage === 2
-			? '/news/'
-			: undefined
+				? '/news/'
+				: undefined
 
 	const navigation = useNavigation()
 	const newsNavigation = navigation.primary
@@ -196,10 +195,7 @@ export const NewsTemplate = ({
 												(newsPost?.data?.published_at as string) ??
 												(newsPost?.first_publication_date as string)
 											}
-											featuredImageData={
-												newsPost.data?.featured_image
-													?.gatsbyImageData as IGatsbyImageData
-											}
+											featuredImageSrc={newsPost.data?.featured_image?.url}
 											featuredImageAlt={newsPost.data?.featured_image?.alt}
 											buttonText="Read More"
 										/>
@@ -295,11 +291,7 @@ export const query = graphql`
 					}
 					featured_image {
 						alt
-						gatsbyImageData(
-							placeholder: BLURRED
-							width: 400
-							breakpoints: [400]
-						)
+						url
 					}
 				}
 			}

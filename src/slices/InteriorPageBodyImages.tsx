@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
-import { Box, useBoxStyles } from '@walltowall/calico'
+import { Box } from '@walltowall/calico'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
+import { Image as UnpicImage } from '@unpic/react'
 
 import { InteriorPageBodyImagesFragment } from '../types.generated'
 import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
@@ -43,17 +43,24 @@ export const InteriorPageBodyImages = ({
 
 export type InteriorPageBodyImagesImageProps = {
 	captionHTML?: string
-	imageData?: IGatsbyImageData
+	imageSrc?: string
 	imageAlt?: string
 }
 
 const Image = ({
 	captionHTML,
-	imageData,
+	imageSrc,
 	imageAlt,
 }: InteriorPageBodyImagesImageProps) => (
 	<Box as="figure" styles={{ display: 'grid', gap: [4, 5] }}>
-		{imageData && <GatsbyImage image={imageData} alt={imageAlt ?? ''} />}
+		{imageSrc && (
+			<UnpicImage
+				src={imageSrc}
+				alt={imageAlt ?? ''}
+				layout="fullWidth"
+				sizes="(min-width: 700px) 700px, 100vw"
+			/>
+		)}
 		{captionHTML && (
 			<HTMLContent
 				as="figcaption"
@@ -78,7 +85,7 @@ export const mapDataToProps = ({
 	children: data?.items?.map((item) => (
 		<InteriorPageBodyImages.Image
 			key={item?.image?.url}
-			imageData={item?.image?.gatsbyImageData as IGatsbyImageData}
+			imageSrc={item?.image?.url}
 			imageAlt={undefIfEmpty(item?.image?.alt) as string | undefined}
 			captionHTML={getRichText(item?.caption)}
 		/>
@@ -95,7 +102,6 @@ export const fragment = graphql`
 			image {
 				alt
 				url
-				gatsbyImageData(placeholder: BLURRED, width: 700, breakpoints: [700])
 			}
 			caption {
 				html

@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { Box } from '@walltowall/calico'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { getRichText, undefIfEmpty } from '@walltowall/helpers'
 
 import { PageBodyHeroImageFragment } from '../types.generated'
@@ -31,7 +30,7 @@ export const PageBodyHeroImage = ({
 	textHTML,
 	buttonText = 'Learn More',
 	buttonHref,
-	backgroundImageData,
+	backgroundImageSrc,
 	backgroundImageAlt,
 	id,
 }: PageBodyHeroImageProps) => {
@@ -53,7 +52,7 @@ export const PageBodyHeroImage = ({
 				textHTML={textHTML}
 				buttonHref={buttonHref}
 				buttonText={buttonText}
-				imageData={backgroundImageData}
+				imageSrc={backgroundImageSrc}
 				imageAlt={backgroundImageAlt}
 				className={commonStyles.darkGrayGradientBackground}
 			/>
@@ -70,8 +69,7 @@ export const mapDataToProps = ({
 	textHTML: getRichText(data.primary?.text),
 	buttonText: undefIfEmpty(data.primary?.button_text?.text),
 	buttonHref: data.primary?.button_link?.url,
-	backgroundImageData: data.primary?.background_image
-		?.gatsbyImageData as IGatsbyImageData,
+	backgroundImageSrc: data.primary?.background_image?.url,
 	backgroundImageAlt: data.primary?.background_image?.alt,
 })
 
@@ -103,11 +101,7 @@ export const fragment = graphql`
 			}
 			background_image {
 				alt
-				gatsbyImageData(
-					placeholder: BLURRED
-					width: 1200
-					breakpoints: [360, 720, 1200]
-				)
+				url
 			}
 		}
 	}

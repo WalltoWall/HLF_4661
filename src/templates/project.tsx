@@ -2,7 +2,6 @@ import * as React from 'react'
 import { graphql, HeadProps, PageProps } from 'gatsby'
 import { withPrismicPreview } from 'gatsby-plugin-prismic-previews'
 import { Box } from '@walltowall/calico'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { getRichText, propPairsEq, undefIfEmpty } from '@walltowall/helpers'
 import MapSlicesToComponents from '@walltowall/react-map-slices-to-components'
 
@@ -228,9 +227,8 @@ export const ProjectTemplate = ({
 													?.data?.title?.text
 											}
 											href={item?.involved_fellow?.document?.url}
-											thumbnailData={
-												item?.involved_fellow?.document?.data?.portrait
-													?.gatsbyImageData as IGatsbyImageData
+											thumbnailSrc={
+												item?.involved_fellow?.document?.data?.portrait?.url
 											}
 											thumbnailAlt={
 												item?.involved_fellow?.document?.data?.portrait?.alt
@@ -250,10 +248,7 @@ export const ProjectTemplate = ({
 									topLabel="Next Project"
 									title={nextProject.data?.title?.text}
 									excerptHTML={getRichText(nextProject.data?.description)}
-									featuredImageData={
-										nextProject.data?.featured_image
-											?.gatsbyImageData as IGatsbyImageData
-									}
+									featuredImageSrc={nextProject.data?.featured_image?.url}
 									featuredImageAlt={nextProject.data?.featured_image?.alt}
 									sublinkHref={nextProject.data?.website_url?.url}
 									sublinkText={prettyURL(nextProject.data?.website_url?.url)}
@@ -334,11 +329,7 @@ export const query = graphql`
 									}
 									portrait {
 										alt
-										gatsbyImageData(
-											placeholder: BLURRED
-											width: 300
-											breakpoints: [300]
-										)
+										url
 									}
 								}
 							}
@@ -414,7 +405,7 @@ export const query = graphql`
 			}
 			featured_image {
 				alt
-				gatsbyImageData(placeholder: BLURRED, width: 400, breakpoints: [400])
+				url
 			}
 		}
 	}

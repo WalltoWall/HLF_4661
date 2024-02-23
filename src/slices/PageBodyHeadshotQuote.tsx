@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
-import { Box } from '@walltowall/calico'
+import { Box, useBoxStyles } from '@walltowall/calico'
 import { undefIfEmpty } from '@walltowall/helpers'
+import { Image } from '@unpic/react'
 
 import { PageBodyHeadshotQuoteFragment } from '../types.generated'
 import { PageTemplateEnhancerProps } from '../templates/page'
@@ -21,11 +21,12 @@ export const PageBodyHeadshotQuote = ({
 	credit,
 	buttonText = 'Learn More',
 	buttonHref,
-	photoData,
+	photoSrc,
 	photoAlt,
 	nextSharesBg,
 }: PageBodyHeadshotQuoteProps) => {
 	const commonStyles = useCommonStyles()
+	const imgStyles = useBoxStyles({ height: 'full' })
 
 	return (
 		<BoundedBox
@@ -62,7 +63,15 @@ export const PageBodyHeadshotQuote = ({
 						gridColumnEnd: [-1, null, 4],
 					}}
 				>
-					{photoData && <GatsbyImage image={photoData} alt={photoAlt ?? ''} />}
+					{photoSrc && (
+						<Image
+							src={photoSrc}
+							alt={photoAlt ?? ''}
+							layout="fullWidth"
+							className={imgStyles}
+							sizes="(min-width: 500px) 500px, 100vw"
+						/>
+					)}
 				</Box>
 				<Box
 					as="figure"
@@ -113,7 +122,7 @@ export const mapDataToProps = ({
 	credit: data.primary?.credit?.text,
 	buttonText: undefIfEmpty(data.primary?.button_text?.text),
 	buttonHref: data.primary?.button_link?.url,
-	photoData: data.primary?.photo?.gatsbyImageData as IGatsbyImageData,
+	photoSrc: data.primary?.photo?.url,
 	photoAlt: data.primary?.photo?.alt,
 })
 
@@ -138,7 +147,7 @@ export const fragment = graphql`
 			}
 			photo {
 				alt
-				gatsbyImageData(width: 500, breakpoints: [250, 500])
+				url
 			}
 		}
 	}

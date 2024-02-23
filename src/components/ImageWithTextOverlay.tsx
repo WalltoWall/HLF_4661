@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
-import { Box, BoxProps } from '@walltowall/calico'
+import { Box, BoxProps, useBoxStyles } from '@walltowall/calico'
 import { GatsbyImageContainer } from '@walltowall/siamese'
+import { Image } from '@unpic/react'
 
 import { useCommonStyles } from '../hooks/useCommonStyles'
 
@@ -42,8 +42,8 @@ type ImageWithTextOverlayProps<E extends React.ElementType> = {
 	textHTML?: string
 	buttonHref?: string
 	buttonText?: string
-	imageData?: IGatsbyImageData
 	imageAlt?: string
+	imageSrc?: string
 	withImageGradientOverlay?: boolean
 } & BoxProps<E>
 
@@ -57,12 +57,14 @@ export const ImageWithTextOverlay = <
 	buttonText = 'Learn More',
 	imageData,
 	imageAlt,
+	imageSrc,
 	withImageGradientOverlay = false,
 	...props
 }: ImageWithTextOverlayProps<E>) => {
 	const variant = variants[variantName]
 
 	const commonStyles = useCommonStyles()
+	const imageStyles = useBoxStyles({ height: 'full' })
 
 	return (
 		<BoundedBox
@@ -76,7 +78,7 @@ export const ImageWithTextOverlay = <
 				...props.styles,
 			}}
 		>
-			{imageData && (
+			{imageSrc && (
 				<Box
 					as={GatsbyImageContainer}
 					styles={{
@@ -88,7 +90,13 @@ export const ImageWithTextOverlay = <
 						pointerEvents: 'none',
 					}}
 				>
-					<GatsbyImage image={imageData} alt={imageAlt ?? ''} />
+					<Image
+						src={imageSrc}
+						alt={imageAlt ?? ''}
+						layout="fullWidth"
+						className={imageStyles}
+						sizes="(min-width: 1200px) 1200px, 100vw"
+					/>
 				</Box>
 			)}
 			{withImageGradientOverlay && (
@@ -128,20 +136,20 @@ export const ImageWithTextOverlay = <
 						<HTMLContent
 							html={textHTML}
 							componentOverrides={{
-								h1: (Comp) => (props) =>
-									(
-										<Comp
-											as="h1"
-											variant={variant.h1Variant}
-											{...props}
-											styles={{
-												marginBottom: variant.headingMarginBottom,
-												...props.styles,
-											}}
-										/>
-									),
-								p: (Comp) => (props) =>
-									<Comp variant={variant.pVariant} {...props} />,
+								h1: (Comp) => (props) => (
+									<Comp
+										as="h1"
+										variant={variant.h1Variant}
+										{...props}
+										styles={{
+											marginBottom: variant.headingMarginBottom,
+											...props.styles,
+										}}
+									/>
+								),
+								p: (Comp) => (props) => (
+									<Comp variant={variant.pVariant} {...props} />
+								),
 							}}
 							className={commonStyles.textShadow}
 							styles={{
