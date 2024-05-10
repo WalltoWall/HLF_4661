@@ -30,9 +30,6 @@ exports.linkResolver = (doc) => {
 		case 'project_category':
 			return `/impact/projects/${doc.uid}/`
 
-		case 'fellow':
-			return `/fellows/?fellow=${doc.uid}`
-
 		case 'cohort':
 			const number = cohortUIDMap[doc.uid]
 			return number ? `/fellows/?cohort=${number}` : `/fellows/`

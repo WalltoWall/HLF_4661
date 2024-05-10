@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { navigate } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import { useStyles } from 'react-treat'
 import { Box, useBoxStyles } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
@@ -14,7 +14,6 @@ import {
 import { Dialog } from '@reach/dialog'
 import * as R from 'fp-ts/Record'
 import * as A from 'fp-ts/Array'
-import querystring from 'querystring'
 
 import { PageTemplateEnhancerProps } from '../templates/page'
 import { MapDataToPropsArgs } from '../lib/mapSlicesToComponents'
@@ -28,7 +27,6 @@ import { Inline } from '../components/Inline'
 import { Text } from '../components/Text'
 
 import * as styleRefs from './PageBodyFellowsGrid.treat'
-import { Link } from '../components/Link'
 import { Image } from '@unpic/react'
 
 /**
@@ -41,7 +39,6 @@ const groupByCohort = <A extends { cohortUID?: string }>(as: A[]) =>
 	])
 
 type FellowProps = {
-	href: string
 	name?: string
 	cohortTitle?: string
 	portraitSrc?: string
@@ -50,7 +47,6 @@ type FellowProps = {
 }
 
 const Fellow = ({
-	href,
 	name,
 	cohortTitle,
 	portraitSrc,
@@ -61,7 +57,13 @@ const Fellow = ({
 
 	return (
 		<Box as="li">
-			<Link href={href} onClick={openFellowModal}>
+			<Box
+				as="button"
+				onClick={openFellowModal}
+				styles={{
+					width: 'full',
+				}}
+			>
 				<Box
 					styles={{
 						display: 'block',
@@ -107,7 +109,7 @@ const Fellow = ({
 						)}
 					</Box>
 				</Box>
-			</Link>
+			</Box>
 		</Box>
 	)
 }
@@ -209,6 +211,7 @@ const FellowsGridSecondaryTab = ({
 }
 
 const STATIC_TABS_COUNT = 1
+const ALL_FELLOWS = 0
 
 export type PageBodyFellowsGridProps = Partial<
 	ReturnType<typeof mapDataToProps>
@@ -216,21 +219,35 @@ export type PageBodyFellowsGridProps = Partial<
 	PageTemplateEnhancerProps
 
 export const PageBodyFellowsGrid = ({
-	defaultCohortNumber,
-	defaultModalFellowUID,
+	defaultCohortNumber = ALL_FELLOWS,
 	nextSharesBg,
 	location,
 }: PageBodyFellowsGridProps) => {
 	const cohorts = useCohorts()
-	// const latestCohort = cohorts[cohorts.length - 1]
 
 	const fellows = useFellows()
 	const fellowsByCohort = React.useMemo(() => groupByCohort(fellows), [fellows])
-	// const fellowsOfLatestCohort = latestCohort.uid
-	// 	? fellowsByCohort[latestCohort.uid] ?? []
-	// 	: []
 
-	const [cohortTabIndex, setCohortTabIndex] = React.useState(0)
+	const [cohortTabIndex, setCohortTabIndex] =
+		React.useState(defaultCohortNumber)
+	const [modalFellowUID, setModalFellowUID] = React.useState<string>()
+
+	React.useEffect(() => {
+		const params = new URLSearchParams(window.location.search)
+
+		const fellowUID = params.get('fellow')
+		const cohort = Number.parseInt(
+			params.get('cohort') ?? ALL_FELLOWS.toString(),
+		)
+
+		if (fellowUID && fellows.some((fellow) => fellow.uid === fellowUID))
+			setModalFellowUID(fellowUID)
+		if (!isNaN(cohort) && cohort > 0 && cohort < cohorts.length)
+			setCohortTabIndex(cohort)
+
+		// Because this is a static site cohorts and fellows will never change.
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	const changeCohortTabIndex = (index: number) => {
 		setCohortTabIndex(index)
@@ -246,33 +263,27 @@ export const PageBodyFellowsGrid = ({
 				url.searchParams.delete('cohort')
 			}
 
-			navigate(url.pathname + url.search)
+			window.history.pushState({}, '', url)
 		}
 	}
 
-	// Need to set the default cohort tab index in a useEffect to fix a
-	// rehydration bug where the selected tab index remains at 0
-	React.useEffect(() => {
-		const defaultCohortIndex = defaultCohortNumber
-			? cohorts.findIndex(
-					(cohort) => cohort?.number?.toString() === defaultCohortNumber,
-				)
-			: -1
-		const defaultCohortTabIndex =
-			defaultCohortIndex === -1 ? 0 : defaultCohortIndex + STATIC_TABS_COUNT
-
-		if (defaultCohortTabIndex) setCohortTabIndex(defaultCohortTabIndex)
-	}, [cohorts, defaultCohortNumber])
-
-	const [modalFellowUID, setModalFellowUID] = React.useState(
-		defaultModalFellowUID,
-	)
 	const modalFellow = React.useMemo(
 		() => fellows.find((fellow) => fellow.uid === modalFellowUID),
 		[fellows, modalFellowUID],
 	)
+
 	const isModalOpen = modalFellowUID !== undefined
-	const openFellowModal = (fellowUID: string) => setModalFellowUID(fellowUID)
+
+	const openFellowModal = (fellowUID: string) => {
+		setModalFellowUID(fellowUID)
+
+		if (location) {
+			const url = new URL(location.href)
+			url.searchParams.set('fellow', fellowUID)
+			navigate(url.pathname + url.search)
+		}
+	}
+
 	const closeFellowModal = () => {
 		setModalFellowUID(undefined)
 
@@ -435,10 +446,6 @@ export const PageBodyFellowsGrid = ({
 							justifyContent: 'center',
 						}}
 					>
-						{/* <Tab>
-							<FellowsGridTab index={0}>Current Cohort</FellowsGridTab>
-						</Tab> */}
-
 						<Tab>
 							<FellowsGridTab index={0}>Forum of Fellows</FellowsGridTab>
 						</Tab>
@@ -456,27 +463,6 @@ export const PageBodyFellowsGrid = ({
 				</Box>
 
 				<TabPanels>
-					{/* <TabPanel>
-						<FellowsGrid>
-							{fellowsOfLatestCohort.map(
-								(fellow) =>
-									fellow.url && (
-										<Fellow
-											key={fellow.uid}
-											href={fellow.url}
-											name={fellow.name}
-											cohortTitle={fellow.cohortTitle}
-											portraitData={fellow.portraitData}
-											portraitAlt={fellow.portraitAlt}
-											openFellowModal={() =>
-												fellow.uid && openFellowModal(fellow.uid)
-											}
-										/>
-									),
-							)}
-						</FellowsGrid>
-					</TabPanel> */}
-
 					<TabPanel>
 						<FellowsGrid>
 							{fellows.map(
@@ -484,7 +470,6 @@ export const PageBodyFellowsGrid = ({
 									fellow.url && (
 										<Fellow
 											key={fellow.uid}
-											href={fellow.url}
 											name={fellow.name}
 											cohortTitle={fellow.cohortTitle}
 											portraitSrc={fellow.portraitSrc}
@@ -508,7 +493,6 @@ export const PageBodyFellowsGrid = ({
 												fellow.url && (
 													<Fellow
 														key={fellow.uid}
-														href={fellow.url}
 														name={fellow.name}
 														cohortTitle={fellow.cohortTitle}
 														portraitSrc={fellow.portraitSrc}
@@ -530,25 +514,23 @@ export const PageBodyFellowsGrid = ({
 }
 
 export const mapDataToProps = ({
+	data,
 	meta,
-}: MapDataToPropsArgs<undefined, typeof mapDataToContext>) => ({
-	defaultCohortNumber: meta?.location
-		? String(
-				querystring.decode(meta?.location.search.replace(/^\?/, '')).cohort ??
-					'',
-			) || undefined
-		: undefined,
-	defaultModalFellowUID: meta?.location
-		? String(
-				querystring.decode(meta?.location.search.replace(/^\?/, '')).fellow ??
-					'',
-			) || undefined
-		: undefined,
+}: MapDataToPropsArgs<any, typeof mapDataToContext>) => ({
+	defaultCohortNumber: data.primary?.default_cohort_number as number,
 	location: meta?.location,
 })
 
 export const mapDataToContext = () => ({
 	bg: 'gray85',
 })
+
+export const fragment = graphql`
+	fragment PageBodyFellowsGrid on PrismicPageDataBodyFellowsGrid {
+		primary {
+			default_cohort_number
+		}
+	}
+`
 
 export default PageBodyFellowsGrid

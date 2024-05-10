@@ -41,7 +41,8 @@
 			"type": "Link",
 			"config": {
 				"label": "Redirect To",
-				"placeholder": "Optional - Redirect this page to another page or external URL"
+				"placeholder": "Optional - Redirect this page to another page or external URL",
+				"select": null
 			}
 		},
 		"redirect_is_permanent": {
@@ -84,7 +85,7 @@
 							"text": {
 								"type": "StructuredText",
 								"config": {
-									"multi": "paragraph, heading1, heading2, strong, em, hyperlink, embed, list-item, o-list-item",
+									"multi": "paragraph,heading1,heading2,strong,em,hyperlink,embed,list-item,o-list-item",
 									"allowTargetBlank": true,
 									"label": "Text",
 									"placeholder": "Text with formatting and rich content"
@@ -129,7 +130,7 @@
 							"text": {
 								"type": "StructuredText",
 								"config": {
-									"multi": "paragraph, heading1",
+									"multi": "paragraph,heading1",
 									"label": "Text",
 									"placeholder": "Text displayed over the background image"
 								}
@@ -146,7 +147,8 @@
 								"type": "Link",
 								"config": {
 									"label": "Button Link",
-									"placeholder": "Optional - Link for the button"
+									"placeholder": "Optional - Link for the button",
+									"select": null
 								}
 							},
 							"background_image": {
@@ -179,7 +181,7 @@
 							"text": {
 								"type": "StructuredText",
 								"config": {
-									"multi": "paragraph, heading1",
+									"multi": "paragraph,heading1",
 									"label": "Text",
 									"placeholder": "Text displayed over the background image"
 								}
@@ -196,7 +198,8 @@
 								"type": "Link",
 								"config": {
 									"label": "Button Link",
-									"placeholder": "Optional - Link for the button"
+									"placeholder": "Optional - Link for the button",
+									"select": null
 								}
 							}
 						}
@@ -266,7 +269,14 @@
 						"description": "Grid of Fellows with toggle to see current or all cohorts",
 						"icon": "supervisor_account",
 						"display": "list",
-						"non-repeat": {},
+						"non-repeat": {
+							"default_cohort_number": {
+								"type": "Number",
+								"config": {
+									"label": "Default Cohort Number"
+								}
+							}
+						},
 						"repeat": {}
 					},
 					"image_carousel": {
@@ -331,7 +341,8 @@
 								"type": "Link",
 								"config": {
 									"label": "Link",
-									"placeholder": "Link to display"
+									"placeholder": "Link to display",
+									"select": null
 								}
 							},
 							"button_text": {
@@ -371,7 +382,8 @@
 								"type": "Link",
 								"config": {
 									"label": "Button Link",
-									"placeholder": "Optional - Link to a page with more information"
+									"placeholder": "Optional - Link to a page with more information",
+									"select": null
 								}
 							},
 							"button_text": {
@@ -420,7 +432,7 @@
 							"text": {
 								"type": "StructuredText",
 								"config": {
-									"multi": "paragraph, heading1",
+									"multi": "paragraph,heading1",
 									"label": "Text",
 									"placeholder": "Text displayed over the background image"
 								}
@@ -437,7 +449,8 @@
 								"type": "Link",
 								"config": {
 									"label": "Button Link",
-									"placeholder": "Optional - Link for the button"
+									"placeholder": "Optional - Link for the button",
+									"select": null
 								}
 							}
 						}

@@ -53,11 +53,11 @@ export const fragment = graphql`
 		...PageBodyLinkCollection
 		...PageBodyQuoteSlideshow
 		...PageBodyText
+		...PageBodyFellowsGrid
 
 		# The following slices do not have fragments:
 		#...PageBodyFooter
 		#...PageBodyHeader
-		#...PageBodyFellowsGrid
 		#...PageBodySearch
 	}
 `
