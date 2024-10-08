@@ -3,6 +3,7 @@ import { graphql, navigate } from 'gatsby'
 import { useStyles } from 'react-treat'
 import { Box, useBoxStyles } from '@walltowall/calico'
 import { AspectRatio } from '@walltowall/siamese'
+import { Image } from '@unpic/react'
 import {
 	Tabs,
 	Tab,
@@ -25,9 +26,9 @@ import { HTMLContent } from '../components/HTMLContent'
 import { Icon } from '../components/Icon'
 import { Inline } from '../components/Inline'
 import { Text } from '../components/Text'
+import { Link } from '../components/Link'
 
 import * as styleRefs from './PageBodyFellowsGrid.treat'
-import { Image } from '@unpic/react'
 
 /**
  * Groups a list of records by their `cohortUID` field.
@@ -44,10 +45,12 @@ type FellowProps = {
 	portraitSrc?: string
 	portraitAlt?: string
 	openFellowModal: () => void
+	href: string
 }
 
 const Fellow = ({
 	name,
+	href,
 	cohortTitle,
 	portraitSrc,
 	portraitAlt,
@@ -57,13 +60,7 @@ const Fellow = ({
 
 	return (
 		<Box as="li">
-			<Box
-				as="button"
-				onClick={openFellowModal}
-				styles={{
-					width: 'full',
-				}}
-			>
+			<Link onClick={() => openFellowModal()} href={href}>
 				<Box
 					styles={{
 						display: 'block',
@@ -109,7 +106,7 @@ const Fellow = ({
 						)}
 					</Box>
 				</Box>
-			</Box>
+			</Link>
 		</Box>
 	)
 }
@@ -263,7 +260,7 @@ export const PageBodyFellowsGrid = ({
 				url.searchParams.delete('cohort')
 			}
 
-			window.history.pushState({}, '', url)
+			navigate(url.pathname + url.search)
 		}
 	}
 
@@ -471,6 +468,7 @@ export const PageBodyFellowsGrid = ({
 										<Fellow
 											key={fellow.uid}
 											name={fellow.name}
+											href={fellow.url}
 											cohortTitle={fellow.cohortTitle}
 											portraitSrc={fellow.portraitSrc}
 											portraitAlt={fellow.portraitAlt}
@@ -494,6 +492,7 @@ export const PageBodyFellowsGrid = ({
 													<Fellow
 														key={fellow.uid}
 														name={fellow.name}
+														href={fellow.url}
 														cohortTitle={fellow.cohortTitle}
 														portraitSrc={fellow.portraitSrc}
 														portraitAlt={fellow.portraitAlt}
