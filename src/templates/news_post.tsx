@@ -236,8 +236,8 @@ export const Head = ({ data }: HeadProps<NewsPostTemplateQuery>) => {
 
 	const newsPost = data?.prismicNewsPost
 	const newsPostTitle = newsPost?.data?.title?.text
-
 	const newsPostExcerpt = newsPost?.data?.excerpt?.text
+	const image = siteSettings.metaImage
 
 	return (
 		<>
@@ -246,6 +246,7 @@ export const Head = ({ data }: HeadProps<NewsPostTemplateQuery>) => {
 				{newsPost?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`}
 			</title>
 			{newsPostExcerpt && <meta name="description" content={newsPostExcerpt} />}
+			{image && <meta name="og:image" content={image} />}
 		</>
 	)
 }

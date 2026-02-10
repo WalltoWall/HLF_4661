@@ -229,6 +229,7 @@ export const Head = ({ data }: HeadProps<NewsCategoryTemplateQuery>) => {
 	const newsPageDescription = newsPage.meta_description
 	const newsCategory = data?.prismicNewsCategory
 	const newsCategoryName = newsCategory?.data?.name?.text
+	const image = siteSettings.metaImage
 
 	return (
 		<>
@@ -238,6 +239,7 @@ export const Head = ({ data }: HeadProps<NewsCategoryTemplateQuery>) => {
 			{newsPageDescription && (
 				<meta name="description" content={newsPageDescription} />
 			)}
+			{image && <meta name="og:image" content={image} />}
 		</>
 	)
 }

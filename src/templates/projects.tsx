@@ -221,6 +221,7 @@ export const Head = ({ data }: HeadProps<ProjectsTemplateQuery>) => {
 
 	const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
 	const pageDescription = page?.data?.meta_description
+	const image = siteSettings.metaImage
 
 	return (
 		<>
@@ -229,6 +230,7 @@ export const Head = ({ data }: HeadProps<ProjectsTemplateQuery>) => {
 				{page?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`}
 			</title>
 			{pageDescription && <meta name="description" content={pageDescription} />}
+			{image && <meta name="og:image" content={image} />}
 		</>
 	)
 }

@@ -52,7 +52,8 @@
 			"type": "Link",
 			"config": {
 				"label": "Newsletter Sign Up Link",
-				"placeholder": "Link to a page allowing visitors to sign up for the newsletter"
+				"placeholder": "Link to a page allowing visitors to sign up for the newsletter",
+				"select": null
 			}
 		}
 	},
@@ -105,11 +106,22 @@
 						"type": "Link",
 						"config": {
 							"label": "Page",
-							"placeholder": "Page to resolve documents of this custom type"
+							"placeholder": "Page to resolve documents of this custom type",
+							"select": null
 						}
 					}
 				},
 				"label": "Preview Map"
+			}
+		}
+	},
+	"SEO": {
+		"meta_image": {
+			"type": "Image",
+			"config": {
+				"constraint": {},
+				"thumbnails": [],
+				"label": "Meta Image"
 			}
 		}
 	}

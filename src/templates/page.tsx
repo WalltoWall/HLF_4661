@@ -114,15 +114,19 @@ export const Head = ({ data }: HeadProps<PageTemplateQuery>) => {
 	const siteSettings = useSiteSettings()
 	const page = data?.prismicPage
 
+	const title = page?.data?.meta_title ?? page?.data?.title?.text ?? ''
+	const siteName = page?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`
+	const description = page?.data?.meta_description
+	const image = siteSettings.metaImage
+
 	return (
 		<>
 			<title>
-				{page?.data?.meta_title ?? page?.data?.title?.text ?? ''}
-				{page?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`}
+				{title} {siteName}
 			</title>
-			{page?.data?.meta_description && (
-				<meta name="description" content={page?.data?.meta_description} />
-			)}
+
+			{description && <meta name="description" content={description} />}
+			{image && <meta name="og:image" content={image} />}
 		</>
 	)
 }

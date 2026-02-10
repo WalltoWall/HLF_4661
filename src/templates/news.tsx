@@ -222,16 +222,19 @@ export const Head = ({ data }: HeadProps<NewsTemplateQuery>) => {
 	const siteSettings = useSiteSettings()
 	const page = data?.prismicPage
 
-	const pageTitle = page?.data?.meta_title ?? page?.data?.title?.text
-	const pageDescription = page?.data?.meta_description
+	const title = page?.data?.meta_title ?? page?.data?.title?.text ?? ''
+	const siteName = page?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`
+	const description = page?.data?.meta_description
+	const image = siteSettings.metaImage
 
 	return (
 		<>
 			<title>
-				{pageTitle ?? ''}
-				{page?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`}
+				{title} {siteName}
 			</title>
-			{pageDescription && <meta name="description" content={pageDescription} />}
+
+			{description && <meta name="description" content={description} />}
+			{image && <meta name="og:image" content={image} />}
 		</>
 	)
 }

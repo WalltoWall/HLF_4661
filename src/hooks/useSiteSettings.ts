@@ -28,6 +28,9 @@ export const useSiteSettings = () => {
 					newsletter_sign_up_link {
 						url
 					}
+					meta_image {
+						url
+					}
 				}
 			}
 		}
@@ -45,5 +48,8 @@ export const useSiteSettings = () => {
 		linkedinHandle: settings?.linkedin_handle?.text,
 		linkedinURL: `https://linkedin.com/company/${settings?.linkedin_handle?.text}`,
 		newsletterSignUpHref: settings?.newsletter_sign_up_link?.url,
+
+		//@ts-ignore
+		metaImage: settings?.meta_image?.url as string | undefined,
 	}
 }

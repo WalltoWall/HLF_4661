@@ -274,6 +274,7 @@ export const Head = ({ data }: HeadProps<ProjectTemplateQuery>) => {
 
 	const project = data?.prismicProject
 	const projectTitle = project?.data?.title?.text
+	const image = siteSettings.metaImage
 
 	return (
 		<>
@@ -281,6 +282,7 @@ export const Head = ({ data }: HeadProps<ProjectTemplateQuery>) => {
 				{projectTitle ?? ''}
 				{project?.uid === 'home' ? '' : ` | ${siteSettings.siteName}`}
 			</title>
+			{image && <meta name="og:image" content={image} />}
 		</>
 	)
 }
